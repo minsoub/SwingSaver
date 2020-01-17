@@ -11,7 +11,7 @@
     <!--모바일웹 접속시 팝업-->
     <button type="button" class="mobile-pop" data-toggle="modal" data-target="#mobile_web">모바일웹 접속시 팝업</button>
 
-
+	<form class="form-signin" id='forms1' name="forms1" method="POST">
     <section class="container no-padding">
         <article class="col-xs-12" style="padding: 0;">
 			<%@include file="/WEB-INF/views/web/inc/mypage_left_menu.jsp"%>
@@ -26,16 +26,14 @@
                                 <colgroup>
                                     <col width="17%">
                                     <col width="83%">
-
                                 </colgroup>
-
-
                                 <tr>
                                     <td class="font-weight-bold">
                                         <p>날짜</p>
                                     </td>
+                                    <c:set var="now" value="<%=new java.util.Date()%>" />
                                     <td>
-                                        <input type="date" id="userdate" name="userdate" value="2015-10-10">
+                                        <input type="date" id="userdate" name="userdate" value="<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" />">
                                     </td>
                                 </tr>
                                 <tr>
@@ -45,24 +43,24 @@
 
                                     <td>
                                         <div class="coun_td">
-                                            <input type="radio" name="chk_country" value="domestic" checked="checked">
+                                            <input type="radio" name="country_id" value="KR" checked="checked">
                                             <p>국내</p>
-                                            <input type="radio" name="chk_country" value="foreign">
+                                            <input type="radio" name="country_id" value="foreign">
                                             <p>국외</p>
                                         </div>
 
 
-                                        <select name="area">
-                                            <option value="area">지역</option>
-                                            <option value=" ">서울</option>
-                                            <option value=" ">경기</option>
-                                            <option value=" ">강원</option>
+                                        <select name="zone_id" id="zone_id">    
+                                    		<option value="">지역 선택</option>                            
+                                			<c:forEach var="areInfo" items="${areaList}" varStatus="status">
+                                    			<option  <c:if test="${qrInfo.zone_id == areInfo.zone_id}">selected</c:if>  value="${areInfo.zone_id}">${areInfo.zone_nm}(${areInfo.zone_id})</option>
+                                 			</c:forEach>                                 		
                                         </select>
-                                        <select name="golf-name">
-                                            <option value="golf-name">선택</option>
-                                            <option value=" ">골프장이름입력</option>
-                                            <option value=" "> </option>
-                                            <option value=" "> </option>
+                                        <select name="countryclub_id" id="countryclub_id">
+                                    		<option value="">골프장 선택</option>                            
+                                			<c:forEach var="golfInfo" items="${golfList}" varStatus="status">
+                                    			<option  <c:if test="${qrInfo.countryclub_id == golfInfo.countryclub_id}">selected</c:if>  value="${golfInfo.countryclub_id}">${golfInfo.countryclub_nm}(${golfInfo.countryclub_id})</option>
+                                 			</c:forEach>  
                                         </select>
                                     </td>
 
@@ -70,19 +68,18 @@
                                 <tr>
                                     <td class="font-weight-bold"><p>코스</p></td>
                                     <td class="course_td">
-                                            출발&ensp;
-                                            <select name="course_1">
-                                            <option value="out">OUT</option>
-                                            <option value=" "> </option>
-                                            <option value=" "> </option>
-                                            <option value=" "> </option>
+                                                                      출발&ensp;
+                                            <select name="startcourse">
+                                			<c:forEach var="parInfo" items="${parList}" varStatus="status">
+                                    			<option  <c:if test="${qrInfo.startcourse == parInfo.course}">selected</c:if>  value="${parInfo.course}">${parInfo1.course_nm}(${parInfo.course})</option>
+                                 			</c:forEach> 
                                         </select>
                                             &emsp;도착&ensp;
-                                            <select name="course_2">
-                                            <option value="in">IN</option>
-                                            <option value=" "> </option>
-                                            <option value=" "> </option>
-                                            <option value=" "> </option>
+                                            <select name="endcourse">
+                                            <option value="">IN</option>
+                                			<c:forEach var="parInfo" items="${parList}" varStatus="status">
+                                    			<option  <c:if test="${qrInfo.endcourse == parInfo.course}">selected</c:if>  value="${parInfo.course}">${parInfo.course_nm}(${parInfo.course})</option>
+                                 			</c:forEach> 
                                         </select>
                                     </td>
 
@@ -92,7 +89,7 @@
                         </div>
 
                         <div class="sc-cont">
-                            <h4>골프장이름</h4>
+                            <h4>골프장명 : <span id="golfTitle">골프장이름</span></h4>
 
                             <h4 class="sc-tit">출발 Course</h4>
                             <div style="overflow-x:auto; margin-bottom: 30px;">
@@ -112,43 +109,43 @@
                                     </tr>
                                     <tr>
                                         <td class="green-td fir-td">PAR</td>
-                                        <td class="green-td">4</td>
-                                        <td class="green-td">4</td>
-                                        <td class="green-td">5</td>
-                                        <td class="green-td">5</td>
-                                        <td class="green-td">3</td>
-                                        <td class="green-td">4</td>
-                                        <td class="green-td">5</td>
-                                        <td class="green-td">4</td>
-                                        <td class="green-td">4</td>
-                                        <td class="green-td">36</td>
+                                        <td class="green-td"><span id="hole1">${parInfo1.hole1}</span></td>
+                                        <td class="green-td"><span id="hole2">${parInfo1.hole2}</span></td>
+                                        <td class="green-td"><span id="hole3">${parInfo1.hole3}</span></td>
+                                        <td class="green-td"><span id="hole4">${parInfo1.hole4}</span></td>
+                                        <td class="green-td"><span id="hole5">${parInfo1.hole5}</span></td>
+                                        <td class="green-td"><span id="hole6">${parInfo1.hole6}</span></td>
+                                        <td class="green-td"><span id="hole7">${parInfo1.hole7}</span></td>
+                                        <td class="green-td"><span id="hole8">${parInfo1.hole8}</span></td>
+                                        <td class="green-td"><span id="hole9">${parInfo1.hole9}</span></td>
+                                        <td class="green-td"><span id="sum1">${parInfo1.sum}</span></td>
                                     </tr>
                                     <tr>
                                         <td class="gray-td fir-td">Stroke</td>
-                                        <td><input type="text" name="stroke"></td>
-                                        <td><input type="text" name="stroke"></td>
-                                        <td><input type="text" name="stroke"></td>
-                                        <td><input type="text" name="stroke"></td>
-                                        <td><input type="text" name="stroke"></td>
-                                        <td><input type="text" name="stroke"></td>
-                                        <td><input type="text" name="stroke"></td>
-                                        <td><input type="text" name="stroke"></td>
-                                        <td><input type="text" name="stroke"></td>
-                                        <td class="gray-td"><input type="text" name="stroke"></td>
+                                        <td><input type="text" name="stroke1" value="${scoreVo.stroke1}"></td>
+                                        <td><input type="text" name="stroke2" value="${scoreVo.stroke2}"></td>
+                                        <td><input type="text" name="stroke3" value="${scoreVo.stroke3}"></td>
+                                        <td><input type="text" name="stroke4"  value="${scoreVo.stroke4}"></td>
+                                        <td><input type="text" name="stroke5"  value="${scoreVo.stroke5}"></td>
+                                        <td><input type="text" name="stroke6" value="${scoreVo.stroke6}"></td>
+                                        <td><input type="text" name="stroke7" value="${scoreVo.stroke7}"></td>
+                                        <td><input type="text" name="stroke8" value="${scoreVo.stroke8}"></td>
+                                        <td><input type="text" name="stroke9" value="${scoreVo.stroke9}"></td>
+                                        <td class="gray-td"><input type="text" name="stroke_sum1" value="${scoreVo.stroke1+scoreVo.stroke2+scoreVo.stroke3+scoreVo.stroke4+scoreVo.stroke5+scoreVo.stroke6+scoreVo.stroke7+scoreo.stroke8+scoreVo.stroke9}"></td>
                                     </tr>
 
                                     <tr>
                                         <td class="gray-td fir-td" rowspan="2">Putts</td>
-                                        <td><input type="text" name="putts"></td>
-                                        <td><input type="text" name="putts"></td>
-                                        <td><input type="text" name="putts"></td>
-                                        <td><input type="text" name="putts"></td>
-                                        <td><input type="text" name="putts"></td>
-                                        <td><input type="text" name="putts"></td>
-                                        <td><input type="text" name="putts"></td>
-                                        <td><input type="text" name="putts"></td>
-                                        <td><input type="text" name="putts"></td>
-                                        <td class="gray-td" rowspan="2"><input type="text" name="putts"></td>
+                                        <td><input type="text" name="putter1"></td>
+                                        <td><input type="text" name="putter2"></td>
+                                        <td><input type="text" name="putter3"></td>
+                                        <td><input type="text" name="putter4"></td>
+                                        <td><input type="text" name="putter5"></td>
+                                        <td><input type="text" name="putter6"></td>
+                                        <td><input type="text" name="putter7"></td>
+                                        <td><input type="text" name="putter8"></td>
+                                        <td><input type="text" name="putter9"></td>
+                                        <td class="gray-td" rowspan="2"><input type="text" name="putter_sum1"></td>
                                     </tr>
                                     <tr>
                                         <td><button type="button" class="sc-view" data-toggle="modal" data-target="#putts_01">상세</button></td>
@@ -163,87 +160,82 @@
 
                                     </tr>
                                     <tr>
-                                        <td class="gray2-td fir-td">Score</td>
-                                        <td><input type="text" name="score"></td>
-                                        <td><input type="text" name="score"></td>
-                                        <td><input type="text" name="score"></td>
-                                        <td><input type="text" name="score"></td>
-                                        <td><input type="text" name="score"></td>
-                                        <td><input type="text" name="score"></td>
-                                        <td><input type="text" name="score"></td>
-                                        <td><input type="text" name="score"></td>
-                                        <td><input type="text" name="score"></td>
-                                        <td class="gray2-td"><input type="text" name="score"></td>
+                                        <td class="gray-td fir-td">Score</td>
+                                        <td><input type="text" name="score1" value="${scoreVo.score1-parInfo1.hole1}"></td>
+                                        <td><input type="text" name="score2" value="${scoreVo.score2-parInfo1.hole2}"></td>
+                                        <td><input type="text" name="score3" value="${scoreVo.score3-parInfo1.hole3}"></td>
+                                        <td><input type="text" name="score4" value="${scoreVo.score4-parInfo1.hole4}"></td>
+                                        <td><input type="text" name="score5" value="${scoreVo.score5-parInfo1.hole5}"></td>
+                                        <td><input type="text" name="score6" value="${scoreVo.score6-parInfo1.hole6}"></td>
+                                        <td><input type="text" name="score7" value="${scoreVo.score7-parInfo1.hole7}"></td>
+                                        <td><input type="text" name="score8" value="${scoreVo.score8-parInfo1.hole8}"></td>
+                                        <td><input type="text" name="score9" value="${scoreVo.score9-parInfo1.hole9}"></td>
+                                        <td class="gray-td"><input type="text" name="score_sum1" value="${scoreVo.score1+scoreVo.score2+scoreVo.score3+scoreVo.score4+scoreVo.score5+scoreVo.score6+scoreVo.score7+scoreo.score8+scoreVo.score9 - (parInfo1.hole1+parInfo1.hole2+parInfo1.hole3+parInfo1.hole4+parInfo1.hole5+parInfo1.hole6+parInfo1.hole7+parInfo1.hole8+parInfo1.hole9)}"></td>
                                     </tr>
                                     <tr>
                                         <td class="gray-td fir-td">Fairway안착</td>
-                                        <td><input type="checkbox" name="fairway" value="fairway"></td>
-                                        <td><input type="checkbox" name="fairway" value="fairway"></td>
-                                        <td><input type="checkbox" name="fairway" value="fairway"></td>
-                                        <td><input type="checkbox" name="fairway" value="fairway"></td>
-                                        <td><input type="checkbox" name="fairway" value="fairway"></td>
-                                        <td><input type="checkbox" name="fairway" value="fairway"></td>
-                                        <td><input type="checkbox" name="fairway" value="fairway"></td>
-                                        <td><input type="checkbox" name="fairway" value="fairway"></td>
-                                        <td><input type="checkbox" name="fairway" value="fairway"></td>
+                                        <td><input type="checkbox" name="fairwayon1" value="Y"></td>
+                                        <td><input type="checkbox" name="fairwayon2" value="Y"></td>
+                                        <td><input type="checkbox" name="fairwayon3" value="Y"></td>
+                                        <td><input type="checkbox" name="fairwayon4" value="Y"></td>
+                                        <td><input type="checkbox" name="fairwayon5" value="Y"></td>
+                                        <td><input type="checkbox" name="fairwayon6" value="Y"></td>
+                                        <td><input type="checkbox" name="fairwayon7" value="Y"></td>
+                                        <td><input type="checkbox" name="fairwayon8" value="Y"></td>
+                                        <td><input type="checkbox" name="fairwayon9" value="Y"></td>
                                         <td class="gray-td"> </td>
                                     </tr>
                                     <tr>
                                         <td class="gray-td fir-td">Green적중</td>
-                                        <td><input type="checkbox" name="green" value="green"></td>
-                                        <td><input type="checkbox" name="green" value="green"></td>
-                                        <td><input type="checkbox" name="green" value="green"></td>
-                                        <td><input type="checkbox" name="green" value="green"></td>
-                                        <td><input type="checkbox" name="green" value="green"></td>
-                                        <td><input type="checkbox" name="green" value="green"></td>
-                                        <td><input type="checkbox" name="green" value="green"></td>
-                                        <td><input type="checkbox" name="green" value="green"></td>
-                                        <td><input type="checkbox" name="green" value="green"></td>
+                                        <td><input type="checkbox" name="greenon1" value="Y"></td>
+                                        <td><input type="checkbox" name="greenon2" value="Y"></td>
+                                        <td><input type="checkbox" name="greenon3" value="Y"></td>
+                                        <td><input type="checkbox" name="greenon4" value="Y"></td>
+                                        <td><input type="checkbox" name="greenon5" value="Y"></td>
+                                        <td><input type="checkbox" name="greenon6" value="Y"></td>
+                                        <td><input type="checkbox" name="greenon7" value="Y"></td>
+                                        <td><input type="checkbox" name="greenon8" value="Y"></td>
+                                        <td><input type="checkbox" name="greenon9" value="Y"></td>
                                         <td class="gray-td"> </td>
                                     </tr>
                                     <tr>
                                         <td class="gray-td fir-td" rowspan="2">Sand Save</td>
-                                        <td><input type="checkbox" name="sandsave" value="sandsave"></td>
-                                        <td><input type="checkbox" name="sandsave" value="sandsave"></td>
-                                        <td><input type="checkbox" name="sandsave" value="sandsave"></td>
-                                        <td><input type="checkbox" name="sandsave" value="sandsave"></td>
-                                        <td><input type="checkbox" name="sandsave" value="sandsave"></td>
-                                        <td><input type="checkbox" name="sandsave" value="sandsave"></td>
-                                        <td><input type="checkbox" name="sandsave" value="sandsave"></td>
-                                        <td><input type="checkbox" name="sandsave" value="sandsave"></td>
-                                        <td><input type="checkbox" name="sandsave" value="sandsave"></td>
+                                        <td><input type="checkbox" name="sendsavechk1" value="Y"></td>
+                                        <td><input type="checkbox" name="sendsavechk2" value="Y"></td>
+                                        <td><input type="checkbox" name="sendsavechk3" value="Y"></td>
+                                        <td><input type="checkbox" name="sendsavechk4" value="Y"></td>
+                                        <td><input type="checkbox" name="sendsavechk5" value="Y"></td>
+                                        <td><input type="checkbox" name="sendsavechk6" value="Y"></td>
+                                        <td><input type="checkbox" name="sendsavechk7" value="Y"></td>
+                                        <td><input type="checkbox" name="sendsavechk8" value="Y"></td>
+                                        <td><input type="checkbox" name="sendsavechk9" value="Y"></td>
                                         <td class="gray-td" rowspan="2"> </td>
                                     </tr>
                                     <tr>
-                                        <td><input type="checkbox" name="sandsave" value="sandsave"></td>
-                                        <td><input type="checkbox" name="sandsave" value="sandsave"></td>
-                                        <td><input type="checkbox" name="sandsave" value="sandsave"></td>
-                                        <td><input type="checkbox" name="sandsave" value="sandsave"></td>
-                                        <td><input type="checkbox" name="sandsave" value="sandsave"></td>
-                                        <td><input type="checkbox" name="sandsave" value="sandsave"></td>
-                                        <td><input type="checkbox" name="sandsave" value="sandsave"></td>
-                                        <td><input type="checkbox" name="sandsave" value="sandsave"></td>
-                                        <td><input type="checkbox" name="sandsave" value="sandsave"></td>
+                                        <td><input type="checkbox" name="sendsave1" value="Y"></td>
+                                        <td><input type="checkbox" name="sendsave2" value="Y"></td>
+                                        <td><input type="checkbox" name="sendsave3" value="Y"></td>
+                                        <td><input type="checkbox" name="sendsave4" value="Y"></td>
+                                        <td><input type="checkbox" name="sendsave5" value="Y"></td>
+                                        <td><input type="checkbox" name="sendsave6" value="Y"></td>
+                                        <td><input type="checkbox" name="sendsave7" value="Y"></td>
+                                        <td><input type="checkbox" name="sendsave8" value="Y"></td>
+                                        <td><input type="checkbox" name="sendsave9" value="Y"></td>
                                     </tr>
 
                                     <tr>
                                         <td class="gray-td fir-td">Par Break</td>
-                                        <td><input type="checkbox" name="parbreak" value="parbreak"></td>
-                                        <td><input type="checkbox" name="parbreak" value="parbreak"></td>
-                                        <td><input type="checkbox" name="parbreak" value="parbreak"></td>
-                                        <td><input type="checkbox" name="parbreak" value="parbreak"></td>
-                                        <td><input type="checkbox" name="parbreak" value="parbreak"></td>
-                                        <td><input type="checkbox" name="parbreak" value="parbreak"></td>
-                                        <td><input type="checkbox" name="parbreak" value="parbreak"></td>
-                                        <td><input type="checkbox" name="parbreak" value="parbreak"></td>
-                                        <td><input type="checkbox" name="parbreak" value="parbreak"></td>
+                                        <td><input type="checkbox" name="parbreak1" value="Y"></td>
+                                        <td><input type="checkbox" name="parbreak2" value="Y"></td>
+                                        <td><input type="checkbox" name="parbreak3" value="Y"></td>
+                                        <td><input type="checkbox" name="parbreak4" value="Y"></td>
+                                        <td><input type="checkbox" name="parbreak5" value="Y"></td>
+                                        <td><input type="checkbox" name="parbreak6" value="Y"></td>
+                                        <td><input type="checkbox" name="parbreak7" value="Y"></td>
+                                        <td><input type="checkbox" name="parbreak8" value="Y"></td>
+                                        <td><input type="checkbox" name="parbreak9" value="Y"></td>
                                         <td class="gray-td"> </td>
                                     </tr>
-
-
-
-
-
                                 </table>
                             </div>
 
@@ -265,43 +257,43 @@
                                     </tr>
                                     <tr>
                                         <td class="green-td fir-td">PAR</td>
-                                        <td class="green-td">4</td>
-                                        <td class="green-td">4</td>
-                                        <td class="green-td">5</td>
-                                        <td class="green-td">5</td>
-                                        <td class="green-td">3</td>
-                                        <td class="green-td">4</td>
-                                        <td class="green-td">5</td>
-                                        <td class="green-td">4</td>
-                                        <td class="green-td">4</td>
-                                        <td class="green-td">36</td>
+                                        <td class="green-td"><span id="hole10">${parInfo2.hole1}</span></td>
+                                        <td class="green-td"><span id="hole11">${parInfo2.hole2}</span></td>
+                                        <td class="green-td"><span id="hole12">${parInfo2.hole3}</span></td>
+                                        <td class="green-td"><span id="hole13">${parInfo2.hole4}</span></td>
+                                        <td class="green-td"><span id="hole14">${parInfo2.hole5}</span></td>
+                                        <td class="green-td"><span id="hole15">${parInfo2.hole6}</span></td>
+                                        <td class="green-td"><span id="hole16">${parInfo2.hole7}</span></td>
+                                        <td class="green-td"><span id="hole17">${parInfo2.hole8}</span></td>
+                                        <td class="green-td"><span id="hole18">${parInfo2.hole9}</span></td>
+                                        <td class="green-td"><span id="sum2">${parInfo2.sum}</span></td>
                                     </tr>
                                     <tr>
                                         <td class="gray-td fir-td">Stroke</td>
-                                        <td><input type="text" name="stroke"></td>
-                                        <td><input type="text" name="stroke"></td>
-                                        <td><input type="text" name="stroke"></td>
-                                        <td><input type="text" name="stroke"></td>
-                                        <td><input type="text" name="stroke"></td>
-                                        <td><input type="text" name="stroke"></td>
-                                        <td><input type="text" name="stroke"></td>
-                                        <td><input type="text" name="stroke"></td>
-                                        <td><input type="text" name="stroke"></td>
-                                        <td class="gray-td"><input type="text" name="stroke"></td>
+                                        <td><input type="text" name="stroke10" value="${scoreVo.stroke10}"></td>
+                                        <td><input type="text" name="stroke11" value="${scoreVo.stroke11}"></td>
+                                        <td><input type="text" name="stroke12" value="${scoreVo.stroke12}"></td>
+                                        <td><input type="text" name="stroke13"  value="${scoreVo.stroke13}"></td>
+                                        <td><input type="text" name="stroke14"  value="${scoreVo.stroke14}"></td>
+                                        <td><input type="text" name="stroke15" value="${scoreVo.stroke15}"></td>
+                                        <td><input type="text" name="stroke16" value="${scoreVo.stroke16}"></td>
+                                        <td><input type="text" name="stroke17" value="${scoreVo.stroke17}"></td>
+                                        <td><input type="text" name="stroke18" value="${scoreVo.stroke18}"></td>
+                                        <td class="gray-td"><input type="text" name="stroke_sum1" value="${scoreVo.stroke10+scoreVo.stroke11+scoreVo.stroke12+scoreVo.stroke13+scoreVo.stroke14+scoreVo.stroke15+scoreVo.stroke16+scoreo.stroke17+scoreVo.stroke18}"></td>
                                     </tr>
 
                                     <tr>
                                         <td class="gray-td fir-td" rowspan="2">Putts</td>
-                                        <td><input type="text" name="putts"></td>
-                                        <td><input type="text" name="putts"></td>
-                                        <td><input type="text" name="putts"></td>
-                                        <td><input type="text" name="putts"></td>
-                                        <td><input type="text" name="putts"></td>
-                                        <td><input type="text" name="putts"></td>
-                                        <td><input type="text" name="putts"></td>
-                                        <td><input type="text" name="putts"></td>
-                                        <td><input type="text" name="putts"></td>
-                                        <td class="gray-td" rowspan="2"><input type="text" name="putts"></td>
+                                        <td><input type="text" name="putter10"></td>
+                                        <td><input type="text" name="putter11"></td>
+                                        <td><input type="text" name="putter12"></td>
+                                        <td><input type="text" name="putter13"></td>
+                                        <td><input type="text" name="putter14"></td>
+                                        <td><input type="text" name="putter15"></td>
+                                        <td><input type="text" name="putter16"></td>
+                                        <td><input type="text" name="putter17"></td>
+                                        <td><input type="text" name="putter18"></td>
+                                        <td class="gray-td" rowspan="2"><input type="text" name="putter_sum2"></td>
                                     </tr>
                                     <tr>
                                         <td><button type="button" class="sc-view" data-toggle="modal" data-target="#putts_01">상세</button></td>
@@ -316,113 +308,86 @@
 
                                     </tr>
                                     <tr>
-                                        <td class="gray2-td fir-td">Score</td>
-                                        <td><input type="text" name="score"></td>
-                                        <td><input type="text" name="score"></td>
-                                        <td><input type="text" name="score"></td>
-                                        <td><input type="text" name="score"></td>
-                                        <td><input type="text" name="score"></td>
-                                        <td><input type="text" name="score"></td>
-                                        <td><input type="text" name="score"></td>
-                                        <td><input type="text" name="score"></td>
-                                        <td><input type="text" name="score"></td>
-                                        <td class="gray2-td"><input type="text" name="score"></td>
+                                        <td class="gray-td fir-td">Score</td>
+                                        <td><input type="text" name="score10" value="${scoreVo.score10-parInfo2.hole1}"></td>
+                                        <td><input type="text" name="score11" value="${scoreVo.score11-parInfo2.hole2}"></td>
+                                        <td><input type="text" name="score12" value="${scoreVo.score12-parInfo2.hole3}"></td>
+                                        <td><input type="text" name="score13" value="${scoreVo.score13-parInfo2.hole4}"></td>
+                                        <td><input type="text" name="score14" value="${scoreVo.score14-parInfo2.hole5}"></td>
+                                        <td><input type="text" name="score15" value="${scoreVo.score15-parInfo2.hole6}"></td>
+                                        <td><input type="text" name="score16" value="${scoreVo.score16-parInfo2.hole7}"></td>
+                                        <td><input type="text" name="score17" value="${scoreVo.score17-parInfo2.hole8}"></td>
+                                        <td><input type="text" name="score18" value="${scoreVo.score18-parInfo2.hole9}"></td>
+                                        <td class="gray-td"><input type="text" name="score_sum2" value="${scoreVo.score10+scoreVo.score11+scoreVo.score12+scoreVo.score13+scoreVo.score14+scoreVo.score15+scoreVo.score16+scoreo.score17+scoreVo.score18 - (parInfo2.hole1+parInfo2.hole2+parInfo2.hole3+parInfo2.hole4+parInfo2.hole5+parInfo2.hole6+parInfo2.hole7+parInfo2.hole8+parInfo2.hole9)}"></td>
                                     </tr>
                                     <tr>
                                         <td class="gray-td fir-td">Fairway안착</td>
-                                        <td><input type="checkbox" name="fairway" value="fairway"></td>
-                                        <td><input type="checkbox" name="fairway" value="fairway"></td>
-                                        <td><input type="checkbox" name="fairway" value="fairway"></td>
-                                        <td><input type="checkbox" name="fairway" value="fairway"></td>
-                                        <td><input type="checkbox" name="fairway" value="fairway"></td>
-                                        <td><input type="checkbox" name="fairway" value="fairway"></td>
-                                        <td><input type="checkbox" name="fairway" value="fairway"></td>
-                                        <td><input type="checkbox" name="fairway" value="fairway"></td>
-                                        <td><input type="checkbox" name="fairway" value="fairway"></td>
+                                        <td><input type="checkbox" name="fairwayon10" value="Y"></td>
+                                        <td><input type="checkbox" name="fairwayon11" value="Y"></td>
+                                        <td><input type="checkbox" name="fairwayon12" value="Y"></td>
+                                        <td><input type="checkbox" name="fairwayon13" value="Y"></td>
+                                        <td><input type="checkbox" name="fairwayon14" value="Y"></td>
+                                        <td><input type="checkbox" name="fairwayon15" value="Y"></td>
+                                        <td><input type="checkbox" name="fairwayon16" value="Y"></td>
+                                        <td><input type="checkbox" name="fairwayon17" value="Y"></td>
+                                        <td><input type="checkbox" name="fairwayon18" value="Y"></td>
                                         <td class="gray-td"> </td>
                                     </tr>
                                     <tr>
                                         <td class="gray-td fir-td">Green적중</td>
-                                        <td><input type="checkbox" name="green" value="green"></td>
-                                        <td><input type="checkbox" name="green" value="green"></td>
-                                        <td><input type="checkbox" name="green" value="green"></td>
-                                        <td><input type="checkbox" name="green" value="green"></td>
-                                        <td><input type="checkbox" name="green" value="green"></td>
-                                        <td><input type="checkbox" name="green" value="green"></td>
-                                        <td><input type="checkbox" name="green" value="green"></td>
-                                        <td><input type="checkbox" name="green" value="green"></td>
-                                        <td><input type="checkbox" name="green" value="green"></td>
+                                        <td><input type="checkbox" name="greenon10" value="Y"></td>
+                                        <td><input type="checkbox" name="greenon11" value="Y"></td>
+                                        <td><input type="checkbox" name="greenon12" value="Y"></td>
+                                        <td><input type="checkbox" name="greenon13" value="Y"></td>
+                                        <td><input type="checkbox" name="greenon14" value="Y"></td>
+                                        <td><input type="checkbox" name="greenon15" value="Y"></td>
+                                        <td><input type="checkbox" name="greenon16" value="Y"></td>
+                                        <td><input type="checkbox" name="greenon17" value="Y"></td>
+                                        <td><input type="checkbox" name="greenon18" value="Y"></td>
                                         <td class="gray-td"> </td>
                                     </tr>
                                     <tr>
                                         <td class="gray-td fir-td" rowspan="2">Sand Save</td>
-                                        <td><input type="checkbox" name="sandsave" value="sandsave"></td>
-                                        <td><input type="checkbox" name="sandsave" value="sandsave"></td>
-                                        <td><input type="checkbox" name="sandsave" value="sandsave"></td>
-                                        <td><input type="checkbox" name="sandsave" value="sandsave"></td>
-                                        <td><input type="checkbox" name="sandsave" value="sandsave"></td>
-                                        <td><input type="checkbox" name="sandsave" value="sandsave"></td>
-                                        <td><input type="checkbox" name="sandsave" value="sandsave"></td>
-                                        <td><input type="checkbox" name="sandsave" value="sandsave"></td>
-                                        <td><input type="checkbox" name="sandsave" value="sandsave"></td>
+                                        <td><input type="checkbox" name="sendsavechk10" value="Y"></td>
+                                        <td><input type="checkbox" name="sendsavechk11" value="Y"></td>
+                                        <td><input type="checkbox" name="sendsavechk12" value="Y"></td>
+                                        <td><input type="checkbox" name="sendsavechk13" value="Y"></td>
+                                        <td><input type="checkbox" name="sendsavechk14" value="Y"></td>
+                                        <td><input type="checkbox" name="sendsavechk15" value="Y"></td>
+                                        <td><input type="checkbox" name="sendsavechk16" value="Y"></td>
+                                        <td><input type="checkbox" name="sendsavechk17" value="Y"></td>
+                                        <td><input type="checkbox" name="sendsavechk18" value="Y"></td>
                                         <td class="gray-td" rowspan="2"> </td>
                                     </tr>
                                     <tr>
-                                        <td><input type="checkbox" name="sandsave" value="sandsave"></td>
-                                        <td><input type="checkbox" name="sandsave" value="sandsave"></td>
-                                        <td><input type="checkbox" name="sandsave" value="sandsave"></td>
-                                        <td><input type="checkbox" name="sandsave" value="sandsave"></td>
-                                        <td><input type="checkbox" name="sandsave" value="sandsave"></td>
-                                        <td><input type="checkbox" name="sandsave" value="sandsave"></td>
-                                        <td><input type="checkbox" name="sandsave" value="sandsave"></td>
-                                        <td><input type="checkbox" name="sandsave" value="sandsave"></td>
-                                        <td><input type="checkbox" name="sandsave" value="sandsave"></td>
+                                        <td><input type="checkbox" name="sendsave10" value="Y"></td>
+                                        <td><input type="checkbox" name="sendsave11" value="Y"></td>
+                                        <td><input type="checkbox" name="sendsave12" value="Y"></td>
+                                        <td><input type="checkbox" name="sendsave13" value="Y"></td>
+                                        <td><input type="checkbox" name="sendsave14" value="Y"></td>
+                                        <td><input type="checkbox" name="sendsave15" value="Y"></td>
+                                        <td><input type="checkbox" name="sendsave16" value="Y"></td>
+                                        <td><input type="checkbox" name="sendsave17" value="Y"></td>
+                                        <td><input type="checkbox" name="sendsave18" value="Y"></td>
                                     </tr>
 
                                     <tr>
                                         <td class="gray-td fir-td">Par Break</td>
-                                        <td><input type="checkbox" name="parbreak" value="parbreak"></td>
-                                        <td><input type="checkbox" name="parbreak" value="parbreak"></td>
-                                        <td><input type="checkbox" name="parbreak" value="parbreak"></td>
-                                        <td><input type="checkbox" name="parbreak" value="parbreak"></td>
-                                        <td><input type="checkbox" name="parbreak" value="parbreak"></td>
-                                        <td><input type="checkbox" name="parbreak" value="parbreak"></td>
-                                        <td><input type="checkbox" name="parbreak" value="parbreak"></td>
-                                        <td><input type="checkbox" name="parbreak" value="parbreak"></td>
-                                        <td><input type="checkbox" name="parbreak" value="parbreak"></td>
+                                        <td><input type="checkbox" name="parbreak10" value="Y"></td>
+                                        <td><input type="checkbox" name="parbreak11" value="Y"></td>
+                                        <td><input type="checkbox" name="parbreak12" value="Y"></td>
+                                        <td><input type="checkbox" name="parbreak13" value="Y"></td>
+                                        <td><input type="checkbox" name="parbreak14" value="Y"></td>
+                                        <td><input type="checkbox" name="parbreak15" value="Y"></td>
+                                        <td><input type="checkbox" name="parbreak16" value="Y"></td>
+                                        <td><input type="checkbox" name="parbreak17" value="Y"></td>
+                                        <td><input type="checkbox" name="parbreak18" value="Y"></td>
                                         <td class="gray-td"> </td>
                                     </tr>
-
-
-
-
-
                                 </table>
                             </div>
-
-
-
-
-
-                            <button class="form-btn" onclick="#">등록하기</button>
-
-
-
-
-
-
-
-
+                            <button id="btnAdd" class="form-btn" onclick="#">등록하기</button>
                         </div>
-
-
-
-
-
-
-
-
-
 
                     </div>
 
@@ -430,7 +395,7 @@
             </div>
         </article>
     </section>
-
+	</form>
 
 
 
@@ -554,20 +519,8 @@
                                     <td> </td>
                                     <td>Putter</td>
                                 </tr>
-
-
-
-
-
-
                             </table>
                         </div>
-
-
-
-
-
-
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -587,7 +540,7 @@
             </div>
         </div>
     </div>
-
+	
 
     <!--    putts -->
 
@@ -732,6 +685,196 @@
         </div>
     </div>
 
+<script>
+
+$(document).ready(function(){
+	
+	// 처음 로딩시 sendsave1~18까지 disable
+	$("input[name='sendsave1']").attr( 'disabled', true );
+	$("input[name=sendsave2]").attr( 'disabled', true );
+	$("input[name=sendsave3]").attr( 'disabled', true );
+	$("input[name=sendsave4]").attr( 'disabled', true );
+	$("input[name=sendsave5]").attr( 'disabled', true );
+	$("input[name=sendsave6]").attr( 'disabled', true );
+	$("input[name=sendsave7]").attr( 'disabled', true );
+	$("input[name=sendsave8]").attr( 'disabled', true );
+	$("input[name=sendsave9]").attr( 'disabled', true );
+	$("input[name=sendsave10]").attr( 'disabled', true );
+	$("input[name=sendsave11]").attr( 'disabled', true );
+	$("input[name=sendsave12]").attr( 'disabled', true );
+	$("input[name=sendsave13]").attr( 'disabled', true );
+	$("input[name=sendsave14]").attr( 'disabled', true );
+	$("input[name=sendsave15]").attr( 'disabled', true );
+	$("input[name=sendsave16]").attr( 'disabled', true );
+	$("input[name=sendsave17]").attr( 'disabled', true );
+	$("input[name=sendsave18]").attr( 'disabled', true );
+	
+	
+    $("input[name=sendsavechk1]").click(function(){    	
+    	if ($("input:checkbox[name='sendsavechk1']").is(":checked") == true)
+    		$("input[name=sendsave1]").removeAttr('disabled');
+    	else  {
+    		$("input[name=sendsave1]").attr( 'disabled', true );
+    		$("input[name=sendsave1]").attr( 'checked',  false );
+    	}
+    });
+    $("input[name=sendsavechk2]").click(function(){
+    	if ($("input:checkbox[name='sendsavechk2']").is(":checked") == true)
+    		$("input[name=sendsave2]").attr( 'disabled', false );
+    	else  {
+    		$("input[name=sendsave2]").attr( 'disabled', true );
+    		$("input[name=sendsave2]").attr( 'checked',  false );	
+    	}
+    });    
+    $("input[name=sendsavechk3]").click(function(){
+    	if ($("input:checkbox[name='sendsavechk3']").is(":checked") == true)
+    		$("input[name=sendsave3]").attr( 'disabled', false );
+    	else {
+    		$("input[name=sendsave3]").attr( 'disabled', true );
+    		$("input[name=sendsave3]").attr( 'checked',  false );	
+    	}
+    });
+    $("input[name=sendsavechk4]").click(function(){
+    	if ($("input:checkbox[name='sendsavechk4']").is(":checked") == true)
+    		$("input[name=sendsave4]").attr( 'disabled', false );
+    	else {
+    		$("input[name=sendsave4]").attr( 'disabled', true );
+    		$("input[name=sendsave4]").attr( 'checked',  false );	
+    	}
+    });
+    $("input[name=sendsavechk5]").click(function(){
+    	if ($("input:checkbox[name='sendsavechk5']").is(":checked") == true)
+    		$("input[name=sendsave5]").attr( 'disabled', false );
+    	else {
+    		$("input[name=sendsave5]").attr( 'disabled', true );
+    		$("input[name=sendsave5]").attr( 'checked',  false );	
+    	}
+    });
+    $("input[name=sendsavechk6]").click(function(){
+    	if ($("input:checkbox[name='sendsavechk6']").is(":checked") == true)
+    		$("input[name=sendsave6]").attr( 'disabled', false );
+    	else {
+    		$("input[name=sendsave6]").attr( 'disabled', true );
+    		$("input[name=sendsave6]").attr( 'checked',  false );	
+    	}
+    });
+    $("input[name=sendsavechk7]").click(function(){
+    	if ($("input:checkbox[name='sendsavechk7']").is(":checked") == true)
+    		$("input[name=sendsave7]").attr( 'disabled', false );
+    	else {
+    		$("input[name=sendsave7]").attr( 'disabled', true );
+    		$("input[name=sendsave7]").attr( 'checked',  false );	
+    	}
+    });
+    $("input[name=sendsavechk8]").click(function(){
+    	if ($("input:checkbox[name='sendsavechk8']").is(":checked") == true)
+    		$("input[name=sendsave8]").attr( 'disabled', false );
+    	else {
+    		$("input[name=sendsave8]").attr( 'disabled', true );
+    		$("input[name=sendsave8]").attr( 'checked',  false );	
+    	}
+    });
+    $("input[name=sendsavechk9]").click(function(){
+    	if ($("input:checkbox[name='sendsavechk9']").is(":checked") == true)
+    		$("input[name=sendsave9]").attr( 'disabled', false );
+    	else {
+    		$("input[name=sendsave9]").attr( 'disabled', true );
+    		$("input[name=sendsave9]").attr( 'checked',  false );	
+    	}
+    });
+    $("input[name=sendsavechk10]").click(function(){
+    	if ($("input:checkbox[name='sendsavechk10']").is(":checked") == true)
+    		$("input[name=sendsave10]").attr( 'disabled', false );
+    	else {
+    		$("input[name=sendsave10]").attr( 'disabled', true );
+    		$("input[name=sendsave10]").attr( 'checked',  false );	
+    	}
+    });
+    $("input[name=sendsavechk11]").click(function(){
+    	if ($("input:checkbox[name='sendsavechk11']").is(":checked") == true)
+    		$("input[name=sendsave11]").attr( 'disabled', false );
+    	else {
+    		$("input[name=sendsave11]").attr( 'disabled', true );
+    		$("input[name=sendsave11]").attr( 'checked',  false );	
+    	}
+    });
+    $("input[name=sendsavechk12]").click(function(){
+    	if ($("input:checkbox[name='sendsavechk12']").is(":checked") == true)
+    		$("input[name=sendsave12]").attr( 'disabled', false );
+    	else {
+    		$("input[name=sendsave12]").attr( 'disabled', true );
+    		$("input[name=sendsave12]").attr( 'checked',  false );	
+    	}
+    });
+    $("input[name=sendsavechk13]").click(function(){
+    	if ($("input:checkbox[name='sendsavechk13']").is(":checked") == true)
+    		$("input[name=sendsave13]").attr( 'disabled', false );
+    	else {
+    		$("input[name=sendsave13]").attr( 'disabled', true );
+    		$("input[name=sendsave13]").attr( 'checked',  false );	
+    	}
+    });
+    $("input[name=sendsavechk14]").click(function(){
+    	if ($("input:checkbox[name='sendsavechk14']").is(":checked") == true)
+    		$("input[name=sendsave14]").attr( 'disabled', false );
+    	else {
+    		$("input[name=sendsave14]").attr( 'disabled', true );
+    		$("input[name=sendsave14]").attr( 'checked',  false );	
+    	}
+    });
+    $("input[name=sendsavechk15]").click(function(){
+    	if ($("input:checkbox[name='sendsavechk15']").is(":checked") == true)
+    		$("input[name=sendsave15]").attr( 'disabled', false );
+    	else {
+    		$("input[name=sendsave15]").attr( 'disabled', true );
+    		$("input[name=sendsave15]").attr( 'checked',  false );	
+    	}
+    });
+    $("input[name=sendsavechk16]").click(function(){
+    	if ($("input:checkbox[name='sendsavechk16']").is(":checked") == true)
+    		$("input[name=sendsave16]").attr( 'disabled', false );
+    	else {
+    		$("input[name=sendsave16]").attr( 'disabled', true );
+    		$("input[name=sendsave16]").attr( 'checked',  false );	
+    	}
+    });
+    $("input[name=sendsavechk17]").click(function(){
+    	if ($("input:checkbox[name='sendsavechk17']").is(":checked") == true)
+    		$("input[name=sendsave17]").attr( 'disabled', false );
+    	else {
+    		$("input[name=sendsave17]").attr( 'disabled', true );
+    		$("input[name=sendsave17]").attr( 'checked',  false );	
+    	}
+    });
+    $("input[name=sendsavechk18]").click(function(){
+    	if ($("input:checkbox[name='sendsavechk18']").is(":checked") == true)
+    		$("input[name=sendsave18]").attr( 'disabled', false );
+    	else {
+    		$("input[name=sendsave18]").attr( 'disabled', true );
+    		$("input[name=sendsave18]").attr( 'checked',  false );	
+    	}
+    });
+    
+    $("#btnAdd").click(function(){
+    	fn_save();
+    });
+    
+    
+    $("#golfTitle").text($("#countryclub_id option:checked").text());
+    
+    //alert($("#countryclub_id option:checked").text());
+});
+
+// 입력 정보를 저장한다.
+function fn_save()
+{
+	if (confirm("입력된 정보를 저장하시겠습니까?"))
+	{
+		forms1.action = "/score/scoreSave";
+		forms1.submit();
+	}
+}
+</script>
 
 <%@include file="/WEB-INF/views/web/inc/footer.jsp"%>
 

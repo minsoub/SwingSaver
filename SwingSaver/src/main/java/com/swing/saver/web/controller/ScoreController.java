@@ -40,6 +40,7 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -137,6 +138,87 @@ public class ScoreController {
     	mv.addObject("parInfo2", parInfo2);
     	LOGGER.debug("==================== ScoreController qrAdd end : ===================");
     	mv.setViewName("web/score/screen_01");
+    	return mv;
+    }
+
+    
+    /**
+     * 스코어 점수를 이미지로 만든다.
+     * 
+     * @param qrVo
+     * @param request
+     * @param session
+     * @param mv
+     * @param redirectAttributes
+     * @return
+     * @throws ApiException
+     * @throws IOException
+     */
+    @PostMapping(value="/imageMake")
+    public ModelAndView imageMake(QRInfoVo qrVo, HttpServletRequest request, HttpSession session, ModelAndView mv, RedirectAttributes redirectAttributes) throws ApiException, IOException
+    {
+    	LOGGER.debug("==================== ScoreController imageMake Start : ===================");
+    	LoginVo loginVo = (LoginVo)session.getAttribute("login");
+    	UserVo userVo = null;	
+    	long userId = -1;
+    	
+    	if (loginVo != null)
+    		userId = loginVo.getUserid();
+    	LOGGER.debug("Login userID : " + userId);
+       
+        
+    	// 골프장 Par 정보를 얻는다.
+    	String country_id = "KR";
+    	FarVo parInfo1 =  restService.getParInfo(country_id, qrVo.getZone_id(), qrVo.getCountryclub_id(), qrVo.getStartcourse());   // 골프장 Par 정보 상세 정보 조회 (Start Course)
+    	FarVo parInfo2 =  restService.getParInfo(country_id, qrVo.getZone_id(), qrVo.getCountryclub_id(), qrVo.getEndcourse());     // 골프장 Par 정보 상세 정보 조회 (End Course)
+    	
+    	// PAR에 대한 SUM 합계
+    	parInfo1.setSum(parInfo1.getHole1()+parInfo1.getHole2()+parInfo1.getHole3()+parInfo1.getHole4()+parInfo1.getHole5()+parInfo1.getHole6()
+    					+parInfo1.getHole7()+parInfo1.getHole8()+parInfo1.getHole9());
+    	parInfo2.setSum(parInfo2.getHole1()+parInfo2.getHole2()+parInfo2.getHole3()+parInfo2.getHole4()+parInfo2.getHole5()+parInfo2.getHole6()
+		+parInfo2.getHole7()+parInfo2.getHole8()+parInfo2.getHole9());
+    	
+    	// 개인별 스코어 세부정보  VO에 저장
+    	ScoreVo scoreVo = new ScoreVo();
+    	scoreVo.setVisit_date(CommonUtil.getCurrentDate());	 				// 골프친 날짜(당일)
+    	scoreVo.setContryclub_id(qrVo.getCountryclub_id()); 				// 골프장 코드
+    	scoreVo.setStart_course(Integer.parseInt(qrVo.getStartcourse()));	// out 시작 코스
+    	scoreVo.setEnd_course(Integer.parseInt(qrVo.getEndcourse()));  		// in 종료 코스
+    	
+    	String score = qrVo.getScore();		// 현재 형식 1:2:3:4 ~~ 형식으로 되어 있다.
+    	String[] scoreList = score.split(":");
+    	if (scoreList.length == 18)
+    	{
+    		scoreVo.setUser_id((new Long(userId)).intValue());
+    		scoreVo.setScore1(Integer.parseInt(scoreList[0]));
+    		scoreVo.setScore2(Integer.parseInt(scoreList[1]));
+    		scoreVo.setScore3(Integer.parseInt(scoreList[2]));
+    		scoreVo.setScore4(Integer.parseInt(scoreList[3]));
+    		scoreVo.setScore5(Integer.parseInt(scoreList[4]));
+    		scoreVo.setScore6(Integer.parseInt(scoreList[5]));
+    		scoreVo.setScore7(Integer.parseInt(scoreList[6]));
+    		scoreVo.setScore8(Integer.parseInt(scoreList[7]));
+    		scoreVo.setScore9(Integer.parseInt(scoreList[8]));
+    		scoreVo.setScore10(Integer.parseInt(scoreList[9]));
+    		scoreVo.setScore11(Integer.parseInt(scoreList[10]));
+    		scoreVo.setScore12(Integer.parseInt(scoreList[11]));
+    		scoreVo.setScore13(Integer.parseInt(scoreList[12]));
+    		scoreVo.setScore14(Integer.parseInt(scoreList[13]));
+    		scoreVo.setScore15(Integer.parseInt(scoreList[14]));
+    		scoreVo.setScore16(Integer.parseInt(scoreList[15]));
+    		scoreVo.setScore17(Integer.parseInt(scoreList[16]));
+    		scoreVo.setScore18(Integer.parseInt(scoreList[17]));
+    		
+    	}else {
+    		scoreVo.setError("스코어 정보 개수 에러 :" + scoreList.length);
+    	}
+    	 
+    	mv.addObject("scoreVo", scoreVo);			// Score 정보
+    	mv.addObject("qrInfo", qrVo);
+    	mv.addObject("parInfo1", parInfo1);
+    	mv.addObject("parInfo2", parInfo2);
+    	LOGGER.debug("==================== ScoreController imageMake end : ===================");
+    	mv.setViewName("web/score/screen_02");
     	return mv;
     }
     
@@ -246,21 +328,40 @@ public class ScoreController {
     		scoreVo.setError("스코어 정보 개수 에러 :" + scoreList.length);
     	}
     	
-    	String rtnJson = restService.getAreaList();   // 관리자가 지역 정보 조회
+    	String rtnJson = restService.getAreaList();   // 관리자가 지역 리스트 조회
     	LOGGER.debug(rtnJson);
         ObjectMapper mapper = new ObjectMapper();
         Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});
-
-        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
-        
-        // groupList => RestFul Service에서 등록한 명
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);        
         List<AreaVo> areaList = mapper.convertValue(map.get("areaList"), TypeFactory.defaultInstance().constructCollectionType(List.class,AreaVo.class));
-    	
+        
+        // 골프장 리스트 조회 (그 지역에 포함된)
+        List<GolfVo> golfList = getGolfList(country_id, qrVo.getZone_id());
+        // 골프장에 포함된 코스 정보 조회
+        List<FarVo> parList = getParList(qrVo.getCountryclub_id());
+                   	
+        QRInfoVo qrVo2 = new QRInfoVo();
+        
+        qrVo2.setZone_id(qrVo.getZone_id());
+        qrVo2.setCountryclub_id(qrVo.getCountryclub_id());
+        qrVo2.setStartcourse(qrVo.getStartcourse());
+        qrVo2.setEndcourse(qrVo.getEndcourse());
+        qrVo2.setUsername(qrVo.getUsername());
+        qrVo2.setScore(qrVo.getScore());
+        qrVo2.setOthername1(qrVo.getOthername1());
+        qrVo2.setScore1(qrVo.getScore1());
+        qrVo2.setOthername2(qrVo.getOthername2());
+        qrVo2.setScore2(qrVo.getScore2());
+        qrVo2.setOthername3(qrVo.getOthername3());
+        qrVo2.setScore3(qrVo.getScore3());
+        
     	mv.addObject("areaList", areaList); 
     	mv.addObject("scoreVo", scoreVo);			// Score 정보
-    	mv.addObject("qrInfo", qrVo);
+    	mv.addObject("qrInfo", qrVo2);
     	mv.addObject("parInfo1", parInfo1);
     	mv.addObject("parInfo2", parInfo2);
+    	mv.addObject("golfList", golfList);			// 지역에 속한 골프장 리스트
+    	mv.addObject("parList", parList);			// 골프장에 속한 Par List 정보 
     	LOGGER.debug("==================== scoreRegister qrAdd end : ===================");
     	mv.setViewName("web/score/score_01_1");
     	return mv;
@@ -401,7 +502,60 @@ public class ScoreController {
         mv.setViewName("jsonView");
         
     	return mv;
-    }      
+    }     
+    /***
+     * 그 지역에 속한 골프장 리스트를 리턴한다.
+     * 
+     * @param country_id
+     * @param zone_id
+     * @return
+     * @throws ApiException
+     * @throws IOException
+     */
+    private List<GolfVo> getGolfList(String country_id, String zone_id) throws ApiException, IOException {
+    	String rtnJson = restService.getGolfList(country_id, zone_id);
+    	LOGGER.debug(rtnJson);
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});
+
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
+        List<GolfVo> areaList = null;
+        
+        LOGGER.debug("map size : " + map.size());
+        if (!map.containsKey("golfList"))
+        {
+        	areaList = new ArrayList<GolfVo>();
+        	GolfVo golf = mapper.readValue(rtnJson,GolfVo.class);
+        	areaList.add(golf);
+        }else {
+        	// groupList => RestFul Service에서 등록한 명
+        	areaList = mapper.convertValue(map.get("golfList"), TypeFactory.defaultInstance().constructCollectionType(List.class,GolfVo.class));
+        }
+
+        return areaList;
+    }
+    /***
+     * 골프장에 속한 Par 정보 리스트를 리턴한다.
+     * 
+     * @param countryclub_id
+     * @return
+     * @throws ApiException
+     * @throws IOException
+     */
+    private List<FarVo> getParList(String countryclub_id) throws ApiException, IOException {
+    	String rtnJson = restService.getParList(countryclub_id);
+    	LOGGER.debug(rtnJson);
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});
+
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
+        
+        // groupList => RestFul Service에서 등록한 명
+        List<FarVo> parList = mapper.convertValue(map.get("parList"), TypeFactory.defaultInstance().constructCollectionType(List.class,FarVo.class));
+
+        return parList;
+    }
+    
     
     /**
      * 국가에 해당하는 지역 리스트를 출력 한다.

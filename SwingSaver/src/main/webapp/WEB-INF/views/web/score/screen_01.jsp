@@ -40,16 +40,16 @@
  
                                 <tr>
                                    <td class="black-td fir-td">Score</td>
-                                    <td><p class="pl-num">${scoreVo.score1}</p></td>
-                                   <td><p class="pl2-num">${scoreVo.score2}</p></td>
-                                   <td><p class="pl2-num">${scoreVo.score3}</p></td>
-                                    <td><p class="mi-num">${scoreVo.score4}</p></td>
-                                   <td><p class="pl2-num">${scoreVo.score5}</p></td>
-                                   <td><p class="pl2-num">${scoreVo.score6}</p></td>
-                                    <td><p class="mi-num">${scoreVo.score7}</p></td>
-                                    <td><p class="pl-num">${scoreVo.score8}</p></td>
-                                   <td><p class="pl2-num">${scoreVo.score9}</p></td>
-                                   <td class="black-td">34</td>
+                                   <td><p class="<c:if test="${(scoreVo.score1-parInfo1.hole1) < 0}">pl-num</c:if><c:if test="${(scoreVo.score1-parInfo1.hole1) == 0}">pl2-num</c:if><c:if test="${(scoreVo.score1-parInfo1.hole1) > 0}">mi-num</c:if>">${scoreVo.score1-parInfo1.hole1}</p></td>
+                                   <td><p class="<c:if test="${(scoreVo.score2-parInfo1.hole2) < 0}">pl-num</c:if><c:if test="${(scoreVo.score2-parInfo1.hole2) == 0}">pl2-num</c:if><c:if test="${(scoreVo.score2-parInfo1.hole2) > 0}">mi-num</c:if>">${scoreVo.score2-parInfo1.hole2}</p></td>
+                                   <td><p class="<c:if test="${(scoreVo.score3-parInfo1.hole3) < 0}">pl-num</c:if><c:if test="${(scoreVo.score3-parInfo1.hole3) == 0}">pl2-num</c:if><c:if test="${(scoreVo.score3-parInfo1.hole3) > 0}">mi-num</c:if>">${scoreVo.score3-parInfo1.hole3}</p></td>
+                                   <td><p class="<c:if test="${(scoreVo.score4-parInfo1.hole4) < 0}">pl-num</c:if><c:if test="${(scoreVo.score4-parInfo1.hole4) == 0}">pl2-num</c:if><c:if test="${(scoreVo.score4-parInfo1.hole4) > 0}">mi-num</c:if>">${scoreVo.score4-parInfo1.hole4}</p></td>
+                                   <td><p class="<c:if test="${(scoreVo.score5-parInfo1.hole5) < 0}">pl-num</c:if><c:if test="${(scoreVo.score5-parInfo1.hole5) == 0}">pl2-num</c:if><c:if test="${(scoreVo.score5-parInfo1.hole5) > 0}">mi-num</c:if>">${scoreVo.score5-parInfo1.hole5}</p></td>
+                                   <td><p class="<c:if test="${(scoreVo.score6-parInfo1.hole6) < 0}">pl-num</c:if><c:if test="${(scoreVo.score6-parInfo1.hole6) == 0}">pl2-num</c:if><c:if test="${(scoreVo.score6-parInfo1.hole6) > 0}">mi-num</c:if>">${scoreVo.score6-parInfo1.hole6}</p></td>
+                                   <td><p class="<c:if test="${(scoreVo.score7-parInfo1.hole7) < 0}">pl-num</c:if><c:if test="${(scoreVo.score7-parInfo1.hole7) == 0}">pl2-num</c:if><c:if test="${(scoreVo.score7-parInfo1.hole7) > 0}">mi-num</c:if>">${scoreVo.score7-parInfo1.hole7}</p></td>
+                                   <td><p class="<c:if test="${(scoreVo.score8-parInfo1.hole8) < 0}">pl-num</c:if><c:if test="${(scoreVo.score8-parInfo1.hole8) == 0}">pl2-num</c:if><c:if test="${(scoreVo.score8-parInfo1.hole8) > 0}">mi-num</c:if>">${scoreVo.score8-parInfo1.hole8}</p></td>
+                                   <td><p class="<c:if test="${(scoreVo.score9-parInfo1.hole9) < 0}">pl-num</c:if><c:if test="${(scoreVo.score9-parInfo1.hole9) == 0}">pl2-num</c:if><c:if test="${(scoreVo.score9-parInfo1.hole9) > 0}">mi-num</c:if>">${scoreVo.score9-parInfo1.hole9}</p></td>
+                                   <td class="black-td">${(scoreVo.score1+scoreVo.score2+scoreVo.score3+scoreVo.score4+scoreVo.score5+scoreVo.score6+scoreVo.score7+scoreVo.score8+scoreVo.score9)-(parInfo1.hole1+parInfo1.hole2+parInfo1.hole3+parInfo1.hole4+parInfo1.hole5+parInfo1.hole6+parInfo1.hole7+parInfo1.hole8+parInfo1.hole9)}</td>
                                </tr>                                                               
 
 
@@ -88,20 +88,19 @@
                                    <td class="gray-td">${parInfo2.sum}</td>
                                </tr>
 
- 
-                                <tr>
+                                 <tr>
                                    <td class="black-td fir-td">Score</td>
-                                    <td><p class="pl-num">${scoreVo.score10}</p></td>
-                                   <td><p class="pl2-num">${scoreVo.score11}</p></td>
-                                   <td><p class="pl2-num">${scoreVo.score12}</p></td>
-                                    <td><p class="mi-num">${scoreVo.score13}</p></td>
-                                   <td><p class="pl2-num">${scoreVo.score14}</p></td>
-                                   <td><p class="pl2-num">${scoreVo.score15}</p></td>
-                                    <td><p class="mi-num">${scoreVo.score16}</p></td>
-                                    <td><p class="pl-num">${scoreVo.score17}</p></td>
-                                   <td><p class="pl2-num">${scoreVo.score18}</p></td>
-                                   <td class="black-td">34</td>
-                               </tr>                                               
+                                   <td><p class="<c:if test="${(scoreVo.score10-parInfo2.hole1) < 0}">pl-num</c:if><c:if test="${(scoreVo.score10-parInfo2.hole1) == 0}">pl2-num</c:if><c:if test="${(scoreVo.score10-parInfo2.hole1) > 0}">mi-num</c:if>">${scoreVo.score10-parInfo2.hole1}</p></td>
+                                   <td><p class="<c:if test="${(scoreVo.score11-parInfo2.hole2) < 0}">pl-num</c:if><c:if test="${(scoreVo.score11-parInfo2.hole2) == 0}">pl2-num</c:if><c:if test="${(scoreVo.score11-parInfo2.hole2) > 0}">mi-num</c:if>">${scoreVo.score11-parInfo2.hole2}</p></td>
+                                   <td><p class="<c:if test="${(scoreVo.score12-parInfo2.hole3) < 0}">pl-num</c:if><c:if test="${(scoreVo.score12-parInfo2.hole3) == 0}">pl2-num</c:if><c:if test="${(scoreVo.score12-parInfo2.hole3) > 0}">mi-num</c:if>">${scoreVo.score12-parInfo2.hole3}</p></td>
+                                   <td><p class="<c:if test="${(scoreVo.score13-parInfo2.hole4) < 0}">pl-num</c:if><c:if test="${(scoreVo.score13-parInfo2.hole4) == 0}">pl2-num</c:if><c:if test="${(scoreVo.score13-parInfo2.hole4) > 0}">mi-num</c:if>">${scoreVo.score13-parInfo2.hole4}</p></td>
+                                   <td><p class="<c:if test="${(scoreVo.score14-parInfo2.hole5) < 0}">pl-num</c:if><c:if test="${(scoreVo.score14-parInfo2.hole5) == 0}">pl2-num</c:if><c:if test="${(scoreVo.score14-parInfo2.hole5) > 0}">mi-num</c:if>">${scoreVo.score14-parInfo2.hole5}</p></td>
+                                   <td><p class="<c:if test="${(scoreVo.score15-parInfo2.hole6) < 0}">pl-num</c:if><c:if test="${(scoreVo.score15-parInfo2.hole6) == 0}">pl2-num</c:if><c:if test="${(scoreVo.score15-parInfo2.hole6) > 0}">mi-num</c:if>">${scoreVo.score15-parInfo2.hole6}</p></td>
+                                   <td><p class="<c:if test="${(scoreVo.score16-parInfo2.hole7) < 0}">pl-num</c:if><c:if test="${(scoreVo.score16-parInfo2.hole7) == 0}">pl2-num</c:if><c:if test="${(scoreVo.score16-parInfo2.hole7) > 0}">mi-num</c:if>">${scoreVo.score16-parInfo2.hole7}</p></td>
+                                   <td><p class="<c:if test="${(scoreVo.score17-parInfo2.hole8) < 0}">pl-num</c:if><c:if test="${(scoreVo.score17-parInfo2.hole8) == 0}">pl2-num</c:if><c:if test="${(scoreVo.score17-parInfo2.hole8) > 0}">mi-num</c:if>">${scoreVo.score17-parInfo2.hole8}</p></td>
+                                   <td><p class="<c:if test="${(scoreVo.score18-parInfo2.hole9) < 0}">pl-num</c:if><c:if test="${(scoreVo.score18-parInfo2.hole9) == 0}">pl2-num</c:if><c:if test="${(scoreVo.score18-parInfo2.hole9) > 0}">mi-num</c:if>">${scoreVo.score18-parInfo2.hole9}</p></td>
+                                   <td class="black-td">${(scoreVo.score10+scoreVo.score11+scoreVo.score12+scoreVo.score13+scoreVo.score14+scoreVo.score15+scoreVo.score16+scoreVo.score17+scoreVo.score18)-(parInfo2.hole1+parInfo2.hole2+parInfo2.hole3+parInfo2.hole4+parInfo2.hole5+parInfo2.hole6+parInfo2.hole7+parInfo2.hole8+parInfo2.hole9)}</td>
+                               </tr>                                                
                            </table>
                            </div>                                    
                                 <button id="btnMng"  class="form-btn" onclick="#">내 스코어 관리하기</button>
@@ -154,7 +153,8 @@ function fn_mngScoreList()
 // 이미지로 만들기
 function fn_makeImage()
 {
-	
+	forms1.action = "/score/imageMake";
+	forms1.submit();
 }
 </script>
 

@@ -31,6 +31,24 @@ public class ScoreVo {
 	private int score16;
 	private int score17;
 	private int score18;
+	private int stroke1;
+	private int stroke2;
+	private int stroke3;
+	private int stroke4;
+	private int stroke5;
+	private int stroke6;
+	private int stroke7;
+	private int stroke8;
+	private int stroke9;
+	private int stroke10;
+	private int stroke11;
+	private int stroke12;
+	private int stroke13;
+	private int stroke14;
+	private int stroke15;
+	private int stroke16;
+	private int stroke17;
+	private int stroke18;	
 	private int putter1;
 	private int putter2;
 	private int putter3;
@@ -202,9 +220,118 @@ public class ScoreVo {
 	}
 	public int getScore18() {
 		return score18;
-	}
+	}	
 	public void setScore18(int score18) {
 		this.score18 = score18;
+	}
+	
+	public int getStroke1() {
+		return stroke1;
+	}
+	public void setStroke1(int stroke1) {
+		this.stroke1 = stroke1;
+	}
+	public int getStroke2() {
+		return stroke2;
+	}
+	public void setStroke2(int stroke2) {
+		this.stroke2 = stroke2;
+	}
+	public int getStroke3() {
+		return stroke3;
+	}
+	public void setStroke3(int stroke3) {
+		this.stroke3 = stroke3;
+	}
+	public int getStroke4() {
+		return stroke4;
+	}
+	public void setStroke4(int stroke4) {
+		this.stroke4 = stroke4;
+	}
+	public int getStroke5() {
+		return stroke5;
+	}
+	public void setStroke5(int stroke5) {
+		this.stroke5 = stroke5;
+	}
+	public int getStroke6() {
+		return stroke6;
+	}
+	public void setStroke6(int stroke6) {
+		this.stroke6 = stroke6;
+	}
+	public int getStroke7() {
+		return stroke7;
+	}
+	public void setStroke7(int stroke7) {
+		this.stroke7 = stroke7;
+	}
+	public int getStroke8() {
+		return stroke8;
+	}
+	public void setStroke8(int stroke8) {
+		this.stroke8 = stroke8;
+	}
+	public int getStroke9() {
+		return stroke9;
+	}
+	public void setStroke9(int stroke9) {
+		this.stroke9 = stroke9;
+	}
+	public int getStroke10() {
+		return stroke10;
+	}
+	public void setStroke10(int stroke10) {
+		this.stroke10 = stroke10;
+	}
+	public int getStroke11() {
+		return stroke11;
+	}
+	public void setStroke11(int stroke11) {
+		this.stroke11 = stroke11;
+	}
+	public int getStroke12() {
+		return stroke12;
+	}
+	public void setStroke12(int stroke12) {
+		this.stroke12 = stroke12;
+	}
+	public int getStroke13() {
+		return stroke13;
+	}
+	public void setStroke13(int stroke13) {
+		this.stroke13 = stroke13;
+	}
+	public int getStroke14() {
+		return stroke14;
+	}
+	public void setStroke14(int stroke14) {
+		this.stroke14 = stroke14;
+	}
+	public int getStroke15() {
+		return stroke15;
+	}
+	public void setStroke15(int stroke15) {
+		this.stroke15 = stroke15;
+	}
+	public int getStroke16() {
+		return stroke16;
+	}
+	public void setStroke16(int stroke16) {
+		this.stroke16 = stroke16;
+	}
+	public int getStroke17() {
+		return stroke17;
+	}
+	public void setStroke17(int stroke17) {
+		this.stroke17 = stroke17;
+	}
+	public int getStroke18() {
+		return stroke18;
+	}
+	public void setStroke18(int stroke18) {
+		this.stroke18 = stroke18;
 	}
 	public int getPutter1() {
 		return putter1;
