@@ -122,6 +122,22 @@ public class ScoreDetailVo {
 	private String description;
 	private String dateinserted;
 	
+	private boolean result;
+	private String error;
+	
+	
+	public String getError() {
+		return error;
+	}
+	public void setError(String error) {
+		this.error = error;
+	}
+	public boolean isResult() {
+		return result;
+	}
+	public void setResult(boolean result) {
+		this.result = result;
+	}
 	
 	public String getVisit_date() {
 		return visit_date;

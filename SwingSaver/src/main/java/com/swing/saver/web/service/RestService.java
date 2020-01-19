@@ -93,5 +93,9 @@ public interface RestService {
     public FarVo getParInfo(String country_id, String zone_id, String countryclub_id, String course) throws ApiException, IOException;		// 골프장 Par 정보 상세보기
     public String parDelete(Map<String, String> params) throws JsonProcessingException, ApiException;  // 골프장 Par 삭제
     public String parUpdate(Map<String, String> params) throws JsonProcessingException, ApiException;  // 골프장 Par 정보 수정
+    
+    // 스코어 정보 저장 
+    public String scoreCreate(Map<String, String> params) throws JsonProcessingException, ApiException;	        // 스코어정보 개인별 신규 등록
+    public String scoreDetailCreate(Map<String, String> params) throws JsonProcessingException, ApiException;	// 스코어정보 개인별 상세 신규 등록
      
 } 

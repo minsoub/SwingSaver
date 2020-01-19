@@ -889,4 +889,30 @@ public class RestServiceImpl implements RestService {
 
         return rtnJson;
     } 
+    /**
+     * 스코어정보 개인별 신규 등록
+     */
+    public String scoreCreate(Map<String, String> params) throws JsonProcessingException, ApiException {	     
+        ObjectMapper mapper = new ObjectMapper();
+        String rtnJson = "";
+
+        rtnJson = sendMessage.sendHttpsStr(mapper.writeValueAsString(params),"/ords/swing/saver/score","POST", "application/json",true);
+
+        LOGGER.debug("스코어정보 개인별 신규 등록 가입 파라미터:{},응답:{}",params.toString(),rtnJson);
+
+        return rtnJson;
+    }
+    /**
+     * 스코어정보 개인별 상세 신규 등록
+     */
+    public String scoreDetailCreate(Map<String, String> params) throws JsonProcessingException, ApiException {	 
+        ObjectMapper mapper = new ObjectMapper();
+        String rtnJson = "";
+
+        rtnJson = sendMessage.sendHttpsStr(mapper.writeValueAsString(params),"/ords/swing/saver/scoredetail","POST", "application/json",true);
+
+        LOGGER.debug("스코어정보 개인별 상세 신규 가입 파라미터:{},응답:{}",params.toString(),rtnJson);
+
+        return rtnJson;
+    }
 }

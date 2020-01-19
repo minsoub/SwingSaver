@@ -12,6 +12,25 @@
     <button type="button" class="mobile-pop" data-toggle="modal" data-target="#mobile_web">모바일웹 접속시 팝업</button>
 
 	<form class="form-signin" id='forms1' name="forms1" method="POST">
+	<input type="hidden" name="puterpattern1"  id="puterpattern1">
+    <input type="hidden" name="puterpattern2"  id="puterpattern2">
+    <input type="hidden" name="puterpattern3"  id="puterpattern3">
+    <input type="hidden" name="puterpattern4"  id="puterpattern4">
+    <input type="hidden" name="puterpattern5"  id="puterpattern5">
+    <input type="hidden" name="puterpattern6"  id="puterpattern6">
+    <input type="hidden" name="puterpattern7"  id="puterpattern7">
+    <input type="hidden" name="puterpattern8"  id="puterpattern8">
+    <input type="hidden" name="puterpattern9"  id="puterpattern9">
+	<input type="hidden" name="puterpattern10" id="puterpattern10">
+    <input type="hidden" name="puterpattern11" id="puterpattern11">
+    <input type="hidden" name="puterpattern12" id="puterpattern12">
+    <input type="hidden" name="puterpattern13" id="puterpattern13">
+    <input type="hidden" name="puterpattern14" id="puterpattern14">
+    <input type="hidden" name="puterpattern15" id="puterpattern15">
+    <input type="hidden" name="puterpattern16" id="puterpattern16">
+    <input type="hidden" name="puterpattern17" id="puterpattern17">
+    <input type="hidden" name="puterpattern18" id="puterpattern18">
+                                        
     <section class="container no-padding">
         <article class="col-xs-12" style="padding: 0;">
 			<%@include file="/WEB-INF/views/web/inc/mypage_left_menu.jsp"%>
@@ -148,15 +167,15 @@
                                         <td class="gray-td" rowspan="2"><input type="text" name="putter_sum1"></td>
                                     </tr>
                                     <tr>
-                                        <td><button type="button" class="sc-view" data-toggle="modal" data-target="#putts_01">상세</button></td>
-                                        <td><button type="button" class="sc-view" data-toggle="modal" data-target="#putts_01">상세</button></td>
-                                        <td><button type="button" class="sc-view" data-toggle="modal" data-target="#putts_01">상세</button></td>
-                                        <td><button type="button" class="sc-view" data-toggle="modal" data-target="#putts_01">상세</button></td>
-                                        <td><button type="button" class="sc-view" data-toggle="modal" data-target="#putts_01">상세</button></td>
-                                        <td><button type="button" class="sc-view" data-toggle="modal" data-target="#putts_01">상세</button></td>
-                                        <td><button type="button" class="sc-view" data-toggle="modal" data-target="#putts_01">상세</button></td>
-                                        <td><button type="button" class="sc-view" data-toggle="modal" data-target="#putts_01">상세</button></td>
-                                        <td><button type="button" class="sc-view" data-toggle="modal" data-target="#putts_01">상세</button></td>
+                                        <td><button type="button" class="sc-view" data-toggle="modal" data-target="#putts_01" data-whatever="putter1">상세</button></td>
+                                        <td><button type="button" class="sc-view" data-toggle="modal" data-target="#putts_01" data-whatever="putter2">상세</button></td>
+                                        <td><button type="button" class="sc-view" data-toggle="modal" data-target="#putts_01" data-whatever="putter3">상세</button></td>
+                                        <td><button type="button" class="sc-view" data-toggle="modal" data-target="#putts_01" data-whatever="putter4">상세</button></td>
+                                        <td><button type="button" class="sc-view" data-toggle="modal" data-target="#putts_01" data-whatever="putter5">상세</button></td>
+                                        <td><button type="button" class="sc-view" data-toggle="modal" data-target="#putts_01" data-whatever="putter6">상세</button></td>
+                                        <td><button type="button" class="sc-view" data-toggle="modal" data-target="#putts_01" data-whatever="putter7">상세</button></td>
+                                        <td><button type="button" class="sc-view" data-toggle="modal" data-target="#putts_01" data-whatever="putter8">상세</button></td>
+                                        <td><button type="button" class="sc-view" data-toggle="modal" data-target="#putts_01" data-whatever="putter9">상세</button></td>
 
                                     </tr>
                                     <tr>
@@ -543,7 +562,6 @@
 	
 
     <!--    putts -->
-
     <div class="modal fade" id="putts_01" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog " role="document" style="width: 700px;">
             <div class="modal-content">
@@ -553,42 +571,42 @@
                     <span aria-hidden="true">&times;</span>
                     </button>
                     <h4 class="modal-title text-center" id="exampleModalLabel">Putts</h4>
-
                 </div>
                 <div class="modal-move">
                     <!-- 모달 내용 -->
                     <form>
+                       <input type="hidden" id="putter_id">
                         <div class="modal-pt">
-                            <input type="radio" name="putts01" checked="checked" value="putts01" />
+                            <input type="radio" name="putts01" checked="checked" value="1" />
                             <img src="../image/jl_on.gif" width="100%">
                         </div>
                         <div class="modal-pt">
-                            <input type="radio" name="putts01" checked="checked" value="putts01" />
+                            <input type="radio" name="putts01"  value="2" />
                             <img src="../image/jr_on.gif" width="100%">
                         </div>
                         <div class="modal-pt">
-                            <input type="radio" name="putts01" checked="checked" value="putts01" />
+                            <input type="radio" name="putts01"  value="3" />
                             <img src="../image/ol_on.gif" width="100%">
                         </div>
                         <div class="modal-pt">
-                            <input type="radio" name="putts01" checked="checked" value="putts01" />
+                            <input type="radio" name="putts01"  value="4" />
                             <img src="../image/or_on.gif" width="100%">
                         </div>
 
                         <div class="modal-pt">
-                            <input type="radio" name="putts01" checked="checked" value="putts01" />
+                            <input type="radio" name="putts01" value="5" />
                             <img src="../image/os_on.gif" width="100%">
                         </div>
                         <div class="modal-pt">
-                            <input type="radio" name="putts01" checked="checked" value="putts01" />
+                            <input type="radio" name="putts01"  value="6" />
                             <img src="../image/sl_on.gif" width="100%">
                         </div>
                         <div class="modal-pt">
-                            <input type="radio" name="putts01" checked="checked" value="putts01" />
+                            <input type="radio" name="putts01"  value="7" />
                             <img src="../image/sr_on.gif" width="100%">
                         </div>
                         <div class="modal-pt">
-                            <input type="radio" name="putts01" checked="checked" value="putts01" />
+                            <input type="radio" name="putts01" value="8" />
                             <img src="../image/ss_on.gif" width="100%">
                         </div>
 
@@ -599,12 +617,11 @@
                     <div class="col-md-12">
 
                         <div class="mo-pa col-md-6 ">
-                            <button type="button" class="modal-btn">저장</button>
-
+                            <button type="button" id="btnSelect" class="modal-btn">선택</button>
                         </div>
 
                         <div class="mo-pa col-md-6 ">
-                            <button type="button" class="modal-btn btn-secondary" data-dismiss="modal">취소</button>
+                            <button type="button" id="btnCancel" class="modal-btn btn-secondary" data-dismiss="modal">취소</button>
                         </div>
                     </div>
                 </div>
@@ -858,7 +875,37 @@ $(document).ready(function(){
     $("#btnAdd").click(function(){
     	fn_save();
     });
+
+    $('#putts_01').on('show.bs.modal', function (event) {
+    	  var button = $(event.relatedTarget) // Button that triggered the modal
+    	  var recipient = button.data('whatever') // Extract info from data-* attributes
+    	  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    	  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    	  
+    	  console.log(recipient);
+    	  $("#putter_id").val(recipient);
+    	  
+    	  //var modal = $(this)
+    	  //modal.find('.modal-title').text('New message to ' + recipient)
+    	  //modal.find('.modal-body input').val(recipient)
+    });
+    	
     
+    // Putter Pattern 화면에서의 선택
+    $("#btnSelect").click(function(){
+    	if($("#putter_id").val() == "putter1")
+    		$("input[name='putter1']").val($("input:radio[name='putts01']").val());
+    	if($("#putter_id").val() == "putter2")
+    		$("input[name='putter2']").val($("input:radio[name='putts01']").val());  
+    	
+
+    	$("#putts_01").attr('aria-hidden', 'true').hide();
+    });
+    
+    $("#btnCancel").click(function(){
+    	//$("#putts_01").hide();
+    	$("#putts_01").attr('aria-hidden', 'true').hide();
+    });
     
     $("#golfTitle").text($("#countryclub_id option:checked").text());
     

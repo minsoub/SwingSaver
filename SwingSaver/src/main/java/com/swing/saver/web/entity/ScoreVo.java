@@ -31,6 +31,8 @@ public class ScoreVo {
 	private int score16;
 	private int score17;
 	private int score18;
+	private int score_sum;
+	private int score_plus_sum;
 	private int stroke1;
 	private int stroke2;
 	private int stroke3;
@@ -71,8 +73,28 @@ public class ScoreVo {
 	private String dateinserted;
 	
 	private String error;			// QR 파라미터가 잘 못 넘어왔을 때 해당 에러를 여기에 저장한다.
+	private boolean result;
 	
 	
+	
+	public boolean isResult() {
+		return result;
+	}
+	public void setResult(boolean result) {
+		this.result = result;
+	}
+	public int getScore_plus_sum() {
+		return score_plus_sum;
+	}
+	public void setScore_plus_sum(int score_plus_sum) {
+		this.score_plus_sum = score_plus_sum;
+	}
+	public int getScore_sum() {
+		return score_sum;
+	}
+	public void setScore_sum(int score_sum) {
+		this.score_sum = score_sum;
+	}
 	public String getError() {
 		return error;
 	}
