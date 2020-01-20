@@ -141,30 +141,30 @@
                                     </tr>
                                     <tr>
                                         <td class="gray-td fir-td">Stroke</td>
-                                        <td><input type="text" name="stroke1" value="${scoreVo.stroke1}"></td>
-                                        <td><input type="text" name="stroke2" value="${scoreVo.stroke2}"></td>
-                                        <td><input type="text" name="stroke3" value="${scoreVo.stroke3}"></td>
-                                        <td><input type="text" name="stroke4"  value="${scoreVo.stroke4}"></td>
-                                        <td><input type="text" name="stroke5"  value="${scoreVo.stroke5}"></td>
-                                        <td><input type="text" name="stroke6" value="${scoreVo.stroke6}"></td>
-                                        <td><input type="text" name="stroke7" value="${scoreVo.stroke7}"></td>
-                                        <td><input type="text" name="stroke8" value="${scoreVo.stroke8}"></td>
-                                        <td><input type="text" name="stroke9" value="${scoreVo.stroke9}"></td>
-                                        <td class="gray-td"><input type="text" name="stroke_sum1" value="${scoreVo.stroke1+scoreVo.stroke2+scoreVo.stroke3+scoreVo.stroke4+scoreVo.stroke5+scoreVo.stroke6+scoreVo.stroke7+scoreo.stroke8+scoreVo.stroke9}"></td>
+                                        <td><input type="number" name="stroke1" value="${scoreVo.stroke1}" maxlength="2" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="number" name="stroke2" value="${scoreVo.stroke2}" maxlength="2" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="number" name="stroke3" value="${scoreVo.stroke3}" maxlength="2" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="number" name="stroke4"  value="${scoreVo.stroke4}" maxlength="2" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="number" name="stroke5"  value="${scoreVo.stroke5}" maxlength="2" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="number" name="stroke6" value="${scoreVo.stroke6}" maxlength="2" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="number" name="stroke7" value="${scoreVo.stroke7}" maxlength="2" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="number" name="stroke8" value="${scoreVo.stroke8}" maxlength="2" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="number" name="stroke9" value="${scoreVo.stroke9}" maxlength="2" oninput="maxLengthCheck(this)"></td>
+                                        <td class="gray-td"><input type="text" readonly name="stroke_sum1" value="${scoreVo.stroke1+scoreVo.stroke2+scoreVo.stroke3+scoreVo.stroke4+scoreVo.stroke5+scoreVo.stroke6+scoreVo.stroke7+scoreo.stroke8+scoreVo.stroke9}"></td>
                                     </tr>
 
                                     <tr>
                                         <td class="gray-td fir-td" rowspan="2">Putts</td>
-                                        <td><input type="text" name="putter1"></td>
-                                        <td><input type="text" name="putter2"></td>
-                                        <td><input type="text" name="putter3"></td>
-                                        <td><input type="text" name="putter4"></td>
-                                        <td><input type="text" name="putter5"></td>
-                                        <td><input type="text" name="putter6"></td>
-                                        <td><input type="text" name="putter7"></td>
-                                        <td><input type="text" name="putter8"></td>
-                                        <td><input type="text" name="putter9"></td>
-                                        <td class="gray-td" rowspan="2"><input type="text" name="putter_sum1"></td>
+                                        <td><input type="number" name="putter1"  maxlength="2" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="number" name="putter2"  maxlength="2" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="number" name="putter3"  maxlength="2" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="number" name="putter4"  maxlength="2" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="number" name="putter5"  maxlength="2" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="number" name="putter6"  maxlength="2" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="number" name="putter7"  maxlength="2" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="number" name="putter8"  maxlength="2" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="number" name="putter9"  maxlength="2" oninput="maxLengthCheck(this)"></td>
+                                        <td class="gray-td" rowspan="2"><input type="text" readonly name="putter_sum1"></td>
                                     </tr>
                                     <tr>
                                         <td><button type="button" class="sc-view" data-toggle="modal" data-target="#putts_01" data-whatever="putter1">상세</button></td>
@@ -180,16 +180,16 @@
                                     </tr>
                                     <tr>
                                         <td class="gray-td fir-td">Score</td>
-                                        <td><input type="text" name="score1" value="${scoreVo.score1-parInfo1.hole1}"></td>
-                                        <td><input type="text" name="score2" value="${scoreVo.score2-parInfo1.hole2}"></td>
-                                        <td><input type="text" name="score3" value="${scoreVo.score3-parInfo1.hole3}"></td>
-                                        <td><input type="text" name="score4" value="${scoreVo.score4-parInfo1.hole4}"></td>
-                                        <td><input type="text" name="score5" value="${scoreVo.score5-parInfo1.hole5}"></td>
-                                        <td><input type="text" name="score6" value="${scoreVo.score6-parInfo1.hole6}"></td>
-                                        <td><input type="text" name="score7" value="${scoreVo.score7-parInfo1.hole7}"></td>
-                                        <td><input type="text" name="score8" value="${scoreVo.score8-parInfo1.hole8}"></td>
-                                        <td><input type="text" name="score9" value="${scoreVo.score9-parInfo1.hole9}"></td>
-                                        <td class="gray-td"><input type="text" name="score_sum1" value="${scoreVo.score1+scoreVo.score2+scoreVo.score3+scoreVo.score4+scoreVo.score5+scoreVo.score6+scoreVo.score7+scoreo.score8+scoreVo.score9 - (parInfo1.hole1+parInfo1.hole2+parInfo1.hole3+parInfo1.hole4+parInfo1.hole5+parInfo1.hole6+parInfo1.hole7+parInfo1.hole8+parInfo1.hole9)}"></td>
+                                        <td><input type="text" name="score1" value="${scoreVo.score1-parInfo1.hole1}"  maxlength="3" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="text" name="score2" value="${scoreVo.score2-parInfo1.hole2}"  maxlength="3" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="text" name="score3" value="${scoreVo.score3-parInfo1.hole3}"  maxlength="3" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="text" name="score4" value="${scoreVo.score4-parInfo1.hole4}"  maxlength="3" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="text" name="score5" value="${scoreVo.score5-parInfo1.hole5}"  maxlength="3" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="text" name="score6" value="${scoreVo.score6-parInfo1.hole6}"  maxlength="3" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="text" name="score7" value="${scoreVo.score7-parInfo1.hole7}"  maxlength="3" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="text" name="score8" value="${scoreVo.score8-parInfo1.hole8}"  maxlength="3" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="text" name="score9" value="${scoreVo.score9-parInfo1.hole9}"  maxlength="3" oninput="maxLengthCheck(this)"></td>
+                                        <td class="gray-td"><input type="text" name="score_sum1" readonly value="${scoreVo.score1+scoreVo.score2+scoreVo.score3+scoreVo.score4+scoreVo.score5+scoreVo.score6+scoreVo.score7+scoreo.score8+scoreVo.score9 - (parInfo1.hole1+parInfo1.hole2+parInfo1.hole3+parInfo1.hole4+parInfo1.hole5+parInfo1.hole6+parInfo1.hole7+parInfo1.hole8+parInfo1.hole9)}"></td>
                                     </tr>
                                     <tr>
                                         <td class="gray-td fir-td">Fairway안착</td>
@@ -289,30 +289,30 @@
                                     </tr>
                                     <tr>
                                         <td class="gray-td fir-td">Stroke</td>
-                                        <td><input type="text" name="stroke10" value="${scoreVo.stroke10}"></td>
-                                        <td><input type="text" name="stroke11" value="${scoreVo.stroke11}"></td>
-                                        <td><input type="text" name="stroke12" value="${scoreVo.stroke12}"></td>
-                                        <td><input type="text" name="stroke13"  value="${scoreVo.stroke13}"></td>
-                                        <td><input type="text" name="stroke14"  value="${scoreVo.stroke14}"></td>
-                                        <td><input type="text" name="stroke15" value="${scoreVo.stroke15}"></td>
-                                        <td><input type="text" name="stroke16" value="${scoreVo.stroke16}"></td>
-                                        <td><input type="text" name="stroke17" value="${scoreVo.stroke17}"></td>
-                                        <td><input type="text" name="stroke18" value="${scoreVo.stroke18}"></td>
-                                        <td class="gray-td"><input type="text" name="stroke_sum1" value="${scoreVo.stroke10+scoreVo.stroke11+scoreVo.stroke12+scoreVo.stroke13+scoreVo.stroke14+scoreVo.stroke15+scoreVo.stroke16+scoreo.stroke17+scoreVo.stroke18}"></td>
+                                        <td><input type="number" name="stroke10" value="${scoreVo.stroke10}" maxlength="2" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="number" name="stroke11" value="${scoreVo.stroke11}" maxlength="2" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="number" name="stroke12" value="${scoreVo.stroke12}" maxlength="2" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="number" name="stroke13"  value="${scoreVo.stroke13}" maxlength="2" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="number" name="stroke14"  value="${scoreVo.stroke14}" maxlength="2" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="number" name="stroke15" value="${scoreVo.stroke15}" maxlength="2" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="number" name="stroke16" value="${scoreVo.stroke16}" maxlength="2" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="number" name="stroke17" value="${scoreVo.stroke17}" maxlength="2" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="number" name="stroke18" value="${scoreVo.stroke18}" maxlength="2" oninput="maxLengthCheck(this)"></td>
+                                        <td class="gray-td"><input type="text" name="stroke_sum1" readonly value="${scoreVo.stroke10+scoreVo.stroke11+scoreVo.stroke12+scoreVo.stroke13+scoreVo.stroke14+scoreVo.stroke15+scoreVo.stroke16+scoreo.stroke17+scoreVo.stroke18}"></td>
                                     </tr>
 
                                     <tr>
                                         <td class="gray-td fir-td" rowspan="2">Putts</td>
-                                        <td><input type="text" name="putter10"></td>
-                                        <td><input type="text" name="putter11"></td>
-                                        <td><input type="text" name="putter12"></td>
-                                        <td><input type="text" name="putter13"></td>
-                                        <td><input type="text" name="putter14"></td>
-                                        <td><input type="text" name="putter15"></td>
-                                        <td><input type="text" name="putter16"></td>
-                                        <td><input type="text" name="putter17"></td>
-                                        <td><input type="text" name="putter18"></td>
-                                        <td class="gray-td" rowspan="2"><input type="text" name="putter_sum2"></td>
+                                        <td><input type="number" name="putter10" maxlength="2" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="number" name="putter11" maxlength="2" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="number" name="putter12" maxlength="2" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="number" name="putter13" maxlength="2" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="number" name="putter14" maxlength="2" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="number" name="putter15" maxlength="2" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="number" name="putter16" maxlength="2" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="number" name="putter17" maxlength="2" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="number" name="putter18" maxlength="2" oninput="maxLengthCheck(this)"></td>
+                                        <td class="gray-td" rowspan="2"><input type="text" readonly name="putter_sum2"></td>
                                     </tr>
                                     <tr>
                                         <td><button type="button" class="sc-view" data-toggle="modal" data-target="#putts_01">상세</button></td>
@@ -328,16 +328,16 @@
                                     </tr>
                                     <tr>
                                         <td class="gray-td fir-td">Score</td>
-                                        <td><input type="text" name="score10" value="${scoreVo.score10-parInfo2.hole1}"></td>
-                                        <td><input type="text" name="score11" value="${scoreVo.score11-parInfo2.hole2}"></td>
-                                        <td><input type="text" name="score12" value="${scoreVo.score12-parInfo2.hole3}"></td>
-                                        <td><input type="text" name="score13" value="${scoreVo.score13-parInfo2.hole4}"></td>
-                                        <td><input type="text" name="score14" value="${scoreVo.score14-parInfo2.hole5}"></td>
-                                        <td><input type="text" name="score15" value="${scoreVo.score15-parInfo2.hole6}"></td>
-                                        <td><input type="text" name="score16" value="${scoreVo.score16-parInfo2.hole7}"></td>
-                                        <td><input type="text" name="score17" value="${scoreVo.score17-parInfo2.hole8}"></td>
-                                        <td><input type="text" name="score18" value="${scoreVo.score18-parInfo2.hole9}"></td>
-                                        <td class="gray-td"><input type="text" name="score_sum2" value="${scoreVo.score10+scoreVo.score11+scoreVo.score12+scoreVo.score13+scoreVo.score14+scoreVo.score15+scoreVo.score16+scoreo.score17+scoreVo.score18 - (parInfo2.hole1+parInfo2.hole2+parInfo2.hole3+parInfo2.hole4+parInfo2.hole5+parInfo2.hole6+parInfo2.hole7+parInfo2.hole8+parInfo2.hole9)}"></td>
+                                        <td><input type="text" name="score10" value="${scoreVo.score10-parInfo2.hole1}" maxlength="3" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="text" name="score11" value="${scoreVo.score11-parInfo2.hole2}" maxlength="3" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="text" name="score12" value="${scoreVo.score12-parInfo2.hole3}" maxlength="3" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="text" name="score13" value="${scoreVo.score13-parInfo2.hole4}" maxlength="3" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="text" name="score14" value="${scoreVo.score14-parInfo2.hole5}" maxlength="3" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="text" name="score15" value="${scoreVo.score15-parInfo2.hole6}" maxlength="3" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="text" name="score16" value="${scoreVo.score16-parInfo2.hole7}" maxlength="3" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="text" name="score17" value="${scoreVo.score17-parInfo2.hole8}" maxlength="3" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="text" name="score18" value="${scoreVo.score18-parInfo2.hole9}" maxlength="3" oninput="maxLengthCheck(this)"></td>
+                                        <td class="gray-td"><input type="text" name="score_sum2" readonly value="${scoreVo.score10+scoreVo.score11+scoreVo.score12+scoreVo.score13+scoreVo.score14+scoreVo.score15+scoreVo.score16+scoreo.score17+scoreVo.score18 - (parInfo2.hole1+parInfo2.hole2+parInfo2.hole3+parInfo2.hole4+parInfo2.hole5+parInfo2.hole6+parInfo2.hole7+parInfo2.hole8+parInfo2.hole9)}"></td>
                                     </tr>
                                     <tr>
                                         <td class="gray-td fir-td">Fairway안착</td>
