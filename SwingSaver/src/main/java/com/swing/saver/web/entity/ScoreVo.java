@@ -75,8 +75,149 @@ public class ScoreVo {
 	private String error;			// QR 파라미터가 잘 못 넘어왔을 때 해당 에러를 여기에 저장한다.
 	private boolean result;
 	
+	private int scorechk1;
+	private int scorechk2;
+	private int scorechk3;
+	private int scorechk4;
+	private int scorechk5;
+	private int scorechk6;
+	private int scorechk7;
+	private int scorechk8;
+	private int scorechk9;
+	private int scorechk10;
+	private int scorechk11;
+	private int scorechk12;
+	private int scorechk13;
+	private int scorechk14;
+	private int scorechk15;
+	private int scorechk16;
+	private int scorechk17;
+	private int scorechk18;	
+	private int scorechksum1;
+	private int scorechksum2;
 	
 	
+
+	public int getScorechksum1() {
+		return scorechksum1;
+	}
+	public void setScorechksum1(int scorechksum1) {
+		this.scorechksum1 = scorechksum1;
+	}
+	public int getScorechksum2() {
+		return scorechksum2;
+	}
+	public void setScorechksum2(int scorechksum2) {
+		this.scorechksum2 = scorechksum2;
+	}
+	public int getScorechk1() {
+		return scorechk1;
+	}
+	public void setScorechk1(int scorechk1) {
+		this.scorechk1 = scorechk1;
+	}
+	public int getScorechk2() {
+		return scorechk2;
+	}
+	public void setScorechk2(int scorechk2) {
+		this.scorechk2 = scorechk2;
+	}
+	public int getScorechk3() {
+		return scorechk3;
+	}
+	public void setScorechk3(int scorechk3) {
+		this.scorechk3 = scorechk3;
+	}
+	public int getScorechk4() {
+		return scorechk4;
+	}
+	public void setScorechk4(int scorechk4) {
+		this.scorechk4 = scorechk4;
+	}
+	public int getScorechk5() {
+		return scorechk5;
+	}
+	public void setScorechk5(int scorechk5) {
+		this.scorechk5 = scorechk5;
+	}
+	public int getScorechk6() {
+		return scorechk6;
+	}
+	public void setScorechk6(int scorechk6) {
+		this.scorechk6 = scorechk6;
+	}
+	public int getScorechk7() {
+		return scorechk7;
+	}
+	public void setScorechk7(int scorechk7) {
+		this.scorechk7 = scorechk7;
+	}
+	public int getScorechk8() {
+		return scorechk8;
+	}
+	public void setScorechk8(int scorechk8) {
+		this.scorechk8 = scorechk8;
+	}
+	public int getScorechk9() {
+		return scorechk9;
+	}
+	public void setScorechk9(int scorechk9) {
+		this.scorechk9 = scorechk9;
+	}
+	public int getScorechk10() {
+		return scorechk10;
+	}
+	public void setScorechk10(int scorechk10) {
+		this.scorechk10 = scorechk10;
+	}
+	public int getScorechk11() {
+		return scorechk11;
+	}
+	public void setScorechk11(int scorechk11) {
+		this.scorechk11 = scorechk11;
+	}
+	public int getScorechk12() {
+		return scorechk12;
+	}
+	public void setScorechk12(int scorechk12) {
+		this.scorechk12 = scorechk12;
+	}
+	public int getScorechk13() {
+		return scorechk13;
+	}
+	public void setScorechk13(int scorechk13) {
+		this.scorechk13 = scorechk13;
+	}
+	public int getScorechk14() {
+		return scorechk14;
+	}
+	public void setScorechk14(int scorechk14) {
+		this.scorechk14 = scorechk14;
+	}
+	public int getScorechk15() {
+		return scorechk15;
+	}
+	public void setScorechk15(int scorechk15) {
+		this.scorechk15 = scorechk15;
+	}
+	public int getScorechk16() {
+		return scorechk16;
+	}
+	public void setScorechk16(int scorechk16) {
+		this.scorechk16 = scorechk16;
+	}
+	public int getScorechk17() {
+		return scorechk17;
+	}
+	public void setScorechk17(int scorechk17) {
+		this.scorechk17 = scorechk17;
+	}
+	public int getScorechk18() {
+		return scorechk18;
+	}
+	public void setScorechk18(int scorechk18) {
+		this.scorechk18 = scorechk18;
+	}
 	public boolean isResult() {
 		return result;
 	}

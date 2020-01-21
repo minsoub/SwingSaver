@@ -138,6 +138,123 @@ public class ScoreController {
     				);
     		scoreVo.setScore_plus_sum(scoreVo.getScore_sum() - (parInfo1.getSum()+parInfo2.getSum()));
     		
+    		// 스코어 계산
+    		if (scoreVo.getScore1() == 0)
+    		{
+    			scoreVo.setScorechk1(0);
+    		}else {
+    			scoreVo.setScorechk1(scoreVo.getScore1() - parInfo1.getHole1());
+    		}
+    		if (scoreVo.getScore2() == 0)
+    		{
+    			scoreVo.setScorechk2(0);
+    		}else {
+    			scoreVo.setScorechk2(scoreVo.getScore2() - parInfo1.getHole2());
+    		}
+    		if (scoreVo.getScore3() == 0)
+    		{
+    			scoreVo.setScorechk3(0);
+    		}else {
+    			scoreVo.setScorechk3(scoreVo.getScore3() - parInfo1.getHole3());
+    		}
+    		if (scoreVo.getScore4() == 0)
+    		{
+    			scoreVo.setScorechk4(0);
+    		}else {
+    			scoreVo.setScorechk4(scoreVo.getScore4() - parInfo1.getHole4());
+    		}
+    		if (scoreVo.getScore5() == 0)
+    		{
+    			scoreVo.setScorechk5(0);
+    		}else {
+    			scoreVo.setScorechk5(scoreVo.getScore5() - parInfo1.getHole5());
+    		}
+    		if (scoreVo.getScore6() == 0)
+    		{
+    			scoreVo.setScorechk6(0);
+    		}else {
+    			scoreVo.setScorechk6(scoreVo.getScore6() - parInfo1.getHole6());
+    		}
+    		if (scoreVo.getScore7() == 0)
+    		{
+    			scoreVo.setScorechk7(0);
+    		}else {
+    			scoreVo.setScorechk7(scoreVo.getScore7() - parInfo1.getHole7());
+    		}
+    		if (scoreVo.getScore8() == 0)
+    		{
+    			scoreVo.setScorechk8(0);
+    		}else {
+    			scoreVo.setScorechk8(scoreVo.getScore8() - parInfo1.getHole8());
+    		}  
+    		if (scoreVo.getScore9() == 0)
+    		{
+    			scoreVo.setScorechk9(0);
+    		}else {
+    			scoreVo.setScorechk9(scoreVo.getScore9() - parInfo1.getHole9());
+    		}     		
+    		/////////////////////////////////////////////////////////////////////
+    		if (scoreVo.getScore10() == 0)
+    		{
+    			scoreVo.setScorechk10(0);
+    		}else {
+    			scoreVo.setScorechk10(scoreVo.getScore10() - parInfo2.getHole1());
+    		}
+    		if (scoreVo.getScore11() == 0)
+    		{
+    			scoreVo.setScorechk11(0);
+    		}else {
+    			scoreVo.setScorechk11(scoreVo.getScore11() - parInfo2.getHole2());
+    		}
+    		if (scoreVo.getScore12() == 0)
+    		{
+    			scoreVo.setScorechk12(0);
+    		}else {
+    			scoreVo.setScorechk12(scoreVo.getScore12() - parInfo2.getHole3());
+    		}
+    		if (scoreVo.getScore13() == 0)
+    		{
+    			scoreVo.setScorechk13(0);
+    		}else {
+    			scoreVo.setScorechk13(scoreVo.getScore13() - parInfo2.getHole4());
+    		}
+    		if (scoreVo.getScore14() == 0)
+    		{
+    			scoreVo.setScorechk14(0);
+    		}else {
+    			scoreVo.setScorechk14(scoreVo.getScore14() - parInfo2.getHole5());
+    		}
+    		if (scoreVo.getScore15() == 0)
+    		{
+    			scoreVo.setScorechk15(0);
+    		}else {
+    			scoreVo.setScorechk15(scoreVo.getScore15() - parInfo2.getHole6());
+    		}
+    		if (scoreVo.getScore16() == 0)
+    		{
+    			scoreVo.setScorechk16(0);
+    		}else {
+    			scoreVo.setScorechk16(scoreVo.getScore16() - parInfo2.getHole7());
+    		}
+    		if (scoreVo.getScore17() == 0)
+    		{
+    			scoreVo.setScorechk17(0);
+    		}else {
+    			scoreVo.setScorechk17(scoreVo.getScore17() - parInfo2.getHole8());
+    		}  
+    		if (scoreVo.getScore18() == 0)
+    		{
+    			scoreVo.setScorechk18(0);
+    		}else {
+    			scoreVo.setScorechk18(scoreVo.getScore18() - parInfo2.getHole9());
+    		} 
+    		
+    		// sum
+    		scoreVo.setScorechksum1(scoreVo.getScorechk1()+scoreVo.getScorechk2()+scoreVo.getScorechk3()+scoreVo.getScorechk4()+scoreVo.getScorechk5()
+    						+scoreVo.getScorechk6() + scoreVo.getScorechk7() + scoreVo.getScorechk8() + scoreVo.getScorechk9());
+    		scoreVo.setScorechksum2(scoreVo.getScorechk10()+scoreVo.getScorechk11()+scoreVo.getScorechk12()+scoreVo.getScorechk13()+scoreVo.getScorechk14()
+			+scoreVo.getScorechk15() + scoreVo.getScorechk16() + scoreVo.getScorechk17() + scoreVo.getScorechk18());
+    		
     	}else {
     		scoreVo.setError("스코어 정보 개수 에러 :" + scoreList.length);
     	}
@@ -150,9 +267,9 @@ public class ScoreController {
     	scoreVo2.setEnd_course(Integer.parseInt(qrVo.getEndcourse()));  		// in 종료 코스
     	
     	String score2 = qrVo.getScore1();		// 현재 형식 1:2:3:4 ~~ 형식으로 되어 있다.
-    	String[] scoreList2 = score2.split(":");
-    	if (scoreList2.length == 18)
+    	if (score2 != null)
     	{
+    		String[] scoreList2 = score2.split(":");
     		scoreVo2.setUser_id((new Long(userId)).intValue());
     		scoreVo2.setScore1(Integer.parseInt(scoreList2[0]));
     		scoreVo2.setScore2(Integer.parseInt(scoreList2[1]));
@@ -182,6 +299,123 @@ public class ScoreController {
     				);
     		scoreVo2.setScore_plus_sum(scoreVo2.getScore_sum() - (parInfo1.getSum()+parInfo2.getSum()));
     		
+    		// 스코어 계산
+    		if (scoreVo2.getScore1() == 0)
+    		{
+    			scoreVo2.setScorechk1(0);
+    		}else {
+    			scoreVo2.setScorechk1(scoreVo2.getScore1() - parInfo1.getHole1());
+    		}
+    		if (scoreVo2.getScore2() == 0)
+    		{
+    			scoreVo2.setScorechk2(0);
+    		}else {
+    			scoreVo2.setScorechk2(scoreVo2.getScore2() - parInfo1.getHole2());
+    		}
+    		if (scoreVo2.getScore3() == 0)
+    		{
+    			scoreVo2.setScorechk3(0);
+    		}else {
+    			scoreVo2.setScorechk3(scoreVo2.getScore3() - parInfo1.getHole3());
+    		}
+    		if (scoreVo2.getScore4() == 0)
+    		{
+    			scoreVo2.setScorechk4(0);
+    		}else {
+    			scoreVo2.setScorechk4(scoreVo2.getScore4() - parInfo1.getHole4());
+    		}
+    		if (scoreVo2.getScore5() == 0)
+    		{
+    			scoreVo2.setScorechk5(0);
+    		}else {
+    			scoreVo2.setScorechk5(scoreVo2.getScore5() - parInfo1.getHole5());
+    		}
+    		if (scoreVo2.getScore6() == 0)
+    		{
+    			scoreVo2.setScorechk6(0);
+    		}else {
+    			scoreVo2.setScorechk6(scoreVo2.getScore6() - parInfo1.getHole6());
+    		}
+    		if (scoreVo2.getScore7() == 0)
+    		{
+    			scoreVo2.setScorechk7(0);
+    		}else {
+    			scoreVo2.setScorechk7(scoreVo2.getScore7() - parInfo1.getHole7());
+    		}
+    		if (scoreVo2.getScore8() == 0)
+    		{
+    			scoreVo2.setScorechk8(0);
+    		}else {
+    			scoreVo2.setScorechk8(scoreVo2.getScore8() - parInfo1.getHole8());
+    		}  
+    		if (scoreVo2.getScore9() == 0)
+    		{
+    			scoreVo2.setScorechk9(0);
+    		}else {
+    			scoreVo2.setScorechk9(scoreVo2.getScore9() - parInfo1.getHole9());
+    		}     		
+    		/////////////////////////////////////////////////////////////////////
+    		if (scoreVo2.getScore10() == 0)
+    		{
+    			scoreVo2.setScorechk10(0);
+    		}else {
+    			scoreVo2.setScorechk10(scoreVo2.getScore10() - parInfo2.getHole1());
+    		}
+    		if (scoreVo2.getScore11() == 0)
+    		{
+    			scoreVo2.setScorechk11(0);
+    		}else {
+    			scoreVo2.setScorechk11(scoreVo2.getScore11() - parInfo2.getHole2());
+    		}
+    		if (scoreVo2.getScore12() == 0)
+    		{
+    			scoreVo2.setScorechk12(0);
+    		}else {
+    			scoreVo2.setScorechk12(scoreVo2.getScore12() - parInfo2.getHole3());
+    		}
+    		if (scoreVo2.getScore13() == 0)
+    		{
+    			scoreVo2.setScorechk13(0);
+    		}else {
+    			scoreVo2.setScorechk13(scoreVo2.getScore13() - parInfo2.getHole4());
+    		}
+    		if (scoreVo2.getScore14() == 0)
+    		{
+    			scoreVo2.setScorechk14(0);
+    		}else {
+    			scoreVo2.setScorechk14(scoreVo2.getScore14() - parInfo2.getHole5());
+    		}
+    		if (scoreVo2.getScore15() == 0)
+    		{
+    			scoreVo2.setScorechk15(0);
+    		}else {
+    			scoreVo2.setScorechk15(scoreVo2.getScore15() - parInfo2.getHole6());
+    		}
+    		if (scoreVo2.getScore16() == 0)
+    		{
+    			scoreVo2.setScorechk16(0);
+    		}else {
+    			scoreVo2.setScorechk16(scoreVo2.getScore16() - parInfo2.getHole7());
+    		}
+    		if (scoreVo2.getScore17() == 0)
+    		{
+    			scoreVo2.setScorechk17(0);
+    		}else {
+    			scoreVo2.setScorechk17(scoreVo2.getScore17() - parInfo2.getHole8());
+    		}  
+    		if (scoreVo2.getScore18() == 0)
+    		{
+    			scoreVo2.setScorechk18(0);
+    		}else {
+    			scoreVo2.setScorechk18(scoreVo2.getScore18() - parInfo2.getHole9());
+    		} 
+    		
+    		// sum
+    		scoreVo2.setScorechksum1(scoreVo2.getScorechk1()+scoreVo2.getScorechk2()+scoreVo2.getScorechk3()+scoreVo2.getScorechk4()+scoreVo2.getScorechk5()
+    						+scoreVo2.getScorechk6() + scoreVo2.getScorechk7() + scoreVo2.getScorechk8() + scoreVo2.getScorechk9());
+    		scoreVo2.setScorechksum2(scoreVo2.getScorechk10()+scoreVo2.getScorechk11()+scoreVo2.getScorechk12()+scoreVo2.getScorechk13()+scoreVo2.getScorechk14()
+			+scoreVo2.getScorechk15() + scoreVo2.getScorechk16() + scoreVo2.getScorechk17() + scoreVo2.getScorechk18());
+    		
     	}else {
     		scoreVo2.setError("NO");
     	}
@@ -193,9 +427,10 @@ public class ScoreController {
     	scoreVo3.setEnd_course(Integer.parseInt(qrVo.getEndcourse()));  		// in 종료 코스
     	
     	String score3 = qrVo.getScore2();		// 현재 형식 1:2:3:4 ~~ 형식으로 되어 있다.
-    	String[] scoreList3 = score3.split(":");
-    	if (scoreList3.length == 18)
+    	
+    	if (score3 != null)
     	{
+    		String[] scoreList3 = score3.split(":");
     		scoreVo3.setUser_id((new Long(userId)).intValue());
     		scoreVo3.setScore1(Integer.parseInt(scoreList3[0]));
     		scoreVo3.setScore2(Integer.parseInt(scoreList3[1]));
@@ -225,6 +460,123 @@ public class ScoreController {
     				);
     		scoreVo3.setScore_plus_sum(scoreVo3.getScore_sum() - (parInfo1.getSum()+parInfo2.getSum()));
     		
+    		// 스코어 계산
+    		if (scoreVo3.getScore1() == 0)
+    		{
+    			scoreVo3.setScorechk1(0);
+    		}else {
+    			scoreVo3.setScorechk1(scoreVo3.getScore1() - parInfo1.getHole1());
+    		}
+    		if (scoreVo3.getScore2() == 0)
+    		{
+    			scoreVo3.setScorechk2(0);
+    		}else {
+    			scoreVo3.setScorechk2(scoreVo3.getScore2() - parInfo1.getHole2());
+    		}
+    		if (scoreVo3.getScore3() == 0)
+    		{
+    			scoreVo3.setScorechk3(0);
+    		}else {
+    			scoreVo3.setScorechk3(scoreVo3.getScore3() - parInfo1.getHole3());
+    		}
+    		if (scoreVo3.getScore4() == 0)
+    		{
+    			scoreVo3.setScorechk4(0);
+    		}else {
+    			scoreVo3.setScorechk4(scoreVo3.getScore4() - parInfo1.getHole4());
+    		}
+    		if (scoreVo3.getScore5() == 0)
+    		{
+    			scoreVo3.setScorechk5(0);
+    		}else {
+    			scoreVo3.setScorechk5(scoreVo3.getScore5() - parInfo1.getHole5());
+    		}
+    		if (scoreVo3.getScore6() == 0)
+    		{
+    			scoreVo3.setScorechk6(0);
+    		}else {
+    			scoreVo3.setScorechk6(scoreVo3.getScore6() - parInfo1.getHole6());
+    		}
+    		if (scoreVo3.getScore7() == 0)
+    		{
+    			scoreVo3.setScorechk7(0);
+    		}else {
+    			scoreVo3.setScorechk7(scoreVo3.getScore7() - parInfo1.getHole7());
+    		}
+    		if (scoreVo3.getScore8() == 0)
+    		{
+    			scoreVo3.setScorechk8(0);
+    		}else {
+    			scoreVo3.setScorechk8(scoreVo3.getScore8() - parInfo1.getHole8());
+    		}  
+    		if (scoreVo3.getScore9() == 0)
+    		{
+    			scoreVo3.setScorechk9(0);
+    		}else {
+    			scoreVo3.setScorechk9(scoreVo3.getScore9() - parInfo1.getHole9());
+    		}     		
+    		/////////////////////////////////////////////////////////////////////
+    		if (scoreVo3.getScore10() == 0)
+    		{
+    			scoreVo3.setScorechk10(0);
+    		}else {
+    			scoreVo3.setScorechk10(scoreVo3.getScore10() - parInfo2.getHole1());
+    		}
+    		if (scoreVo3.getScore11() == 0)
+    		{
+    			scoreVo3.setScorechk11(0);
+    		}else {
+    			scoreVo3.setScorechk11(scoreVo3.getScore11() - parInfo2.getHole2());
+    		}
+    		if (scoreVo3.getScore12() == 0)
+    		{
+    			scoreVo3.setScorechk12(0);
+    		}else {
+    			scoreVo3.setScorechk12(scoreVo3.getScore12() - parInfo2.getHole3());
+    		}
+    		if (scoreVo3.getScore13() == 0)
+    		{
+    			scoreVo3.setScorechk13(0);
+    		}else {
+    			scoreVo3.setScorechk13(scoreVo3.getScore13() - parInfo2.getHole4());
+    		}
+    		if (scoreVo3.getScore14() == 0)
+    		{
+    			scoreVo3.setScorechk14(0);
+    		}else {
+    			scoreVo3.setScorechk14(scoreVo3.getScore14() - parInfo2.getHole5());
+    		}
+    		if (scoreVo3.getScore15() == 0)
+    		{
+    			scoreVo3.setScorechk15(0);
+    		}else {
+    			scoreVo3.setScorechk15(scoreVo3.getScore15() - parInfo2.getHole6());
+    		}
+    		if (scoreVo3.getScore16() == 0)
+    		{
+    			scoreVo3.setScorechk16(0);
+    		}else {
+    			scoreVo3.setScorechk16(scoreVo3.getScore16() - parInfo2.getHole7());
+    		}
+    		if (scoreVo3.getScore17() == 0)
+    		{
+    			scoreVo3.setScorechk17(0);
+    		}else {
+    			scoreVo3.setScorechk17(scoreVo3.getScore17() - parInfo2.getHole8());
+    		}  
+    		if (scoreVo3.getScore18() == 0)
+    		{
+    			scoreVo3.setScorechk18(0);
+    		}else {
+    			scoreVo3.setScorechk18(scoreVo3.getScore18() - parInfo2.getHole9());
+    		} 
+    		
+    		// sum
+    		scoreVo3.setScorechksum1(scoreVo3.getScorechk1()+scoreVo3.getScorechk2()+scoreVo3.getScorechk3()+scoreVo3.getScorechk4()+scoreVo3.getScorechk5()
+    						+scoreVo3.getScorechk6() + scoreVo3.getScorechk7() + scoreVo3.getScorechk8() + scoreVo3.getScorechk9());
+    		scoreVo3.setScorechksum2(scoreVo3.getScorechk10()+scoreVo3.getScorechk11()+scoreVo3.getScorechk12()+scoreVo3.getScorechk13()+scoreVo3.getScorechk14()
+			+scoreVo3.getScorechk15() + scoreVo3.getScorechk16() + scoreVo3.getScorechk17() + scoreVo3.getScorechk18());
+    		    		
     	}else {
     		scoreVo3.setError("NO");
     	}    	
@@ -236,9 +588,10 @@ public class ScoreController {
     	scoreVo4.setEnd_course(Integer.parseInt(qrVo.getEndcourse()));  		// in 종료 코스
     	
     	String score4 = qrVo.getScore3();		// 현재 형식 1:2:3:4 ~~ 형식으로 되어 있다.
-    	String[] scoreList4 = score4.split(":");
-    	if (scoreList4.length == 18)
+    	
+    	if (score4 != null)
     	{
+    		String[] scoreList4 = score4.split(":");
     		scoreVo4.setUser_id((new Long(userId)).intValue());
     		scoreVo4.setScore1(Integer.parseInt(scoreList4[0]));
     		scoreVo4.setScore2(Integer.parseInt(scoreList4[1]));
@@ -268,6 +621,123 @@ public class ScoreController {
     				);
     		scoreVo4.setScore_plus_sum(scoreVo4.getScore_sum() - (parInfo1.getSum()+parInfo2.getSum()));
     		
+    		// 스코어 계산
+    		if (scoreVo4.getScore1() == 0)
+    		{
+    			scoreVo4.setScorechk1(0);
+    		}else {
+    			scoreVo4.setScorechk1(scoreVo4.getScore1() - parInfo1.getHole1());
+    		}
+    		if (scoreVo4.getScore2() == 0)
+    		{
+    			scoreVo4.setScorechk2(0);
+    		}else {
+    			scoreVo4.setScorechk2(scoreVo4.getScore2() - parInfo1.getHole2());
+    		}
+    		if (scoreVo4.getScore3() == 0)
+    		{
+    			scoreVo4.setScorechk3(0);
+    		}else {
+    			scoreVo4.setScorechk3(scoreVo4.getScore3() - parInfo1.getHole3());
+    		}
+    		if (scoreVo4.getScore4() == 0)
+    		{
+    			scoreVo4.setScorechk4(0);
+    		}else {
+    			scoreVo4.setScorechk4(scoreVo4.getScore4() - parInfo1.getHole4());
+    		}
+    		if (scoreVo4.getScore5() == 0)
+    		{
+    			scoreVo4.setScorechk5(0);
+    		}else {
+    			scoreVo4.setScorechk5(scoreVo4.getScore5() - parInfo1.getHole5());
+    		}
+    		if (scoreVo4.getScore6() == 0)
+    		{
+    			scoreVo4.setScorechk6(0);
+    		}else {
+    			scoreVo4.setScorechk6(scoreVo4.getScore6() - parInfo1.getHole6());
+    		}
+    		if (scoreVo4.getScore7() == 0)
+    		{
+    			scoreVo4.setScorechk7(0);
+    		}else {
+    			scoreVo4.setScorechk7(scoreVo4.getScore7() - parInfo1.getHole7());
+    		}
+    		if (scoreVo4.getScore8() == 0)
+    		{
+    			scoreVo4.setScorechk8(0);
+    		}else {
+    			scoreVo4.setScorechk8(scoreVo4.getScore8() - parInfo1.getHole8());
+    		}  
+    		if (scoreVo4.getScore9() == 0)
+    		{
+    			scoreVo4.setScorechk9(0);
+    		}else {
+    			scoreVo4.setScorechk9(scoreVo4.getScore9() - parInfo1.getHole9());
+    		}     		
+    		/////////////////////////////////////////////////////////////////////
+    		if (scoreVo4.getScore10() == 0)
+    		{
+    			scoreVo4.setScorechk10(0);
+    		}else {
+    			scoreVo4.setScorechk10(scoreVo4.getScore10() - parInfo2.getHole1());
+    		}
+    		if (scoreVo4.getScore11() == 0)
+    		{
+    			scoreVo4.setScorechk11(0);
+    		}else {
+    			scoreVo4.setScorechk11(scoreVo4.getScore11() - parInfo2.getHole2());
+    		}
+    		if (scoreVo4.getScore12() == 0)
+    		{
+    			scoreVo4.setScorechk12(0);
+    		}else {
+    			scoreVo4.setScorechk12(scoreVo4.getScore12() - parInfo2.getHole3());
+    		}
+    		if (scoreVo4.getScore13() == 0)
+    		{
+    			scoreVo4.setScorechk13(0);
+    		}else {
+    			scoreVo4.setScorechk13(scoreVo4.getScore13() - parInfo2.getHole4());
+    		}
+    		if (scoreVo4.getScore14() == 0)
+    		{
+    			scoreVo4.setScorechk14(0);
+    		}else {
+    			scoreVo4.setScorechk14(scoreVo4.getScore14() - parInfo2.getHole5());
+    		}
+    		if (scoreVo4.getScore15() == 0)
+    		{
+    			scoreVo4.setScorechk15(0);
+    		}else {
+    			scoreVo4.setScorechk15(scoreVo4.getScore15() - parInfo2.getHole6());
+    		}
+    		if (scoreVo4.getScore16() == 0)
+    		{
+    			scoreVo4.setScorechk16(0);
+    		}else {
+    			scoreVo4.setScorechk16(scoreVo4.getScore16() - parInfo2.getHole7());
+    		}
+    		if (scoreVo4.getScore17() == 0)
+    		{
+    			scoreVo4.setScorechk17(0);
+    		}else {
+    			scoreVo4.setScorechk17(scoreVo4.getScore17() - parInfo2.getHole8());
+    		}  
+    		if (scoreVo4.getScore18() == 0)
+    		{
+    			scoreVo4.setScorechk18(0);
+    		}else {
+    			scoreVo4.setScorechk18(scoreVo4.getScore18() - parInfo2.getHole9());
+    		} 
+    		
+    		// sum
+    		scoreVo4.setScorechksum1(scoreVo4.getScorechk1()+scoreVo4.getScorechk2()+scoreVo4.getScorechk3()+scoreVo4.getScorechk4()+scoreVo4.getScorechk5()
+    						+scoreVo4.getScorechk6() + scoreVo4.getScorechk7() + scoreVo4.getScorechk8() + scoreVo4.getScorechk9());
+    		scoreVo4.setScorechksum2(scoreVo4.getScorechk10()+scoreVo4.getScorechk11()+scoreVo4.getScorechk12()+scoreVo4.getScorechk13()+scoreVo4.getScorechk14()
+			+scoreVo4.getScorechk15() + scoreVo4.getScorechk16() + scoreVo4.getScorechk17() + scoreVo4.getScorechk18());
+    	    		
     	}else {
     		scoreVo4.setError("NO");
     	}    
