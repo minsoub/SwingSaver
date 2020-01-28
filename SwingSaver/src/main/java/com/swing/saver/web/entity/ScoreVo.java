@@ -51,6 +51,8 @@ public class ScoreVo {
 	private int stroke16;
 	private int stroke17;
 	private int stroke18;	
+	private int strokesum1;
+	private int strokesum2;
 	private int putter1;
 	private int putter2;
 	private int putter3;
@@ -98,6 +100,18 @@ public class ScoreVo {
 	
 	
 
+	public int getStrokesum1() {
+		return strokesum1;
+	}
+	public void setStrokesum1(int strokesum1) {
+		this.strokesum1 = strokesum1;
+	}
+	public int getStrokesum2() {
+		return strokesum2;
+	}
+	public void setStrokesum2(int strokesum2) {
+		this.strokesum2 = strokesum2;
+	}
 	public int getScorechksum1() {
 		return scorechksum1;
 	}

@@ -8,6 +8,7 @@ import com.swing.saver.web.entity.FarVo;
 import com.swing.saver.web.entity.GolfVo;
 import com.swing.saver.web.entity.GroupVo;
 import com.swing.saver.web.entity.LoginVo;
+import com.swing.saver.web.entity.ScoreMaster;
 import com.swing.saver.web.entity.UserVo;
 import com.swing.saver.web.exception.ApiException;
 import org.slf4j.Logger;
@@ -768,6 +769,18 @@ public class RestServiceImpl implements RestService {
         return golfVo;
     }  
     
+	/**
+	 * 골프장정보 상세정보를 조회한다. 
+	 * JSON으로 리턴 - AJAX에서 사용함
+	 */
+    @Override
+    public String getGolfDetail(String country_id, String zone_id, String countryclub_id) throws ApiException, IOException {
+        String rtnJson = sendMessage.sendHttpsStr("/ords/swing/saver/golfinfo/"+country_id+"/"+zone_id+"/"+countryclub_id,"GET", "application/json",true);
+        LOGGER.debug("골프장정보 파라미터:{},응답:{}",zone_id,rtnJson);
+
+        return rtnJson;
+    } 
+    
     /**
      * 관리자모드에서 골프장정보 업데이트 처리 
      */
@@ -843,6 +856,21 @@ public class RestServiceImpl implements RestService {
         return farVo;
     }  
     
+	/**
+	 * 골프장 Par 정보 상세정보를 조회한다. 
+	 */
+    @Override
+    public String getParDetail(String country_id, String zone_id, String countryclub_id, String course) throws ApiException, IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        String rtnJson= "";
+
+        rtnJson = sendMessage.sendHttpsStr("/ords/swing/saver/parinfo/"+country_id+"/"+zone_id+"/"+countryclub_id+"/"+course,"GET", "application/json",true);
+        LOGGER.debug("골프장 Par 정보 파라미터:{},응답:{}",course,rtnJson);
+        return rtnJson;
+    }   
+    
+    
+    
     /**
      * 관리자모드에서 선택된 골프장 Par정보를 삭제한다. 
      */
@@ -892,6 +920,7 @@ public class RestServiceImpl implements RestService {
     /**
      * 스코어정보 개인별 신규 등록
      */
+    @Override
     public String scoreCreate(Map<String, String> params) throws JsonProcessingException, ApiException {	     
         ObjectMapper mapper = new ObjectMapper();
         String rtnJson = "";
@@ -905,6 +934,7 @@ public class RestServiceImpl implements RestService {
     /**
      * 스코어정보 개인별 상세 신규 등록
      */
+    @Override
     public String scoreDetailCreate(Map<String, String> params) throws JsonProcessingException, ApiException {	 
         ObjectMapper mapper = new ObjectMapper();
         String rtnJson = "";
@@ -914,5 +944,46 @@ public class RestServiceImpl implements RestService {
         LOGGER.debug("스코어정보 개인별 상세 신규 가입 파라미터:{},응답:{}",params.toString(),rtnJson);
 
         return rtnJson;
+    }
+    /**
+     *  스코어정보 리스트 조회
+     */
+    @Override
+    public String scoreList(String user_id, String stdate, String etdate, String country_id, String zone_id, String countryclub_id) throws ApiException, IOException		
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        String rtnJson = "";
+        Map<String,String> sendMap = new HashMap<String, String>();
+        sendMap.put("user_id",        user_id);
+        sendMap.put("stdate", 	  	  stdate);		    // 시작날짜 
+        sendMap.put("etdate",     	  etdate);		    // 종료날짜
+        sendMap.put("country_id", 	  country_id);	    // 국가코드
+        sendMap.put("zone_id",		  zone_id);		    // 지역코드
+        sendMap.put("countryclub_id", countryclub_id);	// 골프장 코드
+        
+        rtnJson = sendMessage.sendHttpsStr(mapper.writeValueAsString(sendMap), "/ords/swing/saver/scorelist", "POST", "application/json",true);
+        
+        return rtnJson;
+    }
+    /**
+     * 스코어정보 상세보기
+     */
+    @Override
+    public ScoreMaster getScoreInfo(String visit_date, String countryclub_id, String seq_no, String user_id) throws ApiException, IOException		
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        ScoreMaster scoreVo = null;
+        Map<String,String> sendMap = new HashMap<String, String>();
+        sendMap.put("visit_date",     visit_date);
+        sendMap.put("seq_no", 	  	  seq_no);		     
+        sendMap.put("user_id",     	  user_id);		     
+        sendMap.put("countryclub_id", countryclub_id);	 
+        String rtnJson= "";
+
+        rtnJson = sendMessage.sendHttpsStr(mapper.writeValueAsString(sendMap), "/ords/swing/saver/scoredetail", "GET", "application/json",true);
+        LOGGER.debug("골프장 Par 정보 파라미터:{},응답:{}",sendMap.toString(),rtnJson);
+        scoreVo = mapper.readValue(rtnJson, ScoreMaster.class);
+
+        return scoreVo;
     }
 }

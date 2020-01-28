@@ -7,6 +7,7 @@ import com.swing.saver.web.entity.FarVo;
 import com.swing.saver.web.entity.GolfVo;
 import com.swing.saver.web.entity.GroupVo;
 import com.swing.saver.web.entity.LoginVo;
+import com.swing.saver.web.entity.ScoreMaster;
 import com.swing.saver.web.entity.UserVo;
 import com.swing.saver.web.exception.ApiException;
 
@@ -86,16 +87,19 @@ public interface RestService {
     public String golfCreate(Map<String, String> params) throws JsonProcessingException, ApiException;	// 골프장정보 신규 등록
     public String golfDelete(Map<String, String> params) throws JsonProcessingException, ApiException;  // 골프장정보 삭제
     public GolfVo getGolfInfo(String country_id, String zone_id, String countryclub_id) throws ApiException, IOException;		// 골프장정보 상세보기
+    public String getGolfDetail(String country_id, String zone_id, String countryclub_id) throws ApiException, IOException;		// 골프장정보 상세보기
     public String golfUpdate(Map<String, String> params) throws JsonProcessingException, ApiException;  // 골프장정보 수정
     public String getParList(String countryclub_id) throws ApiException;								// Par 정보 조회 
     public String getParList(String country_id, String zone_id, String countryclub_id) throws ApiException;								// Par List정보 조회
     public String parCreate(Map<String, String> params) throws JsonProcessingException, ApiException;	// 골프장 Par 정보 신규 등록
     public FarVo getParInfo(String country_id, String zone_id, String countryclub_id, String course) throws ApiException, IOException;		// 골프장 Par 정보 상세보기
+    public String getParDetail(String country_id, String zone_id, String countryclub_id, String course) throws ApiException, IOException;		// 골프장 Par 정보 상세보기
     public String parDelete(Map<String, String> params) throws JsonProcessingException, ApiException;  // 골프장 Par 삭제
     public String parUpdate(Map<String, String> params) throws JsonProcessingException, ApiException;  // 골프장 Par 정보 수정
     
     // 스코어 정보 저장 
     public String scoreCreate(Map<String, String> params) throws JsonProcessingException, ApiException;	        // 스코어정보 개인별 신규 등록
     public String scoreDetailCreate(Map<String, String> params) throws JsonProcessingException, ApiException;	// 스코어정보 개인별 상세 신규 등록
-     
+    public String scoreList(String user_id, String stdate, String etdate, String country_id, String zone_id, String countryclub_id) throws ApiException, IOException;		// 스코어정보 리스트 조회
+    public ScoreMaster getScoreInfo(String visit_date, String countryclub_id, String seq_no, String user_id) throws ApiException, IOException;		// 스코어정보 상세보기
 } 

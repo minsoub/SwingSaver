@@ -52,7 +52,7 @@
                                     </td>
                                     <c:set var="now" value="<%=new java.util.Date()%>" />
                                     <td>
-                                        <input type="date" id="userdate" name="userdate" value="<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" />">
+                                        <input type="date" id="visit_date" name="visit_date" value="<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" />">
                                     </td>
                                 </tr>
                                 <tr>
@@ -62,20 +62,22 @@
 
                                     <td>
                                         <div class="coun_td">
-                                            <input type="radio" name="country_id" value="KR" checked="checked">
-                                            <p>국내</p>
-                                            <input type="radio" name="country_id" value="foreign">
-                                            <p>국외</p>
+                                			<select name="country_id" id="country_id" onchange="javascript:changeCountry(this.value);">    
+                                    			<option value="">국가를 선택해주세요.</option>                            
+                                				<c:forEach var="ctryInfo" items="${countryList}" varStatus="status">
+                                    				<option value="${ctryInfo.code}" <c:if test="${ctryInfo.code == qrInfo.country_id}">selected</c:if>>${ctryInfo.codename}(${ctryInfo.code})</option>
+                                 				</c:forEach>
+                                 			</select> 
                                         </div>
 
 
-                                        <select name="zone_id" id="zone_id">    
+                                        <select name="zone_id" id="zone_id"  onchange="javascript:changeZone(this.value);">    
                                     		<option value="">지역 선택</option>                            
                                 			<c:forEach var="areInfo" items="${areaList}" varStatus="status">
                                     			<option  <c:if test="${qrInfo.zone_id == areInfo.zone_id}">selected</c:if>  value="${areInfo.zone_id}">${areInfo.zone_nm}(${areInfo.zone_id})</option>
                                  			</c:forEach>                                 		
                                         </select>
-                                        <select name="countryclub_id" id="countryclub_id">
+                                        <select name="countryclub_id" id="countryclub_id" onchange="javascript:changeCountryClub(this.value);">
                                     		<option value="">골프장 선택</option>                            
                                 			<c:forEach var="golfInfo" items="${golfList}" varStatus="status">
                                     			<option  <c:if test="${qrInfo.countryclub_id == golfInfo.countryclub_id}">selected</c:if>  value="${golfInfo.countryclub_id}">${golfInfo.countryclub_nm}(${golfInfo.countryclub_id})</option>
@@ -88,13 +90,13 @@
                                     <td class="font-weight-bold"><p>코스</p></td>
                                     <td class="course_td">
                                                                       출발&ensp;
-                                            <select name="startcourse">
+                                            <select name="start_course" id="start_course">
                                 			<c:forEach var="parInfo" items="${parList}" varStatus="status">
                                     			<option  <c:if test="${qrInfo.startcourse == parInfo.course}">selected</c:if>  value="${parInfo.course}">${parInfo1.course_nm}(${parInfo.course})</option>
                                  			</c:forEach> 
                                         </select>
                                             &emsp;도착&ensp;
-                                            <select name="endcourse">
+                                            <select name="end_course" id="end_course">
                                             <option value="">IN</option>
                                 			<c:forEach var="parInfo" items="${parList}" varStatus="status">
                                     			<option  <c:if test="${qrInfo.endcourse == parInfo.course}">selected</c:if>  value="${parInfo.course}">${parInfo.course_nm}(${parInfo.course})</option>
@@ -141,30 +143,30 @@
                                     </tr>
                                     <tr>
                                         <td class="gray-td fir-td">Stroke</td>
-                                        <td><input type="number" name="stroke1" value="${scoreVo.stroke1}" maxlength="2" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="number" name="stroke2" value="${scoreVo.stroke2}" maxlength="2" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="number" name="stroke3" value="${scoreVo.stroke3}" maxlength="2" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="number" name="stroke4"  value="${scoreVo.stroke4}" maxlength="2" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="number" name="stroke5"  value="${scoreVo.stroke5}" maxlength="2" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="number" name="stroke6" value="${scoreVo.stroke6}" maxlength="2" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="number" name="stroke7" value="${scoreVo.stroke7}" maxlength="2" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="number" name="stroke8" value="${scoreVo.stroke8}" maxlength="2" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="number" name="stroke9" value="${scoreVo.stroke9}" maxlength="2" oninput="maxLengthCheck(this)"></td>
-                                        <td class="gray-td"><input type="text" readonly name="stroke_sum1" value="${scoreVo.stroke1+scoreVo.stroke2+scoreVo.stroke3+scoreVo.stroke4+scoreVo.stroke5+scoreVo.stroke6+scoreVo.stroke7+scoreo.stroke8+scoreVo.stroke9}"></td>
+                                        <td><input type="number" id="stroke1" name="stroke1" value="${scoreVo.stroke1}" maxlength="2" oninput="maxLengthCheck(this)" onkeyup="strokeChk1(this)"></td>
+                                        <td><input type="number" id="stroke2" name="stroke2" value="${scoreVo.stroke2}" maxlength="2" oninput="maxLengthCheck(this)" onkeyup="strokeChk1(this)"></td>
+                                        <td><input type="number" id="stroke3" name="stroke3" value="${scoreVo.stroke3}" maxlength="2" oninput="maxLengthCheck(this)" onkeyup="strokeChk1(this)"></td>
+                                        <td><input type="number" id="stroke4" name="stroke4" value="${scoreVo.stroke4}" maxlength="2" oninput="maxLengthCheck(this)" onkeyup="strokeChk1(this)"></td>
+                                        <td><input type="number" id="stroke5" name="stroke5" value="${scoreVo.stroke5}" maxlength="2" oninput="maxLengthCheck(this)" onkeyup="strokeChk1(this)"></td>
+                                        <td><input type="number" id="stroke6" name="stroke6" value="${scoreVo.stroke6}" maxlength="2" oninput="maxLengthCheck(this)" onkeyup="strokeChk1(this)"></td>
+                                        <td><input type="number" id="stroke7" name="stroke7" value="${scoreVo.stroke7}" maxlength="2" oninput="maxLengthCheck(this)" onkeyup="strokeChk1(this)"></td>
+                                        <td><input type="number" id="stroke8" name="stroke8" value="${scoreVo.stroke8}" maxlength="2" oninput="maxLengthCheck(this)" onkeyup="strokeChk1(this)"></td>
+                                        <td><input type="number" id="stroke9" name="stroke9" value="${scoreVo.stroke9}" maxlength="2" oninput="maxLengthCheck(this)" onkeyup="strokeChk1(this)"></td>
+                                        <td class="gray-td"><input type="text" readonly id="strokesum1" name="strokesum1" value="${scoreVo.strokesum1}"></td>
                                     </tr>
 
                                     <tr>
                                         <td class="gray-td fir-td" rowspan="2">Putts</td>
-                                        <td><input type="number" name="putter1"  maxlength="2" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="number" name="putter2"  maxlength="2" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="number" name="putter3"  maxlength="2" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="number" name="putter4"  maxlength="2" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="number" name="putter5"  maxlength="2" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="number" name="putter6"  maxlength="2" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="number" name="putter7"  maxlength="2" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="number" name="putter8"  maxlength="2" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="number" name="putter9"  maxlength="2" oninput="maxLengthCheck(this)"></td>
-                                        <td class="gray-td" rowspan="2"><input type="text" readonly name="putter_sum1"></td>
+                                        <td><input type="number" id="putter1" name="putter1"  maxlength="2" oninput="maxLengthCheck(this)" onkeyup="putterChk1()"></td>
+                                        <td><input type="number" id="putter2" name="putter2"  maxlength="2" oninput="maxLengthCheck(this)" onkeyup="putterChk1()"></td>
+                                        <td><input type="number" id="putter3" name="putter3"  maxlength="2" oninput="maxLengthCheck(this)" onkeyup="putterChk1()"></td>
+                                        <td><input type="number" id="putter4" name="putter4"  maxlength="2" oninput="maxLengthCheck(this)" onkeyup="putterChk1()"></td>
+                                        <td><input type="number" id="putter5" name="putter5"  maxlength="2" oninput="maxLengthCheck(this)" onkeyup="putterChk1()"></td>
+                                        <td><input type="number" id="putter6" name="putter6"  maxlength="2" oninput="maxLengthCheck(this)" onkeyup="putterChk1()"></td>
+                                        <td><input type="number" id="putter7" name="putter7"  maxlength="2" oninput="maxLengthCheck(this)" onkeyup="putterChk1()"></td>
+                                        <td><input type="number" id="putter8" name="putter8"  maxlength="2" oninput="maxLengthCheck(this)" onkeyup="putterChk1()"></td>
+                                        <td><input type="number" id="putter9" name="putter9"  maxlength="2" oninput="maxLengthCheck(this)" onkeyup="putterChk1()"></td>
+                                        <td class="gray-td" rowspan="2"><input type="text" readonly id="puttersum1" name="puttersum1"></td>
                                     </tr>
                                     <tr>
                                         <td><button type="button" class="sc-view" data-toggle="modal" data-target="#putts_01" data-whatever="putter1">상세</button></td>
@@ -176,20 +178,19 @@
                                         <td><button type="button" class="sc-view" data-toggle="modal" data-target="#putts_01" data-whatever="putter7">상세</button></td>
                                         <td><button type="button" class="sc-view" data-toggle="modal" data-target="#putts_01" data-whatever="putter8">상세</button></td>
                                         <td><button type="button" class="sc-view" data-toggle="modal" data-target="#putts_01" data-whatever="putter9">상세</button></td>
-
                                     </tr>
                                     <tr>
                                         <td class="gray-td fir-td">Score</td>
-                                        <td><input type="text" name="score1" value="${scoreVo.score1-parInfo1.hole1}"  maxlength="3" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="text" name="score2" value="${scoreVo.score2-parInfo1.hole2}"  maxlength="3" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="text" name="score3" value="${scoreVo.score3-parInfo1.hole3}"  maxlength="3" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="text" name="score4" value="${scoreVo.score4-parInfo1.hole4}"  maxlength="3" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="text" name="score5" value="${scoreVo.score5-parInfo1.hole5}"  maxlength="3" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="text" name="score6" value="${scoreVo.score6-parInfo1.hole6}"  maxlength="3" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="text" name="score7" value="${scoreVo.score7-parInfo1.hole7}"  maxlength="3" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="text" name="score8" value="${scoreVo.score8-parInfo1.hole8}"  maxlength="3" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="text" name="score9" value="${scoreVo.score9-parInfo1.hole9}"  maxlength="3" oninput="maxLengthCheck(this)"></td>
-                                        <td class="gray-td"><input type="text" name="score_sum1" readonly value="${scoreVo.score1+scoreVo.score2+scoreVo.score3+scoreVo.score4+scoreVo.score5+scoreVo.score6+scoreVo.score7+scoreo.score8+scoreVo.score9 - (parInfo1.hole1+parInfo1.hole2+parInfo1.hole3+parInfo1.hole4+parInfo1.hole5+parInfo1.hole6+parInfo1.hole7+parInfo1.hole8+parInfo1.hole9)}"></td>
+                                        <td><input type="text" id="score1" name="score1" readonly value="${scoreVo.score1-parInfo1.hole1}"  maxlength="3" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="text" id="score2" name="score2" readonly value="${scoreVo.score2-parInfo1.hole2}"  maxlength="3" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="text" id="score3" name="score3" readonly value="${scoreVo.score3-parInfo1.hole3}"  maxlength="3" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="text" id="score4" name="score4" readonly value="${scoreVo.score4-parInfo1.hole4}"  maxlength="3" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="text" id="score5" name="score5" readonly value="${scoreVo.score5-parInfo1.hole5}"  maxlength="3" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="text" id="score6" name="score6" readonly value="${scoreVo.score6-parInfo1.hole6}"  maxlength="3" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="text" id="score7" name="score7" readonly value="${scoreVo.score7-parInfo1.hole7}"  maxlength="3" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="text" id="score8" name="score8" readonly value="${scoreVo.score8-parInfo1.hole8}"  maxlength="3" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="text" id="score9" name="score9" readonly value="${scoreVo.score9-parInfo1.hole9}"  maxlength="3" oninput="maxLengthCheck(this)"></td>
+                                        <td class="gray-td"><input type="text" id="scoresum1" name="scoresum1" readonly value="${scoreVo.score1+scoreVo.score2+scoreVo.score3+scoreVo.score4+scoreVo.score5+scoreVo.score6+scoreVo.score7+scoreo.score8+scoreVo.score9 - (parInfo1.hole1+parInfo1.hole2+parInfo1.hole3+parInfo1.hole4+parInfo1.hole5+parInfo1.hole6+parInfo1.hole7+parInfo1.hole8+parInfo1.hole9)}"></td>
                                     </tr>
                                     <tr>
                                         <td class="gray-td fir-td">Fairway안착</td>
@@ -289,30 +290,30 @@
                                     </tr>
                                     <tr>
                                         <td class="gray-td fir-td">Stroke</td>
-                                        <td><input type="number" name="stroke10" value="${scoreVo.stroke10}" maxlength="2" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="number" name="stroke11" value="${scoreVo.stroke11}" maxlength="2" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="number" name="stroke12" value="${scoreVo.stroke12}" maxlength="2" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="number" name="stroke13"  value="${scoreVo.stroke13}" maxlength="2" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="number" name="stroke14"  value="${scoreVo.stroke14}" maxlength="2" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="number" name="stroke15" value="${scoreVo.stroke15}" maxlength="2" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="number" name="stroke16" value="${scoreVo.stroke16}" maxlength="2" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="number" name="stroke17" value="${scoreVo.stroke17}" maxlength="2" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="number" name="stroke18" value="${scoreVo.stroke18}" maxlength="2" oninput="maxLengthCheck(this)"></td>
-                                        <td class="gray-td"><input type="text" name="stroke_sum1" readonly value="${scoreVo.stroke10+scoreVo.stroke11+scoreVo.stroke12+scoreVo.stroke13+scoreVo.stroke14+scoreVo.stroke15+scoreVo.stroke16+scoreo.stroke17+scoreVo.stroke18}"></td>
+                                        <td><input type="number" id="stroke10" name="stroke10" value="${scoreVo.stroke10}" maxlength="2" oninput="maxLengthCheck(this)" onkeyup="strokeChk2(this)"></td>
+                                        <td><input type="number" id="stroke11" name="stroke11" value="${scoreVo.stroke11}" maxlength="2" oninput="maxLengthCheck(this)" onkeyup="strokeChk2(this)"></td>
+                                        <td><input type="number" id="stroke12" name="stroke12" value="${scoreVo.stroke12}" maxlength="2" oninput="maxLengthCheck(this)" onkeyup="strokeChk2(this)"></td>
+                                        <td><input type="number" id="stroke13" name="stroke13" value="${scoreVo.stroke13}" maxlength="2" oninput="maxLengthCheck(this)" onkeyup="strokeChk2(this)"></td>
+                                        <td><input type="number" id="stroke14" name="stroke14" value="${scoreVo.stroke14}" maxlength="2" oninput="maxLengthCheck(this)" onkeyup="strokeChk2(this)"></td>
+                                        <td><input type="number" id="stroke15" name="stroke15" value="${scoreVo.stroke15}" maxlength="2" oninput="maxLengthCheck(this)" onkeyup="strokeChk2(this)"></td>
+                                        <td><input type="number" id="stroke16" name="stroke16" value="${scoreVo.stroke16}" maxlength="2" oninput="maxLengthCheck(this)" onkeyup="strokeChk2(this)"></td>
+                                        <td><input type="number" id="stroke17" name="stroke17" value="${scoreVo.stroke17}" maxlength="2" oninput="maxLengthCheck(this)" onkeyup="strokeChk2(this)"></td>
+                                        <td><input type="number" id="stroke18" name="stroke18" value="${scoreVo.stroke18}" maxlength="2" oninput="maxLengthCheck(this)" onkeyup="strokeChk2(this)"></td>
+                                        <td class="gray-td"><input type="text" id="strokesum2" name="strokesum2" readonly value="${scoreVo.strokesum2}"></td>
                                     </tr>
 
                                     <tr>
                                         <td class="gray-td fir-td" rowspan="2">Putts</td>
-                                        <td><input type="number" name="putter10" maxlength="2" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="number" name="putter11" maxlength="2" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="number" name="putter12" maxlength="2" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="number" name="putter13" maxlength="2" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="number" name="putter14" maxlength="2" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="number" name="putter15" maxlength="2" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="number" name="putter16" maxlength="2" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="number" name="putter17" maxlength="2" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="number" name="putter18" maxlength="2" oninput="maxLengthCheck(this)"></td>
-                                        <td class="gray-td" rowspan="2"><input type="text" readonly name="putter_sum2"></td>
+                                        <td><input type="number" id="putter10" name="putter10" maxlength="2" oninput="maxLengthCheck(this)" onkeyup="putterChk2()"></td>
+                                        <td><input type="number" id="putter11" name="putter11" maxlength="2" oninput="maxLengthCheck(this)" onkeyup="putterChk2()"></td>
+                                        <td><input type="number" id="putter12" name="putter12" maxlength="2" oninput="maxLengthCheck(this)" onkeyup="putterChk2()"></td>
+                                        <td><input type="number" id="putter13" name="putter13" maxlength="2" oninput="maxLengthCheck(this)" onkeyup="putterChk2()"></td>
+                                        <td><input type="number" id="putter14" name="putter14" maxlength="2" oninput="maxLengthCheck(this)" onkeyup="putterChk2()"></td>
+                                        <td><input type="number" id="putter15" name="putter15" maxlength="2" oninput="maxLengthCheck(this)" onkeyup="putterChk2()"></td>
+                                        <td><input type="number" id="putter16" name="putter16" maxlength="2" oninput="maxLengthCheck(this)" onkeyup="putterChk2()"></td>
+                                        <td><input type="number" id="putter17" name="putter17" maxlength="2" oninput="maxLengthCheck(this)" onkeyup="putterChk2()"></td>
+                                        <td><input type="number" id="putter18" name="putter18" maxlength="2" oninput="maxLengthCheck(this)" onkeyup="putterChk2()"></td>
+                                        <td class="gray-td" rowspan="2"><input type="text" readonly id="puttersum2" name="puttersum2"></td>
                                     </tr>
                                     <tr>
                                         <td><button type="button" class="sc-view" data-toggle="modal" data-target="#putts_01">상세</button></td>
@@ -328,16 +329,16 @@
                                     </tr>
                                     <tr>
                                         <td class="gray-td fir-td">Score</td>
-                                        <td><input type="text" name="score10" value="${scoreVo.score10-parInfo2.hole1}" maxlength="3" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="text" name="score11" value="${scoreVo.score11-parInfo2.hole2}" maxlength="3" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="text" name="score12" value="${scoreVo.score12-parInfo2.hole3}" maxlength="3" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="text" name="score13" value="${scoreVo.score13-parInfo2.hole4}" maxlength="3" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="text" name="score14" value="${scoreVo.score14-parInfo2.hole5}" maxlength="3" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="text" name="score15" value="${scoreVo.score15-parInfo2.hole6}" maxlength="3" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="text" name="score16" value="${scoreVo.score16-parInfo2.hole7}" maxlength="3" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="text" name="score17" value="${scoreVo.score17-parInfo2.hole8}" maxlength="3" oninput="maxLengthCheck(this)"></td>
-                                        <td><input type="text" name="score18" value="${scoreVo.score18-parInfo2.hole9}" maxlength="3" oninput="maxLengthCheck(this)"></td>
-                                        <td class="gray-td"><input type="text" name="score_sum2" readonly value="${scoreVo.score10+scoreVo.score11+scoreVo.score12+scoreVo.score13+scoreVo.score14+scoreVo.score15+scoreVo.score16+scoreo.score17+scoreVo.score18 - (parInfo2.hole1+parInfo2.hole2+parInfo2.hole3+parInfo2.hole4+parInfo2.hole5+parInfo2.hole6+parInfo2.hole7+parInfo2.hole8+parInfo2.hole9)}"></td>
+                                        <td><input type="text" id="score10" name="score10" readonly value="${scoreVo.score10-parInfo2.hole1}" maxlength="3" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="text" id="score11" name="score11" readonly value="${scoreVo.score11-parInfo2.hole2}" maxlength="3" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="text" id="score12" name="score12" readonly value="${scoreVo.score12-parInfo2.hole3}" maxlength="3" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="text" id="score13" name="score13" readonly value="${scoreVo.score13-parInfo2.hole4}" maxlength="3" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="text" id="score14" name="score14" readonly value="${scoreVo.score14-parInfo2.hole5}" maxlength="3" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="text" id="score15" name="score15" readonly value="${scoreVo.score15-parInfo2.hole6}" maxlength="3" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="text" id="score16" name="score16" readonly value="${scoreVo.score16-parInfo2.hole7}" maxlength="3" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="text" id="score17" name="score17" readonly readonly value="${scoreVo.score17-parInfo2.hole8}" maxlength="3" oninput="maxLengthCheck(this)"></td>
+                                        <td><input type="text" id="score18" name="score18" value="${scoreVo.score18-parInfo2.hole9}" maxlength="3" oninput="maxLengthCheck(this)"></td>
+                                        <td class="gray-td"><input type="text" id="scoresum2" name="scoresum2" readonly value="${scoreVo.score10+scoreVo.score11+scoreVo.score12+scoreVo.score13+scoreVo.score14+scoreVo.score15+scoreVo.score16+scoreo.score17+scoreVo.score18 - (parInfo2.hole1+parInfo2.hole2+parInfo2.hole3+parInfo2.hole4+parInfo2.hole5+parInfo2.hole6+parInfo2.hole7+parInfo2.hole8+parInfo2.hole9)}"></td>
                                     </tr>
                                     <tr>
                                         <td class="gray-td fir-td">Fairway안착</td>
@@ -894,11 +895,42 @@ $(document).ready(function(){
     // Putter Pattern 화면에서의 선택
     $("#btnSelect").click(function(){
     	if($("#putter_id").val() == "putter1")
-    		$("input[name='putter1']").val($("input:radio[name='putts01']").val());
+    		$("input[name='puterpattern1']").val($("input:radio[name='putts01']").val());
     	if($("#putter_id").val() == "putter2")
-    		$("input[name='putter2']").val($("input:radio[name='putts01']").val());  
-    	
-
+    		$("input[name='puterpattern2']").val($("input:radio[name='putts02']").val());
+    	if($("#putter_id").val() == "putter3")
+    		$("input[name='puterpattern3']").val($("input:radio[name='putts03']").val());
+    	if($("#putter_id").val() == "putter4")
+    		$("input[name='puterpattern4']").val($("input:radio[name='putts04']").val());
+    	if($("#putter_id").val() == "putter5")
+    		$("input[name='puterpattern5']").val($("input:radio[name='putts05']").val());
+    	if($("#putter_id").val() == "putter6")
+    		$("input[name='puterpattern6']").val($("input:radio[name='putts06']").val());
+    	if($("#putter_id").val() == "putter7")
+    		$("input[name='puterpattern7']").val($("input:radio[name='putts07']").val());
+    	if($("#putter_id").val() == "putter8")
+    		$("input[name='puterpattern8']").val($("input:radio[name='putts08']").val());
+    	if($("#putter_id").val() == "putter9")
+    		$("input[name='puterpattern9']").val($("input:radio[name='putts09']").val());
+    	if($("#putter_id").val() == "putter10")
+    		$("input[name='puterpattern10']").val($("input:radio[name='putts10']").val());
+    	if($("#putter_id").val() == "putter11")
+    		$("input[name='puterpattern11']").val($("input:radio[name='putts11']").val());
+    	if($("#putter_id").val() == "putter12")
+    		$("input[name='puterpattern12']").val($("input:radio[name='putts12']").val());
+    	if($("#putter_id").val() == "putter13")
+    		$("input[name='puterpattern13']").val($("input:radio[name='putts13']").val());
+    	if($("#putter_id").val() == "putter14")
+    		$("input[name='puterpattern14']").val($("input:radio[name='putts14']").val());
+    	if($("#putter_id").val() == "putter15")
+    		$("input[name='puterpattern15']").val($("input:radio[name='putts15']").val());
+    	if($("#putter_id").val() == "putter16")
+    		$("input[name='puterpattern16']").val($("input:radio[name='putts16']").val());
+    	if($("#putter_id").val() == "putter17")
+    		$("input[name='puterpattern17']").val($("input:radio[name='putts17']").val());    	
+    	if($("#putter_id").val() == "putter18")
+    		$("input[name='puterpattern18']").val($("input:radio[name='putts18']").val());        	
+ 		// 팝업창 숨김
     	$("#putts_01").attr('aria-hidden', 'true').hide();
     });
     
@@ -912,6 +944,234 @@ $(document).ready(function(){
     //alert($("#countryclub_id option:checked").text());
 });
 
+
+// 국가 코드를 선택했을 대 호출되는 메소드로 지역 정보를 콤보박스로 구성한다.
+function changeCountry(data)
+{
+	// zone_id clear
+	$("#zone_id").empty();
+	if (data == "") return;
+	// 다시 조회
+	var url = "/admin/area/areaList/"+data;
+	var method = "GET";
+	var data = "";
+	
+    $.ajax({
+        type: method,
+        url : url,
+        data: data,
+        dataType:"json",
+        async:true,
+        contentType:"application/json;charset=UTF-8",
+        success : function(rtnData) {
+        	console.dir(rtnData);
+            var reqdata = JSON.parse(rtnData.data);
+            $('#zone_id').append($('<option>').text("지역을 선택해주세요."));
+            $.each(reqdata.areaList, function(i, obj){
+                    $('#zone_id').append($('<option>').text(obj.zone_nm).attr('value', obj.zone_id));
+            });
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR.responseText);
+        }
+    });		
+}
+// 지역 선택 했을 때 호출되는 메소드로 골프장 정보를 출력한다.
+function changeZone(data)
+{
+	// countryclub_id clear
+	$("#countryclub_id").empty();
+	if (data == "") return;
+	// 다시 조회
+	var url = "/score/golfList/"+$("#country_id").val()+"/"+data;
+	var method = "GET";
+	var data = "";
+	
+    $.ajax({
+        type: method,
+        url : url,
+        data: data,
+        dataType:"json",
+        async:true,
+        contentType:"application/json;charset=UTF-8",
+        success : function(rtnData) {
+        	console.dir(rtnData);
+            var reqdata = JSON.parse(rtnData.data);
+            $('#countryclub_id').append($('<option>').text("골프장을 선택"));
+            if(typeof (reqdata) === 'object'){	   
+            	$('#countryclub_id').append($('<option>').text(reqdata.countryclub_nm).attr('value', reqdata.countryclub_id));
+            }else {
+            	$.each(reqdata, function(i, obj){
+                    $('#countryclub_id').append($('<option>').text(obj.countryclub_nm).attr('value', obj.countryclub_id));
+            	});
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR.responseText);
+        }
+    });			
+}
+
+function changeCountryClub(data)
+{
+	// countryclub_id clear
+	$("#start_course").empty();
+	$("#end_course").empty();
+	if (data == "") return;
+	// 다시 조회
+	var url = "/score/parList/"+$("#country_id").val()+"/"+$("#zone_id").val()+"/"+data;
+	var method = "GET";
+	var data = "";
+	
+    $.ajax({
+        type: method,
+        url : url,
+        data: data,
+        dataType:"json",
+        async:true,
+        contentType:"application/json;charset=UTF-8",
+        success : function(rtnData) {
+        	console.dir(rtnData);
+            var reqdata = JSON.parse(rtnData.data);
+            $('#start_course').append($('<option>').text("OUT 코스선택"));
+            $('#end_course').append($('<option>').text("IN 코스선택"));
+            
+            if(typeof (reqdata) === 'object'){	            	
+            	$('#start_course').append($('<option>').text(reqdata.course_nm).attr('value', reqdata.course));
+                $('#end_course').append($('<option>').text(reqdata.course_nm).attr('value', reqdata.course));
+            }else {
+            	$.each(reqdata, function(i, obj){
+                    $('#start_course').append($('<option>').text(obj.course_nm).attr('value', obj.course));
+                    $('#end_course').append($('<option>').text(obj.course_nm).attr('value', obj.course));
+            	});
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR.responseText);
+        }
+    });			
+}	
+
+// Stoke 입력했을 때 호출되는 메소드 
+function strokeChk1(obj)
+{
+	// stroke 점수를 계산한다.
+	var sum = 0;
+	if ($('#stroke1').val() != "") sum += parseInt($('#stroke1').val());
+	if ($('#stroke2').val() != "") sum += parseInt($('#stroke2').val());
+	if ($('#stroke3').val() != "") sum += parseInt($('#stroke3').val());
+	if ($('#stroke4').val() != "") sum += parseInt($('#stroke4').val());
+	if ($('#stroke5').val() != "") sum += parseInt($('#stroke5').val());
+	if ($('#stroke6').val() != "") sum += parseInt($('#stroke6').val());
+	if ($('#stroke7').val() != "") sum += parseInt($('#stroke7').val());
+	if ($('#stroke8').val() != "") sum += parseInt($('#stroke8').val());
+	if ($('#stroke9').val() != "") sum += parseInt($('#stroke9').val());
+	
+	$('#strokesum1').val(sum);
+	
+	// Score recalculate
+	ScoreChk1();
+}
+function strokeChk2(obj)
+{
+	// stroke 점수를 계산한다.
+	var sum = 0;
+	if ($('#stroke10').val() != "") sum += parseInt($('#stroke10').val());
+	if ($('#stroke11').val() != "") sum += parseInt($('#stroke11').val());
+	if ($('#stroke12').val() != "") sum += parseInt($('#stroke12').val());
+	if ($('#stroke13').val() != "") sum += parseInt($('#stroke13').val());
+	if ($('#stroke14').val() != "") sum += parseInt($('#stroke14').val());
+	if ($('#stroke15').val() != "") sum += parseInt($('#stroke15').val());
+	if ($('#stroke16').val() != "") sum += parseInt($('#stroke16').val());
+	if ($('#stroke17').val() != "") sum += parseInt($('#stroke17').val());
+	if ($('#stroke18').val() != "") sum += parseInt($('#stroke18').val());
+	
+	$('#strokesum2').val(sum);
+	// Score recalculate
+	ScoreChk2();	
+}
+// Stroke 변경에 의해서 다시 재계산한다.
+function ScoreChk1()
+{
+	var sum = 0;
+	console.log($('#hole1').val());
+	if ($('#stroke1').val() != "") $('#score1').val($('#stroke1').val() - $('#hole1').text());
+	if ($('#stroke2').val() != "") $('#score2').val($('#stroke2').val() - $('#hole2').text());
+	if ($('#stroke3').val() != "") $('#score3').val($('#stroke3').val() - $('#hole3').text());
+	if ($('#stroke4').val() != "") $('#score4').val($('#stroke4').val() - $('#hole4').text());
+	if ($('#stroke5').val() != "") $('#score5').val($('#stroke5').val() - $('#hole5').text());
+	if ($('#stroke6').val() != "") $('#score6').val($('#stroke6').val() - $('#hole6').text());
+	if ($('#stroke7').val() != "") $('#score7').val($('#stroke7').val() - $('#hole7').text());
+	if ($('#stroke8').val() != "") $('#score8').val($('#stroke8').val() - $('#hole8').text());
+	if ($('#stroke9').val() != "") $('#score9').val($('#stroke9').val() - $('#hole9').text());
+	
+	if ($('#score1').val() != "") sum += parseInt($('#score1').val());
+	if ($('#score2').val() != "") sum += parseInt($('#score2').val());
+	if ($('#score3').val() != "") sum += parseInt($('#score3').val());
+	if ($('#score4').val() != "") sum += parseInt($('#score4').val());
+	if ($('#score5').val() != "") sum += parseInt($('#score5').val());
+	if ($('#score6').val() != "") sum += parseInt($('#score6').val());
+	if ($('#score7').val() != "") sum += parseInt($('#score7').val());
+	if ($('#score8').val() != "") sum += parseInt($('#score8').val());
+	if ($('#score9').val() != "") sum += parseInt($('#score9').val());	
+	$('#scoresum1').val(sum);
+}
+function ScoreChk2()
+{
+	var sum = 0;
+	if ($('#stroke10').val() != "") $('#score10').val($('#stroke10').val() - $('#hole10').text());
+	if ($('#stroke11').val() != "") $('#score11').val($('#stroke11').val() - $('#hole11').text());
+	if ($('#stroke12').val() != "") $('#score12').val($('#stroke12').val() - $('#hole12').text());
+	if ($('#stroke13').val() != "") $('#score13').val($('#stroke13').val() - $('#hole13').text());
+	if ($('#stroke14').val() != "") $('#score14').val($('#stroke14').val() - $('#hole14').text());
+	if ($('#stroke15').val() != "") $('#score15').val($('#stroke15').val() - $('#hole15').text());
+	if ($('#stroke16').val() != "") $('#score16').val($('#stroke16').val() - $('#hole16').text());
+	if ($('#stroke17').val() != "") $('#score17').val($('#stroke17').val() - $('#hole17').text());
+	if ($('#stroke18').val() != "") $('#score18').val($('#stroke18').val() - $('#hole18').text());	
+	
+	if ($('#score10').val() != "") sum += parseInt($('#score10').val());
+	if ($('#score11').val() != "") sum += parseInt($('#score11').val());
+	if ($('#score12').val() != "") sum += parseInt($('#score12').val());
+	if ($('#score13').val() != "") sum += parseInt($('#score13').val());
+	if ($('#score14').val() != "") sum += parseInt($('#score14').val());
+	if ($('#score15').val() != "") sum += parseInt($('#score15').val());
+	if ($('#score16').val() != "") sum += parseInt($('#score16').val());
+	if ($('#score17').val() != "") sum += parseInt($('#score17').val());
+	if ($('#score18').val() != "") sum += parseInt($('#score18').val());	
+	$('#scoresum2').val(sum);	
+}
+
+// Putts 입력을 체크한다 
+function putterChk1()
+{
+	var sum = 0;
+	if ($('#putter1').val() != "") sum += parseInt($('#putter1').val());
+	if ($('#putter2').val() != "") sum += parseInt($('#putter2').val());
+	if ($('#putter3').val() != "") sum += parseInt($('#putter3').val());
+	if ($('#putter4').val() != "") sum += parseInt($('#putter4').val());
+	if ($('#putter5').val() != "") sum += parseInt($('#putter5').val());
+	if ($('#putter6').val() != "") sum += parseInt($('#putter6').val());
+	if ($('#putter7').val() != "") sum += parseInt($('#putter7').val());
+	if ($('#putter8').val() != "") sum += parseInt($('#putter8').val());
+	if ($('#putter9').val() != "") sum += parseInt($('#putter9').val());
+	
+	$('#puttersum1').val(sum);	
+}
+function putterChk2()
+{
+	var sum = 0;
+	if ($('#putter10').val() != "") sum += parseInt($('#putter10').val());
+	if ($('#putter11').val() != "") sum += parseInt($('#putter11').val());
+	if ($('#putter12').val() != "") sum += parseInt($('#putter12').val());
+	if ($('#putter13').val() != "") sum += parseInt($('#putter13').val());
+	if ($('#putter14').val() != "") sum += parseInt($('#putter14').val());
+	if ($('#putter15').val() != "") sum += parseInt($('#putter15').val());
+	if ($('#putter16').val() != "") sum += parseInt($('#putter16').val());
+	if ($('#putter17').val() != "") sum += parseInt($('#putter17').val());
+	if ($('#putter18').val() != "") sum += parseInt($('#putter18').val());
+	
+	$('#puttersum2').val(sum);		
+}
 // 입력 정보를 저장한다.
 function fn_save()
 {

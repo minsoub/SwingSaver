@@ -37,4 +37,13 @@ public class CommonUtil {
 		
 		return format.format(now);
 	}
+	
+	public static String getCurrentFromatDate()
+	{
+		Date now = new Date();
+		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		
+		return format.format(now);
+	}
 }

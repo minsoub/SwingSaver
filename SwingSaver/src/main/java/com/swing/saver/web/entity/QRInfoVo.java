@@ -6,6 +6,7 @@ package com.swing.saver.web.entity;
  *
  */
 public class QRInfoVo {
+	private String country_id;		// 국가코드
 	private String zone_id;			// 지역코드
 	private String countryclub_id;	// 골프장 코드
 	private String startcourse;		// out 시작코스 (2자리)
@@ -18,6 +19,15 @@ public class QRInfoVo {
 	private String score2;			// 동반자 2의 점수
 	private String othername3;		// 동반자 3
 	private String score3;			// 동반자 3의 점수
+	
+	
+	
+	public String getCountry_id() {
+		return country_id;
+	}
+	public void setCountry_id(String country_id) {
+		this.country_id = country_id;
+	}
 	public String getZone_id() {
 		return zone_id;
 	}
