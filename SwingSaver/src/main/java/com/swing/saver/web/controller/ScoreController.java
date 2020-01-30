@@ -1168,7 +1168,7 @@ public class ScoreController {
     	scoreDetailParams.put("countryclub_id",    scoreVo.getCountryclub_id());
     	// seq_no => DB에서 신규 생성
     	scoreDetailParams.put("seq_no",           map.get("seq_no").toString());
-    	scoreDetailParams.put("user_id",          String.valueOf(scoreVo.getUser_id()));
+    	scoreDetailParams.put("user_id",          String.valueOf(userId));
     	
     	scoreDetailParams.put("puterpattern1",    scoreVo.getPuterpattern1());
     	scoreDetailParams.put("puterpattern2",    scoreVo.getPuterpattern2());
@@ -1624,6 +1624,515 @@ public class ScoreController {
         mv.setViewName("web/score/score_02");
         LOGGER.debug("==================== ScoreController scoreDetail end : ===================={}");
         return mv;
+    }
+    
+    /**
+     * 개인별 스코어 정보를 삭제한다.
+     * 
+     * @param params
+     * @return
+     * @throws ApiException
+     * @throws IOException
+     */
+    @PostMapping(value="/scoreDelete")
+    public ModelAndView scoreDelete(@RequestBody Map<String, String> params) throws ApiException, IOException
+    {
+        ModelAndView mv = new ModelAndView();
+        LOGGER.debug("ScoreController scoreDelete 시작");
+        String rtn = restService.scoreDelete(params);
+        LOGGER.debug(rtn);
+        mv.addObject("data",rtn);
+        mv.setViewName("jsonView");
+        LOGGER.debug("ScoreController scoreDelete 종료");
+        return mv;
+    }
+    
+    /**
+     * 내 스코어 상세정보 수정화면
+     * @param params
+     * @param request
+     * @return
+     * @throws ApiException
+     * @throws IOException
+     */
+    @PostMapping(value="/scoreModify")
+    public ModelAndView  scoreModify(ScoreListVo scoreVo, HttpServletRequest request, HttpSession session, ModelAndView mv, RedirectAttributes redirectAttributes) throws ApiException, IOException {
+
+        LOGGER.debug("==================== ScoreController scoreModify Strart : ===================={}");
+    	LoginVo loginVo = (LoginVo)request.getSession().getAttribute("login");
+    	UserVo userVo = null;		
+    	long userId = loginVo.getUserid();
+    	LOGGER.debug("Login userID : " + userId);
+    	
+    	// 파라미터
+    	String stdate = scoreVo.getStdate();
+    	String etdate = scoreVo.getEtdate();
+    	String country_id = scoreVo.getCountry_id();
+    	String zone_id = scoreVo.getZone_id();
+    	String countryclub_id = scoreVo.getCountryclub_id();
+    	String search_seq_no = scoreVo.getSearch_seq_no();
+    	String search_countryclub_id = scoreVo.getSearch_countryclub_id();
+    	String search_visit_date = scoreVo.getSearch_visit_date();
+    	
+    	if (search_visit_date != null) search_visit_date = search_visit_date.replaceAll("-", "");
+    	
+    	LOGGER.debug("Parameter info : ");
+    	LOGGER.debug("Parameter info : " + stdate);
+    	LOGGER.debug("Parameter info : " + etdate);
+    	LOGGER.debug("Parameter info : " + country_id);
+    	LOGGER.debug("Parameter info : " + zone_id);
+    	LOGGER.debug("Parameter info : " + countryclub_id);
+    	LOGGER.debug("Parameter info : " + search_seq_no);
+    	LOGGER.debug("Parameter info : " + search_countryclub_id);
+    	LOGGER.debug("Parameter info : " + search_visit_date);
+    	
+    	
+        /*회원정보 조회*/
+    	userVo = restService.getMemberInfo(userId);
+        mv.addObject("userInfo",userVo);
+        
+        // 개인별 스코어 정보 조회
+        ScoreMaster sm = restService.getScoreInfo(search_visit_date, search_countryclub_id, search_seq_no, String.valueOf(userId));
+        
+        // Hole에 대한 PAR 정보를 조회
+    	FarVo parInfo1 =  restService.getParInfo(country_id, sm.getZone_id(), search_countryclub_id, sm.getStart_course());   // 골프장 Par 정보 상세 정보 조회 (Start Course)
+    	FarVo parInfo2 =  restService.getParInfo(country_id, sm.getZone_id(), search_countryclub_id, sm.getEnd_course());     // 골프장 Par 정보 상세 정보 조회 (End Course)
+    	
+    	// PAR에 대한 SUM 합계
+    	parInfo1.setSum(parInfo1.getHole1()+parInfo1.getHole2()+parInfo1.getHole3()+parInfo1.getHole4()+parInfo1.getHole5()+parInfo1.getHole6()
+    					+parInfo1.getHole7()+parInfo1.getHole8()+parInfo1.getHole9());
+    	parInfo2.setSum(parInfo2.getHole1()+parInfo2.getHole2()+parInfo2.getHole3()+parInfo2.getHole4()+parInfo2.getHole5()+parInfo2.getHole6()
+		+parInfo2.getHole7()+parInfo2.getHole8()+parInfo2.getHole9());
+    	
+        mv.addObject("scoreInfo", sm);
+        mv.addObject("parInfo1", parInfo1);
+        mv.addObject("parInfo1", parInfo2);
+        
+        // 리스트에서 넘어온 파라미터 
+        mv.addObject("stdate", stdate.replaceAll("-", ""));
+        mv.addObject("etdate", etdate.replaceAll("-", ""));
+        mv.addObject("country_id", country_id);
+        mv.addObject("zone_id", zone_id);
+        mv.addObject("countryclub_id", countryclub_id);
+        mv.addObject("search_seq_no", search_seq_no);
+        mv.addObject("search_countryclub_id", search_countryclub_id);
+        mv.addObject("search_visit_date", search_visit_date);
+        
+        mv.setViewName("web/score/score_02_1");
+        LOGGER.debug("==================== ScoreController scoreModify end : ===================={}");
+        return mv;
+    }    
+    
+    /**
+     * 개인별 스코어 수정 정보를 저장한다
+     * 
+     * @param scoreVo
+     * @param request
+     * @param session
+     * @param mv
+     * @param redirectAttributes
+     * @return
+     * @throws ApiException
+     * @throws IOException
+     */
+    @PostMapping(value="/scoreUpdate")
+    public ModelAndView scoreUpdate(@ModelAttribute(value="scoreInfo")ScoreMaster scoreVo, HttpServletRequest request, HttpSession session, ModelAndView mv, RedirectAttributes redirectAttributes) throws ApiException, IOException
+    {
+    	//@ModelAttribute(value="qrVo")QRInfoVo qrVo,
+    	LOGGER.debug("==================== ScoreController scoreUpdate Start : ===================");
+    	LoginVo loginVo = (LoginVo)session.getAttribute("login");
+    	UserVo userVo = null;		
+    	long userId = -1;
+    	
+    	if (loginVo != null)
+    		userId = loginVo.getUserid();
+    	LOGGER.debug("Login userID : " + userId);
+    	
+    	// 파라미터
+    	String stdate = scoreVo.getStdate();
+    	String etdate = scoreVo.getEtdate();
+    	String country_id = scoreVo.getCountry_id();
+    	String zone_id = scoreVo.getZone_id();
+    	String countryclub_id = scoreVo.getCountryclub_id();
+    	String search_seq_no = scoreVo.getSearch_seq_no();
+    	String search_countryclub_id = scoreVo.getSearch_countryclub_id();
+    	String search_visit_date = scoreVo.getSearch_visit_date();
+    	
+    	if (search_visit_date != null) search_visit_date = search_visit_date.replaceAll("-", "");
+    	
+    	LOGGER.debug("Parameter info : ");
+    	LOGGER.debug("Parameter info : " + stdate);
+    	LOGGER.debug("Parameter info : " + etdate);
+    	LOGGER.debug("Parameter info : " + country_id);
+    	LOGGER.debug("Parameter info : " + zone_id);
+    	LOGGER.debug("Parameter info : " + countryclub_id);
+    	LOGGER.debug("Parameter info : " + search_seq_no);
+    	LOGGER.debug("Parameter info : " + search_countryclub_id);
+    	LOGGER.debug("Parameter info : " + search_visit_date);
+    	
+    	
+    	// 개인별 스코어 정보 등록
+    	Map<String, String> scoreParams = new HashMap<String, String>();
+    	// 파라미터 등록 
+    	scoreParams.put("visit_date",       scoreVo.getVisit_date().replaceAll("-", ""));
+    	scoreParams.put("countryclub_id",    scoreVo.getCountryclub_id());
+    	scoreParams.put("seq_no",           scoreVo.getSearch_seq_no());
+    	scoreParams.put("user_id",          String.valueOf(userId));
+    	scoreParams.put("start_course",     String.valueOf(scoreVo.getStart_course()));
+    	scoreParams.put("end_course",       String.valueOf(scoreVo.getEnd_course()));
+    	scoreParams.put("score1",           String.valueOf(scoreVo.getScore1()));
+    	scoreParams.put("score2",           String.valueOf(scoreVo.getScore2()));
+    	scoreParams.put("score3",           String.valueOf(scoreVo.getScore3()));
+    	scoreParams.put("score4",           String.valueOf(scoreVo.getScore4()));
+    	scoreParams.put("score5",           String.valueOf(scoreVo.getScore5()));
+    	scoreParams.put("score6",           String.valueOf(scoreVo.getScore6()));
+    	scoreParams.put("score7",           String.valueOf(scoreVo.getScore7()));
+    	scoreParams.put("score8",           String.valueOf(scoreVo.getScore8()));
+    	scoreParams.put("score9",           String.valueOf(scoreVo.getScore9()));
+    	scoreParams.put("score10",          String.valueOf(scoreVo.getScore10()));
+    	scoreParams.put("score11",          String.valueOf(scoreVo.getScore11()));
+    	scoreParams.put("score12",          String.valueOf(scoreVo.getScore12()));
+    	scoreParams.put("score13",          String.valueOf(scoreVo.getScore13()));
+    	scoreParams.put("score14",          String.valueOf(scoreVo.getScore14()));
+    	scoreParams.put("score15",          String.valueOf(scoreVo.getScore15()));
+    	scoreParams.put("score16",          String.valueOf(scoreVo.getScore16()));
+    	scoreParams.put("score17",          String.valueOf(scoreVo.getScore17()));
+    	scoreParams.put("score18",          String.valueOf(scoreVo.getScore18()));
+    	
+    	scoreParams.put("stroke1",          String.valueOf(scoreVo.getStroke1()));
+    	scoreParams.put("stroke2",          String.valueOf(scoreVo.getStroke2()));
+    	scoreParams.put("stroke3",          String.valueOf(scoreVo.getStroke3()));
+    	scoreParams.put("stroke4",          String.valueOf(scoreVo.getStroke4()));
+    	scoreParams.put("stroke5",          String.valueOf(scoreVo.getStroke5()));
+    	scoreParams.put("stroke6",          String.valueOf(scoreVo.getStroke6()));
+    	scoreParams.put("stroke7",          String.valueOf(scoreVo.getStroke7()));
+    	scoreParams.put("stroke8",          String.valueOf(scoreVo.getStroke8()));
+    	scoreParams.put("stroke9",          String.valueOf(scoreVo.getStroke9()));
+    	scoreParams.put("stroke10",         String.valueOf(scoreVo.getStroke10()));
+    	scoreParams.put("stroke11",         String.valueOf(scoreVo.getStroke11()));
+    	scoreParams.put("stroke12",         String.valueOf(scoreVo.getStroke12()));
+    	scoreParams.put("stroke13",         String.valueOf(scoreVo.getStroke13()));
+    	scoreParams.put("stroke14",         String.valueOf(scoreVo.getStroke14()));
+    	scoreParams.put("stroke15",         String.valueOf(scoreVo.getStroke15()));
+    	scoreParams.put("stroke16",         String.valueOf(scoreVo.getStroke16()));
+    	scoreParams.put("stroke17",         String.valueOf(scoreVo.getStroke17()));
+    	scoreParams.put("stroke18",         String.valueOf(scoreVo.getStroke18()));
+    	
+    	scoreParams.put("putter1",          String.valueOf(scoreVo.getPutter1()));
+    	scoreParams.put("putter2",          String.valueOf(scoreVo.getPutter2()));
+    	scoreParams.put("putter3",          String.valueOf(scoreVo.getPutter3()));
+    	scoreParams.put("putter4",          String.valueOf(scoreVo.getPutter4()));
+    	scoreParams.put("putter5",          String.valueOf(scoreVo.getPutter5()));
+    	scoreParams.put("putter6",          String.valueOf(scoreVo.getPutter6()));
+    	scoreParams.put("putter7",          String.valueOf(scoreVo.getPutter7()));
+    	scoreParams.put("putter8",          String.valueOf(scoreVo.getPutter8()));
+    	scoreParams.put("putter9",          String.valueOf(scoreVo.getPutter9()));
+    	scoreParams.put("putter10",         String.valueOf(scoreVo.getPutter10()));
+    	scoreParams.put("putter11",         String.valueOf(scoreVo.getPutter11()));
+    	scoreParams.put("putter12",         String.valueOf(scoreVo.getPutter12()));
+    	scoreParams.put("putter13",         String.valueOf(scoreVo.getPutter13()));
+    	scoreParams.put("putter14",         String.valueOf(scoreVo.getPutter14()));
+    	scoreParams.put("putter15",         String.valueOf(scoreVo.getPutter15()));
+    	scoreParams.put("putter16",         String.valueOf(scoreVo.getPutter16()));
+    	scoreParams.put("putter17",         String.valueOf(scoreVo.getPutter17()));
+    	scoreParams.put("putter18",         String.valueOf(scoreVo.getPutter18()));
+    	////////////////////////////////////////////////////////////////
+    	String rtnJson = restService.scoreUpdate(scoreParams);
+    	LOGGER.debug(rtnJson);
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});
+        
+        String result = map.get("result").toString();
+        if (result.equals("true"))
+        {
+        	scoreVo.setResult(true);
+        }else {
+        	scoreVo.setResult(false);
+        	scoreVo.setError(map.get("error").toString());
+        }
+    	
+    	// 개인별 스코어 세부정보 등록 
+    	Map<String, String> scoreDetailParams = new HashMap<String, String>();
+        // 파라미터 등록 
+    	scoreDetailParams.put("visit_date",       scoreVo.getVisit_date().replaceAll("-", ""));
+    	scoreDetailParams.put("countryclub_id",    scoreVo.getCountryclub_id());
+    	// seq_no => DB에서 신규 생성
+    	scoreDetailParams.put("seq_no",           scoreVo.getSearch_seq_no());
+    	scoreDetailParams.put("user_id",          String.valueOf(userId));
+    	
+    	scoreDetailParams.put("puterpattern1",    scoreVo.getPuterpattern1());
+    	scoreDetailParams.put("puterpattern2",    scoreVo.getPuterpattern2());
+    	scoreDetailParams.put("puterpattern3",    scoreVo.getPuterpattern3());
+    	scoreDetailParams.put("puterpattern4",    scoreVo.getPuterpattern4());
+    	scoreDetailParams.put("puterpattern5",    scoreVo.getPuterpattern5());
+    	scoreDetailParams.put("puterpattern6",    scoreVo.getPuterpattern6());
+    	scoreDetailParams.put("puterpattern7",    scoreVo.getPuterpattern7());
+    	scoreDetailParams.put("puterpattern8",    scoreVo.getPuterpattern8());
+    	scoreDetailParams.put("puterpattern9",    scoreVo.getPuterpattern9());
+    	scoreDetailParams.put("puterpattern10",   scoreVo.getPuterpattern10());
+    	scoreDetailParams.put("puterpattern11",   scoreVo.getPuterpattern11());
+    	scoreDetailParams.put("puterpattern12",   scoreVo.getPuterpattern12());
+    	scoreDetailParams.put("puterpattern13",   scoreVo.getPuterpattern13());
+    	scoreDetailParams.put("puterpattern14",   scoreVo.getPuterpattern14());
+    	scoreDetailParams.put("puterpattern15",   scoreVo.getPuterpattern15());
+    	scoreDetailParams.put("puterpattern16",   scoreVo.getPuterpattern16());
+    	scoreDetailParams.put("puterpattern17",   scoreVo.getPuterpattern17());
+    	scoreDetailParams.put("puterpattern18",   scoreVo.getPuterpattern18());
+    	
+    	scoreDetailParams.put("parbreak1",        scoreVo.getParbreak1());
+    	scoreDetailParams.put("parbreak2",        scoreVo.getParbreak2());
+    	scoreDetailParams.put("parbreak3",        scoreVo.getParbreak3());
+    	scoreDetailParams.put("parbreak4",        scoreVo.getParbreak4());
+    	scoreDetailParams.put("parbreak5",        scoreVo.getParbreak5());
+    	scoreDetailParams.put("parbreak6",        scoreVo.getParbreak6());
+    	scoreDetailParams.put("parbreak7",        scoreVo.getParbreak7());
+    	scoreDetailParams.put("parbreak8",        scoreVo.getParbreak8());
+    	scoreDetailParams.put("parbreak9",        scoreVo.getParbreak9());
+    	scoreDetailParams.put("parbreak10",       scoreVo.getParbreak10());
+    	scoreDetailParams.put("parbreak11",       scoreVo.getParbreak11());
+    	scoreDetailParams.put("parbreak12",       scoreVo.getParbreak12());
+    	scoreDetailParams.put("parbreak13",       scoreVo.getParbreak13());
+    	scoreDetailParams.put("parbreak14",       scoreVo.getParbreak14());
+    	scoreDetailParams.put("parbreak15",       scoreVo.getParbreak15());
+    	scoreDetailParams.put("parbreak16",       scoreVo.getParbreak16());
+    	scoreDetailParams.put("parbreak17",       scoreVo.getParbreak17());
+    	scoreDetailParams.put("parbreak18",       scoreVo.getParbreak18());
+    	
+    	// sendsave
+    	if (scoreVo.getSendsavechk1() == null || "".equals(scoreVo.getSendsavechk1()))  // Not check .equals("Y"))	// 빠졌는데 벗어 났는지 
+    	{
+    		scoreDetailParams.put("sendsave1",   "0");		// 빠진적 없다.    		
+    	}else {
+    		if (scoreVo.getSendsave1() == null || "".equals(scoreVo.getSendsave1()))
+    			scoreDetailParams.put("sendsave1",    "N");
+    		else 
+    			scoreDetailParams.put("sendsave1",    scoreVo.getSendsave1());
+    	}
+    	if (scoreVo.getSendsavechk2() == null || "".equals(scoreVo.getSendsavechk2()))  // Not check .equals("Y"))	// 빠졌는데 벗어 났는지 
+    	{
+    		scoreDetailParams.put("sendsave2",   "0");		// 빠진적 없다.    		
+    	}else {
+    		if (scoreVo.getSendsave2() == null || "".equals(scoreVo.getSendsave2()))
+    			scoreDetailParams.put("sendsave2",    "N");
+    		else 
+    			scoreDetailParams.put("sendsave2",    scoreVo.getSendsave1());
+    	}
+    	if (scoreVo.getSendsavechk3() == null || "".equals(scoreVo.getSendsavechk3()))  // Not check .equals("Y"))	// 빠졌는데 벗어 났는지 
+    	{
+    		scoreDetailParams.put("sendsave3",   "0");		// 빠진적 없다.    		
+    	}else {
+    		if (scoreVo.getSendsave3() == null || "".equals(scoreVo.getSendsave3()))
+    			scoreDetailParams.put("sendsave3",    "N");
+    		else 
+    			scoreDetailParams.put("sendsave3",    scoreVo.getSendsave3());
+    	}
+    	if (scoreVo.getSendsavechk4() == null || "".equals(scoreVo.getSendsavechk4()))  // Not check .equals("Y"))	// 빠졌는데 벗어 났는지 
+    	{
+    		scoreDetailParams.put("sendsave4",   "0");		// 빠진적 없다.    		
+    	}else {
+    		if (scoreVo.getSendsave4() == null || "".equals(scoreVo.getSendsave4()))
+    			scoreDetailParams.put("sendsave4",    "N");
+    		else 
+    			scoreDetailParams.put("sendsave4",    scoreVo.getSendsave4());
+    	}
+    	if (scoreVo.getSendsavechk5() == null || "".equals(scoreVo.getSendsavechk5()))  // Not check .equals("Y"))	// 빠졌는데 벗어 났는지 
+    	{
+    		scoreDetailParams.put("sendsave5",   "0");		// 빠진적 없다.    		
+    	}else {
+    		if (scoreVo.getSendsave5() == null || "".equals(scoreVo.getSendsave5()))
+    			scoreDetailParams.put("sendsave5",    "N");
+    		else 
+    			scoreDetailParams.put("sendsave5",    scoreVo.getSendsave5());
+    	}
+    	if (scoreVo.getSendsavechk6() == null || "".equals(scoreVo.getSendsavechk6()))  // Not check .equals("Y"))	// 빠졌는데 벗어 났는지 
+    	{
+    		scoreDetailParams.put("sendsave6",   "0");		// 빠진적 없다.    		
+    	}else {
+    		if (scoreVo.getSendsave6() == null || "".equals(scoreVo.getSendsave6()))
+    			scoreDetailParams.put("sendsave6",    "N");
+    		else 
+    			scoreDetailParams.put("sendsave6",    scoreVo.getSendsave6());
+    	}
+    	if (scoreVo.getSendsavechk7() == null || "".equals(scoreVo.getSendsavechk7()))  // Not check .equals("Y"))	// 빠졌는데 벗어 났는지 
+    	{
+    		scoreDetailParams.put("sendsave7",   "0");		// 빠진적 없다.    		
+    	}else {
+    		if (scoreVo.getSendsave7() == null || "".equals(scoreVo.getSendsave7()))
+    			scoreDetailParams.put("sendsave7",    "N");
+    		else 
+    			scoreDetailParams.put("sendsave7",    scoreVo.getSendsave7());
+    	}
+    	if (scoreVo.getSendsavechk8() == null || "".equals(scoreVo.getSendsavechk8()))  // Not check .equals("Y"))	// 빠졌는데 벗어 났는지 
+    	{
+    		scoreDetailParams.put("sendsave8",   "0");		// 빠진적 없다.    		
+    	}else {
+    		if (scoreVo.getSendsave8() == null || "".equals(scoreVo.getSendsave8()))
+    			scoreDetailParams.put("sendsave8",    "N");
+    		else 
+    			scoreDetailParams.put("sendsave8",    scoreVo.getSendsave8());
+    	}
+    	if (scoreVo.getSendsavechk9() == null || "".equals(scoreVo.getSendsavechk9()))  // Not check .equals("Y"))	// 빠졌는데 벗어 났는지 
+    	{
+    		scoreDetailParams.put("sendsave9",   "0");		// 빠진적 없다.    		
+    	}else {
+    		if (scoreVo.getSendsave9() == null || "".equals(scoreVo.getSendsave9()))
+    			scoreDetailParams.put("sendsave9",    "N");
+    		else 
+    			scoreDetailParams.put("sendsave9",    scoreVo.getSendsave9());
+    	}
+    	if (scoreVo.getSendsavechk10() == null || "".equals(scoreVo.getSendsavechk10()))  // Not check .equals("Y"))	// 빠졌는데 벗어 났는지 
+    	{
+    		scoreDetailParams.put("sendsave10",   "0");		// 빠진적 없다.    		
+    	}else {
+    		if (scoreVo.getSendsave10() == null || "".equals(scoreVo.getSendsave10()))
+    			scoreDetailParams.put("sendsave10",    "N");
+    		else 
+    			scoreDetailParams.put("sendsave10",    scoreVo.getSendsave10());
+    	}
+    	if (scoreVo.getSendsavechk11() == null || "".equals(scoreVo.getSendsavechk11()))  // Not check .equals("Y"))	// 빠졌는데 벗어 났는지 
+    	{
+    		scoreDetailParams.put("sendsave11",   "0");		// 빠진적 없다.    		
+    	}else {
+    		if (scoreVo.getSendsave11() == null || "".equals(scoreVo.getSendsave11()))
+    			scoreDetailParams.put("sendsave11",    "N");
+    		else 
+    			scoreDetailParams.put("sendsave11",    scoreVo.getSendsave11());
+    	}
+    	if (scoreVo.getSendsavechk12() == null || "".equals(scoreVo.getSendsavechk12()))  // Not check .equals("Y"))	// 빠졌는데 벗어 났는지 
+    	{
+    		scoreDetailParams.put("sendsave12",   "0");		// 빠진적 없다.    		
+    	}else {
+    		if (scoreVo.getSendsave12() == null || "".equals(scoreVo.getSendsave12()))
+    			scoreDetailParams.put("sendsave12",    "N");
+    		else 
+    			scoreDetailParams.put("sendsave12",    scoreVo.getSendsave12());
+    	}
+    	if (scoreVo.getSendsavechk13() == null || "".equals(scoreVo.getSendsavechk13()))  // Not check .equals("Y"))	// 빠졌는데 벗어 났는지 
+    	{
+    		scoreDetailParams.put("sendsave13",   "0");		// 빠진적 없다.    		
+    	}else {
+    		if (scoreVo.getSendsave13() == null || "".equals(scoreVo.getSendsave13()))
+    			scoreDetailParams.put("sendsave13",    "N");
+    		else 
+    			scoreDetailParams.put("sendsave13",    scoreVo.getSendsave13());
+    	}
+    	if (scoreVo.getSendsavechk14() == null || "".equals(scoreVo.getSendsavechk14()))  // Not check .equals("Y"))	// 빠졌는데 벗어 났는지 
+    	{
+    		scoreDetailParams.put("sendsave14",   "0");		// 빠진적 없다.    		
+    	}else {
+    		if (scoreVo.getSendsave14() == null || "".equals(scoreVo.getSendsave14()))
+    			scoreDetailParams.put("sendsave14",    "N");
+    		else 
+    			scoreDetailParams.put("sendsave14",    scoreVo.getSendsave14());
+    	}
+    	if (scoreVo.getSendsavechk15() == null || "".equals(scoreVo.getSendsavechk15()))  // Not check .equals("Y"))	// 빠졌는데 벗어 났는지 
+    	{
+    		scoreDetailParams.put("sendsave15",   "0");		// 빠진적 없다.    		
+    	}else {
+    		if (scoreVo.getSendsave15() == null || "".equals(scoreVo.getSendsave15()))
+    			scoreDetailParams.put("sendsave15",    "N");
+    		else 
+    			scoreDetailParams.put("sendsave15",    scoreVo.getSendsave15());
+    	}
+    	if (scoreVo.getSendsavechk16() == null || "".equals(scoreVo.getSendsavechk16()))  // Not check .equals("Y"))	// 빠졌는데 벗어 났는지 
+    	{
+    		scoreDetailParams.put("sendsave16",   "0");		// 빠진적 없다.    		
+    	}else {
+    		if (scoreVo.getSendsave16() == null || "".equals(scoreVo.getSendsave16()))
+    			scoreDetailParams.put("sendsave16",    "N");
+    		else 
+    			scoreDetailParams.put("sendsave16",    scoreVo.getSendsave16());
+    	}
+    	if (scoreVo.getSendsavechk17() == null || "".equals(scoreVo.getSendsavechk17()))  // Not check .equals("Y"))	// 빠졌는데 벗어 났는지 
+    	{
+    		scoreDetailParams.put("sendsave17",   "0");		// 빠진적 없다.    		
+    	}else {
+    		if (scoreVo.getSendsave17() == null || "".equals(scoreVo.getSendsave17()))
+    			scoreDetailParams.put("sendsave17",    "N");
+    		else 
+    			scoreDetailParams.put("sendsave17",    scoreVo.getSendsave17());
+    	}
+    	if (scoreVo.getSendsavechk18() == null || "".equals(scoreVo.getSendsavechk18()))  // Not check .equals("Y"))	// 빠졌는데 벗어 났는지 
+    	{
+    		scoreDetailParams.put("sendsave18",   "0");		// 빠진적 없다.    		
+    	}else {
+    		if (scoreVo.getSendsave18() == null || "".equals(scoreVo.getSendsave18()))
+    			scoreDetailParams.put("sendsave18",    "N");
+    		else 
+    			scoreDetailParams.put("sendsave18",    scoreVo.getSendsave18());
+    	}    	
+    	
+    	// greenon
+    	scoreDetailParams.put("greenon1",         scoreVo.getGreenon1());
+    	scoreDetailParams.put("greenon2",         scoreVo.getGreenon2());
+    	scoreDetailParams.put("greenon3",         scoreVo.getGreenon3());
+    	scoreDetailParams.put("greenon4",         scoreVo.getGreenon4());
+    	scoreDetailParams.put("greenon5",         scoreVo.getGreenon5());
+    	scoreDetailParams.put("greenon6",         scoreVo.getGreenon6());
+    	scoreDetailParams.put("greenon7",         scoreVo.getGreenon7());
+    	scoreDetailParams.put("greenon8",         scoreVo.getGreenon8());
+    	scoreDetailParams.put("greenon9",         scoreVo.getGreenon9());
+    	scoreDetailParams.put("greenon10",        scoreVo.getGreenon10());
+    	scoreDetailParams.put("greenon11",        scoreVo.getGreenon11());
+    	scoreDetailParams.put("greenon12",        scoreVo.getGreenon12());
+    	scoreDetailParams.put("greenon13",        scoreVo.getGreenon13());
+    	scoreDetailParams.put("greenon14",        scoreVo.getGreenon14());
+    	scoreDetailParams.put("greenon15",        scoreVo.getGreenon15());
+    	scoreDetailParams.put("greenon16",        scoreVo.getGreenon16());
+    	scoreDetailParams.put("greenon17",        scoreVo.getGreenon17());
+    	scoreDetailParams.put("greenon18",        scoreVo.getGreenon18());
+    	
+    	// fairwayon
+    	scoreDetailParams.put("fairwayon1",       scoreVo.getFairwayon1());
+    	scoreDetailParams.put("fairwayon2",       scoreVo.getFairwayon2());
+    	scoreDetailParams.put("fairwayon3",       scoreVo.getFairwayon3());
+    	scoreDetailParams.put("fairwayon4",       scoreVo.getFairwayon4());
+    	scoreDetailParams.put("fairwayon5",       scoreVo.getFairwayon5());
+    	scoreDetailParams.put("fairwayon6",       scoreVo.getFairwayon6());
+    	scoreDetailParams.put("fairwayon7",       scoreVo.getFairwayon7());
+    	scoreDetailParams.put("fairwayon8",       scoreVo.getFairwayon8());
+    	scoreDetailParams.put("fairwayon9",       scoreVo.getFairwayon9());
+    	scoreDetailParams.put("fairwayon10",      scoreVo.getFairwayon10());
+    	scoreDetailParams.put("fairwayon11",      scoreVo.getFairwayon11());
+    	scoreDetailParams.put("fairwayon12",      scoreVo.getFairwayon12());
+    	scoreDetailParams.put("fairwayon13",      scoreVo.getFairwayon13());
+    	scoreDetailParams.put("fairwayon14",      scoreVo.getFairwayon14());
+    	scoreDetailParams.put("fairwayon15",      scoreVo.getFairwayon15());
+    	scoreDetailParams.put("fairwayon16",      scoreVo.getFairwayon16());
+    	scoreDetailParams.put("fairwayon17",      scoreVo.getFairwayon17());
+    	scoreDetailParams.put("fairwayon18",      scoreVo.getFairwayon18());
+    	
+    	
+    	
+    	rtnJson = restService.scoreDetailUpdate(scoreDetailParams);
+    	LOGGER.debug(rtnJson);
+    	mapper = new ObjectMapper();
+    	Map<String, Object> map2 = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});
+        result = map2.get("result").toString();
+        if (result.equals("true"))
+        {
+        	scoreVo.setResult(true);
+        }else {
+        	scoreVo.setResult(false);
+        	scoreVo.setError(map2.get("error").toString());
+        }
+        
+        
+        // 리스트에서 넘어온 파라미터 
+        ScoreListVo vo = new ScoreListVo();
+        vo.setStdate(stdate.replaceAll("-", ""));
+        vo.setEtdate(etdate.replaceAll("-", ""));
+        vo.setCountry_id(country_id);
+        vo.setZone_id(zone_id);
+        vo.setSearch_countryclub_id(search_countryclub_id);
+        vo.setSearch_seq_no(search_seq_no);
+        vo.setSearch_visit_date(search_visit_date);
+
+        redirectAttributes.addFlashAttribute("scoreVo", vo);
+    	LOGGER.debug("==================== scoreRegister scoreUpdate end : ===================");
+    	mv.setViewName( "redirect:/score/scoreDetail" );
+    	
+    	return mv;
     }
     
     

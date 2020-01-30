@@ -133,6 +133,8 @@ function pageUri() {
     	nextUri = "/admin/areaList";  	
     }else if("adm_04_02.jsp" == arrayUri[maxLen-1]) {
     	nextUri = "/admin/golfList";
+    }else if("score_02.jsp" == arrayUri[maxLen-1]) {
+    	nextUri = "/score/scoreList";
     }
     
     //alert(nextUri);

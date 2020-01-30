@@ -980,10 +980,55 @@ public class RestServiceImpl implements RestService {
         sendMap.put("countryclub_id", countryclub_id);	 
         String rtnJson= "";
 
-        rtnJson = sendMessage.sendHttpsStr(mapper.writeValueAsString(sendMap), "/ords/swing/saver/scoredetail", "GET", "application/json",true);
-        LOGGER.debug("골프장 Par 정보 파라미터:{},응답:{}",sendMap.toString(),rtnJson);
+        rtnJson = sendMessage.sendHttpsStr( "/ords/swing/saver/scoredetail/"+visit_date+"/"+countryclub_id+"/"+seq_no+"/"+user_id, "GET", "application/json",true);
+        LOGGER.debug("스코어정보 정보 파라미터:{},응답:{}",sendMap.toString(),rtnJson);
         scoreVo = mapper.readValue(rtnJson, ScoreMaster.class);
 
         return scoreVo;
+    }
+    /**
+     * 개인별 스코어 정보 삭제
+     */
+    @Override
+    public String scoreDelete(Map<String, String> params) throws JsonProcessingException, ApiException
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        String rtnJson = "";
+
+        rtnJson = sendMessage.sendHttpsStr(mapper.writeValueAsString(params), "/ords/swing/saver/score", "DELETE", "application/json", true);
+
+        LOGGER.debug("개인별 스코어 삭제 파라미터:{},응답:{}",params.toString(),rtnJson);
+
+        return rtnJson;
+    }
+    /**
+     * 개인별 스코어 정보 수정 
+     */
+    @Override
+    public String scoreUpdate(Map<String, String> params) throws JsonProcessingException, ApiException
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        String rtnJson = "";
+
+        rtnJson = sendMessage.sendHttpsStr(mapper.writeValueAsString(params),"/ords/swing/saver/score","PUT", "application/json",true);
+
+        LOGGER.debug("스코어정보 개인별 수정 가입 파라미터:{},응답:{}",params.toString(),rtnJson);
+
+        return rtnJson;
+    }
+    /**
+     * 개인별 스코어 상세 정보 수정
+     */
+    @Override
+    public String scoreDetailUpdate(Map<String, String> params) throws JsonProcessingException, ApiException
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        String rtnJson = "";
+
+        rtnJson = sendMessage.sendHttpsStr(mapper.writeValueAsString(params),"/ords/swing/saver/scoredetail","PUT", "application/json",true);
+
+        LOGGER.debug("스코어정보 개인별 상세 수정 파라미터:{},응답:{}",params.toString(),rtnJson);
+
+        return rtnJson;
     }
 }

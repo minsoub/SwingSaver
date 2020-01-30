@@ -102,4 +102,7 @@ public interface RestService {
     public String scoreDetailCreate(Map<String, String> params) throws JsonProcessingException, ApiException;	// 스코어정보 개인별 상세 신규 등록
     public String scoreList(String user_id, String stdate, String etdate, String country_id, String zone_id, String countryclub_id) throws ApiException, IOException;		// 스코어정보 리스트 조회
     public ScoreMaster getScoreInfo(String visit_date, String countryclub_id, String seq_no, String user_id) throws ApiException, IOException;		// 스코어정보 상세보기
+    public String scoreDelete(Map<String, String> params) throws JsonProcessingException, ApiException;			// 개인별 스코어 정보 삭제
+    public String scoreUpdate(Map<String, String> params) throws JsonProcessingException, ApiException;  // 개인별 스코어 정보 수정
+    public String scoreDetailUpdate(Map<String, String> params) throws JsonProcessingException, ApiException;  // 개인별 스코어 정보 수정
 } 

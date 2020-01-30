@@ -895,41 +895,41 @@ $(document).ready(function(){
     // Putter Pattern 화면에서의 선택
     $("#btnSelect").click(function(){
     	if($("#putter_id").val() == "putter1")
-    		$("input[name='puterpattern1']").val($("input:radio[name='putts01']").val());
+    		$("input[name='puterpattern1']").val($("input:radio[name='putts01']:checked").val());
     	if($("#putter_id").val() == "putter2")
-    		$("input[name='puterpattern2']").val($("input:radio[name='putts02']").val());
+    		$("input[name='puterpattern2']").val($("input:radio[name='putts01']:checked").val());
     	if($("#putter_id").val() == "putter3")
-    		$("input[name='puterpattern3']").val($("input:radio[name='putts03']").val());
+    		$("input[name='puterpattern3']").val($("input:radio[name='putts01']:checked").val());
     	if($("#putter_id").val() == "putter4")
-    		$("input[name='puterpattern4']").val($("input:radio[name='putts04']").val());
+    		$("input[name='puterpattern4']").val($("input:radio[name='putts01']:checked").val());
     	if($("#putter_id").val() == "putter5")
-    		$("input[name='puterpattern5']").val($("input:radio[name='putts05']").val());
+    		$("input[name='puterpattern5']").val($("input:radio[name='putts01']:checked").val());
     	if($("#putter_id").val() == "putter6")
-    		$("input[name='puterpattern6']").val($("input:radio[name='putts06']").val());
+    		$("input[name='puterpattern6']").val($("input:radio[name='putts01']:checked").val());
     	if($("#putter_id").val() == "putter7")
-    		$("input[name='puterpattern7']").val($("input:radio[name='putts07']").val());
+    		$("input[name='puterpattern7']").val($("input:radio[name='putts01']:checked").val());
     	if($("#putter_id").val() == "putter8")
-    		$("input[name='puterpattern8']").val($("input:radio[name='putts08']").val());
+    		$("input[name='puterpattern8']").val($("input:radio[name='putts01']:checked").val());
     	if($("#putter_id").val() == "putter9")
-    		$("input[name='puterpattern9']").val($("input:radio[name='putts09']").val());
+    		$("input[name='puterpattern9']").val($("input:radio[name='putts01']:checked").val());
     	if($("#putter_id").val() == "putter10")
-    		$("input[name='puterpattern10']").val($("input:radio[name='putts10']").val());
+    		$("input[name='puterpattern10']").val($("input:radio[name='putts01']:checked").val());
     	if($("#putter_id").val() == "putter11")
-    		$("input[name='puterpattern11']").val($("input:radio[name='putts11']").val());
+    		$("input[name='puterpattern11']").val($("input:radio[name='putts01']:checked").val());
     	if($("#putter_id").val() == "putter12")
-    		$("input[name='puterpattern12']").val($("input:radio[name='putts12']").val());
+    		$("input[name='puterpattern12']").val($("input:radio[name='putts01']:checked").val());
     	if($("#putter_id").val() == "putter13")
-    		$("input[name='puterpattern13']").val($("input:radio[name='putts13']").val());
+    		$("input[name='puterpattern13']").val($("input:radio[name='putts01']:checked").val());
     	if($("#putter_id").val() == "putter14")
-    		$("input[name='puterpattern14']").val($("input:radio[name='putts14']").val());
+    		$("input[name='puterpattern14']").val($("input:radio[name='putts01']:checked").val());
     	if($("#putter_id").val() == "putter15")
-    		$("input[name='puterpattern15']").val($("input:radio[name='putts15']").val());
+    		$("input[name='puterpattern15']").val($("input:radio[name='putts01']:checked").val());
     	if($("#putter_id").val() == "putter16")
-    		$("input[name='puterpattern16']").val($("input:radio[name='putts16']").val());
+    		$("input[name='puterpattern16']").val($("input:radio[name='putts01']:checked").val());
     	if($("#putter_id").val() == "putter17")
-    		$("input[name='puterpattern17']").val($("input:radio[name='putts17']").val());    	
+    		$("input[name='puterpattern17']").val($("input:radio[name='putts01']:checked").val());    	
     	if($("#putter_id").val() == "putter18")
-    		$("input[name='puterpattern18']").val($("input:radio[name='putts18']").val());        	
+    		$("input[name='puterpattern18']").val($("input:radio[name='putts01']:checked").val());        	
  		// 팝업창 숨김
     	$("#putts_01").attr('aria-hidden', 'true').hide();
     });
