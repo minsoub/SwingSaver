@@ -60,7 +60,7 @@
                                         <p>날짜</p>
                                     </td>
                                     <td>
-                                        <input type="date" id="visit_date" name="visit_date" value="${visit_date}">
+                                        <input type="date" id="visit_date" name="visit_date" value="${search_visit_date}">
                                     </td>
                                 </tr>
                                 <tr>
@@ -98,14 +98,14 @@
                                                                       출발&ensp;
                                             <select name="start_course" id="start_course">
                                 			<c:forEach var="parInfo" items="${parList}" varStatus="status">
-                                    			<option  <c:if test="${scoreInfo.startcourse == parInfo.course}">selected</c:if>  value="${parInfo.course}">${parInfo1.course_nm}(${parInfo.course})</option>
+                                    			<option  <c:if test="${scoreInfo.start_course == parInfo.course}">selected</c:if>  value="${parInfo.course}">${parInfo1.course_nm}(${parInfo.course})</option>
                                  			</c:forEach> 
                                         </select>
                                             &emsp;도착&ensp;
                                             <select name="end_course" id="end_course">
                                             <option value="">IN</option>
                                 			<c:forEach var="parInfo" items="${parList}" varStatus="status">
-                                    			<option  <c:if test="${scoreInfo.endcourse == parInfo.course}">selected</c:if>  value="${parInfo.course}">${parInfo.course_nm}(${parInfo.course})</option>
+                                    			<option  <c:if test="${scoreInfo.end_course == parInfo.course}">selected</c:if>  value="${parInfo.course}">${parInfo.course_nm}(${parInfo.course})</option>
                                  			</c:forEach> 
                                         </select>
                                     </td>
@@ -410,7 +410,7 @@
                                     </tr>
                                 </table>
                             </div>
-                            <button class="form-btn" onclick="#">수정하기</button>
+                            <button id="btnAdd" class="form-btn" onclick="#">수정하기</button>
                         </div>
                     </div>
                 </div>
@@ -856,6 +856,8 @@ $(document).ready(function(){
     
     // Putter Pattern 화면에서의 선택
     $("#btnSelect").click(function(){
+    	alert($("input:radio[name='putts01']:checked").val());
+    	alert($("input[name='puterpattern1']").val());
     	if($("#putter_id").val() == "putter1")
     		$("input[name='puterpattern1']").val($("input:radio[name='putts01']:checked").val());
     	if($("#putter_id").val() == "putter2")

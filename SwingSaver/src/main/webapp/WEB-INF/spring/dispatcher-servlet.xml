@@ -16,6 +16,7 @@
             <list>
                 <value>/group</value>
                 <value>/web/mypage</value>
+                <value>/web/score</value>
                 <value>/score/scoreList</value>
                 <value>/admin/groupList</value>
                 <value>/admin/areaList</value>

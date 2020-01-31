@@ -33,6 +33,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.support.RequestContextUtils;
 import org.springframework.web.multipart.*;
 
 import javax.annotation.Resource;
@@ -1558,14 +1559,21 @@ public class ScoreController {
      * @throws ApiException
      * @throws IOException
      */
-    @PostMapping(value="/scoreDetail")
-    public ModelAndView  scoreDetail(ScoreListVo scoreVo, HttpServletRequest request, HttpSession session, ModelAndView mv, RedirectAttributes redirectAttributes) throws ApiException, IOException {
+    @RequestMapping(value="/scoreDetail")
+    public ModelAndView  scoreDetail(@RequestParam(required=false)ScoreListVo scoreVo, HttpServletRequest request, HttpSession session, ModelAndView mv, RedirectAttributes redirectAttributes) throws ApiException, IOException {
 
         LOGGER.debug("==================== ScoreController scoreDetail Strart : ===================={}");
     	LoginVo loginVo = (LoginVo)request.getSession().getAttribute("login");
     	UserVo userVo = null;		
     	long userId = loginVo.getUserid();
     	LOGGER.debug("Login userID : " + userId);
+    	
+    	Map<String, ? > flashMap = RequestContextUtils.getInputFlashMap(request);
+    	
+    	if (flashMap != null)
+    	{
+    		scoreVo = (ScoreListVo) flashMap.get("scoreVo");
+    	}
     	
     	// 파라미터
     	String stdate = scoreVo.getStdate();
@@ -1609,7 +1617,7 @@ public class ScoreController {
     	
         mv.addObject("scoreInfo", sm);
         mv.addObject("parInfo1", parInfo1);
-        mv.addObject("parInfo1", parInfo2);
+        mv.addObject("parInfo2", parInfo2);
         
         // 리스트에서 넘어온 파라미터 
         mv.addObject("stdate", stdate.replaceAll("-", ""));
@@ -1689,7 +1697,8 @@ public class ScoreController {
     	
         /*회원정보 조회*/
     	userVo = restService.getMemberInfo(userId);
-        mv.addObject("userInfo",userVo);
+        mv.addObject("userInfo",userVo);              
+        
         
         // 개인별 스코어 정보 조회
         ScoreMaster sm = restService.getScoreInfo(search_visit_date, search_countryclub_id, search_seq_no, String.valueOf(userId));
@@ -1706,8 +1715,27 @@ public class ScoreController {
     	
         mv.addObject("scoreInfo", sm);
         mv.addObject("parInfo1", parInfo1);
-        mv.addObject("parInfo1", parInfo2);
+        mv.addObject("parInfo2", parInfo2);
         
+        
+        // 국가 조회
+        List<CodeVo> countryList = getCodeList("ctry");
+        mv.addObject("countryList", countryList);
+        
+        // 지역 조회
+        List<AreaVo> areaList = getAreaList(sm.getCountry_id());	// Default KR
+        mv.addObject("areaList", areaList); 
+        
+        // 지역에 속한 골프장 조회
+        // 골프장 리스트 조회 (그 지역에 포함된)
+       	List<GolfVo> golfList = getGolfList(sm.getCountry_id(), sm.getZone_id());
+       	mv.addObject("golfList", golfList);
+       	
+        // 골프장에 포함된 코스 정보 조회
+        List<FarVo> parList = getParList(sm.getCountryclub_id());
+        mv.addObject("parList", parList);
+       	       	        
+                
         // 리스트에서 넘어온 파라미터 
         mv.addObject("stdate", stdate.replaceAll("-", ""));
         mv.addObject("etdate", etdate.replaceAll("-", ""));
