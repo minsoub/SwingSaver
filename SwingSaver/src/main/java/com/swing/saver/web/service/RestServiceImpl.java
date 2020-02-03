@@ -1031,4 +1031,47 @@ public class RestServiceImpl implements RestService {
 
         return rtnJson;
     }
+    /**
+     * 마켓 프로 리스트 조회
+     */
+    @Override
+    public String proList() throws JsonProcessingException, ApiException
+    {
+        String rtnJson = "";
+
+        rtnJson = sendMessage.sendHttpsStr("/ords/swing/saver/market","GET", "application/json",true);
+
+        LOGGER.debug("마켓 프로 조회 파라미터:응답:{}",rtnJson);
+
+        return rtnJson;
+    }
+    /**
+     * 마켓 프로 등록 가능 사용자 조회
+     */
+    @Override
+    public String proUserList() throws JsonProcessingException, ApiException
+    {
+        String rtnJson = "";
+
+        rtnJson = sendMessage.sendHttpsStr("/ords/swing/saver/market/prounlist","GET", "application/json",true);
+
+        LOGGER.debug("마켓 프로 등록 가능 사용자 조회 파라미터:응답:{}",rtnJson);
+
+        return rtnJson;
+    }
+    /**
+     * 마켓 프로 등록
+     */
+    @Override
+    public String marketProCreate(Map<String, String> params) throws JsonProcessingException, ApiException
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        String rtnJson = "";
+
+        rtnJson = sendMessage.sendHttpsStr(mapper.writeValueAsString(params),"/ords/swing/saver/market","POST", "application/json",true);
+
+        LOGGER.debug("마켓 프로 등록 가입 파라미터:{},응답:{}",params.toString(),rtnJson);
+
+        return rtnJson;
+    }
 }
