@@ -34,7 +34,7 @@
                                 <tr>
                                     <td><input type="checkbox" class="id" name="id" id="id" value="${proInfo.id},${proInfo.name}"></td>
                                     <td>${proInfo.email}</td>
-                                    <td>${proInfo.name}</td>
+                                    <td><a href="javascript:ProView('${proInfo.id}');">${proInfo.name}</a></td>
                                     <td>${proInfo.lessonprice}</td>
                                     <td>${proInfo.level_nm}</td>
                                 </tr>
@@ -44,9 +44,7 @@
                     </div>
                 </div>
                 </div>
-            </div>
-            
-            
+            </div>                       
  </section>
 
 
@@ -139,6 +137,11 @@ $(document).ready(function(){
 function fn_proAdd()
 {
 	location.href="/admin/market/addform";
+}
+
+function ProView(id)
+{
+	location.href="/admin/market/proDetail?id="+id;
 }
 </script>
     
