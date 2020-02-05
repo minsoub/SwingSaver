@@ -8,6 +8,7 @@ import com.swing.saver.web.entity.FarVo;
 import com.swing.saver.web.entity.GolfVo;
 import com.swing.saver.web.entity.GroupVo;
 import com.swing.saver.web.entity.LoginVo;
+import com.swing.saver.web.entity.ProVo;
 import com.swing.saver.web.entity.ScoreMaster;
 import com.swing.saver.web.entity.UserVo;
 import com.swing.saver.web.exception.ApiException;
@@ -1074,4 +1075,21 @@ public class RestServiceImpl implements RestService {
 
         return rtnJson;
     }
+    /**
+     * 마켓 프로 상세 정보 조회
+     */
+    @Override
+    public ProVo getProDetail(String id) throws ApiException, IOException		
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        ProVo scoreVo = null;
+
+        String rtnJson= "";
+
+        rtnJson = sendMessage.sendHttpsStr( "/ords/swing/saver/market/pro/"+id, "GET", "application/json",true);
+        LOGGER.debug("마켓 프로 상세 정보 파라미터:{},응답:{}",id,rtnJson);
+        scoreVo = mapper.readValue(rtnJson, ProVo.class);
+
+        return scoreVo;
+    }    
 }

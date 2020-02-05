@@ -141,7 +141,7 @@ function fn_proAdd()
 
 function ProView(id)
 {
-	location.href="/admin/market/proDetail?id="+id;
+	location.href="/admin/market/proDetail/"+id;
 }
 </script>
     

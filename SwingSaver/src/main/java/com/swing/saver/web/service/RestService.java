@@ -7,6 +7,7 @@ import com.swing.saver.web.entity.FarVo;
 import com.swing.saver.web.entity.GolfVo;
 import com.swing.saver.web.entity.GroupVo;
 import com.swing.saver.web.entity.LoginVo;
+import com.swing.saver.web.entity.ProVo;
 import com.swing.saver.web.entity.ScoreMaster;
 import com.swing.saver.web.entity.UserVo;
 import com.swing.saver.web.exception.ApiException;
@@ -110,4 +111,5 @@ public interface RestService {
     public String proList() throws JsonProcessingException, ApiException;   	  // 마켓 프로 리스트 조회
     public String proUserList() throws JsonProcessingException, ApiException;     // 마켓 프로 등록 가능자 조회
     public String marketProCreate(Map<String, String> params) throws JsonProcessingException, ApiException;		// 마켓 프로 저장
+    public ProVo getProDetail(String id) throws ApiException, IOException;	// 마켓 프로 상세 정보 조회
 } 

@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -53,7 +54,7 @@ public class MarketController extends CommonController {
 	 * @throws ApiException
 	 * @throws IOException
 	 */
-    @GetMapping(value="/markketProList")
+    @GetMapping(value="/market/proList")
     public ModelAndView  marketProGetList(HttpServletRequest request) throws ApiException, IOException {
         ModelAndView mv = new ModelAndView();
         LOGGER.debug("==================== MarketController marketProGetList Strart : ===================={}");
@@ -85,7 +86,7 @@ public class MarketController extends CommonController {
      * @throws ApiException
      * @throws IOException
      */
-    @GetMapping(value="/addform")
+    @GetMapping(value="/market/addform")
     public ModelAndView  marketProAddForm(HttpServletRequest request) throws ApiException, IOException {
         ModelAndView mv = new ModelAndView();
         LOGGER.debug("==================== MarketController marketProAddForm Strart : ===================={}");
@@ -115,7 +116,7 @@ public class MarketController extends CommonController {
      * @throws ApiException
      * @throws IOException
      */
-    @PostMapping(value="/proAdd")
+    @PostMapping(value="/market/proAdd")
     public ModelAndView markerProAdd(ProVo proVo, HttpServletRequest request, HttpSession session, ModelAndView mv, RedirectAttributes redirectAttributes)  throws ApiException, IOException {
         LOGGER.debug("==================== MarketController markerProAdd Strart : ===================={}");
     	AdminVo loginVo = (AdminVo)request.getSession().getAttribute("login");
@@ -140,4 +141,57 @@ public class MarketController extends CommonController {
         LOGGER.debug("==================== MarketController markerProAdd end : ===================={}");
         return mv;
     }
+    /**
+     * 상세 정보를 출력한다. 
+     * 
+     * @param id
+     * @param request
+     * @param session
+     * @return
+     * @throws IOException
+     * @throws ApiException
+     */
+    @GetMapping("/market/proDetail/{id}")
+    public ModelAndView proDetail(@PathVariable String id, HttpServletRequest request, HttpSession session) throws IOException, ApiException {
+        LOGGER.debug("==================== MarketController proDetail Strart : ===================={}");
+        ModelAndView mv = new ModelAndView();
+    	AdminVo loginVo = (AdminVo)request.getSession().getAttribute("login");
+    	
+    	ProVo proVo = restService.getProDetail(id);
+    	
+    	mv.addObject("proVo", proVo);
+        mv.setViewName("web/admin/pro/adm_pro_01_02");
+        LOGGER.debug("==================== MarketController proDetail end : ===================={}");
+        return mv;
+    }
+    /**
+     * 마켓 프로 상세 정보 수정하기 위한 폼 호출
+     * 
+     * @param proVo
+     * @param request
+     * @param session
+     * @param mv
+     * @param redirectAttribute
+     * @return
+     * @throws IOException
+     * @throws ApiException
+     */
+    @PostMapping("/market/proModify")
+    public ModelAndView proModify(ProVo proVo, HttpServletRequest request, HttpSession session, ModelAndView mv, RedirectAttributes redirectAttribute) throws IOException, ApiException {
+        LOGGER.debug("==================== MarketController proModify Strart : ===================={}");
+    	AdminVo loginVo = (AdminVo)request.getSession().getAttribute("login");
+    	
+    	ProVo detailVo = restService.getProDetail(proVo.getId());    	
+    	mv.addObject("proVo", detailVo);
+    	
+        // 공통코드 조회
+        List<CodeVo> codeList = getCodeList("lbl");		// 프로레벨 조회
+        mv.addObject("lblList", codeList);
+        
+        mv.setViewName("web/admin/pro/adm_pro_01_02_01");
+        LOGGER.debug("==================== MarketController proDetail end : ===================={}");
+        return mv;
+    }
+    
+    
 }
