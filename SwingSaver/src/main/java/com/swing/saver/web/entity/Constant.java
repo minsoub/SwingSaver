@@ -20,7 +20,7 @@ public enum Constant {
     public static final String GRP_PREFIX = "/group";
     public static final String ADMIN_PREFIX = "/admin";
     public static final String SCORE_PREFIX = "/score";
-    public static final String MARKET_PREFIX = "/pro";
+    public static final String MARKET_PREFIX = "/market";
 
     private static Map<String, MediaType> mediaMap;
 

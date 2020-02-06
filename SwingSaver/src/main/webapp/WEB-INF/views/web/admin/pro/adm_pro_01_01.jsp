@@ -8,7 +8,7 @@
                 <h2 class="right-tit">마켓프로등록</h2>
 
                 <div class="form-page joinus-page edit-page">
-                    <form class="form-signin" id='forms1' name="forms1" method="POST">
+                    <form class="form-signin" id='forms1' name="forms1" method="POST" enctype="multipart/form-data">
                         <div class="question">
                             <p>아이디</p>
                             <select class="userid" name="userid" id="ueerid">

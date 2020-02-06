@@ -16,6 +16,7 @@ public class ProVo {
 	private String level;
 	private String description;
 	private String profile;
+	private String profile_img;
 	private String email;
 	private String name;
 	private String region_nm;
@@ -25,6 +26,12 @@ public class ProVo {
 	
 	
 	
+	public String getProfile_img() {
+		return profile_img;
+	}
+	public void setProfile_img(String profile_img) {
+		this.profile_img = profile_img;
+	}
 	public String getError() {
 		return error;
 	}

@@ -96,8 +96,8 @@
 		                <span class="dg-hd-mo-menu-arrow"></span>
 		                <ul class="sub-menu">
 		                    <li><a href="/web/mypage">개인정보수정</a></li>
-		                    <li><a href="#">내스코어관리</a></li>
-		                    <li><a href="#">내스코어통계 </a></li>
+                        	<li><a href="/score/scoreList">내스코어 관리</a></li>
+                        	<li><a href="/score/statList">내스코어 통계</a></li>
 		                    <li><a href="#">포인트 구매/이용료결제</a></li>
 		                    <li><a href="#">결제내역 조회</a></li>
 		                    <li><a href="#">서비스 변경</a></li>

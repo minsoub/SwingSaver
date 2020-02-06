@@ -47,7 +47,9 @@ import com.swing.saver.web.service.RestService;
 public class MarketController extends CommonController {
 	private final static Logger LOGGER = LoggerFactory.getLogger(MarketController.class);
 	
-
+    @Inject
+    RestService restService;
+    
 	/**
 	 * 마켓 프로 리스트 조회
 	 * 
