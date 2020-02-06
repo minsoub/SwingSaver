@@ -1096,15 +1096,15 @@ public class RestServiceImpl implements RestService {
     public ProVo getProDetail(String id) throws ApiException, IOException		
     {
         ObjectMapper mapper = new ObjectMapper();
-        ProVo scoreVo = null;
+        ProVo proVo = null;
 
         String rtnJson= "";
 
         rtnJson = sendMessage.sendHttpsStr( "/ords/swing/saver/market/pro/"+id, "GET", "application/json",true);
         LOGGER.debug("마켓 프로 상세 정보 파라미터:{},응답:{}",id,rtnJson);
-        scoreVo = mapper.readValue(rtnJson, ProVo.class);
+        proVo = mapper.readValue(rtnJson, ProVo.class);
 
-        return scoreVo;
+        return proVo;
     }  
     /**
      * 마켓 프로 삭제
