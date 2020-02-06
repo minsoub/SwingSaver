@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -25,6 +26,7 @@ import com.swing.saver.web.entity.GroupVo;
 import com.swing.saver.web.entity.LoginVo;
 import com.swing.saver.web.entity.ProVo;
 import com.swing.saver.web.entity.UserVo;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -122,7 +124,12 @@ public class MarketController extends CommonController {
     	AdminVo loginVo = (AdminVo)request.getSession().getAttribute("login");
     	
     	Map<String, String> proParams = new HashMap<String, String>();
-    	
+    	proParams.put("id", proVo.getId());
+    	proParams.put("userid", proVo.getUserid());
+    	proParams.put("lessonprice", proVo.getLessonprice());
+    	proParams.put("level", proVo.getLevel());
+    	proParams.put("profile", proVo.getProfile());
+    	proParams.put("description", proVo.getDescription());
     	////////////////////////////////////////////////////////////////
     	String rtnJson = restService.marketProCreate(proParams);
     	LOGGER.debug(rtnJson);
@@ -192,6 +199,55 @@ public class MarketController extends CommonController {
         LOGGER.debug("==================== MarketController proDetail end : ===================={}");
         return mv;
     }
-    
+    /**
+     * 마켓 프로 삭제
+     * 
+     * @param params
+     * @return
+     * @throws JsonProcessingException
+     * @throws ApiException
+     */
+    @PostMapping("/market/deletePro")
+    public ModelAndView deletePro(@RequestBody Map<String, String> params) throws JsonProcessingException, ApiException {
+        ModelAndView mv = new ModelAndView();
+        LOGGER.debug("MarketController deletePro 시작");
+        String rtn = restService.proDelete(params);
+        mv.addObject("data",rtn);
+        mv.setViewName("jsonView");
+        LOGGER.debug("MarketController deletePro 종료");
+        return mv;
+    } 
+    /***
+     * 마켓 프로 수정
+     * 
+     * @param proVo
+     * @param request
+     * @param session
+     * @param mv
+     * @param redirectAttributes
+     * @return
+     * @throws ApiException
+     * @throws IOException
+     */
+    @PostMapping(value="/market/update")
+    public ModelAndView proUpdate(ProVo proVo, HttpServletRequest request, HttpSession session, ModelAndView mv, RedirectAttributes redirectAttributes) throws ApiException, IOException
+    {
+    	LOGGER.debug("==================== MarketController proUpdate Start : ===================");
+    	Map<String, String> proParams = new HashMap<String, String>();
+    	proParams.put("id", proVo.getId());
+    	proParams.put("userid", proVo.getUserid());
+    	proParams.put("lessonprice", proVo.getLessonprice());
+    	proParams.put("level", proVo.getLevel());
+    	proParams.put("profile", proVo.getProfile());
+    	proParams.put("description", proVo.getDescription());
+    	
+    	String rtnJson = restService.proUpdate(proParams);
+    	
+    	LOGGER.debug(rtnJson);
+    	
+    	LOGGER.debug("==================== MarketController proUpdate end : ===================");
+    	mv.setViewName("redirect:/admin/market/proList");
+    	return mv;
+    } 
     
 }

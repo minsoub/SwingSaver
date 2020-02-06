@@ -11,6 +11,7 @@
 
                         <form id="form1" name="form1" method="post">
 						<input type="hidden" name="id" value="${proVo.id}">
+						<input type="hidden" name="userid" value="${proVo.userid}">
                             <div class="question">
                                 <p>아이디</p>
                                 <div class="que-info">
