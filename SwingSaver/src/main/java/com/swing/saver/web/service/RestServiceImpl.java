@@ -1054,7 +1054,7 @@ public class RestServiceImpl implements RestService {
     {
         String rtnJson = "";
 
-        rtnJson = sendMessage.sendHttpsStr("/ords/swing/saver/market/prounlist","GET", "application/json",true);
+        rtnJson = sendMessage.sendHttpsStr("/ords/swing/saver/prounlist","GET", "application/json",true);
 
         LOGGER.debug("마켓 프로 등록 가능 사용자 조회 파라미터:응답:{}",rtnJson);
 
@@ -1115,7 +1115,7 @@ public class RestServiceImpl implements RestService {
         ObjectMapper mapper = new ObjectMapper();
         String rtnJson = "";
 
-        rtnJson = sendMessage.sendHttpsStr(mapper.writeValueAsString(params), "/ords/swing/market", "DELETE", "application/json", true);
+        rtnJson = sendMessage.sendHttpsStr(mapper.writeValueAsString(params), "/ords/swing/saver/market", "DELETE", "application/json", true);
 
         LOGGER.debug("마켓 프로 삭제 파라미터:{},응답:{}",params.toString(),rtnJson);
 

@@ -13,9 +13,9 @@
                             <p>아이디</p>
                             <select class="userid" name="userid" id="ueerid">
                             	<option value="">이름이나 이메일 입력</option>
-                              <c:forEach var="userInfo" items="${userList}" varStatus="status">
-                               	<option value="${userInfo.userid}">${userInfo.lastname}${userInfo.firstname}(${userInfo.email})</option>
-                              </c:forEach>	                            
+                              	<c:forEach var="userInfo" items="${userList}" varStatus="status">
+                               		<option value="${userInfo.userid}">${userInfo.lastname}${userInfo.firstname}(${userInfo.email})</option>
+                              	</c:forEach>	                            
                             </select>
                             <!--  input type="text" placeholder="이름이나 이메일 입력" required /  -->
                             <!-- div class="inquiry-box">
@@ -30,7 +30,7 @@
                         </div>
                         <div class="question">
                             <p>프로레벨</p>
-                            <select name="level">
+                            <select name="prolevel" id="prolevel">
 			                  <option value="">프로레벨을 선택해주세요.</option>
                               <c:forEach var="lblInfo" items="${lblList}" varStatus="status">
                                	<option value="${lblInfo.code}">${lblInfo.codename}(${lblInfo.code})</option>
@@ -39,11 +39,11 @@
                         </div>
                         <div class="question">
                             <p class="text-t">프로필</p>
-                            <input type="textarea" name="profile" id="profile" placeholder="프로필을 입력해주세요" required />
-                        </div>
+                            <textarea  name="profile" id="profile" placeholder="프로필을 입력해주세요" cols=50 rows=5></textarea>
+                        </div> 
                         <div class="question">
                             <p class="text-t">수상경력</p>
-                            <input type="textarea" name="description" id="description" placeholder="수상경력을 입력해주세요" required />
+                            <textarea name="description" id="description" placeholder="수상경력을 입력해주세요" cols=50 rows=5></textarea>
                         </div>                       
                        <!--얼랏-->
 <!--                        <p class="alert-p">정보를 모두 입력해주세요.</p>-->
@@ -55,6 +55,10 @@
         </div>
 
     </section>
+    
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/js/select2.min.js"></script>
+    
 <script>
 
 $(document).ready(function(){
@@ -78,9 +82,9 @@ $(document).ready(function(){
 	        $("#lessonprice").focus();
 	        return;
 	    }		
-	    if($("#level").val() == ""){
+	    if($("#prolevel").val() == ""){
 	        alert("프로 레벨을 선택하세요");
-	        $("#level").focus();
+	        $("#prolevel").focus();
 	        return;
 	    }
 

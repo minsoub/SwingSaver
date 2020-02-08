@@ -1,15 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/web/inc/top_menu.jsp"%>
 
+<% pageContext.setAttribute("replaceChar", "\n");  %>
+
     <section class="container no-padding">
         <article class="col-md-12" style="padding: 0;">
             <div class="content" style="padding: 0;">
                 <div class="col-xs-12 no-padding">
+                
                     <h2 class="right-tit">마켓프로상세</h2>
                     <div class="sub-mem-list">
                     <h4 class="sub-tit">프로정보</h4>
                     <div class="sub-g-btn">
-                        <button type="button" id="btnList" class="sea-btn add-btn" data-target="#"><img src="../image/back-list.png" cwidth="100%">프로목록</button>
+                        <button type="button" id="btnList" class="sea-btn add-btn" data-target="#"><img src="/image/back-list.png" cwidth="100%">프로목록</button>
                     </div>
 
                         
@@ -22,7 +25,10 @@
                                 </colgroup>
                                 <tbody>
                                 	<tr>
-                                       <td class="bold-td" colspan="2"><img class="profile-img" src="../image/profile-img.png"></td>
+                                       <td class="bold-td" colspan="2">
+                                       <c:if test="${proVo.photo != '' || proVo.phpto ne null}"><img class="profile-img" src="${proVo.photo}"></c:if>                                       
+                                       <c:if test="${proVo.photo eq ''}"><img class="profile-img" src="/image/profile-img.png"></c:if>
+                                       </td>
                                    </tr>
                                     <tr>
                                         <td><strong>아이디</strong></td>
@@ -34,15 +40,15 @@
                                     </tr>
                                     <tr>
                                         <td><strong>프로레벨</strong></td>
-                                        <td>${proVo.level_nm}</td>
+                                        <td>${proVo.prolevel_nm}</td>
                                     </tr>
                                     <tr>
                                         <td><strong>프로필</strong></td>
-                                        <td>${proVo.profile}</td>
+                                        <td>${fn:replace(proVo.profile, replaceChar, "<br/>")}</td>
                                     </tr>
                                     <tr>
                                         <td><strong>수상경력</strong></td>
-                                        <td>${proVo.description}</td>
+                                        <td>${fn:replace(proVo.description, replaceChar, "<br/>")}</td>
                                     </tr>                                    
                                 </tbody>
                             </table>
@@ -69,5 +75,6 @@ $(document).ready(function(){
 });
 
 </script>
+
 </body>
 </html>

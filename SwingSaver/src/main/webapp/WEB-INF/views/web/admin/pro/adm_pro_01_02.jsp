@@ -2,6 +2,8 @@
 <%@include file="/WEB-INF/views/web/inc/admin_header.jsp"%>
 <%@include file="/WEB-INF/views/web/inc/admin_menu.jsp"%>
 
+<% pageContext.setAttribute("replaceChar", "\n");  %>
+
             <div class="content" style="margin-bottom: 0;">
                 <div class="no-padding adm-con" >  
                     <h2 class="right-tit">마켓프로상세</h2>
@@ -10,7 +12,7 @@
                     <div class="sub-g-btn">
                         <button type="button" id="btnModify" class="edit-btn" data-target="#">수정</button>
                         <button type="button" class="edit-btn" data-toggle="modal" data-target="#adm_02_02_01">삭제</button>
-                        <button type="button" id="btnList" class="sea-btn add-btn" data-target="#"><img src="../image/back-list.png" cwidth="100%">프로목록</button>
+                        <button type="button" id="btnList" class="sea-btn add-btn" data-target="#"><img src="/image/back-list.png" cwidth="100%">프로목록</button>
                     </div>
 
                         
@@ -23,7 +25,10 @@
                                 </colgroup>
                                 <tbody>
                                    <tr>
-                                       <td class="bold-td" colspan="2"><img class="profile-img" src="../image/profile-img.png"></td>
+                                       <td class="bold-td" colspan="2">
+                                       		<c:if test="${proVo.photo != '' || proVo.phpto ne null}"><img class="profile-img" src="${proVo.photo}"></c:if>                                       
+                                       		<c:if test="${proVo.photo eq ''}"><img class="profile-img" src="/image/profile-img.png"></c:if>
+                                       </td>
                                    </tr>
                                     <tr>
                                         <td><strong>아이디</strong></td>
@@ -35,15 +40,15 @@
                                     </tr>
                                     <tr>
                                         <td><strong>프로레벨</strong></td>
-                                        <td>${proVo.level_nm}</td>
+                                        <td>${proVo.prolevel_nm}</td>
                                     </tr>
                                     <tr>
                                         <td><strong>프로필</strong></td>
-                                        <td>${proVo.profile}</td>
+                                        <td>${fn:replace(proVo.profile, replaceChar, "<br/>")}</td>
                                     </tr>
                                     <tr>
                                         <td><strong>수상경력</strong></td>
-                                        <td>${proVo.description}</td>
+                                        <td>${fn:replace(proVo.description, replaceChar, "<br/>")}</td>
                                     </tr>                                    
                                 </tbody>
                             </table>
@@ -109,7 +114,7 @@ $(document).ready(function(){
     
     $("#delete").click(function(){
         var obj = new Object();
-        obj.groupid = "${proVo.id}";
+        obj.id = "${proVo.id}";
 
         var jsonData = JSON.stringify(obj);
         console.dir(jsonData);
@@ -130,7 +135,7 @@ function fn_modify()
 // 마켓 프로 리스트로 이동
 function fn_proList()
 {
-	location.href="/admin/markket/proList";
+	location.href="/admin/market/proList";
 }
 </script>
 

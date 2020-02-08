@@ -47,7 +47,7 @@ public class ProController {
     public ModelAndView  proList(HttpServletRequest request) throws ApiException, IOException {
         ModelAndView mv = new ModelAndView();
         LOGGER.debug("==================== ProController proList Strart : ===================={}");
-    	LoginVo loginVo = (LoginVo)request.getSession().getAttribute("login");
+    	//LoginVo loginVo = (LoginVo)request.getSession().getAttribute("login");
     	
         /*회원정보 조회*/
     	//userVo = restService.getMemberInfo(AdminVo);
@@ -82,7 +82,7 @@ public class ProController {
     public ModelAndView proDetail(@PathVariable String id, HttpServletRequest request, HttpSession session) throws IOException, ApiException {
         LOGGER.debug("==================== ProController proDetail Strart : ===================={}");
         ModelAndView mv = new ModelAndView();
-    	AdminVo loginVo = (AdminVo)request.getSession().getAttribute("login");
+        //LoginVo loginVo = (LoginVo)request.getSession().getAttribute("login");
     	
     	ProVo proVo = restService.getProDetail(id);
     	

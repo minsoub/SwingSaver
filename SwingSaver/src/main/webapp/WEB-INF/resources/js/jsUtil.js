@@ -135,6 +135,8 @@ function pageUri() {
     	nextUri = "/admin/golfList";
     }else if("score_02.jsp" == arrayUri[maxLen-1]) {
     	nextUri = "/score/scoreList";
+    }else if("adm_pro_01_02.jsp" == arrayUri[maxLen-1]) {
+    	nextUri = "/admin/market/proList";
     }
     
     //alert(nextUri);

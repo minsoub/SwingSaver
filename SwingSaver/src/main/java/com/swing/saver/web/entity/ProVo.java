@@ -13,19 +13,26 @@ public class ProVo {
 	private String region;
 	private String lessonprice;
 	private String rating;
-	private String level;
+	private String prolevel;
 	private String description;
 	private String profile;
 	private String profile_img;
 	private String email;
 	private String name;
 	private String region_nm;
-	private String level_nm;
+	private String prolevel_nm;
 	private boolean result;
 	private String error;
+	private String photo;
 	
 	
 	
+	public String getPhoto() {
+		return photo;
+	}
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
 	public String getProfile_img() {
 		return profile_img;
 	}
@@ -44,11 +51,12 @@ public class ProVo {
 	public void setResult(boolean result) {
 		this.result = result;
 	}
-	public String getLevel_nm() {
-		return level_nm;
+
+	public String getProlevel_nm() {
+		return prolevel_nm;
 	}
-	public void setLevel_nm(String level_nm) {
-		this.level_nm = level_nm;
+	public void setProlevel_nm(String prolevel_nm) {
+		this.prolevel_nm = prolevel_nm;
 	}
 	public String getEmail() {
 		return email;
@@ -98,11 +106,12 @@ public class ProVo {
 	public void setRating(String rating) {
 		this.rating = rating;
 	}
-	public String getLevel() {
-		return level;
+
+	public String getProlevel() {
+		return prolevel;
 	}
-	public void setLevel(String level) {
-		this.level = level;
+	public void setProlevel(String prolevel) {
+		this.prolevel = prolevel;
 	}
 	public String getDescription() {
 		return description;

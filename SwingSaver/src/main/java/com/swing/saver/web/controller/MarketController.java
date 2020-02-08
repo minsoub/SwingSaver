@@ -97,7 +97,7 @@ public class MarketController extends CommonController {
     	AdminVo loginVo = (AdminVo)request.getSession().getAttribute("login");
     	
         // 공통코드 조회
-        List<CodeVo> codeList = getCodeList("lbl");		// 프로레벨 조회
+        List<CodeVo> codeList = getCodeList("lvl");		// 프로레벨 조회
         mv.addObject("lblList", codeList);
         
         // 사용자 정보 조회
@@ -129,9 +129,10 @@ public class MarketController extends CommonController {
     	proParams.put("id", proVo.getId());
     	proParams.put("userid", proVo.getUserid());
     	proParams.put("lessonprice", proVo.getLessonprice());
-    	proParams.put("level", proVo.getLevel());
+    	proParams.put("prolevel", proVo.getProlevel());
     	proParams.put("profile", proVo.getProfile());
     	proParams.put("description", proVo.getDescription());
+    	proParams.put("region", "KR");
     	////////////////////////////////////////////////////////////////
     	String rtnJson = restService.marketProCreate(proParams);
     	LOGGER.debug(rtnJson);
@@ -194,7 +195,7 @@ public class MarketController extends CommonController {
     	mv.addObject("proVo", detailVo);
     	
         // 공통코드 조회
-        List<CodeVo> codeList = getCodeList("lbl");		// 프로레벨 조회
+        List<CodeVo> codeList = getCodeList("lvl");		// 프로레벨 조회
         mv.addObject("lblList", codeList);
         
         mv.setViewName("web/admin/pro/adm_pro_01_02_01");
@@ -239,7 +240,7 @@ public class MarketController extends CommonController {
     	proParams.put("id", proVo.getId());
     	proParams.put("userid", proVo.getUserid());
     	proParams.put("lessonprice", proVo.getLessonprice());
-    	proParams.put("level", proVo.getLevel());
+    	proParams.put("prolevel", proVo.getProlevel());
     	proParams.put("profile", proVo.getProfile());
     	proParams.put("description", proVo.getDescription());
     	

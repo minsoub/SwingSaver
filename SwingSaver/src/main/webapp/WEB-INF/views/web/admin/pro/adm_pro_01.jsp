@@ -8,7 +8,7 @@
             <div class="content" style="margin-bottom: 0;">
                 <div class="no-padding adm-con" >                 
                 <h2 class="right-tit">마켓프로관리</h2>
-                <button type="button" id="btnDelete" data-toggle="modal" data-target="#adm_02_02_01" class="sea-btn del-btn">프로삭제</button>
+                <button type="button" id="btnDelete" data-toggle="modal"  class="sea-btn del-btn">프로삭제</button>
                 <button type="button" id="btnAdd"    class="sea-btn add-btn">프로등록</button>
                 <div class="col-xs-12 table-box">
                     <div class="table-responsive">
@@ -22,7 +22,7 @@
                             </colgroup>
                             <thead>
                                 <tr>
-                                    <th><input type="checkbox" name=" " value=" "></th>
+                                    <th><input type="checkbox" name="all" class="check-all"></th>
                                     <th>아이디</th>
                                     <th>이름</th>
                                     <th>레슨가격</th>
@@ -36,7 +36,7 @@
                                     <td>${proInfo.email}</td>
                                     <td><a href="javascript:ProView('${proInfo.id}');">${proInfo.name}</a></td>
                                     <td>${proInfo.lessonprice}</td>
-                                    <td>${proInfo.level_nm}</td>
+                                    <td>${proInfo.prolevel_nm}</td>
                                 </tr>
                             </c:forEach>                                
                             </tbody>
@@ -89,17 +89,21 @@ $(document).ready(function(){
     $('.check-all' ).click( function() {
         $('.id' ).prop( 'checked', this.checked );
     } );	
+    
     $("#btnAdd").click(function(){
     	fn_proAdd();
     });
+    
     $('#btnDelete').click(function() {
         var chklen = $("input[id=id]:checkbox:checked").length;
         var _text = "";
         var _idtext = "";
+
         if(chklen == 0){
             alert("삭제할 마켓프로를 선택해주세요");
             return;
         }else{
+        	console.dir("whereis...");
             var i = 1;
             $('#id:checked').each(function() {
                 _idtext = _idtext+$(this).val().split(",")[0];

@@ -6,7 +6,7 @@
                 <div class="form-page">
                     <h2 class="text-center">프로등록 완료</h2>
                     <div class="success">
-                        <img src="../image/log-02-img.png">
+                        <img src="/image/log-02-img.png">
                         <p>프로등록이 완료되었습니다.</p>
                     </div>
                     <button id="btnList" class="form-btn" onclick="#">프로관리</button>

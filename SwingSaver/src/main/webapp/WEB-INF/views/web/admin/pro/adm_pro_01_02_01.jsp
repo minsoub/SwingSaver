@@ -8,7 +8,6 @@
 
                     <div class="form-page joinus-page edit-page">
 
-
                         <form id="form1" name="form1" method="post">
 						<input type="hidden" name="id" value="${proVo.id}">
 						<input type="hidden" name="userid" value="${proVo.userid}">
@@ -24,20 +23,21 @@
                         </div>
                         <div class="question">
                             <p>프로레벨</p>
-                            <select name="level">
+                            <select name="prolevel" id="prolevel">
 			                  <option value="">프로레벨을 선택해주세요.</option>
                               <c:forEach var="lblInfo" items="${lblList}" varStatus="status">
-                               	<option <c:if test="${lblInfo.code == proVo.level}">selected</c:if>  value="${lblInfo.code}">${lblInfo.codename}(${lblInfo.code})</option>
+                               	<option <c:if test="${lblInfo.code == proVo.prolevel}">selected</c:if>  value="${lblInfo.code}">${lblInfo.codename}(${lblInfo.code})</option>
                               </c:forEach>			                  
                 			</select>
                         </div>
+                        
                         <div class="question">
                             <p class="text-t">프로필</p>
-                            <input type="textarea" name="profile" id="profile" value="${proVo.profile}" placeholder="프로필을 입력해주세요" required />
-                        </div>
+                            <textarea  name="profile" id="profile" placeholder="프로필을 입력해주세요" cols=50 rows=5>${proVo.profile}</textarea>
+                        </div> 
                         <div class="question">
                             <p class="text-t">수상경력</p>
-                            <input type="textarea" name="description" id="description" value="${proVo.description}" placeholder="수상경력을 입력해주세요" required />
+                            <textarea name="description" id="description" placeholder="수상경력을 입력해주세요" cols=50 rows=5>${proVo.description}</textarea>
                         </div> 
 
                             <button id="btnSave" class="form-btn">수정</button>
@@ -65,9 +65,9 @@ $(document).ready(function(){
 	        $("#lessonprice").focus();
 	        return;
 	    }		
-	    if($("#level").val() == ""){
+	    if($("#prolevel").val() == ""){
 	        alert("프로 레벨을 선택하세요");
-	        $("#level").focus();
+	        $("#prolevel").focus();
 	        return;
 	    }
 
@@ -82,8 +82,8 @@ $(document).ready(function(){
 	        return;
 	    }
 
-	    document.forms1.action = "/admin/market/update";
-	    document.forms1.submit();
+	    document.form1.action = "/admin/market/update";
+	    document.form1.submit();
 	}
 </script> 
  

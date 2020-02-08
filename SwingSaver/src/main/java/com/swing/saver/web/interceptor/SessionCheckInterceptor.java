@@ -21,7 +21,7 @@ public class SessionCheckInterceptor extends HandlerInterceptorAdapter {
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public void setUrlList(List urlList) {
         this.urlList = urlList;
-    }
+    }  
 
     // 로그인 이후 접속 불가 URL 리스트
     List<String> loginAfterUrlLit;

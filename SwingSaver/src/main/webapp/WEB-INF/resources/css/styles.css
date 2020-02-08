@@ -229,6 +229,7 @@ input {
 
 .container {
     padding-top: 7%;
+    padding-bottom: 7%;
 }
 
 section {
@@ -774,6 +775,7 @@ section {
 }
 
 
+
 .joinus-page form .question input[type="password"] {
     border: 1px solid #dcdcdc;
     line-height: 42px;
@@ -796,7 +798,9 @@ section {
 .joinus-page form .question input[type="text"],
 .question input[type="number"],
 .question input[type="tel"],
-.question input[type="email"] {
+.question input[type="email"],
+.question input[type="textarea"]
+{
     border: 1px solid #dcdcdc;
     line-height: 42px;
     height: 42px;
@@ -813,11 +817,22 @@ section {
     float: right;
 }
 
+.question input[type="textarea"]{
+    height: 100px;
+}
+
+.text-t{
+    margin-bottom: 60px!important;
+}
+
 form p {
     display: inline-block;
     width: 21%;
 }
 
+.bold-td{
+    border-top: 3px solid #333 !important;
+}
 
 .email-q-01 {
     padding: 3px 0;
@@ -1019,6 +1034,61 @@ form p {
 .tex-03 {
     width: 26%;
     margin-left: 4px;
+}
+
+.pro-wrap{
+    margin-bottom: 30px;
+}
+
+.pro-box{
+    border: 1px solid #dbdbdb;
+    padding: 25px;
+    display: block;
+    color: #333;
+}
+
+.pro-box:hover, .pro-box:visited, .pro-box:focus{
+    color: #333!important;
+}
+
+.pro-box ul{
+    margin-top: 20px;
+}
+
+.pro-box span{
+    background-color: #333;
+    color: #fff;
+    padding: 1px 10px;
+    border-radius: 10px;
+}
+
+.pro-box h4{
+    font-weight: 600; 
+}
+
+.pro-img{
+    width: 30%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.pro-img img{
+    border-radius: 50%;
+    width: 100%;
+}
+
+.pro-info{
+    width: 60%;
+    display: inline-block;
+    margin-left: 30px;
+}
+
+.pro-box p{
+    color: #cecece;
+    font-size: 50px;
+    position: absolute;
+    bottom: -20px;
+    right: 40px;
 }
 
 /*洹몃９愿�由�*/
@@ -2647,8 +2717,39 @@ tbody {
     .modal-dialog {
         width: 360px !important;
     }
+    
+    .pro-img {
+    width: 50%;
+    display: block;
+    margin: auto;
+    }
+    
+    
+    .pro-info {
+    width: 100%;
+    display: block;
+    margin-left: 0;
+    text-align: center;
+}
+    .pro-box p{
+        top: -5px;
+    }
+    .pro-box{
+        margin-top: 20px;
+    }
+    
+    .pro-wrap{
+        margin-bottom: 0
+    }
+    
+    .pro-box h4 {
+    font-size: 22px;
+}
 
 }
+
+
+
 
 /*硫붾돱*/
 

@@ -1546,6 +1546,9 @@ public class ScoreController {
         mv.addObject("zone_id", "");
         mv.addObject("countryclub_id", "");
         
+        ScoreListVo scoreVo = new ScoreListVo();
+        mv.addObject("scoreVo", scoreVo);
+        
         mv.setViewName("web/score/score_01");
         LOGGER.debug("==================== ScoreController scoreList end : ===================={}");
         return mv;
@@ -1571,9 +1574,11 @@ public class ScoreController {
     	Map<String, ? > flashMap = RequestContextUtils.getInputFlashMap(request);
     	
     	if (flashMap != null)
-    	{
+    	{    		
+    		LOGGER.debug("flashMap is not null");
     		scoreVo = (ScoreListVo) flashMap.get("scoreVo");
     	}
+    	if (scoreVo == null) LOGGER.debug("scorevo is null...");
     	
     	// 파라미터
     	String stdate = scoreVo.getStdate();
@@ -1633,6 +1638,91 @@ public class ScoreController {
         LOGGER.debug("==================== ScoreController scoreDetail end : ===================={}");
         return mv;
     }
+    
+    /**
+     * 내 스코어 상세정보 보기
+     * @param params
+     * @param request
+     * @return
+     * @throws ApiException
+     * @throws IOException
+     */
+    @PostMapping(value="/scoreDetail")
+    public ModelAndView  scorePostDetail(@ModelAttribute("scoreVo") ScoreListVo scoreVo, HttpServletRequest request, HttpSession session, ModelAndView mv, RedirectAttributes redirectAttributes) throws ApiException, IOException {
+
+        LOGGER.debug("==================== ScoreController scoreDetail Strart : ===================={}");
+    	LoginVo loginVo = (LoginVo)request.getSession().getAttribute("login");
+    	UserVo userVo = null;		
+    	long userId = loginVo.getUserid();
+    	LOGGER.debug("Login userID : " + userId);
+    	
+    	Map<String, ? > flashMap = RequestContextUtils.getInputFlashMap(request);
+    	
+    	if (flashMap != null)
+    	{    		
+    		LOGGER.debug("flashMap is not null");
+    		scoreVo = (ScoreListVo) flashMap.get("scoreVo");
+    	}
+    	if (scoreVo == null) LOGGER.debug("scorevo is null...");
+    	
+    	// 파라미터
+    	String stdate = scoreVo.getStdate();
+    	String etdate = scoreVo.getEtdate();
+    	String country_id = scoreVo.getCountry_id();
+    	String zone_id = scoreVo.getZone_id();
+    	String countryclub_id = scoreVo.getCountryclub_id();
+    	String search_seq_no = scoreVo.getSearch_seq_no();
+    	String search_countryclub_id = scoreVo.getSearch_countryclub_id();
+    	String search_visit_date = scoreVo.getSearch_visit_date();
+    	
+    	if (search_visit_date != null) search_visit_date = search_visit_date.replaceAll("-", "");
+    	
+    	LOGGER.debug("Parameter info : ");
+    	LOGGER.debug("Parameter info : " + stdate);
+    	LOGGER.debug("Parameter info : " + etdate);
+    	LOGGER.debug("Parameter info : " + country_id);
+    	LOGGER.debug("Parameter info : " + zone_id);
+    	LOGGER.debug("Parameter info : " + countryclub_id);
+    	LOGGER.debug("Parameter info : " + search_seq_no);
+    	LOGGER.debug("Parameter info : " + search_countryclub_id);
+    	LOGGER.debug("Parameter info : " + search_visit_date);
+    	
+    	
+        /*회원정보 조회*/
+    	userVo = restService.getMemberInfo(userId);
+        mv.addObject("userInfo",userVo);
+        
+        // 개인별 스코어 정보 조회
+        ScoreMaster sm = restService.getScoreInfo(search_visit_date, search_countryclub_id, search_seq_no, String.valueOf(userId));
+        
+        // Hole에 대한 PAR 정보를 조회
+    	FarVo parInfo1 =  restService.getParInfo(country_id, sm.getZone_id(), search_countryclub_id, sm.getStart_course());   // 골프장 Par 정보 상세 정보 조회 (Start Course)
+    	FarVo parInfo2 =  restService.getParInfo(country_id, sm.getZone_id(), search_countryclub_id, sm.getEnd_course());     // 골프장 Par 정보 상세 정보 조회 (End Course)
+    	
+    	// PAR에 대한 SUM 합계
+    	parInfo1.setSum(parInfo1.getHole1()+parInfo1.getHole2()+parInfo1.getHole3()+parInfo1.getHole4()+parInfo1.getHole5()+parInfo1.getHole6()
+    					+parInfo1.getHole7()+parInfo1.getHole8()+parInfo1.getHole9());
+    	parInfo2.setSum(parInfo2.getHole1()+parInfo2.getHole2()+parInfo2.getHole3()+parInfo2.getHole4()+parInfo2.getHole5()+parInfo2.getHole6()
+		+parInfo2.getHole7()+parInfo2.getHole8()+parInfo2.getHole9());
+    	
+        mv.addObject("scoreInfo", sm);
+        mv.addObject("parInfo1", parInfo1);
+        mv.addObject("parInfo2", parInfo2);
+        
+        // 리스트에서 넘어온 파라미터 
+        mv.addObject("stdate", stdate.replaceAll("-", ""));
+        mv.addObject("etdate", etdate.replaceAll("-", ""));
+        mv.addObject("country_id", country_id);
+        mv.addObject("zone_id", zone_id);
+        mv.addObject("countryclub_id", countryclub_id);
+        mv.addObject("search_seq_no", search_seq_no);
+        mv.addObject("search_countryclub_id", search_countryclub_id);
+        mv.addObject("search_visit_date", search_visit_date);
+        
+        mv.setViewName("web/score/score_02");
+        LOGGER.debug("==================== ScoreController scoreDetail end : ===================={}");
+        return mv;
+    }    
     
     /**
      * 개인별 스코어 정보를 삭제한다.

@@ -32,7 +32,7 @@
             <div class="dropdown">
                 <button class="menubtn dropdown-toggle" data-toggle="dropdown">레슨마켓</button>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#thi">레슨프로소개</a>
+                    <a class="dropdown-item" href="/market/proList">레슨프로소개</a>
                     <a class="dropdown-item" href="#">레슨마켓소개</a>
 
                 </div>
