@@ -586,6 +586,11 @@ public class AdminController {
     	params.put("email", golfVo.getEmail());
     	params.put("description", golfVo.getDescription());
     	
+    	params.put("pgm_call_param", golfVo.getPgm_call_param());
+    	if (golfVo.getAlliance_check().isEmpty()) golfVo.setAlliance_check("N");
+    	params.put("alliance_check", golfVo.getAlliance_check());
+    	
+    	
     	LOGGER.debug(golfVo.getImageFile().getOriginalFilename());
     	if (!golfVo.getImageFile().isEmpty())
     	{
@@ -703,6 +708,10 @@ public class AdminController {
     	params.put("phone", golfVo.getPhone());
     	params.put("email", golfVo.getEmail());
     	params.put("description", golfVo.getDescription());
+    	
+    	params.put("pgm_call_param", golfVo.getPgm_call_param());
+    	if (golfVo.getAlliance_check().isEmpty()) golfVo.setAlliance_check("N");
+    	params.put("alliance_check", golfVo.getAlliance_check());
     	
     	if (!golfVo.getImageFile().isEmpty())
     	{

@@ -72,11 +72,17 @@
                                         <td>${golfInfo.email}</td>
                                     </tr>
                                     <tr>
+                                    	<td><strong>제휴여부</strong>
+                                    	<td>${golfInfo.alliance_check}
+                                    </tr>
+                                    <tr>
+                                    	<td><strong>프로그램호출인자</strong></td>
+                                    	<td>${golfInfo.pgm_call_param}</td>
+                                    </tr>
+                                    <tr>
                                         <td><strong>비고</strong></td>
                                         <td>${golfInfo.description}</td>
                                     </tr>
-
-
                                 </tbody>
                             </table>
                         </div>

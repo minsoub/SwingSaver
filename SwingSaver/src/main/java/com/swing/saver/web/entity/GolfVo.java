@@ -17,6 +17,8 @@ public class GolfVo {
 	String email;			// 담당자 메일
 	String assets;			// 저장경로
 	String description;		// 비고
+	String alliance_check;	// 제휴여부
+	String pgm_call_param;  // 프로그램 호출인자
 	String dateinserted;
 	boolean result;
 	String error;
@@ -25,6 +27,19 @@ public class GolfVo {
 	MultipartFile assetsFile;
 	
 	
+	
+	public String getAlliance_check() {
+		return alliance_check;
+	}
+	public void setAlliance_check(String alliance_check) {
+		this.alliance_check = alliance_check;
+	}
+	public String getPgm_call_param() {
+		return pgm_call_param;
+	}
+	public void setPgm_call_param(String pgm_call_param) {
+		this.pgm_call_param = pgm_call_param;
+	}
 	public MultipartFile getImageFile() {
 		return imageFile;
 	}

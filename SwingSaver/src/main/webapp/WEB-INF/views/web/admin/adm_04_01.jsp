@@ -41,11 +41,11 @@
                         </div>
                         <div class="question">
                             <p>이미지경로</p>
-                            <input type="file" id="imageFile" name="imageFile" placeholder="기본이미지 저장경로" style="width:150;"  />
+                            <input type="file" id="imageFile" name="imageFile" placeholder="기본이미지 저장경로" style="width:350;"  />
                         </div>
                         <div class="question">
                             <p>Asset경로</p>
-                            <input type="file" id="assetsFile" name="assetsFile" placeholder="Asset 저장 경로"  style="width:150;"   />
+                            <input type="file" id="assetsFile" name="assetsFile" placeholder="Asset 저장 경로"  style="width:350;"   />
                         </div>
                         <div class="question">
                             <p>담당자주소</p>
@@ -58,11 +58,21 @@
                         <div class="question">
                             <p>이메일</p>
                             <input type="email" id="email" name="email" placeholder="담당자 메일" maxlength="100"  />
-                        </div>                  
+                        </div>
+                        
                         <div class="question">
-                                <p>비고</p>
-                                <input type="text" id="description" name="description" placeholder="description" maxlength="100" >
-                        </div>                       
+                        	<p>제휴여부</p>
+                        	<input type="checkbox" id="alliance_check" name="alliance_check" value="Y">제휴골프장 (체크시 제휴골프장임)
+                        </div>        
+                        <div class="question">
+                        	<p>프로그램연동</p>
+                        	<input type="text" id="pgm_call_param" name="pgm_call_param"  placeholder="프로그램 연동 호출 인자" style="width:350;" />
+                        </div>          
+                        <div class="question">
+                            <p>비고</p>
+                            <input type="text" id="description" name="description" placeholder="description" maxlength="100" >
+                        </div>
+                                               
                        
                         <!--                            <p class="alert-p">정보를 모두 입력해주세요.</p>-->
                         <button id="btnSave" class="form-btn">등록</button>

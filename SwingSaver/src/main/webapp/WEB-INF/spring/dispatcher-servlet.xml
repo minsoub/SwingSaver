@@ -70,6 +70,12 @@
     <mvc:resources mapping="/js/**" location="/WEB-INF/resources/js/"></mvc:resources>
     <mvc:resources mapping="/image/**" location="/WEB-INF/resources/image/"></mvc:resources>
     <mvc:resources mapping="/fonts/**" location="/WEB-INF/resources/fonts/"></mvc:resources>
+
+    <mvc:resources mapping="/mobile/css/**" location="/WEB-INF/resources/mobile/css/"></mvc:resources>
+    <mvc:resources mapping="/mobile/js/**" location="/WEB-INF/resources/mobile/js/"></mvc:resources>
+    <mvc:resources mapping="/mobile/image/**" location="/WEB-INF/resources/mobile/image/"></mvc:resources>
+    <mvc:resources mapping="/mobile/fonts/**" location="/WEB-INF/resources/mobile/fonts/"></mvc:resources>
+        
     <mvc:resources mapping="/resources/**" location="/WEB-INF/resources/"></mvc:resources>
 
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">

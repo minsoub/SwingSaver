@@ -1,0 +1,388 @@
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+/*reset*/
+
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 75%;
+    line-height: 1.5em;
+    font-family: "Malgun Gothic", "Lucida Grande", 'Noto Sans KR'sans-serif;
+}
+
+p{margin: 0}
+
+select,
+input {
+    color: #333;
+}
+
+a:active,
+a:hover {
+    color: #333;
+    text-decoration: none;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+    cursor: pointer;
+}
+
+a:link,
+a:active,
+a:visited {
+    color: #333;
+    text-decoration: none;
+    border: 0px;
+}
+
+span.button,
+img.button,
+a.button {
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+input[type=submit] {
+    -webkit-appearance: none;
+}
+
+button {
+    border: 0 none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+
+
+
+
+/*header*/
+
+#header {
+    width: 100%;
+    color: #fff;
+    background-color: #333333;
+    position: fixed;
+    height: 62px;
+}
+
+#contents {
+    padding: 62px 0 100px 0;
+}
+.gnb-menu {
+    width: 20px;
+    margin: 20px 0 0 20px;
+
+}
+
+.gnb-ser {
+    width: 22px;
+    float: right;
+    margin: 20px 20px 0 0;
+
+}
+
+.logo {
+    display: inline-block;
+    text-align: center;
+    width: 77%;
+    font-size: 18px;
+}
+
+.select-area {
+    padding: 20px;
+    background-color: #ededed;
+    padding: 10px 20px;
+}
+
+.select-bar {
+    width: 100%;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 50px;
+    font-size: 16px;
+}
+
+
+.bud-tab {
+    border-bottom: 1px solid #acacac;
+}
+
+.tab-01 {
+    width: 49%;
+    display: inline-block;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 16px;
+}
+
+.bud-tab .active {
+    color: #ee6d6d;
+    border-bottom: 4px solid #e62424;
+}
+
+.list {
+    padding: 10px 20px;
+    border-bottom: 1px solid #cecece;
+}
+
+.list-img {
+    width: 17%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.list-logo {
+    height: 22px;
+}
+
+.list-info {
+    width: 60%;
+    display: inline-block;
+    margin-left: 5px;
+
+}
+
+.list-right {
+    float: right;
+    text-align: right;
+}
+
+.list-info h4 {
+    margin: 5px 0 0 0;
+    font-size: 16px;
+}
+
+.list-info p {
+    margin: 0;
+    font-size: 12px;
+    color: #919191;
+}
+
+.list-like {
+    width: 22px;
+}
+
+
+.play {
+    display: block;
+    border-radius: 50px;
+    border: 1px solid #ffdada;
+    padding: 3px 15px;
+    margin-top: 8px;
+    font-size: 14px;
+    color: #ffdada;
+}
+
+
+.list-right .active {
+    border: 1px solid #ff6e6e;
+    color: #ff6e6e;
+}
+
+#gnb {
+    border-top: 1px solid #acacac;
+    padding: 10px;
+    background-color: #fff;
+    position: fixed;
+    bottom: 0;
+}
+
+.menu-gnb {
+    display: inline-block;
+    width: 18%;
+    text-align: center;
+}
+
+.menu-gnb:last-child {
+    width: 20%;
+}
+
+#gnb .active p {
+    opacity: 1;
+}
+
+#gnb .active .gnb-01 {
+    opacity: 1;
+}
+
+.gnb-01 {
+    height: 20px;
+    opacity: 0.3;
+}
+
+.menu-gnb p {
+    font-size: 12px;
+    margin: 3px 0;
+    opacity: 0.5;
+}
+
+.search-wrap {
+    padding: 10px 20px;
+}
+
+.sear-btn{
+    margin-bottom: 10px;
+}
+
+.sear-btn p {
+    display: inline-block;
+    font-size: 14px;
+}
+
+.sear-btn button {
+    display: inline-block;
+    float: right;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 0;
+}
+
+.sear-keyword a {
+    color: #acacac;
+    padding: 5px 13px;
+    border: 1px solid #acacac;
+    display: inline-block;
+    border-radius: 10px;
+    margin: 3px 0;
+    cursor: pointer;
+    font-size: 14px;
+
+}
+
+.search-area{
+    padding: 20px;
+    background-color: #fff;
+    padding: 10px 20px;
+    border-bottom: 1px solid #cecece;
+}
+
+.search-area input{
+    width: 81%;
+    background-color: #ededed;
+    padding: 10px;
+    border-radius: 50px;
+    font-size: 14px;
+    border: none;
+}
+.search-area button{
+    font-size: 16px;
+    font-weight: 600;
+    padding: 0px;
+    float: right;
+    line-height: 2.5;
+}
+
+.main-btn{
+    padding: 20px;
+}
+
+.main-btn a{
+    display: inline-block;
+    background: #ededed;
+    text-align: center;
+    border-radius: 10px;
+    width: 49%;
+    vertical-align: top;
+}
+
+
+.main-btn a img{
+    width: 40%;
+    margin: 20px 0 10px 0;
+}
+
+.main-btn p{
+    font-size: 16px;
+    font-weight: 600;
+    padding-bottom: 17px;
+}
+
+.recomend{
+    padding: 10px 20px;
+}
+
+.rec-list{
+/*    width: 600px;*/
+}
+
+.rec-list a{
+    width: 100px;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.rec-list a img{
+    border-radius: 5px;
+}
+
+.rec-list a p{
+    color: #acacac;
+    margin-top: 5px;
+}
+
+.rec-list a h4{
+    margin: 0;
+}
+
+.gfmain-btn{
+    padding: 20px 0;
+}
+
+.golf-main{
+    padding: 20px;
+    background-color: #ffffff;
+    position: relative;
+    top: -30px;
+    border-radius: 20px;
+    
+}
+
+.golf-info{
+    text-align: center;
+    margin: 10px;
+}
+
+.golf-info img{
+    float: right;
+}
+
+.golf-info p{
+    color: #acacac;
+    font-size: 14px;
+}
+
+.golf-info h2{
+    margin: 5px;
+}
+
+.play-btn{
+    width: 100%;
+    background-color: #f25555;
+    padding: 20px 0;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.play-btn a{
+    color: #fff;
+    font-size: 20px;
+}
+
+@media all and (min-width:768px) {
+/*
+    #header {
+        width: 100%;
+        color: #fff;
+        background-color: #333333;
+    }
+*/
+
+}

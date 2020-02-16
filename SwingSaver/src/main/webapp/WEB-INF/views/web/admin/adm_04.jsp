@@ -16,12 +16,13 @@
                             <colgroup>
                                 <col width="3%">
                                 <col width="8%">
+                                <col width="8%">
                                 <col width="10%">
-                                <col width="12%">
                                 <col width="25%">
-                                <col width="12%">
+                                <col width="10%">
                                 <col width="10%">
                                 <col width="20%">
+                                <col width="8%">
                             </colgroup>
                             <thead>
                                 <tr>
@@ -33,6 +34,7 @@
                                     <th>골프장홀수</th>
                                     <th>연락처</th>
                                     <th>메일</th>
+                                    <th>제휴여부</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -46,6 +48,7 @@
                                     <td>${golfVo.hole_value}</td>
                                     <td>${golfVo.phone}</td>
                                     <td>${golfVo.email}</td>
+                                    <td>${golfVo.alliance_check}</td>
                                 </tr>
                             </c:forEach>
                             </tbody>
