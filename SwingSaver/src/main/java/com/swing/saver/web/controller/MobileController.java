@@ -1,16 +1,34 @@
 package com.swing.saver.web.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.swing.saver.web.entity.Constant;
+import com.swing.saver.web.entity.GolfVo;
+import com.swing.saver.web.exception.ApiException;
+import com.swing.saver.web.service.MobileService;
 import com.swing.saver.web.service.RestService;
 
 /**
@@ -29,17 +47,31 @@ public class MobileController {
     private String uploadPath;
     
     @Inject
-    RestService restService;
+    MobileService restService;
     
     /**
      * Mobile Index Page
+     * 골프장 추천 리스트를 조회해서 출력한다. 
      * 
      * @param request
      * @return
      */
     @GetMapping("/home")
-    public String mobileHomeForm(HttpServletRequest request) {
-        return "mobile/home";
+    public ModelAndView mobileHomeForm(HttpServletRequest request) throws IOException, ApiException {    	
+    	ModelAndView mv = new ModelAndView();
+    	
+    	String rtnJson = restService.golfRecommandList();
+    	ObjectMapper mapper = new ObjectMapper();
+    	Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});
+    	
+    	mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
+    	
+    	List<GolfVo> golfList = mapper.convertValue(map.get("golfList"), TypeFactory.defaultInstance().constructCollectionType(List.class, GolfVo.class));
+    	mv.addObject("golfList", golfList);
+    	mv.setViewName("mobile/home");
+    	
+    	
+        return mv;
     }
     
     /**
@@ -85,5 +117,22 @@ public class MobileController {
     @GetMapping("/golflist")
     public String mobileGolfList(HttpServletRequest request) {
         return "mobile/golflist";
-    }     
+    }    
+    
+    /**
+     * 이미지 URL을 호출 받아서 이미지를 읽어서 리턴한다. 
+     * 
+     * @param request
+     * @return
+     * @throws IOException
+     */
+    @GetMapping(value="/getImage", produces=MediaType.IMAGE_JPEG_VALUE)
+    public @ResponseBody byte[] getImage(HttpServletRequest request) throws IOException {
+    	InputStream in = null;   // 이미지 read
+    	String imageName = request.getParameter("fileName");
+    	String filePath = uploadPath + File.separator + imageName;
+    	in = new FileInputStream(filePath);
+    	
+    	return IOUtils.toByteArray(in);
+    }
 }

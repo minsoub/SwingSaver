@@ -22,12 +22,40 @@ public class GolfVo {
 	String dateinserted;
 	boolean result;
 	String error;
+	String country_nm;		// 국가코드명
+	String zone_nm;			// 지역명
+	String image_url;		// 이미지 경로
+	String assets_url;		// 저장이미지 경로
 	
 	MultipartFile imageFile;
 	MultipartFile assetsFile;
 	
 	
 	
+	public String getImage_url() {
+		return image_url;
+	}
+	public void setImage_url(String image_url) {
+		this.image_url = image_url;
+	}
+	public String getAssets_url() {
+		return assets_url;
+	}
+	public void setAssets_url(String assets_url) {
+		this.assets_url = assets_url;
+	}
+	public String getCountry_nm() {
+		return country_nm;
+	}
+	public void setCountry_nm(String country_nm) {
+		this.country_nm = country_nm;
+	}
+	public String getZone_nm() {
+		return zone_nm;
+	}
+	public void setZone_nm(String zone_nm) {
+		this.zone_nm = zone_nm;
+	}
 	public String getAlliance_check() {
 		return alliance_check;
 	}

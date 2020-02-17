@@ -114,4 +114,6 @@ public interface RestService {
     public String proUpdate(Map<String, String> params) throws JsonProcessingException, ApiException;		// 마켓 프로 수정
     public ProVo getProDetail(String id) throws ApiException, IOException;	// 마켓 프로 상세 정보 조회
     public String proDelete(Map<String, String> params) throws JsonProcessingException, ApiException;  // 마켓 프로 삭제
+
+    
 } 
