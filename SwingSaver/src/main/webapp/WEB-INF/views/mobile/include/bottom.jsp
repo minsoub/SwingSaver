@@ -25,8 +25,10 @@
             </a>
         </div>         
         <div class="menu-gnb">
+        	<a href="/web/mypage">
             <img src="/mobile/image/gnb-05.svg" class="gnb-01" width="100%">
             <p>마이페이지</p>
+            </a>
         </div>         
     </div>
     

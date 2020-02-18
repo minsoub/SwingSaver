@@ -42,5 +42,17 @@ window.scrollTo(0, 1);
 }
 //-->
 </script>
+<style media="screen">
+   .wrap{
+     width: 1000px;
+     height: 300px;
+     overflow-x: scroll;
+     white-space:nowrap
+   }
+   .wrap img{
+       width:300px;
+       height:100%;
+   }
+</style>
 </head>
 <body>

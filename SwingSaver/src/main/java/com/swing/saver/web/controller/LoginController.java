@@ -49,8 +49,13 @@ public class LoginController {
     @GetMapping("/loginForm")
     public ModelAndView loginForm(HttpServletRequest request, HttpSession session) {
     	ModelAndView mv = new ModelAndView();
-    	
-    	mv.addObject("prev_url", "");
+    	String prev_url = null;
+        if (session.getAttribute("redirectUrl") != null)
+        {
+        	prev_url = (String) session.getAttribute("redirectUrl");
+        }
+        
+    	mv.addObject("prev_url", "redirect:"+prev_url);
     	mv.setViewName("web/log_01_01");
     	
     	return mv;
@@ -61,6 +66,7 @@ public class LoginController {
         LOGGER.debug("==================== LoginController login Strart : ====================");
         String rtnUrl = "";
         QRInfoVo qrInfo = null;
+        String redirectUrl = null;
         //qrInfo = (QRInfoVo) session.getAttribute("qrInfo");
         if (session.getAttribute("qrInfo") == null)
         {
@@ -104,6 +110,7 @@ public class LoginController {
 
                 redirectAttributes.addFlashAttribute("returnCode", "9999");
                 //redirectAttributes.addFlashAttribute("loginVo", loginVo);
+
                 rtnUrl = "redirect:/loginForm";
             }
         }

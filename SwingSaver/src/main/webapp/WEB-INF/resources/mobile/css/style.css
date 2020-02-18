@@ -311,8 +311,14 @@ table {
 
 .rec-list{
 /*    width: 600px;*/
+	width:1000px;
+	height:150px;
+	white-space:nowrap;
+	overflow-x:scroll;
 }
-
+.rec-data{
+	float: left;
+}
 .rec-list a{
     width: 100px;
     display: inline-block;

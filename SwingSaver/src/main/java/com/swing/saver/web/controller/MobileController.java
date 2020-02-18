@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -17,9 +18,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -48,6 +51,9 @@ public class MobileController {
     
     @Inject
     MobileService restService;
+    
+    @Inject
+    RestService service;
     
     /**
      * Mobile Index Page
@@ -91,9 +97,15 @@ public class MobileController {
      * @param request
      * @return
      */
-    @GetMapping("/detail")
-    public String mobileDetailForm(HttpServletRequest request) {
-        return "mobile/detail";
+    @PostMapping("/detail")
+    public ModelAndView mobileDetailForm(GolfVo vo, HttpServletRequest request,HttpSession session,ModelAndView mv,RedirectAttributes redirectAttributes) throws ApiException, IOException {    	
+    	// 넘어온 키값을 골프장 상세정보를 조회한다.
+    	GolfVo golfInfo = service.getGolfInfo(vo.getCountry_id(), vo.getZone_id(), vo.getCountryclub_id());  	
+    	
+    	mv.addObject("golfInfo", golfInfo);
+    	mv.setViewName("mobile/detail");
+        
+    	return mv;
     }  
     
     /**
@@ -131,6 +143,8 @@ public class MobileController {
     	InputStream in = null;   // 이미지 read
     	String imageName = request.getParameter("fileName");
     	String filePath = uploadPath + File.separator + imageName;
+    	
+    	System.out.println("filePath : " + filePath);
     	in = new FileInputStream(filePath);
     	
     	return IOUtils.toByteArray(in);

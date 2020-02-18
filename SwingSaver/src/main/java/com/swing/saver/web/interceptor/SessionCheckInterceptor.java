@@ -7,6 +7,8 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -72,6 +74,13 @@ public class SessionCheckInterceptor extends HandlerInterceptorAdapter {
                         	if (request.getRequestURI().indexOf("/admin") >-1) {
                         		response.sendRedirect("/admin");
                         	}else {
+                        		// TODO : 호출 페이지가 무엇인지 파악해서 로그인 후 다시 그 호출 페이지로 갈 수 있도록 해야 한다.
+                        		// 모바일에서 넘어오는 경우가 이런 부분이 처리되어야 한다. 
+                        		// 해당 로직은 Score 관리쪽에 적용되어 있다.
+                        		// 세션에 호출 URL을 저장해야 한다.
+                        		System.out.println("call path : " + request.getRequestURI());
+                        		HttpSession session = request.getSession();
+                        		session.setAttribute("redirectUrl", request.getRequestURI());
                         		response.sendRedirect("/loginForm");
                         	}
                         }
