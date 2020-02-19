@@ -6,10 +6,12 @@
         <div class="logo">검색하기</div>
         <img src="/mobile/image/gnb-ser.svg" class="gnb-ser" width="100%">
     </nav>
-    
+       
 <section id="contents">
+	<form name="frm" id="frm" action="POST">
+	  <input type="text" placeholder="이름이나 지역을 검색해주세요" id="word" name="word" value="${word}">
+
     <div class="search-area">
-        <input type="text" placeholder="이름이나 지역을 검색해주세요" id="word" name="word">
         <button id="btnSearch">검색</button>
     </div>
     <div class="search-wrap">
@@ -18,16 +20,38 @@
           <button>모두삭제</button> 
        </div>
        <div class="sear-keyword" id="historyData">
-          <a href="#">사우스랑스CC영암</a> 
+          <!-- a href="#">사우스랑스CC영암</a> 
           <a href="#">파주시</a> 
           <a href="#">경기북부</a> 
           <a href="#">덕평호반CC</a> 
-          <a href="#">아시아나컨트리클럽</a> 
+          <a href="#">아시아나컨트리클럽</a  --> 
        </div>        
     </div>  
+    
+    <!-- div class="bud-tab">
+        <a href="javascript:GolfList('');"  class="tab-01 <c:if test="${alliance_check ne 'Y'}">active</c:if> ">모두</a>
+        <a href="javascript:GolfList('Y');" class="tab-01 <c:if test="${alliance_check eq 'Y'}">active</c:if> ">제휴</a>
+    </div  -->
+    <div class="list-wrap">
+    	<c:forEach var="golfInfo" items="${golfList}" varStatus="status">
+        <div class="list">
+            <img src="<c:if test="${golfInfo.alliance_check eq 'Y'}">/mobile/image/buddyya-on.png</c:if><c:if test="${golfInfo.alliance_check ne 'Y'}">/mobile/image/buddyya-off.png</c:if>" class="list-img" width="100%">
+            <div class="list-info">
+                <img src="<c:url value='${golfInfo.image_url}'/>" class="list-logo">
+                <h4>${golfInfo.countryclub_nm}</h4>
+                <p>${golfInfo.zone_nm}</p>
+            </div>
+            <div class="list-right">
+                <img src="/mobile/image/like-on.svg" class="list-like" width="100%">
+                <a class="play" href="webApp://goActivity?countryclub_id=${golfInfo.countryclub_id}">Play</a>
+            </div>            
+        </div>
+        </c:forEach>       
+    </div> 
+ 	</form>       
 </section>
 
-<script language="javascript">
+<script>
 	$(document).ready(function(){
 	
 		// 쿠키에서 값을 가져와서 구성한다.
@@ -38,7 +62,7 @@
 		    {
 		    	for (var i=0; i<itemArray.length; i++)
 		    	{
-		    		$("#historyData").append("<a href='#'>"+itemArray[i]+"</a>");
+		    		$("#historyData").append("<a href=\"javascript:setData('"+itemArray[i]+"');\">"+itemArray[i]+"</a>");
 		    	}
 		    }
 		}
@@ -53,7 +77,8 @@
 			// 검색 단어 쿠키 저장
 			addCookie($("#word").val());
 			
-			// 검색 수행			
+			// 검색 수행
+			fnSearch();
 		});
 	});
 
@@ -104,6 +129,17 @@
 		    // 신규 id값 저장하기
 		    setCookie('productItems', id, expire);
 		  }
-	}	
+	}
+	function setData(data)
+	{
+		$("#word").val(data);
+		
+		if (data != "") fnSearch();
+	}
+	function fnSearch()
+	{
+		frm.action = "/m/search";
+		frm.submit();
+	}
 </script>
 <%@include file="/WEB-INF/views/mobile/include/bottom.jsp"%>

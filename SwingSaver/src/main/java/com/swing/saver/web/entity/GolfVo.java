@@ -27,11 +27,26 @@ public class GolfVo {
 	String image_url;		// 이미지 경로
 	String assets_url;		// 저장이미지 경로
 	
+	String mode;			// 검색구분 : "" or ALL 전체, REC : 추천
+	String word;			// 검색단어
+	
 	MultipartFile imageFile;
 	MultipartFile assetsFile;
 	
 	
 	
+	public String getWord() {
+		return word;
+	}
+	public void setWord(String word) {
+		this.word = word;
+	}
+	public String getMode() {
+		return mode;
+	}
+	public void setMode(String mode) {
+		this.mode = mode;
+	}
 	public String getImage_url() {
 		return image_url;
 	}

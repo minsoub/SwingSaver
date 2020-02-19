@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +29,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
+import com.swing.saver.web.entity.AreaVo;
 import com.swing.saver.web.entity.Constant;
 import com.swing.saver.web.entity.GolfVo;
 import com.swing.saver.web.exception.ApiException;
@@ -42,7 +44,7 @@ import com.swing.saver.web.service.RestService;
  */
 @Controller
 @RequestMapping(Constant.MOBILE_PREFIX)
-public class MobileController {
+public class MobileController extends CommonController {
 	private final static Logger LOGGER = LoggerFactory.getLogger(MobileController.class);
 	
 	// dispatcher-servlet.xml에 정의
@@ -87,8 +89,29 @@ public class MobileController {
      * @return
      */
     @GetMapping("/search")
-    public String mobileSearchForm(HttpServletRequest request) {
-        return "mobile/search";
+    public ModelAndView mobileSearchForm(GolfVo vo, HttpServletRequest request,HttpSession session,ModelAndView mv,RedirectAttributes redirectAttributes) throws ApiException, IOException {
+    	if (vo.getWord()!= null)
+    	{    	
+        	// 파라미터 : zone_id, alliance_check
+        	Map<String, String> params = new HashMap<String, String>();
+        	params.put("zone_id", "");
+        	params.put("country_id",     "");
+        	params.put("countryclub_id", "");
+        	params.put("alliance_check", "");
+        	params.put("word",  vo.getWord());
+        	
+        	String rtnJson = restService.getGolfList(params);
+        	ObjectMapper mapper = new ObjectMapper();
+        	Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});    	
+        	mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);    	
+        	List<GolfVo> golfList = mapper.convertValue(map.get("golfList"), TypeFactory.defaultInstance().constructCollectionType(List.class, GolfVo.class));
+        	mv.addObject("golfList", golfList);
+    		
+    		mv.addObject("word", vo.getWord());
+    	}       	
+    	
+        mv.setViewName("mobile/search");
+        return mv;
     }
     
     /**
@@ -100,9 +123,19 @@ public class MobileController {
     @PostMapping("/detail")
     public ModelAndView mobileDetailForm(GolfVo vo, HttpServletRequest request,HttpSession session,ModelAndView mv,RedirectAttributes redirectAttributes) throws ApiException, IOException {    	
     	// 넘어온 키값을 골프장 상세정보를 조회한다.
-    	GolfVo golfInfo = service.getGolfInfo(vo.getCountry_id(), vo.getZone_id(), vo.getCountryclub_id());  	
+    	Map<String, String> params = new HashMap<String, String>();
+    	params.put("zone_id",        vo.getZone_id());
+    	params.put("country_id",     vo.getCountry_id());
+    	params.put("countryclub_id", vo.getCountryclub_id());
+    	params.put("alliance_check", "");
+    	params.put("word",           "");
     	
-    	mv.addObject("golfInfo", golfInfo);
+    	String rtnJson = restService.getGolfList(params);
+    	ObjectMapper mapper = new ObjectMapper();
+    	Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});    	
+    	mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);    	
+    	List<GolfVo> golfList = mapper.convertValue(map.get("golfList"), TypeFactory.defaultInstance().constructCollectionType(List.class, GolfVo.class));
+    	mv.addObject("golfInfo", golfList.get(0));
     	mv.setViewName("mobile/detail");
         
     	return mv;
@@ -115,20 +148,45 @@ public class MobileController {
      * @return
      */
     @GetMapping("/bookmark")
-    public String mobileBookMarkForm(HttpServletRequest request) {
-        return "mobile/bookmark";
+    public ModelAndView mobileBookMarkForm(GolfVo vo, HttpServletRequest request,HttpSession session, ModelAndView mv, RedirectAttributes redirectAttributes) throws ApiException, IOException {
+        
+	
+    	
+    	mv.setViewName("mobile/bookmark");
+    	return mv;
     } 
     
     
     /**
-     * 버디야 둘러보기 
+     * 리스트 출력하기 
      * 
      * @param request
      * @return
      */
     @GetMapping("/golflist")
-    public String mobileGolfList(HttpServletRequest request) {
-        return "mobile/golflist";
+    public ModelAndView mobileGolfList(GolfVo vo, HttpServletRequest request,HttpSession session, ModelAndView mv, RedirectAttributes redirectAttributes) throws ApiException, IOException {
+    	// 지역 코드 조회
+        List<AreaVo> areaList = getAreaList("KR");	// Default KR
+        mv.addObject("areaList", areaList); 
+    	
+    	// 파라미터 : zone_id, alliance_check
+    	Map<String, String> params = new HashMap<String, String>();
+    	params.put("zone_id", vo.getZone_id());
+    	params.put("country_id",     "");
+    	params.put("countryclub_id", "");
+    	params.put("alliance_check", vo.getAlliance_check());
+    	params.put("word", "");
+    	
+    	String rtnJson = restService.getGolfList(params);
+    	ObjectMapper mapper = new ObjectMapper();
+    	Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});    	
+    	mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);    	
+    	List<GolfVo> golfList = mapper.convertValue(map.get("golfList"), TypeFactory.defaultInstance().constructCollectionType(List.class, GolfVo.class));
+    	mv.addObject("golfList", golfList);
+        mv.addObject("alliance_check", vo.getAlliance_check());		// 검색조건
+        mv.addObject("zone_id", vo.getZone_id());					// 검색조건
+        mv.setViewName("mobile/golflist");        
+        return mv;
     }    
     
     /**
@@ -149,4 +207,6 @@ public class MobileController {
     	
     	return IOUtils.toByteArray(in);
     }
+    
+    
 }

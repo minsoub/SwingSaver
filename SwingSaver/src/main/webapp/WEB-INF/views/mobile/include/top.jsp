@@ -11,6 +11,7 @@
     <script src="/js/jquery-latest.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/jsUtil.js"></script>
+    <script src="/mobile/js/Common.js"></script>
     
     <!-- script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js"></script>

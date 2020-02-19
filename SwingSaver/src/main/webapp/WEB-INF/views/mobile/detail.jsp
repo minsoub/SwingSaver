@@ -9,31 +9,29 @@
     
 <section id="contents">
 
-   <div class="main-bn">
+	<div class="main-bn">
         <img src="/mobile/image/golf-main-bn.png"width="100%">
-   </div>
+	</div>
     <div class="golf-main">
-    <div class="golf-info">
-        <img src="/mobile/image/like-on.svg" class="list-like" width="100%">
-        <p>경기남부</p>
-        <h2>사우스링스 영암</h2>
-    </div>
-    <div class="main-btn gfmain-btn">
-        <a href="#" class="">
-        <img src="/mobile/image/main-reserve.png" width="100%">
-        <p>골프장예약</p>
-        </a>
+   		<div class="golf-info">
+        	<img src="/mobile/image/like-on.svg" class="list-like" width="100%">
+        	<p>${golfInfo.zone_nm}</p>
+        	<h2>${golfInfo.countryclub_nm}</h2>
+   		</div>
+   		<div class="main-btn gfmain-btn">
+        	<a href="#" class="">
+        	<img src="/mobile/image/main-reserve.png" width="100%">
+        	<p>골프장예약</p>
+        	</a>
         
-        <a href="#" class="">
-        <img src="/mobile/image/main-event.png" width="100%">
-        <p>이벤트</p>
-        </a>
-    </div>
-        <div class="play-btn">
-        <a class="" href="#">
-            PLAY
-        </a>
-        </div>
+        	<a href="#" class="">
+        	<img src="/mobile/image/main-event.png" width="100%">
+        	<p>이벤트</p>
+        	</a>
+    	</div>
+    	<div class="play-btn">
+        	<a class=""  href="javascript:CallApp('${golfInfo.countryclub_id}');">PLAY</a>
+    	</div>
     </div>
 
 </section>

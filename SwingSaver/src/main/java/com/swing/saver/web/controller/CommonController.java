@@ -14,6 +14,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
+import com.swing.saver.web.entity.AreaVo;
 import com.swing.saver.web.entity.CodeVo;
 import com.swing.saver.web.entity.UserVo;
 import com.swing.saver.web.exception.ApiException;
@@ -68,5 +69,28 @@ public abstract class CommonController {
         List<UserVo> userList = mapper.convertValue(map.get("memList"), TypeFactory.defaultInstance().constructCollectionType(List.class,UserVo.class));
 
         return userList;
-    }     
+    } 
+    
+    /**
+     * 국가에 해당하는 지역 리스트를 출력 한다.
+     * 
+     * @param country_id
+     * @return
+     * @throws ApiException
+     * @throws IOException
+     */
+    public List<AreaVo> getAreaList(String country_id) throws ApiException, IOException {
+    	String rtnJson = restService.getAreaList(country_id);   
+    	LOGGER.debug(rtnJson);
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});
+
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
+        
+        // groupList => RestFul Service에서 등록한 명
+        List<AreaVo> areaList = mapper.convertValue(map.get("areaList"), TypeFactory.defaultInstance().constructCollectionType(List.class,AreaVo.class));
+
+        return areaList;
+    }
+        
 }
