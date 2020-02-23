@@ -6,12 +6,13 @@
         <div class="logo">검색하기</div>
         <img src="/mobile/image/gnb-ser.svg" class="gnb-ser" width="100%">
     </nav>
-       
+ <form name="frm" id="frm" action="POST">      
 <section id="contents">
-	<form name="frm" id="frm" action="POST">
-	  <input type="text" placeholder="이름이나 지역을 검색해주세요" id="word" name="word" value="${word}">
+	
+	  
 
     <div class="search-area">
+        <input type="text" placeholder="이름이나 지역을 검색해주세요" id="word" name="word" value="${word}">
         <button id="btnSearch">검색</button>
     </div>
     <div class="search-wrap">
@@ -48,9 +49,9 @@
         </div>
         </c:forEach>       
     </div> 
- 	</form>       
+ 	
 </section>
-
+</form>       
 <script>
 	$(document).ready(function(){
 	
