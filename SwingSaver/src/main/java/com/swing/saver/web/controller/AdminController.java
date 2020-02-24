@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.swing.saver.web.entity.AdminVo;
+import com.swing.saver.web.entity.AdverVo;
 import com.swing.saver.web.entity.AreaVo;
 import com.swing.saver.web.entity.CodeVo;
 import com.swing.saver.web.entity.Constant;
@@ -15,6 +16,7 @@ import com.swing.saver.web.entity.GroupVo;
 import com.swing.saver.web.entity.LoginVo;
 import com.swing.saver.web.entity.UserVo;
 import com.swing.saver.web.exception.ApiException;
+import com.swing.saver.web.service.AdminService;
 import com.swing.saver.web.service.RestService;
 
 import com.swing.saver.web.util.UploadFileUtils;
@@ -61,6 +63,9 @@ public class AdminController {
     
     @Inject
     RestService restService;
+    
+    @Inject
+    AdminService adminService;
     
     /**
      * Admin Login Form display
@@ -754,12 +759,18 @@ public class AdminController {
     public ModelAndView golfDetail(HttpServletRequest request,@PathVariable String country_id, @PathVariable String zone_id, @PathVariable String countryclub_id)  throws IOException, ApiException 
     {
     	ModelAndView mv = new ModelAndView();
-    	GolfVo golfInfo =  restService.getGolfInfo(country_id, zone_id, countryclub_id);   // 골프장정보 상세 정보 조회
-        mv.addObject("golfInfo", golfInfo);
+    	 ObjectMapper mapper = new ObjectMapper();
+    	//GolfVo golfInfo =  restService.getGolfInfo(country_id, zone_id, countryclub_id);   // 골프장정보 상세 정보 조회
+    	String resultJson = restService.getGolfImgIncludeDetail(country_id, zone_id, countryclub_id);  // 이미지 포함 골프장 정보 조회
+    	Map<String, Object> goflMap = mapper.readValue(resultJson, new TypeReference<Map<String, Object>>(){});
+    	mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false); 
+    	List<GolfVo> mapList = mapper.convertValue(goflMap.get("golfList"), TypeFactory.defaultInstance().constructCollectionType(List.class,GolfVo.class));    	
+        mv.addObject("golfInfo", mapList.get(0));
+        
         
     	String rtnJson = restService.getParList(countryclub_id);   // 관리자가 PAR 정보 조회
     	LOGGER.debug(rtnJson);
-        ObjectMapper mapper = new ObjectMapper();
+       
         Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);        
         // groupList => RestFul Service에서 등록한 명
@@ -976,6 +987,131 @@ public class AdminController {
         return codeList;
     }
     
-     
+    /**
+     * 광고 등록 관리 
+     * 모바일 웹에서 출력한다. 
+     * 
+     * @param session
+     * @return
+     * @throws IOException
+     * @throws ApiException
+     */
+    @GetMapping("/advList")
+    public ModelAndView advList(HttpSession session)  throws IOException, ApiException {
+    	LOGGER.debug("==================== AdminController advList Start : ===================");
+    	ModelAndView mv = new ModelAndView();
+    	AdminVo loginVo = (AdminVo) session.getAttribute("login");
+
+    	String rtnJson = adminService.getAdvList();   // 관리자가 광고관리 정보 조회
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});
+
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
+        
+        // groupList => RestFul Service에서 등록한 명
+        List<AdverVo> advList = mapper.convertValue(map.get("advList"), TypeFactory.defaultInstance().constructCollectionType(List.class,AdverVo.class));
+
+        mv.addObject("advList", advList);
+        mv.setViewName("web/admin/adver/advList");
+        LOGGER.debug("==================== AdminController advList end : ===================");
+        return mv;
+    }
+    /**
+     * 광고 사이트 등록 폼을 보여준다.
+     * 
+     */
+    @GetMapping("/advList/addform")
+    public ModelAndView advfForm(HttpServletRequest request)  throws IOException, ApiException 
+    {
+    	ModelAndView mv = new ModelAndView();
+
+        mv.setViewName("web/admin/adver/advForm");
+        
+    	return mv;
+    } 
+    
+    /**
+     * 광고 사이트를 신규 등록 한다.
+     * 
+     * @param adverVo
+     * @param request
+     * @param session
+     * @param mv
+     * @param redirectAttributes
+     * @return
+     * @throws ApiException
+     * @throws IOException
+     */
+    @PostMapping(value="/advList/add")
+    public ModelAndView advAdd(AdverVo adverVo, HttpServletRequest request, HttpSession session, ModelAndView mv, RedirectAttributes redirectAttributes) throws ApiException, IOException
+    {
+    	LOGGER.debug("==================== AdminController golfAdd Start : ===================");
+    	Map<String, String> params = new HashMap<String, String>();
+    	params.put("seq", 		String.valueOf(adverVo.getSeq()));
+    	params.put("site_name", adverVo.getSite_name());
+    	params.put("site_url",  adverVo.getSite_url());
+    	params.put("order_no",  adverVo.getOrder_no());
+    	params.put("log_image", "");  // file
+    	params.put("description", adverVo.getDescription());
+    	
+    	if (adverVo.getUse_yn().isEmpty()) adverVo.setUse_yn("N");
+    	params.put("use_yn",    adverVo.getUse_yn());
+    	
+    	
+    	LOGGER.debug(adverVo.getImageFile().getOriginalFilename());
+    	if (!adverVo.getImageFile().isEmpty())
+    	{
+    		String orginFileName = adverVo.getImageFile().getOriginalFilename();
+    		int index = orginFileName.lastIndexOf(".");
+		    String fileExt = orginFileName.substring(index + 1);
+	        String savedName = UploadFileUtils.getTimeStamp()+"."+fileExt;
+	        String filePath = uploadPath + File.separator + savedName;
+	        adverVo.getImageFile().transferTo(new File(filePath));
+	    	String paramName = adverVo.getImageFile().getName();  // 파라미터명
+	    	params.put("image", savedName);
+    	}
+
+    	String rtnJson = adminService.advCreate(params);
+    	
+    	// 결과값에 대해서 리턴한다.
+    	LOGGER.debug(rtnJson);
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});
+        // key : result, error
+        String result = map.get("result").toString();
+        if (result.equals("true"))
+        {
+        	adverVo.setResult(true);
+        }else {
+        	adverVo.setResult(false);
+        	adverVo.setError(map.get("error").toString());
+        }
+                
+        mv.addObject("result", adverVo);
+    	LOGGER.debug("==================== AdminController golfAdd end : ===================");
+    	mv.setViewName("web/admin/adver/advResult");
+    	return mv;
+    }  
+    
+    /**
+     * 광고 사이트 상세 정보 출력 
+     * @param request
+     * @return
+     */
+    @GetMapping("/advList/detail/{seq}")
+    public ModelAndView advDetail(HttpServletRequest request,@PathVariable String seq)  throws IOException, ApiException 
+    {
+    	ModelAndView mv = new ModelAndView();
+    	ObjectMapper mapper = new ObjectMapper();
+    	String resultJson = adminService.getAdvertImgIncludeDetail(seq);  // 이미지 포함 광고 사이트 정보 조회
+    	Map<String, Object> goflMap = mapper.readValue(resultJson, new TypeReference<Map<String, Object>>(){});
+    	mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false); 
+    	List<AdverVo> mapList = mapper.convertValue(goflMap.get("advList"), TypeFactory.defaultInstance().constructCollectionType(List.class, AdverVo.class));    	
+        mv.addObject("advInfo", mapList.get(0));       
+               
+        mv.setViewName("web/admin/adver/advDetail");
+        
+    	return mv;
+    }      
     
 }

@@ -89,6 +89,7 @@ public interface RestService {
     public String golfDelete(Map<String, String> params) throws JsonProcessingException, ApiException;  // 골프장정보 삭제
     public GolfVo getGolfInfo(String country_id, String zone_id, String countryclub_id) throws ApiException, IOException;		// 골프장정보 상세보기
     public String getGolfDetail(String country_id, String zone_id, String countryclub_id) throws ApiException, IOException;		// 골프장정보 상세보기
+    public String getGolfImgIncludeDetail(String country_id, String zone_id, String countryclub_id) throws ApiException, IOException;		// 골프장정보 상세보기
     public String golfUpdate(Map<String, String> params) throws JsonProcessingException, ApiException;  // 골프장정보 수정
     public String getParList(String countryclub_id) throws ApiException;								// Par 정보 조회 
     public String getParList(String country_id, String zone_id, String countryclub_id) throws ApiException;								// Par List정보 조회

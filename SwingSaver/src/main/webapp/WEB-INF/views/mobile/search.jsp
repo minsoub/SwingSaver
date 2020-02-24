@@ -43,7 +43,7 @@
                 <p>${golfInfo.zone_nm}</p>
             </div>
             <div class="list-right">
-                <img src="/mobile/image/like-on.svg" class="list-like" width="100%">
+                <img src="<c:if test="${golfInfo.alliance_check eq 'Y'}">/mobile/image/like-on.svg</c:if><c:if test="${golfInfo.alliance_check ne 'Y'}">/mobile/image/like-off.svg</c:if>" class="list-like" width="100%">
                 <a class="play" href="webApp://goActivity?countryclub_id=${golfInfo.countryclub_id}">Play</a>
             </div>            
         </div>

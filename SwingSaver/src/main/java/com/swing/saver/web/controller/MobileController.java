@@ -77,7 +77,7 @@ public class MobileController extends CommonController {
     	List<GolfVo> golfList = mapper.convertValue(map.get("golfList"), TypeFactory.defaultInstance().constructCollectionType(List.class, GolfVo.class));
     	mv.addObject("golfList", golfList);
     	mv.setViewName("mobile/home");
-    	
+    	mv.addObject("setMenu", "home");
     	
         return mv;
     }
@@ -109,7 +109,7 @@ public class MobileController extends CommonController {
     		
     		mv.addObject("word", vo.getWord());
     	}       	
-    	
+    	mv.addObject("setMenu", "search");
         mv.setViewName("mobile/search");
         return mv;
     }
@@ -137,12 +137,13 @@ public class MobileController extends CommonController {
     	List<GolfVo> golfList = mapper.convertValue(map.get("golfList"), TypeFactory.defaultInstance().constructCollectionType(List.class, GolfVo.class));
     	mv.addObject("golfInfo", golfList.get(0));
     	mv.setViewName("mobile/detail");
-        
+    	mv.addObject("setMenu", "detail");
     	return mv;
     }  
     
     /**
      * 버디야 즐겨찾기 
+     * 제휴된 리스트만 출력한다. 
      * 
      * @param request
      * @return
@@ -150,9 +151,30 @@ public class MobileController extends CommonController {
     @GetMapping("/bookmark")
     public ModelAndView mobileBookMarkForm(GolfVo vo, HttpServletRequest request,HttpSession session, ModelAndView mv, RedirectAttributes redirectAttributes) throws ApiException, IOException {
         
-	
+    	// 지역 코드 조회
+        List<AreaVo> areaList = getAreaList("KR");	// Default KR
+        mv.addObject("areaList", areaList); 
+    	
+    	// 파라미터 : zone_id, alliance_check
+    	Map<String, String> params = new HashMap<String, String>();
+    	params.put("zone_id", 		 "");
+    	params.put("country_id",     "");
+    	params.put("countryclub_id", "");
+    	params.put("alliance_check", "Y");		// 제휴 리스트만 출력
+    	params.put("word",           "");
+    	
+    	String rtnJson = restService.getGolfList(params);
+    	ObjectMapper mapper = new ObjectMapper();
+    	Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});    	
+    	mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);    	
+    	List<GolfVo> golfList = mapper.convertValue(map.get("golfList"), TypeFactory.defaultInstance().constructCollectionType(List.class, GolfVo.class));
+    	mv.addObject("golfList", golfList);
+        mv.addObject("alliance_check", vo.getAlliance_check());		// 검색조건
+        mv.addObject("zone_id", vo.getZone_id());					// 검색조건
+        mv.setViewName("mobile/golflist");  
     	
     	mv.setViewName("mobile/bookmark");
+    	mv.addObject("setMenu", "bookmark");
     	return mv;
     } 
     
@@ -185,7 +207,8 @@ public class MobileController extends CommonController {
     	mv.addObject("golfList", golfList);
         mv.addObject("alliance_check", vo.getAlliance_check());		// 검색조건
         mv.addObject("zone_id", vo.getZone_id());					// 검색조건
-        mv.setViewName("mobile/golflist");        
+        mv.setViewName("mobile/golflist");  
+        mv.addObject("setMenu", "golflist");
         return mv;
     }    
     

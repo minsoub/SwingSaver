@@ -772,7 +772,7 @@ public class RestServiceImpl implements RestService {
     
 	/**
 	 * 골프장정보 상세정보를 조회한다. 
-	 * JSON으로 리턴 - AJAX에서 사용함
+	 * 이미지 포함해서 조회한다.
 	 */
     @Override
     public String getGolfDetail(String country_id, String zone_id, String countryclub_id) throws ApiException, IOException {
@@ -781,6 +781,19 @@ public class RestServiceImpl implements RestService {
 
         return rtnJson;
     } 
+    public String getGolfImgIncludeDetail(String country_id, String zone_id, String countryclub_id) throws ApiException, IOException
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        GolfVo golfVo = null;
+
+        String rtnJson= "";
+
+        rtnJson = sendMessage.sendHttpsStr("/ords/swing/saver/golfinfo/"+country_id+"/"+zone_id+"/"+countryclub_id,"POST", "application/json",true);
+        LOGGER.debug("골프장정보 파라미터:{},응답:{}",zone_id,rtnJson);
+
+
+        return rtnJson;
+    }
     
     /**
      * 관리자모드에서 골프장정보 업데이트 처리 

@@ -34,23 +34,13 @@
         <div class="rec-list" style="overflow-x: auto; float:left">
           <c:forEach var="golfInfo" items="${golfList}" varStatus="status">
           	<div class="rec-data">
-            <a href="javascript:goPage('${golfInfo.country_id}','${golfInfo.zone_id}','${golfInfo.countryclub_id}' )">
-            <!-- img src="/mobile/image/golf-img01.png" width="100%"  -->
-            <img src="<c:url value='${golfInfo.image_url}'/>"  width="100%">
-            <p>${golfInfo.zone_nm}</p>
-            <h4>${golfInfo.countryclub_nm}</h4>    
-            </a>
+            	<a href="javascript:goPage('${golfInfo.country_id}','${golfInfo.zone_id}','${golfInfo.countryclub_id}' )">
+            		<!-- img src="/mobile/image/golf-img01.png" width="100%"  -->
+            		<img src="<c:url value='${golfInfo.image_url}'/>"  width="100%">
+            		<p>${golfInfo.zone_nm}</p>
+            		<h4>${golfInfo.countryclub_nm}</h4>    
+            	</a>
             </div>
-            <!-- a href="#">
-            <img src="/mobile/image/golf-img02.png" width="100%">
-            <p>경기남부</p>
-            <h4>사우스링스 영암</h4>    
-            </a>
-            <a href="#">
-            <img src="/mobile/image/golf-img03.png" width="100%">
-            <p>경기남부</p>
-            <h4>사우스링스 영암</h4>    
-            </a  --> 
           </c:forEach>   
         </div>        
     </div>
