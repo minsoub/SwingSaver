@@ -13,8 +13,8 @@
     <div class="select-area">
         <select name="zone_id" id="zone_id" class="select-bar" onChange="javascript:ChangeZone(this.value);">
         	<option value="">지역선택</option>
-        <c:forEach var="areafInfo" items="${areaList}" varStatus="status">
-        	<option value="${areaInfo.code}" <c:if test="${areaInfo.code eq zone_id}">selected</c:if>>${areaInfo.codename}</option>
+        <c:forEach var="areaInfo" items="${areaList}" varStatus="status">
+        	<option value="${areaInfo.zone_id}" <c:if test="${areaInfo.zone_id eq zone_id}">selected</c:if>>${areaInfo.zone_nm}</option>
         </c:forEach>
         </select>
     </div>

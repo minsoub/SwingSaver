@@ -1024,7 +1024,9 @@ public class AdminController {
     public ModelAndView advfForm(HttpServletRequest request)  throws IOException, ApiException 
     {
     	ModelAndView mv = new ModelAndView();
-
+    	AdverVo adverVo = new AdverVo();
+    	
+    	mv.addObject("adverVo", adverVo);
         mv.setViewName("web/admin/adver/advForm");
         
     	return mv;

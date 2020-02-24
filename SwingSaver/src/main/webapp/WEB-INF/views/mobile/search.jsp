@@ -6,19 +6,18 @@
         <div class="logo">검색하기</div>
         <img src="/mobile/image/gnb-ser.svg" class="gnb-ser" width="100%">
     </nav>
- <form name="frm" id="frm" action="POST">      
-<section id="contents">
-	
-	  
 
+<section id="contents">
+	<form name="frm" id="frm" method="POST">      
     <div class="search-area">
         <input type="text" placeholder="이름이나 지역을 검색해주세요" id="word" name="word" value="${word}">
         <button id="btnSearch">검색</button>
     </div>
+    </form>  
     <div class="search-wrap">
        <div class="sear-btn">
           <p>최근검색</p>
-          <button>모두삭제</button> 
+          <button id="btnDelete">모두삭제</button> 
        </div>
        <div class="sear-keyword" id="historyData">
           <!-- a href="#">사우스랑스CC영암</a> 
@@ -38,9 +37,11 @@
         <div class="list">
             <img src="<c:if test="${golfInfo.alliance_check eq 'Y'}">/mobile/image/buddyya-on.png</c:if><c:if test="${golfInfo.alliance_check ne 'Y'}">/mobile/image/buddyya-off.png</c:if>" class="list-img" width="100%">
             <div class="list-info">
+            	<a href="javascript:DetailView('${golfInfo.country_id}','${golfInfo.zone_id}', '${golfInfo.countryclub_id}');">
                 <img src="<c:url value='${golfInfo.image_url}'/>" class="list-logo">
                 <h4>${golfInfo.countryclub_nm}</h4>
                 <p>${golfInfo.zone_nm}</p>
+                </a>
             </div>
             <div class="list-right">
                 <img src="<c:if test="${golfInfo.alliance_check eq 'Y'}">/mobile/image/like-on.svg</c:if><c:if test="${golfInfo.alliance_check ne 'Y'}">/mobile/image/like-off.svg</c:if>" class="list-like" width="100%">
@@ -51,7 +52,12 @@
     </div> 
  	
 </section>
-</form>       
+<form name="sFrm" id="sFrm" method="POST">
+	<input type="hidden" id="country_id" name="country_id" />
+	<input type="hidden" id="zone_id" name="zone_id" />
+	<input type="hidden" id="countryclub_id" name="countryclub_id" />
+</form>
+     
 <script>
 	$(document).ready(function(){
 	
@@ -80,6 +86,13 @@
 			
 			// 검색 수행
 			fnSearch();
+		});
+		$("#btnDelete").click(function(){
+			//alert("t1");
+			// 쿠키 삭제해야 한다.
+			var name = "productItems";
+			document.cookie = name + '=; expires=Thu, 01 Jan 1999 00:00:10 GMT;';
+			$('#historyData').empty();
 		});
 	});
 
@@ -131,6 +144,7 @@
 		    setCookie('productItems', id, expire);
 		  }
 	}
+	 
 	function setData(data)
 	{
 		$("#word").val(data);
@@ -142,5 +156,14 @@
 		frm.action = "/m/search";
 		frm.submit();
 	}
+	
+	function DetailView(country_id, zone_id, countryclub_id)
+	{
+		sFrm.country_id.value = country_id;
+		sFrm.zone_id.value = zone_id;
+		sFrm.countryclub_id.value = countryclub_id;
+		sFrm.action = "/m/detail";
+		sFrm.submit();
+	}	
 </script>
 <%@include file="/WEB-INF/views/mobile/include/bottom.jsp"%>

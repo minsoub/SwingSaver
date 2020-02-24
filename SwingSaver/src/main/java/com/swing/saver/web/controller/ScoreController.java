@@ -765,6 +765,7 @@ public class ScoreController {
     	scoreParams.put("visit_date",       scoreVo.getVisit_date().replaceAll("-", ""));
     	scoreParams.put("countryclub_id",   scoreVo.getContryclub_id());
     	scoreParams.put("user_id",          String.valueOf(userId));
+    	scoreParams.put("user_name",        qrVo.getUsername());
     	////////////////////////////////////////////////////////////////
     	String rtnJson = adminService.scoreLog(scoreParams);
     	LOGGER.debug(rtnJson);

@@ -88,7 +88,7 @@ public class MobileController extends CommonController {
      * @param request
      * @return
      */
-    @GetMapping("/search")
+    @RequestMapping("/search")
     public ModelAndView mobileSearchForm(GolfVo vo, HttpServletRequest request,HttpSession session,ModelAndView mv,RedirectAttributes redirectAttributes) throws ApiException, IOException {
     	if (vo.getWord()!= null)
     	{    	

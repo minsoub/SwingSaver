@@ -31,7 +31,7 @@
 
                         <div class="question">
                         	<p>사용여부</p>
-                        	<input type="checkbox" id="use_check" name="use_check" value="Y" checked>사용여부 (체크시 사용함)
+                        	<input type="checkbox" id="use_yn" name="use_yn" value="Y" checked>사용여부 (체크시 사용함)
                         </div>        
          
                         <div class="question">

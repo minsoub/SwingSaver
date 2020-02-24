@@ -26,12 +26,12 @@
                         </div>
                         <div class="question">
                             <p>정렬순서</p>
-                            <input type="number" id="order_no" name="order_no" placeholder="순서" maxlength="3"  value="99"  value="${advInfo.order_no}"/>
+                            <input type="number" id="order_no" name="order_no" placeholder="순서" maxlength="3"  value="${advInfo.order_no}"/>
                         </div>  
 
                         <div class="question">
                         	<p>사용여부</p>
-                        	<input type="checkbox" id="use_check" name="use_check" value="Y" <c:if test="${use_check eq 'Y'}">checked</c:if>>사용여부 (체크시 사용함)
+                        	<input type="checkbox" id="use_yn" name="use_yn" value="Y" <c:if test="${use_yn eq 'Y'}">checked</c:if>>사용여부 (체크시 사용함)
                         </div>        
          
                         <div class="question">
@@ -68,11 +68,11 @@ function fn_advSave()
         $("#site_url").focus();
         return;
     }   
-    if($("#imageFile").val() == ""){
-        alert("사이트 이미지를 입력하세요");
-        $("#imageFile").focus();
-        return;
-    }
+    //if($("#imageFile").val() == ""){
+    //    alert("사이트 이미지를 입력하세요");
+    //    $("#imageFile").focus();
+    //    return;
+    //}
 	    
     document.forms1.action = "/admin/advList/update";
     document.forms1.submit();

@@ -9,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
  *
  */
 public class AdverVo {
-
+ 
 	private int seq;
 	private String site_name;
 	private String site_url;
