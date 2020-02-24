@@ -33,6 +33,16 @@ public interface AdminService {
 	public String advCreate(Map<String, String> params) throws JsonProcessingException, ApiException;	
 	
 	/**
+	 * 광고제휴 사이트 수정
+	 * 
+	 * @param params
+	 * @return
+	 * @throws JsonProcessingException
+	 * @throws ApiException
+	 */
+	public String advUpdate(Map<String, String> params) throws JsonProcessingException, ApiException;	
+	
+	/**
 	 * 광고제휴 사이트 상세 정보 조회 (이미지 포함)
 	 * 
 	 * @param seq
@@ -41,4 +51,24 @@ public interface AdminService {
 	 * @throws IOException
 	 */
     public String getAdvertImgIncludeDetail(String seq) throws ApiException, IOException;
+    
+    /**
+     * 광고제휴 사이트 삭제 - 개별/일괄 삭제 포함
+     * 
+     * @param params
+     * @return
+     * @throws JsonProcessingException
+     * @throws ApiException
+     */
+    public String advertDelete(Map<String, String> params) throws JsonProcessingException, ApiException;  
+    
+    /**
+     * 스코어  QR 접속 시 로그를 등록한다. 
+     * 
+     * @param params
+     * @return
+     * @throws JsonProcessingException
+     * @throws ApiException
+     */
+    public String scoreLog(Map<String, String> params) throws JsonProcessingException, ApiException;	
 }

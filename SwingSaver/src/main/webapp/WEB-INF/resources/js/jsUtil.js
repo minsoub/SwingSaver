@@ -137,6 +137,8 @@ function pageUri() {
     	nextUri = "/score/scoreList";
     }else if("adm_pro_01_02.jsp" == arrayUri[maxLen-1]) {
     	nextUri = "/admin/market/proList";
+    }else if("advDetail.jsp" == arrayUri[maxLen-1]) {
+    	nextUri = "/admin/advList";
     }
     
     //alert(nextUri);

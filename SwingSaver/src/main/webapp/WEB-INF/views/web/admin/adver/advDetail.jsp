@@ -15,7 +15,6 @@
                         <button type="button" id="btnList"   class="sea-btn add-btn" data-target="#">
                         <img src="/image/back-list.png" cwidth="100%">광고사이트 목록</button>
                     </div>
-
                         
                     <div class="col-xs-12 table-box">
                         <div class="table-responsive">
@@ -23,7 +22,6 @@
                                 <colgroup>
                                     <col width="30%">
                                     <col width="70%">
-
                                 </colgroup>
 
                                 <tbody>
@@ -59,10 +57,6 @@
 
                 </div>
             </div>
-        
-        
-        
-        
  </section>
 
     <!--    그룹삭제 adm_02_02_01 -->
@@ -114,12 +108,11 @@ $(document).ready(function(){
     
     $("#delete").click(function(){
         var obj = new Object();
-        obj.country_id = "${areaInfo.country_id}";
-        obj.zone_id    = "${areaInfo.zone_id}";
+        obj.seq = "${advInfo.seq}";
 
         var jsonData = JSON.stringify(obj);
         console.dir(jsonData);
-        AjaxCall("/admin/area/deleteArea","POST",jsonData);
+        AjaxCall("/admin/advList/delete","POST",jsonData);
     });
     
     $("#close").click(function(){  	
@@ -130,13 +123,13 @@ $(document).ready(function(){
 // 그룹 수정화면으로 이동
 function fn_modify()
 {
-	document.form1.action = "/admin/area/modify";
+	document.form1.action = "/admin/advList/modify";
 	document.form1.submit();
 }
 // 그룹 리스트로 이동
 function fn_groupList()
 {
-	location.href="/admin/areaList";
+	location.href="/admin/advList";
 }
 </script>
 <%@include file="/WEB-INF/views/web/inc/admin_footer.jsp"%>

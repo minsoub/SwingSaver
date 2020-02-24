@@ -1045,7 +1045,7 @@ public class AdminController {
     @PostMapping(value="/advList/add")
     public ModelAndView advAdd(AdverVo adverVo, HttpServletRequest request, HttpSession session, ModelAndView mv, RedirectAttributes redirectAttributes) throws ApiException, IOException
     {
-    	LOGGER.debug("==================== AdminController golfAdd Start : ===================");
+    	LOGGER.debug("==================== AdminController advAdd Start : ===================");
     	Map<String, String> params = new HashMap<String, String>();
     	params.put("seq", 		String.valueOf(adverVo.getSeq()));
     	params.put("site_name", adverVo.getSite_name());
@@ -1068,7 +1068,7 @@ public class AdminController {
 	        String filePath = uploadPath + File.separator + savedName;
 	        adverVo.getImageFile().transferTo(new File(filePath));
 	    	String paramName = adverVo.getImageFile().getName();  // 파라미터명
-	    	params.put("image", savedName);
+	    	params.put("log_image", savedName);
     	}
 
     	String rtnJson = adminService.advCreate(params);
@@ -1088,7 +1088,6 @@ public class AdminController {
         }
                 
         mv.addObject("result", adverVo);
-    	LOGGER.debug("==================== AdminController golfAdd end : ===================");
     	mv.setViewName("web/admin/adver/advResult");
     	return mv;
     }  
@@ -1112,6 +1111,109 @@ public class AdminController {
         mv.setViewName("web/admin/adver/advDetail");
         
     	return mv;
-    }      
+    }   
+    
+    /**
+     * 광고 사이트 상세정보 화면 출력 (수정화면)
+     * @param request
+     * @return
+     */
+    @PostMapping("/advList/modify")
+    public ModelAndView advModify(AdverVo advVo, HttpServletRequest request, HttpSession session, ModelAndView mv, RedirectAttributes redirectAttributes) throws ApiException, IOException 
+    {
+
+    	ObjectMapper mapper = new ObjectMapper();
+    	String resultJson = adminService.getAdvertImgIncludeDetail(String.valueOf(advVo.getSeq()));  // 이미지 포함 광고 사이트 정보 조회
+    	Map<String, Object> goflMap = mapper.readValue(resultJson, new TypeReference<Map<String, Object>>(){});
+    	mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false); 
+    	List<AdverVo> mapList = mapper.convertValue(goflMap.get("advList"), TypeFactory.defaultInstance().constructCollectionType(List.class, AdverVo.class));    	
+        mv.addObject("advInfo", mapList.get(0));       
+               
+        mv.setViewName("web/admin/adver/advModify");
+        
+    	return mv;
+    }   
+    
+    /**
+     * 광고 사이트  정보를 수정한다. 
+     * 
+     * @param adverVo
+     * @param request
+     * @param session
+     * @param mv
+     * @param redirectAttributes
+     * @return
+     * @throws ApiException
+     * @throws IOException
+     */
+    @PostMapping(value="/advList/update")
+    public ModelAndView advUpdate(AdverVo adverVo, HttpServletRequest request, HttpSession session, ModelAndView mv, RedirectAttributes redirectAttributes) throws ApiException, IOException
+    {
+    	LOGGER.debug("==================== AdminController advUpdate Start : ===================");
+    	Map<String, String> params = new HashMap<String, String>();
+    	params.put("seq", 		String.valueOf(adverVo.getSeq()));
+    	params.put("site_name", adverVo.getSite_name());
+    	params.put("site_url",  adverVo.getSite_url());
+    	params.put("order_no",  adverVo.getOrder_no());
+    	params.put("log_image", adverVo.getLog_image());  // file
+    	params.put("description", adverVo.getDescription());
+    	
+    	if (adverVo.getUse_yn().isEmpty()) adverVo.setUse_yn("N");
+    	params.put("use_yn",    adverVo.getUse_yn());
+    	
+    	
+    	LOGGER.debug(adverVo.getImageFile().getOriginalFilename());
+    	if (!adverVo.getImageFile().isEmpty())
+    	{
+    		String orginFileName = adverVo.getImageFile().getOriginalFilename();
+    		int index = orginFileName.lastIndexOf(".");
+		    String fileExt = orginFileName.substring(index + 1);
+	        String savedName = UploadFileUtils.getTimeStamp()+"."+fileExt;
+	        String filePath = uploadPath + File.separator + savedName;
+	        adverVo.getImageFile().transferTo(new File(filePath));
+	    	String paramName = adverVo.getImageFile().getName();  // 파라미터명
+	    	params.put("log_image", savedName);
+    	}
+    	String rtnJson = adminService.advUpdate(params);
+    	
+    	// 결과값에 대해서 리턴한다.
+    	LOGGER.debug(rtnJson);
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});
+        // key : result, error
+        String result = map.get("result").toString();
+        if (result.equals("true"))
+        {
+        	adverVo.setResult(true);
+        }else {
+        	adverVo.setResult(false);
+        	adverVo.setError(map.get("error").toString());
+        }
+                
+        mv.addObject("result", adverVo);
+    	LOGGER.debug("==================== AdminController advUpdate end : ===================");
+    	mv.setViewName("web/admin/adver/advResult");
+    	
+    	return mv;
+    }  
+    
+    /**
+     * 광고 사이트 정보를 삭제한다. 
+     * 
+     * @param params
+     * @return
+     * @throws JsonProcessingException
+     * @throws ApiException
+     */
+    @PostMapping("/advList/delete")
+    public ModelAndView advDelete(@RequestBody Map<String, String> params) throws JsonProcessingException, ApiException {
+        ModelAndView mv = new ModelAndView();
+        LOGGER.debug("AdminController advDelete 시작");
+        String rtn = adminService.advertDelete(params);
+        mv.addObject("data",rtn);
+        mv.setViewName("jsonView");
+        LOGGER.debug("AdminController advDelete 종료");
+        return mv;
+    } 
     
 }

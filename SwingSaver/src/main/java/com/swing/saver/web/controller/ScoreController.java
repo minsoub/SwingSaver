@@ -20,6 +20,7 @@ import com.swing.saver.web.entity.ScoreMaster;
 import com.swing.saver.web.entity.ScoreVo;
 import com.swing.saver.web.entity.UserVo;
 import com.swing.saver.web.exception.ApiException;
+import com.swing.saver.web.service.AdminService;
 import com.swing.saver.web.service.RestService;
 import com.swing.saver.web.util.CommonUtil;
 import com.swing.saver.web.util.UploadFileUtils;
@@ -63,6 +64,9 @@ public class ScoreController {
     
     @Inject
     RestService restService;
+    
+    @Inject
+    AdminService adminService;
     
     /**
      * QR로 넘어 왔을 때 호출되는 메소드로 사용자 스코어 정보를 출력한다.
@@ -753,6 +757,18 @@ public class ScoreController {
     	mv.addObject("qrInfo", qrVo);
     	mv.addObject("parInfo1", parInfo1);
     	mv.addObject("parInfo2", parInfo2);
+    	
+    	/////////////////////////////////////////////////////////////////////////////////////
+    	// qr 접속 정보를 로그에 등록한다. 
+    	Map<String, String> scoreParams = new HashMap<String, String>();
+    	// 파라미터 등록 
+    	scoreParams.put("visit_date",       scoreVo.getVisit_date().replaceAll("-", ""));
+    	scoreParams.put("countryclub_id",   scoreVo.getContryclub_id());
+    	scoreParams.put("user_id",          String.valueOf(userId));
+    	////////////////////////////////////////////////////////////////
+    	String rtnJson = adminService.scoreLog(scoreParams);
+    	LOGGER.debug(rtnJson);
+    	/////////////////////////////////////////////////////////////////////////////////////
     	LOGGER.debug("==================== ScoreController qrAdd end : ===================");
     	mv.setViewName("web/score/screen_02");
     	return mv;

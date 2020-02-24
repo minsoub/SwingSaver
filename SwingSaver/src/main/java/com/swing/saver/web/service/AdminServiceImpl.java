@@ -1,6 +1,7 @@
 package com.swing.saver.web.service;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -72,6 +73,26 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	/**
+	 * 광고제휴 사이트 수정하기
+	 * 
+	 * @param params
+	 * @return
+	 * @throws JsonProcessingException
+	 * @throws ApiException
+	 */
+	public String advUpdate(Map<String, String> params) throws JsonProcessingException, ApiException
+	{
+        ObjectMapper mapper = new ObjectMapper();
+        String rtnJson = "";
+
+        rtnJson = sendMessage.sendHttpsStr(mapper.writeValueAsString(params), "/ords/swing/saver/advlist", "PUT", "application/json", true);
+
+        LOGGER.debug("광고제휴 사이트 수정  파라미터:{},응답:{}",params.toString(), rtnJson);
+
+        return rtnJson;
+	}	
+	
+	/**
 	 * 광고제휴 사이트 상세 정보 조회 (이미지 포함)
 	 * 
 	 * @param seq
@@ -90,5 +111,55 @@ public class AdminServiceImpl implements AdminService {
 
 
          return rtnJson;
+    }
+    
+    /**
+     * 광고제휴 사이트 삭제 - 개별/일괄 삭제 포함
+     * 
+     * @param params
+     * @return
+     * @throws JsonProcessingException
+     * @throws ApiException
+     */
+    public String advertDelete(Map<String, String> params) throws JsonProcessingException, ApiException
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        String rtnJson = "";
+        if(params.get("seq").indexOf(",") == -1) {
+            rtnJson = sendMessage.sendHttpsStr(mapper.writeValueAsString(params), "/ords/swing/saver/advlist", "DELETE", "application/json", true);
+        }else{
+            String[] subgrpList = params.get("seq").split(",");
+            Map<String,String> sendMap = new HashMap<String, String>();
+            int i=0;
+            for (String str: subgrpList) {
+                sendMap.clear();
+                sendMap.put("seq",str);
+                i++;
+                rtnJson = sendMessage.sendHttpsStr(mapper.writeValueAsString(sendMap), "/ords/swing/saver/advlist", "DELETE", "application/json", true);
+            }
+        }
+        LOGGER.debug("광고제휴 사이트 삭제 파라미터:{},응답:{}",params.toString(),rtnJson);
+
+        return rtnJson;
+    }
+    
+    /**
+     * 스코어  QR 접속 시 로그를 등록한다. 
+     * 
+     * @param params
+     * @return
+     * @throws JsonProcessingException
+     * @throws ApiException
+     */
+    public String scoreLog(Map<String, String> params) throws JsonProcessingException, ApiException
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        String rtnJson = "";
+
+        rtnJson = sendMessage.sendHttpsStr(mapper.writeValueAsString(params), "/ords/swing/saver/score/log", "POST", "application/json", true);
+
+        LOGGER.debug("스코어  QR 접속 시 로그 파라미터:{},응답:{}",params.toString(), rtnJson);
+
+        return rtnJson;
     }
 }

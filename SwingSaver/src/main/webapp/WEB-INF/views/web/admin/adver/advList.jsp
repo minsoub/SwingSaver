@@ -102,7 +102,7 @@ $(document).ready(function(){
     	fn_groupAdd();
     });
     $('#groupdelete').click(function() {
-        var chklen = $("input[id=groupid]:checkbox:checked").length;
+        var chklen = $("input[id=seq]:checkbox:checked").length;
         var _text = "";
         var _idtext = "";
         if(chklen == 0){
@@ -110,7 +110,7 @@ $(document).ready(function(){
             return;
         }else{
             var i = 1;
-            $('#groupid:checked').each(function() {
+            $('#seq:checked').each(function() {
                 _idtext = _idtext+$(this).val().split(",")[0];
                 _text= _text+$(this).val().split(",")[1];
                 if(i<chklen){
@@ -127,11 +127,11 @@ $(document).ready(function(){
     $("#delete").click(function(){
         var groupid = $("#selgrpuserId").val();
         var obj = new Object();
-        obj.groupid = groupid;
+        obj.seq = groupid;
 
         var jsonData = JSON.stringify(obj);
         console.dir(jsonData);
-        AjaxCall("/admin/group/deleteGroup","POST",jsonData);
+        AjaxCall("/admin/advList/delete", "POST", jsonData);
     });
     
     $("#close").click(function(){
