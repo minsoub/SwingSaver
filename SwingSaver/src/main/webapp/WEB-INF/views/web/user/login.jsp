@@ -56,12 +56,18 @@
         
     	$("#btnface").click(function(){
     		alert("준비중입니다!");
+    		document.forms1.action ="";
+    		return;
     	});
     	$("#btnkakao").click(function(){
     		alert("준비중입니다!");
+    		document.forms1.action ="";
+    		return;
     	});	
     	$("#btnNaver").click(function(){
     		alert("준비중입니다!");
+    		document.forms1.action ="";
+    		return;
     	});	
     });
     
