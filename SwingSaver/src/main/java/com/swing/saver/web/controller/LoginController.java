@@ -57,7 +57,7 @@ public class LoginController {
      * @param session
      * @return
      */
-    @GetMapping("/loginForm")
+    @RequestMapping("/loginForm")
     public ModelAndView loginForm(HttpServletRequest request, HttpSession session) {
     	ModelAndView mv = new ModelAndView();
     	String prev_url = null;
