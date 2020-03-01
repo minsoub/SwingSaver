@@ -61,4 +61,21 @@ public class MobileServiceImpl implements MobileService {
     	
     	return rtnJson;
     }
+    
+    /**
+     * 메인 광고 이미지 리스트 조회
+     * 
+     * @return
+     * @throws ApiException
+     */
+    public String getAdvList() throws ApiException
+    {
+        String rtnJson = "";
+
+        rtnJson = sendMessage.sendHttpsStr("/ords/swing/saver/advlist", "GET", "application/x-www-form-urlencoded",true);
+
+        LOGGER.debug("광고 등록 리스트 조회 응답:{}",rtnJson);
+
+        return rtnJson;
+    }
 }

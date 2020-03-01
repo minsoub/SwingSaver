@@ -32,6 +32,14 @@ public class LoginController {
     @Inject
     RestService restService;
 
+    /**
+     * 메인 페이지 접속 
+     * 
+     * @param mv
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @GetMapping("/")
     public ModelAndView index(ModelAndView mv, HttpServletRequest request) throws Exception {
         LOGGER.info("==================== LoginController index Strart : ====================");
@@ -41,11 +49,14 @@ public class LoginController {
         mv.setViewName("/index");
         return mv;
     }
+
     /**
-     * 1. 메소드명 : loginForm
-     * 2. 작성자 :
-     * 3. 설명 : 로그인폼
-     * */
+     * 로그인 페이지 호출
+     * 
+     * @param request
+     * @param session
+     * @return
+     */
     @GetMapping("/loginForm")
     public ModelAndView loginForm(HttpServletRequest request, HttpSession session) {
     	ModelAndView mv = new ModelAndView();
@@ -56,11 +67,22 @@ public class LoginController {
         }
         
     	mv.addObject("prev_url", "redirect:"+prev_url);
-    	mv.setViewName("web/log_01_01");
+    	mv.setViewName("web/user/login");
     	
     	return mv;
-        //return "web/log_01_01";
     }
+    /**
+     * 사용자 로그인을 수행한다.
+     * 
+     * @param loginVo
+     * @param request
+     * @param session
+     * @param mv
+     * @param redirectAttributes
+     * @return
+     * @throws ApiException
+     * @throws IOException
+     */
     @PostMapping(value = "/login")
     public String login(LoginVo loginVo, HttpServletRequest request,HttpSession session,ModelAndView mv,RedirectAttributes redirectAttributes) throws ApiException, IOException {
         LOGGER.debug("==================== LoginController login Strart : ====================");
@@ -120,6 +142,14 @@ public class LoginController {
         LOGGER.debug("==================== LoginController login End : ====================");
         return rtnUrl;
     }
+    /**
+     * 로그아웃
+     * 
+     * @param session
+     * @return
+     * @throws ApiException
+     * @throws UnsupportedEncodingException
+     */
     @GetMapping(value = "/logout")
     public String logout(HttpSession session) throws ApiException, UnsupportedEncodingException {
 

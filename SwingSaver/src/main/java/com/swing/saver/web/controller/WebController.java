@@ -56,18 +56,25 @@ public class WebController {
         return mv;
     }
     
+    /**
+     * 아이디 찾기    (/web/search/email)
+     * 비밀번호 찾기 (/web/search/pw)
+     * 
+     * @param page
+     * @return
+     */
     @GetMapping("/search/{page}")
     public String search(@PathVariable String page){
         String viewPage ="";
         if(StringUtils.isEmpty(page)){
             viewPage = "index";
-        }else if(page.equals("email")){
-            viewPage = "web/log_04_01";
-        }else if(page.equals("pw")){
-            viewPage = "web/log_03_01_01";
-        }else if(page.equals("pwreset")){
+        }else if(page.equals("email")){			// 아이디 찾기
+            viewPage = "web/user/id_search";
+        }else if(page.equals("pw")){			// 비밀번호 재설정
+            viewPage = "web/user/log_03_01_01";
+        }else if(page.equals("pwreset")){		// 이메일 전송 완료 페이지
             viewPage = "web/log_03_01_02";
-        }else if(page.equals("pwresetComp")){
+        }else if(page.equals("pwresetComp")){ 	// 비밀번호 재설정 완료 페이지
             viewPage = "web/log_03_02_02";
         }
 
@@ -91,7 +98,7 @@ public class WebController {
         LOGGER.debug("==================== WebController getResetpassword end : ===================={}");
 
         mv.addObject("confirmcode",key);
-        mv.setViewName("web/log_03_02_01");
+        mv.setViewName("web/user/log_03_02_01");
 
         return  mv;
     }
@@ -106,6 +113,17 @@ public class WebController {
         mv.setViewName("jsonView");
         return  mv;
     }
+    
+    /**
+     * 이메일(아이디) 찾은 결과 리스트를 화면에 출력한다.
+     * 
+     * @param userVo
+     * @param mv
+     * @param request
+     * @return
+     * @throws ApiException
+     * @throws IOException
+     */
     @PostMapping("/emailSearch")
     public ModelAndView emailsearch(UserVo userVo, ModelAndView mv, HttpServletRequest request) throws ApiException, IOException {
 
@@ -131,15 +149,42 @@ public class WebController {
             e.printStackTrace();
         }
         mv.addObject("emailList",list);
-        mv.setViewName("web/log_04_02");
+        mv.setViewName("web/user/id_search_result");
         return mv;
     }
 
+    /**
+     * 회원가입 페이지 연결 
+     * SNS 가입과 이메일 가입을 선택할 수 있도록 한다.
+     * 
+     * @param loginVo
+     * @param mv
+     * @param request
+     * @return
+     * @throws ApiException
+     * @throws IOException
+     */
     @GetMapping("/user/member")
     public ModelAndView memberForm(LoginVo loginVo, ModelAndView mv, HttpServletRequest request) throws ApiException, IOException {
-        mv.setViewName("web/log_02_01");
+        mv.setViewName("web/user/prev_regForm");
         return mv;
     }
+    /**
+     * 사용자 등록 폼을 출력한다.
+     * 
+     * @param loginVo
+     * @param mv
+     * @param request
+     * @return
+     * @throws ApiException
+     * @throws IOException
+     */
+    @GetMapping("/user/register")
+    public ModelAndView memberRegisterForm(LoginVo loginVo, ModelAndView mv, HttpServletRequest request) throws ApiException, IOException {
+        mv.setViewName("web/user/memberRegForm");
+        return mv;
+    }
+    
     @PostMapping("/user/join")
     public ModelAndView  memberjoin(@RequestBody Map<String, String> params) throws ApiException, IOException {
         ModelAndView mv = new ModelAndView();
@@ -164,7 +209,7 @@ public class WebController {
 
     @GetMapping("/user/joinSuccess")
     public String  memberjoinOk() {
-        return "web/log_02_02";
+        return "web/user/joinResult";
     }
 
     @PostMapping("/user/modify")

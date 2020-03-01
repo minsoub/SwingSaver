@@ -586,7 +586,7 @@ section {
     background-color: #353636;
     border: 1px solid #353636;
     line-height: 0;
-    font-size: 20px;
+    font-size: 17px;
     display: inline-block;
     box-sizing: border-box;
     padding: 20px 15px;
@@ -711,6 +711,26 @@ section {
     margin-top: 10px;
     display: inline-block;
 }
+
+
+.form-btn{padding: 0;}
+
+.kakao_log{background-color: #ffcd37;text-align: left;padding-left: 30px;
+    border: 1px solid #ffcd37;
+    margin-top: 5px;
+    color: #321d1d;}
+
+.naver_log{background-color: #3cce42;
+    border: 1px solid #3cce42;padding-right: 15px;text-align: left;padding-left: 30px;
+    border-right: 1px solid #fff;
+    margin-right: 10px;}
+
+
+
+.face_log{background-color: #2b7be6;text-align: left;padding-left: 30px;
+    border: 1px solid #2b7be6;
+    margin-top: 5px;}
+
 
 .search-login {
     margin-top: 10px;
@@ -885,7 +905,7 @@ form p {
 
 
 .joinus-page form .email-q-01 select {
-    width: 28%;
+    width: 26%;
     border: 1px solid #dcdcdc;
     line-height: 42px;
     height: 42px;
@@ -1032,13 +1052,85 @@ form p {
 
 
 .tex-03 {
-    width: 26%;
+    width: 25.8%;
     margin-left: 4px;
 }
 
 .pro-wrap{
     margin-bottom: 30px;
 }
+
+        #joinForm {
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        #joinForm  ul.join_box {
+            border: 1px solid #ddd;
+            background-color: #fff;
+        }
+
+        .checkBox,
+        .checkBox>ul {
+            position: relative;
+        }
+
+        .checkBox>ul>li {
+            float: left;
+        }
+
+        .checkBox>ul>li:first-child {
+            width: 85%;
+            padding: 15px;
+            font-weight: 600;
+            color: #888;
+        }
+
+        .checkBox>ul>li:nth-child(2) {
+            position: absolute;
+            top: 50%;
+            right: 30px;
+            margin-top: -12px;
+        }
+
+        .checkBox textarea {
+            width: 96%;
+            height: 90px;
+            margin: 0 2%;
+            background-color: #f7f7f7;
+            color: #888;
+            border: none;
+        }
+
+        .footBtwrap {
+            margin-top: 15px;
+        }
+
+        .footBtwrap>li {
+            float: left;
+            width: 50%;
+            height: 60px;
+        }
+
+        .footBtwrap>li>button {
+            display: block;
+            width: 100%;
+            height: 100%;
+            font-size: 20px;
+            text-align: center;
+            line-height: 60px;
+        }
+
+        .fpmgBt1 {
+            background-color: #fff;
+            color: #888
+        }
+
+        .fpmgBt2 {
+            background-color: lightsalmon;
+            color: #fff
+        }
+
 
 .pro-box{
     border: 1px solid #dbdbdb;
@@ -2424,6 +2516,8 @@ tbody {
         display: inline-block;
     }
 
+    .face_log{margin-top: 5px!important;}
+    .kakao_log{margin-top: 5px!important;}
 
     .main-pro {
         margin-top: 40px;
@@ -2560,7 +2654,7 @@ tbody {
 
 
     .email-q-01 input[type="text"] {
-        width: 34%;
+        width: 33%;
     }
 
     .content {

@@ -1,6 +1,7 @@
 package com.swing.saver.web.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +17,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.swing.saver.web.entity.AreaVo;
 import com.swing.saver.web.entity.CodeVo;
+import com.swing.saver.web.entity.GolfVo;
 import com.swing.saver.web.entity.UserVo;
 import com.swing.saver.web.exception.ApiException;
 import com.swing.saver.web.service.RestService;
@@ -89,6 +91,38 @@ public abstract class CommonController {
         
         // groupList => RestFul Service에서 등록한 명
         List<AreaVo> areaList = mapper.convertValue(map.get("areaList"), TypeFactory.defaultInstance().constructCollectionType(List.class,AreaVo.class));
+
+        return areaList;
+    }
+    
+    /***
+     * 그 지역에 속한 골프장 리스트를 리턴한다.
+     * 
+     * @param country_id
+     * @param zone_id
+     * @return
+     * @throws ApiException
+     * @throws IOException
+     */
+    public List<GolfVo> getGolfList(String country_id, String zone_id) throws ApiException, IOException {
+    	String rtnJson = restService.getGolfList(country_id, zone_id);
+    	LOGGER.debug(rtnJson);
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});
+
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
+        List<GolfVo> areaList = null;
+        
+        LOGGER.debug("map size : " + map.size());
+        if (!map.containsKey("golfList"))
+        {
+        	areaList = new ArrayList<GolfVo>();
+        	GolfVo golf = mapper.readValue(rtnJson,GolfVo.class);
+        	areaList.add(golf);
+        }else {
+        	// groupList => RestFul Service에서 등록한 명
+        	areaList = mapper.convertValue(map.get("golfList"), TypeFactory.defaultInstance().constructCollectionType(List.class,GolfVo.class));
+        }
 
         return areaList;
     }

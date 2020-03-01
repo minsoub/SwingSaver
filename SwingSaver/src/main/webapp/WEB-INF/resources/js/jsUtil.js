@@ -109,7 +109,7 @@ function pageUri() {
     var arrayUri= currUri.split("\/");
     var maxLen = arrayUri.length;
 
-    if("log_02_01.jsp" == arrayUri[maxLen-1]){
+    if("memberRegForm.jsp" == arrayUri[maxLen-1]){		// 사용자 가입 폼에서
         nextUri = "/web/user/joinSuccess";
     }else if("mypage_01.jsp" == arrayUri[maxLen-1]){
         nextUri = "/web/mypage";

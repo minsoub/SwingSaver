@@ -44,7 +44,7 @@ public class SendMessageImpl implements SendMessage {
         HttpsURLConnection httpConn = null;
         String url = endPointUrl + apiPath;
         String json = "";
-        LOGGER.debug("sendHttpsStr : {},{}", content,params);
+        LOGGER.debug("sendHttpsStr : {},{}", apiPath,params);
         try {
 
             byte[] paramsBytes = params.getBytes("UTF-8");
@@ -76,7 +76,7 @@ public class SendMessageImpl implements SendMessage {
             }
             br.close();
 
-            LOGGER.info("response ={}",response.toString());
+            LOGGER.info("response ={}", response.toString());
             httpConn.disconnect();
             json = response.toString();
 

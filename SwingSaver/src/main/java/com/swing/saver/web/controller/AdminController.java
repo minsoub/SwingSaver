@@ -14,6 +14,8 @@ import com.swing.saver.web.entity.FarVo;
 import com.swing.saver.web.entity.GolfVo;
 import com.swing.saver.web.entity.GroupVo;
 import com.swing.saver.web.entity.LoginVo;
+import com.swing.saver.web.entity.ScoreListVo;
+import com.swing.saver.web.entity.StsVo;
 import com.swing.saver.web.entity.UserVo;
 import com.swing.saver.web.exception.ApiException;
 import com.swing.saver.web.service.AdminService;
@@ -39,6 +41,11 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -54,7 +61,7 @@ import java.util.Map.Entry;
  */
 @Controller
 @RequestMapping(Constant.ADMIN_PREFIX)
-public class AdminController {
+public class AdminController extends CommonController {
 	private final static Logger LOGGER = LoggerFactory.getLogger(AdminController.class);
 	
 	// dispatcher-servlet.xml에 정의
@@ -76,6 +83,28 @@ public class AdminController {
     public String adminLoginForm(HttpServletRequest request) {
         return "web/admin/adm_log";
     }
+    
+    /**
+     * 로그아웃
+     * 
+     * @param session
+     * @return
+     * @throws ApiException
+     * @throws UnsupportedEncodingException
+     */
+    @GetMapping(value = "/logout")
+    public String logout(HttpSession session) throws ApiException, UnsupportedEncodingException {
+
+        LOGGER.debug("==================== AdminController logout Start: {}====================");
+        if ( session.getAttribute("login") != null ){
+            // 기존에 login이란 세션 값이 존재한다면
+            session.invalidate(); // 세션 전체를 날려버림
+        }
+
+        LOGGER.debug("==================== AdminController logout End : {}====================");
+        return "redirect:/admin";
+    }    
+    
     /**
      * implement Admin login process.
      * @param loginVo
@@ -965,28 +994,7 @@ public class AdminController {
     	mv.setViewName("web/admin/adm_04_02");
     	return mv;
     }       
-    
-    /**
-     * 코드 정보를 조회해서 리턴한다.
-     * 
-     * @param groupType
-     * @return
-     * @throws IOException
-     * @throws ApiException
-     */
-    private List<CodeVo> getCodeList(String groupType) throws IOException, ApiException {
-
-    	String rtnJson = restService.getCodeList(groupType);   // 코드 정보 조회
-    	LOGGER.debug(rtnJson);
-        ObjectMapper mapper = new ObjectMapper();
-        Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});
-        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);        
-        // groupList => RestFul Service에서 등록한 명
-        List<CodeVo> codeList = mapper.convertValue(map.get("codeList"), TypeFactory.defaultInstance().constructCollectionType(List.class,CodeVo.class));
-
-        return codeList;
-    }
-    
+        
     /**
      * 광고 등록 관리 
      * 모바일 웹에서 출력한다. 
@@ -1007,10 +1015,7 @@ public class AdminController {
         Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});
 
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
-        
-        // groupList => RestFul Service에서 등록한 명
         List<AdverVo> advList = mapper.convertValue(map.get("advList"), TypeFactory.defaultInstance().constructCollectionType(List.class,AdverVo.class));
-
         mv.addObject("advList", advList);
         mv.setViewName("web/admin/adver/advList");
         LOGGER.debug("==================== AdminController advList end : ===================");
@@ -1160,7 +1165,8 @@ public class AdminController {
     	params.put("log_image", adverVo.getLog_image());  // file
     	params.put("description", adverVo.getDescription());
     	
-    	if (adverVo.getUse_yn().isEmpty()) adverVo.setUse_yn("N");
+    	if (adverVo.getUse_yn() == null)  adverVo.setUse_yn("N");
+    	else if (adverVo.getUse_yn().isEmpty()) adverVo.setUse_yn("N");
     	params.put("use_yn",    adverVo.getUse_yn());
     	
     	
@@ -1217,5 +1223,138 @@ public class AdminController {
         LOGGER.debug("AdminController advDelete 종료");
         return mv;
     } 
+    
+    /**
+     * QR 접속 통계 현황을 출력한다.
+     * 
+     * @param stdate
+     * @param etdate
+     * @param country_id
+     * @param zone_id
+     * @param countryclub_id
+     * @param request
+     * @return
+     * @throws ApiException
+     * @throws IOException
+     */
+    @SuppressWarnings("rawtypes")
+	@RequestMapping(value="/stsList")
+    public ModelAndView  stsList(@RequestParam(value="stdate", required=false)String stdate, 
+    		@RequestParam(value="etdate", required=false)String etdate, @RequestParam(value="country_id", required=false)String country_id, 
+    		@RequestParam(value="zone_id", required=false)String zone_id, @RequestParam(value="countryclub_id", required=false)String countryclub_id, HttpServletRequest request) throws ApiException, IOException {
+        ModelAndView mv = new ModelAndView();
+        LOGGER.debug("==================== AdminController stsList Strart : ===================={}");
+        AdminVo loginVo = (AdminVo)request.getSession().getAttribute("login");
+
+    	LOGGER.debug("Parameter info : ");
+    	LOGGER.debug("Parameter info : " + stdate);
+    	LOGGER.debug("Parameter info : " + etdate);
+    	LOGGER.debug("Parameter info : " + country_id);
+    	LOGGER.debug("Parameter info : " + zone_id);
+    	LOGGER.debug("Parameter info : " + countryclub_id);
+    	
+    	// stdate와 etdate가 없으면 현재의 날짜로 기준으로 한다.
+    	if (stdate == null || "".contentEquals(stdate))
+    	{
+    		Calendar cal = Calendar.getInstance();
+    		Date time = new Date();
+    		cal.setTime(time);
+    		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    		
+    		etdate = format.format(time);
+    		cal.add(Calendar.DATE, -7);
+    		stdate = format.format(cal.getTime());
+    	}
+
+        // 국가 조회
+        List<CodeVo> countryList = getCodeList("ctry");
+        mv.addObject("countryList", countryList);
+        
+        // 지역 조회
+        List<AreaVo> areaList = getAreaList("KR");	// Default KR
+        mv.addObject("areaList", areaList); 
+        
+        // 지역에 속한 골프장 조회
+        // 골프장 리스트 조회 (그 지역에 포함된)
+        if (!"".equals(zone_id) && zone_id != null)
+        {
+        	List<GolfVo> golfList = getGolfList(country_id, zone_id);
+        	mv.addObject("golfList", golfList);
+        }
+        
+        // 접속 통계현황 조회
+    	String rtnJson = adminService.stsList(stdate.replaceAll("-", ""), etdate.replaceAll("-", ""), 
+    											country_id, zone_id, countryclub_id);  
+    	LOGGER.debug(rtnJson);
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});
+
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
+        List<StsVo> stsList = mapper.convertValue(map.get("stsList"), TypeFactory.defaultInstance().constructCollectionType(List.class, StsVo.class));
+        /*
+	 	['Visit date', '골프장명', ''],
+	 	['20200224', 2, 3],
+	 	['20200225', 1, 3],
+	 	['20200226', 3, 3]
+        */
+        ArrayList<String> headerList = new ArrayList<String>();
+        ArrayList<String> dateList = new ArrayList<String>();
+        ArrayList<ArrayList<String>> bodyList = new ArrayList<ArrayList<String>>();
+
+        
+        headerList.add("Visit Date");
+        for (int i=0; i<stsList.size(); i++)
+        {
+        	StsVo vo = stsList.get(i);
+        	if (headerList.contains(vo.getCountryclub_nm()) == false)
+        	{
+        		headerList.add(vo.getCountryclub_nm());  // 골프자명 저장
+        	}
+        	if (headerList.contains(vo.getVisit_date()) == false)
+        	{
+        		dateList.add(vo.getVisit_date());   // 날짜 저장 
+        	}
+        }
+        int max = -1;
+        // 날짜 개수만큼 돈다
+        for (int i=0; i<dateList.size(); i++)
+        {
+        	ArrayList<String> arr = new ArrayList<String>();
+        	arr.add(dateList.get(i));   // 날짜
+        	
+        	for (int j=1; j<headerList.size(); j++)		// 헤더를 돈다
+        	{
+        		int found = 0;
+        		for (int k=0; k<stsList.size(); k++)	// 맵 데이터에서 
+                {
+                	StsVo vo = stsList.get(k);
+                	if (vo.getCountryclub_nm().equals(headerList.get(j)) && dateList.get(i).equals(vo.getVisit_date()))  // 날짜/명칭 같다면
+                	{
+                		arr.add(String.valueOf(vo.getCnt()));
+                		if (vo.getCnt() > max) max = vo.getCnt();
+                		found = 1;
+                		break;
+                	}
+                }
+        		if (found == 0) arr.add("0");
+        	} 
+        	bodyList.add(arr);
+        }
+        bodyList.add(0, headerList);
+
+        mv.addObject("dataList", bodyList);
+        mv.addObject("maxCnt",   max);
+        LOGGER.debug("stsList size : " + stsList.size());
+        mv.addObject("stsList", stsList);
+        mv.addObject("stdate", stdate.replaceAll("-", ""));
+        mv.addObject("etdate", etdate.replaceAll("-", ""));
+        mv.addObject("country_id", country_id);
+        mv.addObject("zone_id", zone_id);
+        mv.addObject("countryclub_id", countryclub_id);
+        
+        mv.setViewName("web/admin/sts/sts_list");
+        LOGGER.debug("==================== AdminController stsList end : ===================={}");
+        return mv;
+    }
     
 }

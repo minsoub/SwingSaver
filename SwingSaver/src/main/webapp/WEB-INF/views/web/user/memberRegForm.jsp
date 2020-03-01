@@ -49,15 +49,6 @@
                 <input class="tex-03" type="text" id="month" name="month" placeholder="월"  />
                 <input class="tex-03 tex-04" type="text" id="day" name="day" placeholder="일"  />
             </div>
-            <%--<div class="question">
-                <p>전화번호</p>
-                <input type="text" id="phone" placeholder="전화번호(-)빼고 입력"   class="phone-number-check"  />
-            </div>
-            <div class="question">
-                <p>성별</p>
-                <div class="rad-fir"><input type="radio" name="gender" value="M" checked="checked"/> 남자</div>
-                <div class="rad-fir"><input type="radio" name="gender" value="F" /> 여자</div>
-            </div>--%>
 
             <div class="question">
                 <p><span></span>비밀번호</p>
@@ -68,20 +59,52 @@
                 <input type="password" id="pwdConfirm" placeholder="비밀번호 재확인"  />
             </div>
 
-<!--
-            <div class="question">
-                <p>그룹아이디</p>
-                <input type="text" placeholder="멤버요청할 그룹/소그룹아이디 입력" required />
-            </div>            
-            <div class="question">
-                <p>직책</p>
-                <select class="que-val" name="grade">
-                  <option value="grade" selected="selected">직책선택</option>
-                  <option value="pro">Pro</option>
-                  <option value="student">Student</option>
-                </select>
-            </div>              
--->
+<!-- 약관 정의  -->
+
+                <ul class="join_box">
+                    <li class="checkBox check01">
+                        <ul class="clearfix">
+                            <li>이용약관 동의(필수)</li>
+                            <li class="checkBtn">
+                                <input type="checkbox" name="chk1" id="chk1" value="Y" checked>동의
+                            </li>
+                        </ul>
+                        <textarea name="" id="">여러분을 환영합니다.
+스윙세이버 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 스윙세이버 서비스의 이용과 관련하여 스윙세이버 서비스를 제공하는 스윙세이버 주식회사(이하 ‘스윙세이버’)와 이를 이용하는 스윙세이버 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 스윙세이버 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
+                        </textarea>
+                    </li>
+                    <li class="checkBox check02">
+                        <ul class="clearfix">
+                            <li>개인정보 수집 및 이용 동의(필수)</li>
+                            <li class="checkBtn">
+                                <input type="checkbox" name="chk2" id="chk2" value="Y" checked>동의
+                            </li>
+                        </ul>
+                        <textarea name="" id="">1.수집‧이용목적 : 스윙세이버 홈페이지 사용
+2.수집 항목 : (필수) 이름, 생년월일, 연락처(본인), 이메일
+3.보유기간 : 회원가입일로부터 1년
+위의 목적으로 개인정보 수집‧이용에 동의합니다.
+                        </textarea>
+                    </li>
+                    <li class="checkBox check03">
+                        <ul class="clearfix">
+                            <li>마케팅/홍보의 수집 및 이용 동의(선택)</li>
+                            <li class="checkBtn">
+                                <input type="checkbox" name="chk3" id="chk3" value="Y" checked>동의
+                            </li>
+                        </ul>
+                        <textarea name="" id="">1. 마케팅 정보 선택적 수집·이용 목적
+스윙세이버 고객에 대한 편의제공, 귀사 및 제휴업체의 상품·서비스 안내 및 이용권유, 사은·판촉행사 등의 마케팅 활동, 시장조사 및 상품·서비스 개발연구 등을 목적으로 수집·이용 합니다.
+2. 수집·이용할 마케팅 정보의 항목
+3. 개인식별정보: 성명, 전화번호, e-mail, 주소 등.
+4. 고객 ID, 접속 일시, IP주소 SNS아이디 등.
+5. 수집이용하는 마케팅 정보의 보유 및 이용기간 : 동의일로부터 회원 탈퇴 혹은 마케팅 동의 해제시 까지 보유·이용합니다.
+※ 상기 내용이 변동하는 경우 당사의 인터넷홈페이지 게시 등을 통해 그 내용을 공시합니다.
+                        </textarea>
+                    </li>
+                </ul>
+
+<!-- 약관 정의 끝  -->
             <button class="form-btn" type="button" id="member">등록</button>
         </form>
     </div>
@@ -115,6 +138,7 @@
             var pwd = $("#pwd").val();
             var pwdConfirm = $("#pwdConfirm").val();
 
+            
             if(email01 =="" || selemail02 == ""){
                 alert("이메일 정보를 확인 하세요");
                 return;
@@ -157,6 +181,19 @@
                 alert("올바른 이메일 주소를 입력하세요");
                 return;
             }
+            
+            // 약관 동의 여부
+            if ($('input:checkbox[id="chk1"]').is(":checked") == false)
+            {
+            	alert("이용약관 동의는 필수입니다!!!");
+            	return;
+            }
+            if ($('input:checkbox[id="chk2"]').is(":checked") == false)
+            {
+            	alert("개인정보 수입 및 이용 동의는 필수입니다!!!");
+            	return;
+            }
+            
             var obj = new Object();
             obj.email = email;
             obj.firstname = firstname;

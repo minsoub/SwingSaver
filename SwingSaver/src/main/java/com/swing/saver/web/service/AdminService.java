@@ -71,4 +71,18 @@ public interface AdminService {
      * @throws ApiException
      */
     public String scoreLog(Map<String, String> params) throws JsonProcessingException, ApiException;	
+    
+    /**
+     * QR 접속 통계현황을 조회한다.
+     * 
+     * @param stdate
+     * @param etdate
+     * @param country_id
+     * @param zone_id
+     * @param countryclub_id
+     * @return
+     * @throws ApiException
+     * @throws IOException
+     */
+    public String stsList(String stdate, String etdate, String country_id, String zone_id, String countryclub_id) throws ApiException, IOException;		// 스코어정보 리스트 조회
 }

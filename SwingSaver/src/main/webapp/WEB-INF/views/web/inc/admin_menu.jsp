@@ -22,7 +22,12 @@
                     </li>
                 </ul>
                 <ul>
-                	<li><a href="/admin/advList">광고관리</a></li>
+                	<li><a class="<c:if test="${fn:indexOf(reqUri, 'sts_list') != -1}">active</c:if>" href="/admin/stsList">QR접속현황</a></li>
+                	<li><a class="<c:if test="${fn:indexOf(reqUri, 'advList') != -1}">active</c:if>" href="/admin/advList">광고관리(모바일)</a></li>
+                </ul>
+                
+                <ul>
+                	<li><a href="/admin/logout">로그아웃</a>
                 </ul>
             </div>
        </div>

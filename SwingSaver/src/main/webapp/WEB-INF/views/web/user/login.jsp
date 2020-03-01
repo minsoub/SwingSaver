@@ -31,6 +31,9 @@
                     <li><a href="/web/user/member"><strong>회원가입하기</strong></a></li>
                 </ul>
             </div>
+            <button class="form-btn naver_log" id="btnNaver"><img src="../image/naver-icon.png" style="    padding-right: 15px;border-right: 1px solid #fff;margin-right: 10px;"> 네이버로 로그인</button>
+            <button class="form-btn face_log"  id="btnface"><img src="../image/facebook-icon.png" style="    padding-right: 15px;border-right: 1px solid #fff;margin-right: 10px;"> 페이스북으로 로그인</button>
+            <button class="form-btn kakao_log" id="btnkakao"><img src="../image/kakao-icon.png" style="    padding-right: 15px;border-right: 1px solid #fff;margin-right: 10px;"> 카카오로 로그인</button>            
         </form>
     </div>
     <!-- Footer -->
@@ -48,23 +51,18 @@
     console.log(message);
     $(document).ready(function(){
         $("#login").click(function(){
-            /* var email = $("#email").val();
-            var password=$("#password").val();
-
-            if(email == ""){
-                alert("이메일 주소를 입력하세요");
-                $("#email").focus();
-                return;
-            }
-            if(password == ""){
-                alert("비밀번호를 입력하세요");
-                $("#password").focus();
-                return;
-            }
-            document.forms1.action = "/login";
-            document.forms1.submit(); */
         	fn_login();
         });
+        
+    	$("#btnface").click(function(){
+    		alert("준비중입니다!");
+    	});
+    	$("#btnkakao").click(function(){
+    		alert("준비중입니다!");
+    	});	
+    	$("#btnNaver").click(function(){
+    		alert("준비중입니다!");
+    	});	
     });
     
     function fn_login(){

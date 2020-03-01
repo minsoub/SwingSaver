@@ -29,6 +29,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
+import com.swing.saver.web.entity.AdverVo;
 import com.swing.saver.web.entity.AreaVo;
 import com.swing.saver.web.entity.Constant;
 import com.swing.saver.web.entity.GolfVo;
@@ -78,6 +79,13 @@ public class MobileController extends CommonController {
     	mv.addObject("golfList", golfList);
     	mv.setViewName("mobile/home");
     	mv.addObject("setMenu", "home");
+    	    	    	
+    	rtnJson = restService.getAdvList();   //  광고관리 정보 조회 (use_yn이 Y인 것에 대해서만 화면상에 보여 주어야 한다)
+    	ObjectMapper mapp= new ObjectMapper();
+        Map<String, Object> mapAd = mapp.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
+        List<AdverVo> advList = mapp.convertValue(mapAd.get("advList"), TypeFactory.defaultInstance().constructCollectionType(List.class,AdverVo.class));
+        mv.addObject("advList", advList);
     	
         return mv;
     }

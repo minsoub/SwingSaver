@@ -162,4 +162,32 @@ public class AdminServiceImpl implements AdminService {
 
         return rtnJson;
     }
+    
+    /**
+     * QR 접속 통계현황을 조회한다.
+     * 
+     * @param stdate
+     * @param etdate
+     * @param country_id
+     * @param zone_id
+     * @param countryclub_id
+     * @return
+     * @throws ApiException
+     * @throws IOException
+     */
+    public String stsList(String stdate, String etdate, String country_id, String zone_id, String countryclub_id) throws ApiException, IOException
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        String rtnJson = "";
+        Map<String,String> sendMap = new HashMap<String, String>();
+        sendMap.put("stdate", 	  	  stdate);		    // 시작날짜 
+        sendMap.put("etdate",     	  etdate);		    // 종료날짜
+        sendMap.put("country_id", 	  country_id);	    // 국가코드
+        sendMap.put("zone_id",		  zone_id);		    // 지역코드
+        sendMap.put("countryclub_id", countryclub_id);	// 골프장 코드
+        
+        rtnJson = sendMessage.sendHttpsStr(mapper.writeValueAsString(sendMap), "/ords/swing/saver/score/log/stslist", "POST", "application/json",true);
+        
+        return rtnJson; 
+    }
 }
