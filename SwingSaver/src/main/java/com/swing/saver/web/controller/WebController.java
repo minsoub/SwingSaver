@@ -40,7 +40,7 @@ public class WebController {
     RestService restService;
 
     @GetMapping("/mypage")
-    public ModelAndView myinfo(HttpSession session,ModelAndView mv) throws IOException, ApiException {
+    public ModelAndView mypage(HttpSession session,ModelAndView mv) throws IOException, ApiException {
         LoginVo loginVo = (LoginVo)session.getAttribute("login");
         UserVo userVo = null;
 
@@ -53,6 +53,19 @@ public class WebController {
 
 
         mv.setViewName("web/mypage_01");
+        return mv;
+    }
+    /**
+     * 개인정보 보호정책
+     * @param session
+     * @param mv
+     * @return
+     * @throws IOException
+     * @throws ApiException
+     */
+    @GetMapping("/info")
+    public ModelAndView myinfo(HttpSession session,ModelAndView mv) throws IOException, ApiException {
+        mv.setViewName("web/info/info01");
         return mv;
     }
     

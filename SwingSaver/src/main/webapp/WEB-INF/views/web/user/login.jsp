@@ -4,6 +4,8 @@
 
 <head>
     <%@include file="/WEB-INF/views/web/inc/header.jsp"%>
+    
+    <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 </head>
 
 <body>
@@ -36,14 +38,16 @@
             <button class="form-btn kakao_log" id="btnkakao"><img src="../image/kakao-icon.png" style="    padding-right: 15px;border-right: 1px solid #fff;margin-right: 10px;"> 카카오로 로그인</button>            
         </form>
     </div>
+    <div id="naver_id_login"></div>
     <!-- Footer -->
 
     <%@include file="/WEB-INF/views/web/inc/footer.jsp"%>
 
     <!-- Footer -->
-
+	<form  id='frm' name="'frm'" method="GET"></form>
 </body>
 <script>
+
     var message = "${returnCode}";
     if(message == "9999"){
         alert("로그인에 실패하였습니다. \n Email 및 비밀번호를 확인해주세요");
@@ -65,11 +69,22 @@
     		return;
     	});	
     	$("#btnNaver").click(function(){
-    		alert("준비중입니다!");
     		document.forms1.action ="";
-    		return;
+    		fn_naver_login();
     	});	
     });
+    
+    function fn_naver_login()
+    {
+    	var client_id = "${naverId}";  // "HU7BlUDoiX1K80yIxsVP";
+    	var response_type = "code";
+    	var redirect_uri = "${naverUrl}";  // encodeURIComponent("https://localhost:8443/naverLoginReturn");
+    	var state = "${state}";
+    	var url = "https://nid.naver.com/oauth2.0/authorize?client_id="+client_id+"&response_type="+response_type+"&redirect_uri="+redirect_uri+"&state="+state;
+    	alert(url);
+    	document.domain = "localhost";
+    	window.open(url, "popup", "width=400, height=600, resizable=yes, scrollbars=auto");
+    }
     
     function fn_login(){
     	var email = $("#email").val();

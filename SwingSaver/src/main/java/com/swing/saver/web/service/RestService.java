@@ -22,6 +22,7 @@ import java.util.Map;
 public interface RestService {
 
     public LoginVo loginProcess(LoginVo loginVo, HttpSession session) throws ApiException, IOException;
+    public LoginVo loginSnsProcess(LoginVo loginVo, HttpSession session) throws ApiException, IOException;
     public String emailList(UserVo userVo) throws ApiException, IOException;
     public String oAuthToken();
     public String join(Map<String,String> joinMap) throws ApiException, JsonProcessingException;

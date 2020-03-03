@@ -65,7 +65,25 @@ public class RestServiceImpl implements RestService {
         }
         return loginVo;
     }
+    @Override
+    public LoginVo loginSnsProcess(LoginVo loginVo, HttpSession session) throws ApiException, IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        String json = "";
+        String rtnJson = "";
 
+        try {
+
+            LOGGER.debug("authUser 시작:{}",json);
+            rtnJson = sendMessage.sendHttpsStr(mapper.writeValueAsString(loginVo),"/ords/swing/saver/snsauth","POST", "application/json",false);
+
+            loginVo = mapper.readValue(rtnJson,LoginVo.class);
+            LOGGER.debug("authUser 시작:{}",rtnJson);
+
+        } catch (JsonProcessingException e) {
+            throw new ApiException(e.getMessage());
+        }
+        return loginVo;
+    }
     @Override
     public String emailList(UserVo userVo) throws ApiException, IOException {
         ObjectMapper mapper = new ObjectMapper();
