@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -34,6 +35,15 @@ public class CommonUtil {
 	public static final String naverReturUrl = "https://localhost:8443/naverLoginReturn";
 	public static final String naverClientId = "HU7BlUDoiX1K80yIxsVP";
 	public static final String naverKey = "9vEYPAM0l3";
+	
+	public static final String kakaoReturnUrl = "https://localhost:8443/kakaoLoginReturn";
+	public static final String kakaoClientId = "21ca63a0efd9cb05762db8191f2b8761";
+	public static final String kakaoApiKey = "2pub5fZbTBSXhHTfiJQ7KI812J04XtAh";
+	
+	public static final String facebookReturnUrl = "https://localhost:8443/facebookLoginReturn";
+	public static final String facebookClientId = "187211659375164";
+	public static final String facebookKey = "a163d69ecb147510993e83943a46db58";
+	
 	/**
 	 * 현재 날짜를 yyyyMMdd 형식으로 리턴한다.
 	 * @return
@@ -56,7 +66,7 @@ public class CommonUtil {
 		return format.format(now);
 	}
 	
-	public static String naverGetProfile(String apiUrl, Map<String, String> requestHeaders){
+	public static String commonSnsGetProfile(String apiUrl, Map<String, String> requestHeaders){
 	        HttpURLConnection con = connect(apiUrl);
 	        try {
 	            con.setRequestMethod("GET");
@@ -88,8 +98,8 @@ public class CommonUtil {
 	        }
 	    }
 
-	    private static String readBody(InputStream body){
-	        InputStreamReader streamReader = new InputStreamReader(body);
+	    private static String readBody(InputStream body) throws UnsupportedEncodingException{
+	        InputStreamReader streamReader = new InputStreamReader(body, "UTF-8");
 
 	        try (BufferedReader lineReader = new BufferedReader(streamReader)) {
 	            StringBuilder responseBody = new StringBuilder();

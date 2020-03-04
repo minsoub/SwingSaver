@@ -59,14 +59,12 @@
         });
         
     	$("#btnface").click(function(){
-    		alert("준비중입니다!");
     		document.forms1.action ="";
-    		return;
+    		fn_facebook_login();
     	});
     	$("#btnkakao").click(function(){
-    		alert("준비중입니다!");
     		document.forms1.action ="";
-    		return;
+    		fn_kakao_login();
     	});	
     	$("#btnNaver").click(function(){
     		document.forms1.action ="";
@@ -76,14 +74,36 @@
     
     function fn_naver_login()
     {
-    	var client_id = "${naverId}";  // "HU7BlUDoiX1K80yIxsVP";
+    	var client_id = "${naverId}";   
     	var response_type = "code";
-    	var redirect_uri = "${naverUrl}";  // encodeURIComponent("https://localhost:8443/naverLoginReturn");
+    	var redirect_uri = "${naverUrl}";  
     	var state = "${state}";
     	var url = "https://nid.naver.com/oauth2.0/authorize?client_id="+client_id+"&response_type="+response_type+"&redirect_uri="+redirect_uri+"&state="+state;
     	alert(url);
     	document.domain = "localhost";
     	window.open(url, "popup", "width=400, height=600, resizable=yes, scrollbars=auto");
+    }
+    
+    function fn_kakao_login()
+    {
+    	var client_id = "${kakaoId}";   
+    	var response_type = "code";
+    	var redirect_uri = "${kakaoUrl}";  
+    	var state = "${state}";
+    	var url = "https://kauth.kakao.com/oauth/authorize?client_id="+client_id+"&redirect_uri="+redirect_uri+"&response_type="+response_type;
+    	document.domain = "localhost";
+    	window.open(url, "popup", "width=400, height=600, resizable=yes, scrollbars=auto");	
+    }
+    
+    function fn_facebook_login()
+    {
+    	var client_id = "${facebookId}";   
+    	var resource_type = "token";
+    	var redirect_uri = "${facebookUrl}";  
+    	var state = "${state}";
+    	var url = "https://www.facebook.com/v6.0/dialog/oauth?client_id="+client_id+"&redirect_uri="+redirect_uri+"&resource_type="+resource_type+"&state="+state;
+    	document.domain = "localhost";
+    	window.open(url, "popup", "width=600, height=600, resizable=yes, scrollbars=auto");	
     }
     
     function fn_login(){
