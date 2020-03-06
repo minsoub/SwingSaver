@@ -23,7 +23,7 @@
                 <input type="password" id="password" name="password" required="" onchange="passwordChange" onfocus="$('#passwordLabel').css('display','none');" onkeyup="passwordChange(event)"  oninput="passwordChange(event)">
                 <label id='passwordLabel'><img src="/image/pw-icon.png" width="100%">비밀번호</label>
             </div>
-
+</form>
             <button class="form-btn" type="button" id="login">로그인</button>
             <div class="id-login">
                 <%--<label class="auto-log"><input type="checkbox" value="remember-me"> 자동로그인</label>--%>
@@ -36,7 +36,7 @@
             <button class="form-btn naver_log" id="btnNaver"><img src="../image/naver-icon.png" style="    padding-right: 15px;border-right: 1px solid #fff;margin-right: 10px;"> 네이버로 로그인</button>
             <button class="form-btn face_log"  id="btnface"><img src="../image/facebook-icon.png" style="    padding-right: 15px;border-right: 1px solid #fff;margin-right: 10px;"> 페이스북으로 로그인</button>
             <button class="form-btn kakao_log" id="btnkakao"><img src="../image/kakao-icon.png" style="    padding-right: 15px;border-right: 1px solid #fff;margin-right: 10px;"> 카카오로 로그인</button>            
-        </form>
+        
     </div>
     <div id="naver_id_login"></div>
     <!-- Footer -->
@@ -62,14 +62,28 @@
     		document.forms1.action ="";
     		fn_facebook_login();
     	});
+    	
     	$("#btnkakao").click(function(){
     		document.forms1.action ="";
     		fn_kakao_login();
     	});	
+    	
     	$("#btnNaver").click(function(){
     		document.forms1.action ="";
     		fn_naver_login();
     	});	
+    	
+    });
+    
+    $("#email").keydown(function(key) {
+    	if (key.keyCode == 13) {
+    		fn_login();
+    	}
+    });
+    $("#password").keydown(function(key) {
+    	if (key.keyCode == 13) {
+    		fn_login();
+    	}
     });
     
     function fn_naver_login()
@@ -79,7 +93,7 @@
     	var redirect_uri = "${naverUrl}";  
     	var state = "${state}";
     	var url = "https://nid.naver.com/oauth2.0/authorize?client_id="+client_id+"&response_type="+response_type+"&redirect_uri="+redirect_uri+"&state="+state;
-    	alert(url);
+    	//alert(url);
     	document.domain = "localhost";
     	window.open(url, "popup", "width=400, height=600, resizable=yes, scrollbars=auto");
     }

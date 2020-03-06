@@ -77,9 +77,14 @@ public class LoginController {
         if (session.getAttribute("redirectUrl") != null)
         {
         	prev_url = (String) session.getAttribute("redirectUrl");
+        	
+        	mv.addObject("prev_url", "redirect:"+prev_url);
+        	LOGGER.debug("redirectUrl is "+ prev_url);
+        }else {
+        	mv.addObject("prev_url", "");
         }
         
-    	mv.addObject("prev_url", "redirect:"+prev_url);
+    	
     	
     	// 토큰 생성 
     	SecureRandom random = new SecureRandom();
@@ -644,7 +649,7 @@ public class LoginController {
                 rtnUrl = "redirect:/loginForm";
             }
         }
-
+        LOGGER.debug(rtnUrl);
         //mv.setViewName(rtnUrl);
 
         LOGGER.debug("==================== LoginController login End : ====================");
