@@ -516,16 +516,16 @@ public class LoginController {
                 String responseBody = CommonUtil.commonSnsGetProfile(apiProfileURL, requestHeaders);
                 /** apiResult json 구조 **/
             	//{"id":"2982599261804634","name":"Minsoub Joung"}
-                System.out.println(responseBody);
+                System.out.println("get : " + responseBody);
                 
                 parser = new JSONParser();
                 obj = parser.parse(responseBody);
                 jsonObj = (JSONObject) obj;
-                JSONObject response_obj = (JSONObject)jsonObj.get("response");
-                String nickname = (String)response_obj.get("name");
-                String email =  (String)response_obj.get("email");
-                String name =  (String)response_obj.get("name");
-                String id =  (String)response_obj.get("id");                
+                //JSONObject response_obj = (JSONObject)jsonObj.get("response");
+                String nickname = (String)jsonObj.get("name");
+                String email =  (String)jsonObj.get("email");
+                String name =  (String)jsonObj.get("name");
+                String id =  (String)jsonObj.get("id");                
                 
                 System.out.println(nickname);
                 System.out.println(email);
