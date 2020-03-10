@@ -112,7 +112,7 @@
    		<c:if test="${advInfo.use_yn eq 'Y'}">
   		<div class="mySlides fade">
     		<div class="numbertext">${status.count} / ${status.end}</div>
-    		<img src="<c:url value='${advInfo.image_url}'/>" style="width:100%">
+    		<a href="${advInfo.site_url}"><img src="<c:url value='${advInfo.image_url}'/>" style="width:100%"></a>
     		<div class="text3">${advInfo.site_name}</div>
   		</div>
   		</c:if>
