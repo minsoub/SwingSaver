@@ -70,6 +70,72 @@ public class WebController {
     }
     
     /**
+     * 회사 정보 - 스윙세이버
+     * 
+     * @param session
+     * @param mv
+     * @return
+     * @throws Exception
+     */
+    @GetMapping("/company")
+    public ModelAndView mycompany(HttpSession session, ModelAndView mv) throws Exception {
+    	mv.setViewName("web/info/company");
+    	return mv;
+    }
+    /**
+     * 골프서비스 - 서비스 소개
+     * @param session
+     * @param mv
+     * @return
+     * @throws Exception
+     */
+    @GetMapping("/golfService")
+    public ModelAndView golfService(HttpSession session, ModelAndView mv) throws Exception {
+    	mv.setViewName("web/info/golf_ser_01");;
+    	return mv;
+    }
+    /**
+     * 골프장 관제 소개
+     * 
+     * @param session
+     * @param mv
+     * @return
+     * @throws Exception
+     */
+    @GetMapping("/golfManagement")
+    public ModelAndView golfManagement(HttpSession session, ModelAndView mv) throws Exception {
+    	mv.setViewName("web/info/golf");
+    	return mv;
+    }
+    
+    /**
+     * 서비스 - 골프서비스 - 이용방법
+     * 
+     * @param session
+     * @param mv
+     * @return
+     * @throws Exception
+     */
+    @GetMapping("/information")
+    public ModelAndView information(HttpSession session, ModelAndView mv) throws Exception {
+    	mv.setViewName("web/info/information");
+    	return mv;
+    }
+    /**
+     * 요금제 및 환불 정책
+     * 
+     * @param session
+     * @param mv
+     * @return
+     * @throws Exception
+     */
+    @GetMapping("/fare")
+    public ModelAndView fare(HttpSession session, ModelAndView mv) throws Exception {
+    	mv.setViewName("web/info/fare");
+    	return mv;
+    }
+    
+    /**
      * 아이디 찾기    (/web/search/email)
      * 비밀번호 찾기 (/web/search/pw)
      * 

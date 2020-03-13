@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@include file="/WEB-INF/views/web/inc/top_menu.jsp"%>
-
+<!DOCTYPE html>
+<html>
+<head>
+    <%@include file="/WEB-INF/views/web/inc/header.jsp"%>
+</head>
+    <%@include file="/WEB-INF/views/web/inc/navi.jsp"%>
 <% pageContext.setAttribute("replaceChar", "\n");  %>
 
     <section class="container no-padding">
