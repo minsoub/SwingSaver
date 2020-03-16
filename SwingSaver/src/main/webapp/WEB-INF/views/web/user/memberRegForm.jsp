@@ -209,6 +209,18 @@
         });
     });
 
+    function selemail(data)
+    {
+    	//alert(data.value);
+    	if (data.value == "1")
+    	{
+    		$("#stremail02").val("");
+    		$("#stremail02").attr("readonly", false);
+    	}else {
+    		$("#stremail02").attr("readonly", true);
+    		$("#stremail02").val(data.value);
+    	}
+    }
 </script>
 </html>
 

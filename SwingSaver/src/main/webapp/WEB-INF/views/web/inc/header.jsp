@@ -19,7 +19,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <link href="/css/flexslider.css" rel="stylesheet" />
     <script src="/js/jquery.flexslider.js"></script>
-
+	<script src="/js/jsUtil.js"></script>
     <script>
         $(function() {
             $('.flexslider').flexslider({
