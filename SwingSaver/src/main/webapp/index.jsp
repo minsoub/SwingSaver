@@ -50,7 +50,7 @@
                         </a>
                     </div>
                     <div class="col-md-4">
-                        <a href="#" class="">
+                        <a href="/web/golfService" class="">
                             <div class=" main_box">
                                 <span class="main_sub">information</span>
                                 <h4>서비스 이용방법</h4>
@@ -62,7 +62,7 @@
                         </a>
                     </div>
                     <div class="col-md-4">
-                        <a href="#" class="">
+                        <a href="/market/proList" class="">
                             <div class=" main_box">
                                 <span class="main_sub">fare & refund</span>
                                 <h4>요금제 및 환불 규정</h4>
@@ -77,7 +77,7 @@
 
                 <div class="col-md-12 main_box_wrap">
                     <div class="col-md-4">
-                        <a href="#" class="">
+                        <a href="/web/golfManagement" class="">
                             <div class=" main_box main_box_img1">
                                 <span class="main_sub">golf play</span>
                                 <h4>골프장 경기관제</h4>
@@ -88,7 +88,7 @@
                         </a>
                     </div>
                     <div class="col-md-4">
-                        <a href="#" class="">
+                        <a href="/web/golfManagement" class="">
                             <div class=" main_box main_box_img2">
                                 <span class="main_sub">facility</span>
                                 <h4>골프장 시설관제</h4>
@@ -99,7 +99,7 @@
                         </a>
                     </div>
                     <div class="col-md-4">
-                        <a href="#" class="">
+                        <a href="/web/golfManagement" class="">
                             <div class=" main_box main_box_img3">
                                 <span class="main_sub">course</span>
                                 <h4>골프장 코스관제</h4>
