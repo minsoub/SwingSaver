@@ -18,7 +18,7 @@
             <div class="col-md-12 fare_info">
                 <ul class="tab">
                     <li class="current" data-tab="tab1"><a href="#">개인 요금제</a></li>
-                    <li data-tab="tab2"><a href="#">그룹 요금제</a></li>
+                    <li data-tab="tab2"><a href="#">환불규정</a></li>
                 </ul>
 
 

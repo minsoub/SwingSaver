@@ -248,7 +248,7 @@ input {
 
 section {
     padding: 0;
-    min-height: 600px;
+    min-height: 700px;
 }
 
 .fir .main-nav-bar {
@@ -291,7 +291,8 @@ section {
     width: 100%;
     min-width: 1100px;
     border-bottom: 1px solid #e5e5e5;
-    background-color: rgb(255, 255, 255, 0.9);
+/*    background-color: rgb(255, 255, 255, 0.9);*/
+    background-color:#fff;
     -webkit-transition: -webkit-transform 300ms;
     -moz-transition: -moz-transform 300ms;
     -o-transition: -o-transform 300ms;
@@ -323,6 +324,7 @@ section {
     display: inline-block;
     height: 60px;
     vertical-align: top;
+    margin-right: 60px;
 }
 
 #topNav .menu_wrap {
@@ -341,7 +343,7 @@ section {
     display: block;
     position: relative;
     height: 60px;
-    padding: 0 22px;
+    padding: 0 30px;
     font-size: 16px;
     line-height: 58px;
     color: #1e1e1e;
@@ -384,8 +386,9 @@ section {
     margin: 0px;
     border: 1px solid #ededed;
     position: absolute;
-    width: 100%;
+    width: 2000px;
     z-index: 200;
+    box-sizing: content-box;
 }
 
 .menu_wrap ul li {
@@ -393,7 +396,7 @@ section {
 }
 
 .menu_wrap ul li a {
-    font-size: 15px;
+    font-size: 17px;
     display: block;
     color: #777777;
     padding: 5px 0;
@@ -401,26 +404,29 @@ section {
 
 .depth_2_wrap h4 {
     font-weight: 600;
-    font-size: 15px;
+    font-size: 18px;
 }
 
 .nav_ser {
-    position: unset !important;
+/*    position: unset !important;*/
 }
 
 .nav_ser .depth_2_wrap {
-    right: 0;
-    padding: 20px 250px;
+    right: -1000px;
+    padding: 20px 50px;
 }
 
 .nav_ser .depth_2_wrap li {
-    width: 19%;
+    width: 200px;
+    box-sizing: content-box;
+    display: inline-block;
     vertical-align: top;
 }
 
 
 .main_box {
     border: 0;
+    border-radius: 20px;
 }
 
 .flexslider {
@@ -431,7 +437,7 @@ section {
 .main_box h4 {
     font-weight: 600;
     color: #222;
-    font-size: 24px;
+    font-size: 30px;
 }
 
 .main_box span {
@@ -441,7 +447,7 @@ section {
 }
 
 .main_box ul {
-    margin-top: 20px;
+    margin-top: 30px;
     color: #8e959b;
 }
 
@@ -465,7 +471,7 @@ section {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
 }
 
 /* Float the list items side by side */
@@ -484,8 +490,8 @@ section {
     color: #000;
     text-align: center;
     text-decoration: none;
-    padding: 14px 16px;
-    font-size: 17px;
+    padding: 20px 16px;
+    font-size: 20px;
     transition: 0.3s;
 }
 
@@ -504,16 +510,19 @@ ul.tab li.current {
     display: block;
 }
 
-
+.golf_pro_box ul{
+    font-size: 17px;
+    margin-top: 10px;
+}
 
 
 .slide_ban {
     display: block;
-    height: 600px;
+    height: 800px;
 }
 
 .ban_con {
-    padding: 9% 0 0 5%;
+    padding: 12% 0 0 8%;
     color: #fff;
 }
 
@@ -523,7 +532,7 @@ ul.tab li.current {
 }
 
 .ban_con p {
-    font-size: 24px;
+    font-size: 30px;
     margin-bottom: 30px;
 }
 
@@ -538,10 +547,12 @@ ul.tab li.current {
 
 .ban_img_1{
     background-image: url('../image/main_bg_01.png');
+    background-size: cover;
 }
 
 .ban_img_2{
     background-image: url('../image/main_bg_02.png');
+    background-size: cover;
 }
 
 .log_wrap li:hover ul {
@@ -718,7 +729,8 @@ ul.tab li.current {
     margin-top: 20px;
     font-weight: 300;
     margin-bottom: 50px;
-    font-size: 16px;
+    font-size: 17px;
+    color: #777;
 }
 
 .golf_pro_box {
@@ -1396,9 +1408,9 @@ form p {
 }
 
 .profile-img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50px;
+    width: 150px;
+    height: 150px;
+    border-radius: 80px;
 
 }
 
@@ -1455,7 +1467,8 @@ form p {
 /*main*/
 
 .main_box {
-    padding: 30px 20px;
+    padding: 50px 40px;
+    font-size: 17px;
 }
 
 /*
@@ -1577,6 +1590,8 @@ form p {
     padding: 25px;
     display: block;
     color: #333;
+    min-height: 200px;
+    margin-bottom: 30px;
 }
 
 .pro-box:hover,
@@ -1609,7 +1624,8 @@ form p {
 
 .pro-img img {
     border-radius: 50%;
-    width: 100%;
+    width: 150px;
+    height: 150px;
 }
 
 .pro-info {
@@ -1622,7 +1638,7 @@ form p {
     color: #cecece;
     font-size: 50px;
     position: absolute;
-    bottom: -20px;
+    bottom: 10px;
     right: 40px;
 }
 
@@ -1759,6 +1775,8 @@ table td {
 .content h2 {
     text-align: center;
     margin-bottom: 50px;
+    font-weight: bold;
+    font-size: 40px;
 }
 
 .sea-btn {
@@ -2069,6 +2087,7 @@ tbody {
     position: fixed;
     top: 0;
     width: 100%;
+    z-index: 9999;
 }
 
 .footer-bt ul {
@@ -2830,7 +2849,27 @@ tbody {
 }
 
 
-@media screen and (max-width:1500px) {
+@media screen and (max-width:1600px) {
+    .slide_ban {
+    height: 550px;
+    }
+    
+    .main_box{
+      padding: 30px 40px;
+    font-size: 14px;  
+    }
+    
+    .ban_con p {
+    font-size: 26px;
+}
+    
+    .ban_con h1 {
+    font-size: 44px;
+}
+    .main_box h4 {
+    font-size: 26px;
+}
+    
     .main-bn-1300 {
         display: block;
     }
@@ -2883,6 +2922,11 @@ tbody {
 /*誘몃뵒�뼱荑쇰━*/
 
 @media screen and (max-width:1300px) {
+    
+    .slide_ban {
+    height: 500px;
+    }
+    
     .main-ban {
         height: 560px;
     }

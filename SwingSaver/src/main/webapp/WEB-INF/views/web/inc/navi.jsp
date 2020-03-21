@@ -14,15 +14,7 @@
                 </h1>
                 <nav id="topNav">
                     <ul class="menu_wrap">
-                        <li class=""><a href="" class="depth_1">스윙세이버</a>
-                            <ul class="depth_2_wrap" role="menu">
-                                <li>
-                                    <a href="/web/company" class="depth_2">회사소개</a>
-                                    <a href="/web/company" class="depth_2">회사비전</a>
-                                    <a href="/web/company" class="depth_2">오시는 길</a>
-                                </li>
-                            </ul>
-                        </li>
+                        <li class=""><a href="/web/company" class="depth_1">스윙세이버</a></li>
                         <li class="nav_ser"><a href="" class="depth_1">서비스</a>
                             <ul class="depth_2_wrap" role="menu">
                                 <li>
@@ -34,8 +26,7 @@
                                     <a href="/web/fare" class="depth_2">요금제 및 환불</a>
                                 </li>
                                 <li>
-                                    <h4>반려동물 서비스</h4>
-                                    <a href="" class="depth_2">서비스 준비중</a>
+                                    <h4>서비스 준비중</h4>
                                 </li>
                                 <li>
                                     <h4>서비스 준비중</h4>

@@ -38,7 +38,7 @@
 
                 <div class="col-md-12 main_box_wrap">
                     <div class="col-md-4">
-                        <a href="#" class="">
+                        <a href="/web/golfService" class="">
                             <div class="main_box">
                                 <span class="main_sub">media</span>
                                 <h4>언론속 스윙세이버</h4>
@@ -62,10 +62,10 @@
                         </a>
                     </div>
                     <div class="col-md-4">
-                        <a href="/market/proList" class="">
+                        <a href="/web/golfService" class="">
                             <div class=" main_box">
-                                <span class="main_sub">fare & refund</span>
-                                <h4>요금제 및 환불 규정</h4>
+                                <span class="main_sub">market pro</span>
+                                <h4>레슨마켓 프로 소개</h4>
                                 <ul>
                                     <li>the role of teacher is often forma and ongo-ing, carried out at a school or other place of formal education.</li>
                                 </ul>
