@@ -156,6 +156,21 @@
                 </li>
 
             </ul>
+            <c:choose>
+            <c:when test="${not empty sessionScope.login.userid}">
+            <ul>
+                <li class="menu-label menu-arrow-active-li">
+                    <a href="/web/mypage" class="dg-point">마이페이지</a>
+                    <span class="dg-hd-mo-menu-arrow menu-arrow-active"></span>
+                    <ul class="sub-menu sub-menu-on">
+                         <li><a href="/web/mypage" class="depth_2">내정보</a></li>
+                         <li><a href="/group/grpenter" class="depth_2">그룹정보</a></li>
+                    </ul>                    
+                </li>
+            </ul> 
+            </c:when>
+            </c:choose> 
+                        
         </nav>
         <!--어두워지는 부분-->
         <div class="dg-hd-mo-menu-panel-overlay"></div>
