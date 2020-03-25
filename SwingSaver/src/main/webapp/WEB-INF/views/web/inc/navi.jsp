@@ -143,7 +143,7 @@
                     <a href="/" class="dg-point">HOME</a>
                     <span class="dg-hd-mo-menu-arrow menu-arrow-active"></span>
                     <ul class="sub-menu sub-menu-on">
-                        <li><a href="#" onclick="fn_smallMenuClick()">스윙세이버</a></li>
+                        <li><a href="/web/company" onclick="fn_smallMenuClick()">스윙세이버</a></li>
                         <li><a href="#" onclick="fn_smallMenuClick()">서비스</a></li>
                         <li class="m_2depth"><a href="/web/golfService">골프장서비스 소개</a></li>
                         <li class="m_2depth"><a href="#">엣지디바이스</a></li>
