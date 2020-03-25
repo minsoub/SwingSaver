@@ -145,12 +145,12 @@
                     <ul class="sub-menu sub-menu-on">
                         <li><a href="#" onclick="fn_smallMenuClick()">스윙세이버</a></li>
                         <li><a href="#" onclick="fn_smallMenuClick()">서비스</a></li>
-                        <li class="m_2depth"><a href="#">골프장서비스 소개</a></li>
+                        <li class="m_2depth"><a href="/web/golfService">골프장서비스 소개</a></li>
                         <li class="m_2depth"><a href="#">엣지디바이스</a></li>
                         <li class="m_2depth"><a href="/market/proList">마켓프로</a></li>
-                        <li class="m_2depth"><a href="#">이용방법</a></li>
-                        <li class="m_2depth"><a href="#">요금제 및 환불</a></li>
-                        <li><a href="#">골프장관제</a></li>
+                        <li class="m_2depth"><a href="/web/information">이용방법</a></li>
+                        <li class="m_2depth"><a href="/web/fare">요금제 및 환불</a></li>
+                        <li><a href="/web/golfManagement">골프장관제</a></li>
                         <li><a href="#">고객센터</a></li>
                     </ul>                    
                 </li>
