@@ -72,6 +72,10 @@
                                         <td>${golfInfo.email}</td>
                                     </tr>
                                     <tr>
+                                    	<td><strong>링크여부</strong>
+                                    	<td>${golfInfo.link_check}
+                                    </tr>                                    
+                                    <tr>
                                     	<td><strong>제휴여부</strong>
                                     	<td>${golfInfo.alliance_check}
                                     </tr>
@@ -82,6 +86,10 @@
                                     <tr>
                                         <td><strong>비고</strong></td>
                                         <td>${golfInfo.description}</td>
+                                    </tr>
+                                    <tr>
+                                    	<td><strong>QR사용 접속횟수</strong></td>
+                                    	<td>${golfInfo.qr_cnt}</td>
                                     </tr>
                                 </tbody>
                             </table>

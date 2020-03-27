@@ -22,7 +22,8 @@
                  </div>
             </div>
     		<div class="" style="margin: 0px">
-                <img id="preview" src="/image/sc-print-bn.jpg" width="100%">
+                <!-- img id="preview" src="/image/sc-print-bn.jpg" width="100%"  -->
+                <img id="preview" src="<c:url value='${golfInfo.image_url}'/>" width="100%">
                 <div class="sc-print">
                   <div>
                     <table>
@@ -228,10 +229,11 @@
              
         </div>
      </div>
-     
+     <c:if test="${golfInfo.link_check == 'Y'}">
      <div class="bottom-bn">
         <p>이제 <strong>스윙세이버</strong>로 내 스코어를 직접 관리해보세요. <span><a href="javascript:fn_mngScoreList();">www.swingsaver.co.kr</a></span></p>
      </div> 
+     </c:if>
   </div>
               
                         
@@ -242,8 +244,9 @@
            <div class="test">
            
            
-              <!-- img src="/image/sc-image.png" width="100%"   -->
+              <!-- img src="/image/sc-image.png" width="100%"  
            </div>
+           
            <div class="sc-ad">
               <p><strong>스코어 관리</strong>가 필요하신가요?<br/>
               <a href=""><span>스윙세이버를 시작! <strong><a href="javascript:fn_mngScoreList();">Click!</a></strong></span></a></p>
@@ -253,7 +256,7 @@
 </section>
   
   
-<form class="form-signin" id='forms1' name="forms1" method="POST">
+<form id='forms1' name="forms1" method="POST">
 <input type="hidden" name="zone_id" value="${qrInfo.zone_id}">
 <input type="hidden" name="countryclub_id" value="${qrInfo.countryclub_id}">
 <input type="hidden" name="startcourse" value="${qrInfo.startcourse}">
@@ -325,7 +328,7 @@ $(document).ready(function(){
 //내 스코어 관리하기
 function fn_mngScoreList()
 {
-	if ("${scoreVo.user_id}" == -1)
+	if ("${scoreVo.user_id}" == '-1')
 	{
 		// 사용자 로그인이 필요한다.
 		forms1.action = "/score/loginForm";

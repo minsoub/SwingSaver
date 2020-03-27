@@ -623,7 +623,8 @@ public class AdminController extends CommonController {
     	params.put("pgm_call_param", golfVo.getPgm_call_param());
     	if (golfVo.getAlliance_check().isEmpty()) golfVo.setAlliance_check("N");
     	params.put("alliance_check", golfVo.getAlliance_check());
-    	
+    	if (golfVo.getLink_check().isEmpty()) golfVo.setLink_check("N");
+    	params.put("link_check", golfVo.getLink_check());
     	
     	LOGGER.debug(golfVo.getImageFile().getOriginalFilename());
     	if (!golfVo.getImageFile().isEmpty())
@@ -746,6 +747,8 @@ public class AdminController extends CommonController {
     	params.put("pgm_call_param", golfVo.getPgm_call_param());
     	if (golfVo.getAlliance_check().isEmpty()) golfVo.setAlliance_check("N");
     	params.put("alliance_check", golfVo.getAlliance_check());
+    	if (golfVo.getLink_check().isEmpty()) golfVo.setLink_check("N");
+    	params.put("link_check", golfVo.getLink_check());
     	
     	if (!golfVo.getImageFile().isEmpty())
     	{

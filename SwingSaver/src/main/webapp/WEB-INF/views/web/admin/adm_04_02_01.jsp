@@ -53,7 +53,10 @@
                             <p>이메일</p>
                             <input type="email" id="email" name="email" placeholder="담당자 메일" value="${golfInfo.email}" maxlength="100"  />
                         </div>        
-                        
+                        <div class="question">
+                        	<p>링크여부</p>
+                        	<input type="checkbox" id="link_check" name="link_check" value="Y" <c:if test="${golfInfo.link_check eq 'Y'}">checked</c:if> >링크사용 (체크시 모바일에서 링크사용)
+                        </div>                          
                         <div class="question">
                         	<p>제휴여부</p>
                         	<input type="checkbox" id="alliance_check" name="alliance_check" value="Y" <c:if test="${golfInfo.alliance_check eq 'Y'}">checked</c:if> >제휴골프장 (체크시 제휴골프장임)

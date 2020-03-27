@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -108,6 +109,26 @@ public class MarketController extends CommonController {
         LOGGER.debug("==================== MarketController marketProAddForm end : ===================={}");
         return mv;
     }
+    
+    /**
+     * 마켓 프로 등록하기 위한 사용자 리스트를 검색한다. 
+     * 
+     * @param request
+     * @return
+     * @throws ApiException
+     * @throws IOException 
+     */
+    @RequestMapping(value="/market/prosearch")
+    @ResponseBody
+    public String maketProSearch(HttpServletRequest request) throws ApiException, IOException {
+    	LOGGER.debug("==================== MarketController maketProSearch Strart : ===================={}");
+    	String jsonData = getProUnUserList(request.getParameter("sid").toString());		// 사용자 조회
+    	LOGGER.debug(jsonData);
+    	
+    	LOGGER.debug("==================== MarketController maketProSearch end : ===================={}");
+    	return jsonData;
+    }
+    		
     /**
      * 마켓 프로 저장
      * 

@@ -11,10 +11,10 @@
                     <form class="form-signin" id='forms1' name="forms1" method="POST" enctype="multipart/form-data">
                         <div class="question">
                             <p>아이디</p>
-                            <select class="userid" name="userid" id="ueerid">
-                            	<option value="">이름이나 이메일 입력</option>
+                            <select class="userid" name="userid" id="ueerid"> 
+                            	<!-- option value="">이름이나 이메일 입력</option  -->
                               	<c:forEach var="userInfo" items="${userList}" varStatus="status">
-                               		<option value="${userInfo.userid}">${userInfo.lastname}${userInfo.firstname}(${userInfo.email})</option>
+                               		<!-- option value="${userInfo.userid}">${userInfo.lastname}${userInfo.firstname}(${userInfo.email})</option  -->
                               	</c:forEach>	                            
                             </select>
                             <!--  input type="text" placeholder="이름이나 이메일 입력" required /  -->
@@ -63,7 +63,30 @@
 
 $(document).ready(function(){
 	
-	$('.userid').select2();
+	$('.userid').select2({
+			ajax: {
+				url: "/admin/market/prosearch", 
+				dataType: 'json',
+				delay: 250,
+				cache: true,
+				data: function(params) {
+					return {
+						sid: params.term
+					};
+				}, 
+				processResults: function (data)
+				{
+					data = JSON.parse(data);
+					console.log(data);
+					console.log(data.result);
+					return {
+						results: data.result
+					};
+				}
+			}, 
+			placeholder: 'Search for Email or ID', 
+			minimumInputLength: 2			
+	});
 	
     $("#btnSave").click(function(){
     	fn_proSave();

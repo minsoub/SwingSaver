@@ -17,6 +17,7 @@ public class GolfVo {
 	String email;			// 담당자 메일
 	String assets;			// 저장경로
 	String description;		// 비고
+	String link_check;		// 링크여부
 	String alliance_check;	// 제휴여부
 	String pgm_call_param;  // 프로그램 호출인자
 	String dateinserted;
@@ -26,6 +27,7 @@ public class GolfVo {
 	String zone_nm;			// 지역명
 	String image_url;		// 이미지 경로
 	String assets_url;		// 저장이미지 경로
+	String qr_cnt;
 	
 	String mode;			// 검색구분 : "" or ALL 전체, REC : 추천
 	String word;			// 검색단어
@@ -35,6 +37,18 @@ public class GolfVo {
 	
 	
 	
+	public String getQr_cnt() {
+		return qr_cnt;
+	}
+	public void setQr_cnt(String qr_cnt) {
+		this.qr_cnt = qr_cnt;
+	}
+	public String getLink_check() {
+		return link_check;
+	}
+	public void setLink_check(String link_check) {
+		this.link_check = link_check;
+	}
 	public String getWord() {
 		return word;
 	}

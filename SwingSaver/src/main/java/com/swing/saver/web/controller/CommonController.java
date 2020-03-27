@@ -74,6 +74,22 @@ public abstract class CommonController {
     } 
     
     /**
+     * 마켓 프로에 등록하지 않은 사용자 리스트를 조회한다.
+     * 검색 기능 추가
+     * 
+     * @return
+     * @throws IOException
+     * @throws ApiException
+     */
+    public String getProUnUserList(String id) throws IOException, ApiException {
+
+    	String rtnJson = restService.proUserList(id);
+    	LOGGER.debug(rtnJson);
+    	
+    	return rtnJson;
+    }  
+    
+    /**
      * 국가에 해당하는 지역 리스트를 출력 한다.
      * 
      * @param country_id

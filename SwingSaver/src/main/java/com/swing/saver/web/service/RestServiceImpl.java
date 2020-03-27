@@ -1091,6 +1091,22 @@ public class RestServiceImpl implements RestService {
 
         return rtnJson;
     }
+    
+    /**
+     * 마켓 프로 등록 가능 사용자 조회
+     */
+    @Override
+    public String proUserList(String id) throws JsonProcessingException, ApiException
+    {
+        String rtnJson = "";
+
+        rtnJson = sendMessage.sendHttpsStr("/ords/swing/saver/prounlist/"+id,"GET", "application/json",true);
+
+        LOGGER.debug("마켓 프로 등록 가능 사용자 조회 파라미터:응답:{}",rtnJson);
+
+        return rtnJson;
+    }
+    
     /**
      * 마켓 프로 등록
      */

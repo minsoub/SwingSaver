@@ -758,6 +758,14 @@ public class ScoreController {
     	mv.addObject("parInfo1", parInfo1);
     	mv.addObject("parInfo2", parInfo2);
     	
+    	// 골프장 정보 (이미지 포함)
+   	 	ObjectMapper mapper = new ObjectMapper();
+   	 	String resultJson = restService.getGolfImgIncludeDetail(country_id, qrVo.getZone_id(), qrVo.getCountryclub_id());  // 이미지 포함 골프장 정보 조회
+   	 	Map<String, Object> goflMap = mapper.readValue(resultJson, new TypeReference<Map<String, Object>>(){});
+   	 	mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false); 
+   	 	List<GolfVo> mapList = mapper.convertValue(goflMap.get("golfList"), TypeFactory.defaultInstance().constructCollectionType(List.class,GolfVo.class));    	
+   	 	mv.addObject("golfInfo", mapList.get(0));
+       
     	/////////////////////////////////////////////////////////////////////////////////////
     	// qr 접속 정보를 로그에 등록한다. 
     	Map<String, String> scoreParams = new HashMap<String, String>();
@@ -886,7 +894,7 @@ public class ScoreController {
     	LOGGER.debug(vo.getZone_id());
     	
     	mv.addObject("prev_url", "redirect:/score/scoreRegister");
-    	mv.setViewName("web/log_01_01");
+    	mv.setViewName("web/user/login");
     	
     	return mv;
     }
