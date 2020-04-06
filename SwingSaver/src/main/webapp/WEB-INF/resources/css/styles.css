@@ -127,7 +127,8 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: "Noto Sans KR", sans-serif, "NotoSans Regular", "Malgun Gothic", "맑은 고딕", "Apple SD Gothic Neo", "돋움", dotum, sans-serif;
+
 }
 
 p {
@@ -248,7 +249,25 @@ input {
 
 section {
     padding: 0;
-    min-height: 700px;
+    /*    min-height: 700px;*/
+    overflow: hidden;
+    height: auto;
+}
+
+.tit-center {
+    clear: both;
+    margin-top: 89px;
+    /* border: 1px solid; */
+    padding: 20px;
+    text-align: center;
+}
+
+.overbox:hover {
+    background-color: #ededed;
+}
+
+.tit-center h1 {
+    text-decoration: underline;
 }
 
 .fir .main-nav-bar {
@@ -291,8 +310,8 @@ section {
     width: 100%;
     min-width: 1100px;
     border-bottom: 1px solid #e5e5e5;
-/*    background-color: rgb(255, 255, 255, 0.9);*/
-    background-color:#fff;
+    /*    background-color: rgb(255, 255, 255, 0.9);*/
+    background-color: #fff;
     -webkit-transition: -webkit-transform 300ms;
     -moz-transition: -moz-transform 300ms;
     -o-transition: -o-transform 300ms;
@@ -344,10 +363,10 @@ section {
     position: relative;
     height: 60px;
     padding: 0 30px;
-    font-size: 16px;
+    font-size: 17px;
+    font-weight: 600;
     line-height: 58px;
     color: #1e1e1e;
-    font-family: 'NotoSans Regular', 'Malgun Gothic', '맑은 고딕', 'Apple SD Gothic Neo', '돋움', dotum, sans-serif;
 }
 
 .log_wrap {
@@ -363,10 +382,9 @@ section {
     margin-top: 5px;
 }
 
-.log_wrap > li:last-child{
+.log_wrap > li:last-child {
     border-left: 1px solid #a3a3a3;
 }
-
 
 
 .log_wrap > li .log_btn {
@@ -377,6 +395,8 @@ section {
 .menu_wrap li:hover ul {
     display: block;
 }
+
+
 
 .menu_wrap li ul {
     background: rgb(255, 255, 255);
@@ -396,19 +416,19 @@ section {
 }
 
 .menu_wrap ul li a {
-    font-size: 17px;
+    font-size: 16px;
     display: block;
     color: #777777;
-    padding: 5px 0;
+    padding: 6px 0;
 }
 
 .depth_2_wrap h4 {
     font-weight: 600;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .nav_ser {
-/*    position: unset !important;*/
+    /*    position: unset !important;*/
 }
 
 .nav_ser .depth_2_wrap {
@@ -429,6 +449,14 @@ section {
     border-radius: 20px;
 }
 
+.main_box p {
+    position: absolute;
+    right: 45px;
+    font-size: 60px;
+    top: 0px;
+    color: #fff;
+}
+
 .flexslider {
     margin: 0;
     border: 0;
@@ -441,7 +469,7 @@ section {
 }
 
 .main_box span {
-    color: #cdd0d2;
+    color: #aaaaaa;
     letter-spacing: 2px;
     font-weight: bold;
 }
@@ -449,6 +477,8 @@ section {
 .main_box ul {
     margin-top: 30px;
     color: #8e959b;
+    letter-spacing: 0;
+    line-height: 1.5;
 }
 
 .main_box_wrap {
@@ -510,7 +540,7 @@ ul.tab li.current {
     display: block;
 }
 
-.golf_pro_box ul{
+.golf_pro_box ul {
     font-size: 17px;
     margin-top: 10px;
 }
@@ -522,18 +552,21 @@ ul.tab li.current {
 }
 
 .ban_con {
-    padding: 12% 0 0 8%;
+    padding: 10% 0 0 8%;
     color: #fff;
 }
 
 .ban_con h1 {
-    font-size: 50px;
+    font-size: 45px;
     letter-spacing: -1px;
+    text-shadow: 0 0 4px rgba(0, 0, 0, .2), 0 0 4px rgba(0, 0, 0, .2);
+    line-height: 1.2;
 }
 
 .ban_con p {
     font-size: 30px;
     margin-bottom: 30px;
+    text-shadow: 0 0 4px rgba(0, 0, 0, .2), 0 0 4px rgba(0, 0, 0, .2);
 }
 
 .ban_con a {
@@ -545,12 +578,19 @@ ul.tab li.current {
     font-weight: 200;
 }
 
-.ban_img_1{
+.ban_con a:hover {
+    background-color: #fff;
+    color: #222;
+    border: 1px solid #fff;
+
+}
+
+.ban_img_1 {
     background-image: url('../image/main_bg_01.png');
     background-size: cover;
 }
 
-.ban_img_2{
+.ban_img_2 {
     background-image: url('../image/main_bg_02.png');
     background-size: cover;
 }
@@ -593,15 +633,15 @@ ul.tab li.current {
     margin: 5% auto;
 }
 
-.fare_info .tab li{
+.fare_info .tab li {
     width: 49%;
 }
 
-.fare_info .tabcontent < div{
+.fare_info .tabcontent < div {
     padding: 30px
 }
 
-.per_fare{
+.per_fare {
     padding: 30px;
 }
 
@@ -610,8 +650,44 @@ ul.tab li.current {
 }
 
 .main-ab {
-    text-align: center;
+    /*    text-align: center;*/
 }
+
+.main-ab ul {
+    font-size: 17px;
+}
+
+.main-ab .tit-li {
+    font-size: 19px;
+    color: #222222;
+    font-weight: bold;
+    margin: 20px 0 5px 0;
+}
+
+.main-ab h3 {
+    margin: 4em 0 1.5em 0;
+    font-size: 1.9em;
+}
+
+.main-ab h3.com-tit:after {
+    content: "";
+    display: block;
+    width: 60px;
+    border-bottom: 3px solid #ff4444;
+    margin: 20px 0px;
+}
+
+/*
+
+.main-ab h3:after {
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    height: 3px;
+    background: #ff4444;
+    content: "";
+}
+*/
 
 .main-gol {
     background-image: url("../image/main-back.png");
@@ -725,56 +801,73 @@ ul.tab li.current {
 }
 
 .main-ab p {
-    line-height: 1.5;
+    line-height: 1.7;
     margin-top: 20px;
-    font-weight: 300;
+    font-weight: 400;
     margin-bottom: 50px;
-    font-size: 17px;
-    color: #777;
+    font-size: 20px;
+    color: #222222;
 }
+
+.red-font {
+    color: #ff4444;
+}
+
+.main-ab ul li {
+    color: #525252
+}
+
 
 .golf_pro_box {
     border-bottom: 1px solid #ededed;
     padding: 20px 0;
 }
 
-.golf_img_box{
-    background-size: cover;height: 400px;margin-bottom: 40px;
+.golf_img_box {
+    background-size: cover;
+    height: 400px;
+    margin-bottom: 40px;
     position: relative;
 }
 
-.golf_tit{
+.golf_tit {
     border-left: 5px solid #ff4949ed;
     padding-left: 10px;
     margin-top: 30px;
 }
 
-.golf_img_1{
+.golf_img_1 {
     background-image: url('../image/golf_img_1.png');
 }
 
-.golf_img_2{
+.golf_img_2 {
     background-image: url('../image/golf_img_2.png');
 }
 
-.golf_img_3{
+.golf_img_3 {
     background-image: url('../image/golf_img_3.png');
 }
 
-.golf_btn{
+.golf_btn {
     position: absolute;
     bottom: 30px;
     right: 30px;
 }
 
-.golf_btn a{
+.golf_btn a {
     border: 1px solid #fff;
-    color:#fff;
+    color: #fff;
     padding: 10px 20px;
     margin-left: 10px;
 }
 
-.golf_pro_box h3 {
+.tabcontent h3 {
+    clear: both;
+    padding-top: 20px;
+    color: #ff2a2a;
+}
+
+.golf_pro_box h4 {
     padding-left: 15px;
     font-weight: 600;
 }
@@ -814,11 +907,11 @@ ul.tab li.current {
 }
 
 .product-info-01 {
-    padding: 10% 0;
+    padding: 7% 2%;
 }
 
 .product-info-01 h4 {
-    font-size: 22px;
+    font-size: 17px;
     font-weight: 300;
     margin-top: 40px;
     color: #777;
@@ -826,7 +919,7 @@ ul.tab li.current {
 }
 
 .product-info-01 h1 {
-    font-size: 40px;
+    font-size: 30px;
     font-weight: 700;
     letter-spacing: -1px;
     margin-top: 12px;
@@ -834,10 +927,10 @@ ul.tab li.current {
 
 
 .product-info-01 p {
-    font-size: 14px;
+    font-size: 17px;
     line-height: 1.5;
     color: #808080;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 .product-info-01 a {
@@ -1469,6 +1562,7 @@ form p {
 .main_box {
     padding: 50px 40px;
     font-size: 17px;
+    min-height: 190px;
 }
 
 /*
@@ -1505,6 +1599,7 @@ form p {
 .main_box_img3 ul li {
     color: #fff !important;
     font-weight: 300 !important;
+    min-height: 40px;
 }
 
 
@@ -1605,11 +1700,21 @@ form p {
     color: #8e959b;
 }
 
-.pro-box span {
+.profile-box span {
     background-color: #333;
     color: #fff;
     padding: 1px 10px;
     border-radius: 10px;
+}
+
+.pro-txt-info{
+   margin: 30px; 
+}
+
+.pro-txt-info ul{
+   font-size: 16px;
+    color: #777;
+    line-height: 1.5; 
 }
 
 .pro-box h4 {
@@ -1617,7 +1722,7 @@ form p {
 }
 
 .pro-img {
-    width: 30%;
+    width: 100%;
     display: inline-block;
     vertical-align: top;
 }
@@ -1656,7 +1761,21 @@ form p {
     margin: 0 0 3px 0;
 }
 
-.side-user {
+.profile-box {
+    border: 1px solid #dbdbdb;
+        display: block;
+}
+
+.profile-box img {
+    width: 100%;
+}
+
+.profile-box h4{
+    font-size: 20px;
+    color: #222;
+}
+
+.profile-box .profile-img .side-user {
     font-weight: 300;
     font-size: 13px;
     color: #646464;
@@ -1768,7 +1887,9 @@ table td {
 
 
 .content {
-    margin-bottom: 15%;
+    margin-bottom: 10%;
+    overflow: hidden;
+    height: auto;
 }
 
 
@@ -1776,7 +1897,22 @@ table td {
     text-align: center;
     margin-bottom: 50px;
     font-weight: bold;
-    font-size: 40px;
+    font-size: 36px;
+}
+
+.content h2:before {
+    content: "";
+    display: block;
+    width: 60px;
+    border-bottom: 3px solid #ff4444;
+    margin: 0 auto 30px auto;
+}
+
+.content h2 > p {
+    font-weight: 200;
+    margin-top: 20px;
+    font-size: 22px;
+    line-height: 1.4;
 }
 
 .sea-btn {
@@ -1856,6 +1992,7 @@ tbody {
     line-height: 1;
     margin-bottom: 15px;
 }
+
 
 
 .close {
@@ -2851,24 +2988,62 @@ tbody {
 
 @media screen and (max-width:1600px) {
     .slide_ban {
-    height: 550px;
+        height: 550px;
+    }
+
+    .main_box {
+        padding: 30px;
+        font-size: 13px;
     }
     
-    .main_box{
-      padding: 30px 40px;
-    font-size: 14px;  
+    .tit-center h1{
+        font-size: 32px;
     }
-    
+
     .ban_con p {
-    font-size: 26px;
-}
-    
+        font-size: 23px;
+    }
+
     .ban_con h1 {
-    font-size: 44px;
+        font-size: 37px;
+    }
+    
+    .main-ab ul {
+    font-size: 16px;
 }
+    .content h2 > p{
+        font-size: 19px;
+        line-height: 1.5;
+    }
+    
+    .content h2{
+        font-size: 30px;
+    }
+    
+    .product-info-01 h4{
+        font-size: 13px;
+    }
+    
+    .product-info-01 p{
+        font-size: 15px;
+    }
+    
+    .product-info-01 h1{
+        font-size: 26px;
+    }
+    
+    .main-ab .tit-li{
+        font-size: 18px;
+        margin: 20px 0 3px 0;
+    }
+    
     .main_box h4 {
-    font-size: 26px;
-}
+        font-size: 23px;
+    }
+
+    .main-ab p{
+        font-size: 18px;
+    }
     
     .main-bn-1300 {
         display: block;
@@ -2922,11 +3097,11 @@ tbody {
 /*誘몃뵒�뼱荑쇰━*/
 
 @media screen and (max-width:1300px) {
-    
+
     .slide_ban {
-    height: 500px;
+        height: 500px;
     }
-    
+
     .main-ban {
         height: 560px;
     }
@@ -2951,25 +3126,27 @@ tbody {
 
 @media screen and (max-width:768px) {
     .ban_con h1 {
-    font-size: 20px;
-    line-height: 28px;
+        font-size: 20px;
+        line-height: 28px;
     }
 
     .ban_con {
-    padding: 40% 0 0 15%;
-}
-    .ban_con p {
-    font-size: 15px;
-}
-    .flex-viewport {
-    max-height: 500px!important;
+        padding: 40% 0 0 15%;
     }
-    
-    .m_2depth{
+    .ban_con p {
+        font-size: 15px;
+    }
+    .flex-viewport {
+        max-height: 500px !important;
+    }
+
+    .m_2depth {
         background-color: #f2f2f2;
     }
-    
-    #swingHead{display: none;}
+
+    #swingHead {
+        display: none;
+    }
 
 
     section {

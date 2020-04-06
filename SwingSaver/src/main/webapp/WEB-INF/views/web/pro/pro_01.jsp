@@ -11,7 +11,15 @@
         <article class="col-md-12" style="padding: 0;">
             <div class="content" style="padding: 0;">
                 <h2 class="right-tit">마켓프로</h2>
+				<div class="col-md-12 fare_info">
+                    <ul class="tab">
+                        <li class="current" data-tab="tab1"><a href="#">소속프로</a></li>
+                        <li data-tab="tab2"><a href="#">프리미엄</a></li>
+                    </ul>
 
+
+                    <div id="tab1" class="tabcontent current">
+                    
                 
                 
                 	<c:forEach var="proInfo" items="${proList}" varStatus="status">
@@ -36,65 +44,67 @@
                     
                     <c:if test="${((status.index + 1 ) mod 2) eq 0}"></div></c:if>
                     </c:forEach>
-<!--                     
-                    <div class="col-md-6 pro-wrap">
-                    <a href="#" class="pro-box">
-                       <div class="pro-img">
-                       <img  src="../image/profile-img.png">
-                       </div>                       
-                       <div class="pro-info">
-                        <h4>홍길동 프로</h4>
+
+
+        <div id="tab2" class="tabcontent">
+                        <div class="col-md-12">
+                            <div class="col-md-4">
+                                <a href="#" class="profile-box">
+                       <img src="/image/profile-img.png">
+                       
+                       <div class="pro-txt-info">
                         <span>Premium</span>
+                        <h4>홍길동 프로</h4>
                         <ul>
                             <li>2010 PGA 투어 윈덤 챔피언십 1위</li>
                             <li>2011 PGA 투어 윈덤 챔피언십 2위</li>
                             <li>2017 PGA 플레이어스 챔피언십 우승</li>
                         </ul>
                         </div>
-                       <p>+</p>
-                    </a> 
-                    </div> 
-                    
-                </div>
-                
-                <div class="col-md-12 pro-wrap">
-                    <div class="col-md-6">
-                    <a href="#" class="pro-box">
-                       <div class="pro-img">
-                       <img src="../image/profile-img.png">
-                       </div>                       
-                       <div class="pro-info">
-                        <h4>홍길동 프로</h4>
-                        <span>Premium</span>
-                        <ul>
-                            <li>2010 PGA 투어 윈덤 챔피언십 1위</li>
-                            <li>2011 PGA 투어 윈덤 챔피언십 2위</li>
-                            <li>2017 PGA 플레이어스 챔피언십 우승</li>
-                        </ul>
-                        </div>
-                       <p>+</p>                      
                     </a>
-                    </div>
-                    <div class="col-md-6">
-                    <a href="#" class="pro-box">
-                       <div class="pro-img">
-                       <img  src="../image/profile-img.png">
-                       </div>                       
-                       <div class="pro-info">
-                        <h4>홍길동 프로</h4>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="#" class="profile-box">
+                       <img src="/image/profile-img.png">
+                       
+                       <div class="pro-txt-info">
                         <span>Premium</span>
+                        <h4>홍길동 프로</h4>
                         <ul>
                             <li>2010 PGA 투어 윈덤 챔피언십 1위</li>
                             <li>2011 PGA 투어 윈덤 챔피언십 2위</li>
                             <li>2017 PGA 플레이어스 챔피언십 우승</li>
                         </ul>
                         </div>
-                       <p>+</p>
-                    </a> 
-                    </div> 
-                </div>                
-  -->
-            </div>
+                    </a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="#" class="profile-box">
+                       <img src="/image/profile-img.png">
+                       
+                       <div class="pro-txt-info">
+                        <span>Premium</span>
+                        <h4>홍길동 프로</h4>
+                        <ul>
+                            <li>2010 PGA 투어 윈덤 챔피언십 1위</li>
+                            <li>2011 PGA 투어 윈덤 챔피언십 2위</li>
+                            <li>2017 PGA 플레이어스 챔피언십 우승</li>
+                        </ul>
+                        </div>
+                    </a>
+                            </div>
+
+                        </div>                    
+                    
+                    
+
+                    </div>
+
+                </div>
+
+
+
+			</div>
         </article>
     </section>
 

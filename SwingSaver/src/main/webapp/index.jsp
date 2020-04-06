@@ -4,17 +4,32 @@
 <html>
 <head>
 	<%@include file="/WEB-INF/views/web/inc/header.jsp"%>
+	
+    <link href="/css/flexslider.css" rel="stylesheet" />
+    <script src="/js/jquery.flexslider.js"></script>
+
+
+    <script>
+        $(function() {
+            $('.flexslider').flexslider({
+                animation: "slide"
+            });
+        });
+
+    </script>
+    	
 </head>
 
 <body>
     <%@include file="/WEB-INF/views/web/inc/navi.jsp"%>
 
+<!--슬라이드-->
     <div class="flexslider">
         <ul class="slides">
             <li>
                 <div class="slide_ban ban_img_1">
                     <div class="ban_con" style="">
-                        <h1>당신의 파트너, 스윙세이버가<br/>더 스마트한 세상을 만들겠습니다.</h1>
+                        <h1>레슨공유서비스, 스윙세이버가<br/>더 스마트하고 편리한 일상을 만들겠습니다.</h1>
                         <p>언제 어디서나, 레슨정보 공유서비스</p>
                         <a href="#">MORE VIEW</a>
                     </div>
@@ -23,14 +38,16 @@
             <li>
                 <div class="slide_ban ban_img_2">
                     <div class="ban_con" style="">
-                        <h1>이젠 셀프 라운딩!<br/>당신만의 골프 파트너가 되겠습니다.</h1>
-                        <p>안전하고 편리한 골프장 관제 서비스</p>
+                        <h1>이젠 셀프라운딩!<br/>그 시작을 스윙세이버가 함께하겠습니다.</h1>
+                        <p>안전하고 편리한 골프장 경기 관제 서비스</p>
                         <a href="#">MORE VIEW</a>
                     </div>
                 </div>
             </li>
         </ul>
     </div>
+<!--슬라이드-->
+    
 
     <section class="">
         <article class="col-md-12" style="padding: 0;">
@@ -39,42 +56,48 @@
                 <div class="col-md-12 main_box_wrap">
                     <div class="col-md-4">
                         <a href="/web/golfService" class="">
-                            <div class="main_box">
+                            <div class="main_box overbox">
                                 <span class="main_sub">media</span>
                                 <h4>언론속 스윙세이버</h4>
                                 <ul>
-                                    <li>the role of teacher is often forma and ongo-ing, carried out at a school or other place of formal education.</li>
+                                    <li>한국골프대학교 & ㈜스윙세이버는 스윙세이버 플랫폼을<br/>교과운영에 활용할 수 있도록 산학협력체결 하였습니다.</li>
                                 </ul>
+                               <p>+</p>
                             </div>
 
                         </a>
                     </div>
                     <div class="col-md-4">
                         <a href="/web/golfService" class="">
-                            <div class=" main_box">
+                            <div class="main_box overbox">
                                 <span class="main_sub">information</span>
                                 <h4>서비스 이용방법</h4>
                                 <ul>
-                                    <li>the role of teacher is often forma and ongo-ing, carried out at a school or other place of formal education.</li>
+                                    <li>개인회원가입 및 아카데미 운영을 위한 방법을 보실 수 있고,<br/>App다운 및 사용에 대해서도 자세히 설명되어 있습니다.</li>
                                 </ul>
+                               <p>+</p>
                             </div>
 
                         </a>
                     </div>
                     <div class="col-md-4">
                         <a href="/web/golfService" class="">
-                            <div class=" main_box">
-                                <span class="main_sub">market pro</span>
-                                <h4>레슨마켓 프로 소개</h4>
+                            <div class="main_box overbox">
+                                <span class="main_sub">lesson market</span>
+                                <h4>레슨마켓 전문가 소개</h4>
                                 <ul>
-                                    <li>the role of teacher is often forma and ongo-ing, carried out at a school or other place of formal education.</li>
+                                    <li>스윙세이버 레슨마켓에서 제공되는 수준 높은 전문가를<br/>만나보세요!</li>
                                 </ul>
+                               <p>+</p>
                             </div>
 
                         </a>
                     </div>
                 </div>
 
+              <div class="tit-center">
+               <h1>Our Products</h1>
+              </div>
                 <div class="col-md-12 main_box_wrap">
                     <div class="col-md-4">
                         <a href="/web/golfManagement" class="">
@@ -82,8 +105,9 @@
                                 <span class="main_sub">golf play</span>
                                 <h4>골프장 경기관제</h4>
                                 <ul>
-                                    <li>the role of teacher is often forma and ongo-ing, carried out at a school or other place of formal education.</li>
+                                    <li>골프장 셀프라운딩 운영을 위한 최적화된<br/>솔루션을 소개합니다.</li>
                                 </ul>
+                               <p>+</p>
                             </div>
                         </a>
                     </div>
@@ -93,8 +117,9 @@
                                 <span class="main_sub">facility</span>
                                 <h4>골프장 시설관제</h4>
                                 <ul>
-                                    <li>the role of teacher is often forma and ongo-ing, carried out at a school or other place of formal education.</li>
+                                    <li>코스내 모든 시설 자원의 연결을 통해<br/>업무감소와 비용절감을 실현하세요.</li>
                                 </ul>
+                               <p>+</p>
                             </div>
                         </a>
                     </div>
@@ -104,8 +129,9 @@
                                 <span class="main_sub">course</span>
                                 <h4>골프장 코스관제</h4>
                                 <ul>
-                                    <li>the role of teacher is often forma and ongo-ing, carried out at a school or other place of formal education.</li>
+                                    <li>코스 예보 시스템을 준비중입니다.<br/></li>
                                 </ul>
+                               <p>+</p>
                             </div>
                         </a>
                     </div>
@@ -115,10 +141,7 @@
     </section>
 
 
-
-
-
-    <!-- Footer -->
+     <!-- Footer -->
     <%@include file="/WEB-INF/views/web/inc/footer.jsp"%>
     <!-- Footer -->
 

@@ -47,13 +47,13 @@
                                         <td>${proVo.prolevel_nm}</td>
                                     </tr>
                                     <tr>
+                                        <td><strong>자기소개</strong></td>
+                                        <td>${fn:replace(proVo.description, replaceChar, "<br/>")}</td>
+                                    </tr>                                     
+                                    <tr>
                                         <td><strong>프로필</strong></td>
                                         <td>${fn:replace(proVo.profile, replaceChar, "<br/>")}</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>수상경력</strong></td>
-                                        <td>${fn:replace(proVo.description, replaceChar, "<br/>")}</td>
-                                    </tr>                                    
+                                    </tr>                                   
                                 </tbody>
                             </table>
                         </div>
