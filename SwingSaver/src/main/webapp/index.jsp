@@ -68,7 +68,7 @@
                         </a>
                     </div>
                     <div class="col-md-4">
-                        <a href="/web/golfService" class="">
+                        <a href="/web/information" class="">
                             <div class="main_box overbox">
                                 <span class="main_sub">information</span>
                                 <h4>서비스 이용방법</h4>
@@ -81,7 +81,7 @@
                         </a>
                     </div>
                     <div class="col-md-4">
-                        <a href="/web/golfService" class="">
+                        <a href="/market/proList" class="">
                             <div class="main_box overbox">
                                 <span class="main_sub">lesson market</span>
                                 <h4>레슨마켓 전문가 소개</h4>

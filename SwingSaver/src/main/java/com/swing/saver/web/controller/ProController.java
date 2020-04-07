@@ -53,15 +53,28 @@ public class ProController {
     	//userVo = restService.getMemberInfo(AdminVo);
         //mv.addObject("userInfo",userVo);
         
-    	String rtnJson = restService.proList();   // 마켓 프로 리스트 조회
+    	String rtnJson1 = restService.proList("0");   // 마켓 프로 리스트 조회
         ObjectMapper mapper = new ObjectMapper();
-        Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});
+        Map<String, Object> map = mapper.readValue(rtnJson1, new TypeReference<Map<String, Object>>(){});
 
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
         
         // proList => RestFul Service에서 등록한 명
-        List<ProVo> proList = mapper.convertValue(map.get("proList"), TypeFactory.defaultInstance().constructCollectionType(List.class,ProVo.class));
-        mv.addObject("proList", proList);
+        List<ProVo> proList1 = mapper.convertValue(map.get("proList"), TypeFactory.defaultInstance().constructCollectionType(List.class,ProVo.class));
+        mv.addObject("proList1", proList1);
+        mv.addObject("proCount1", proList1.size());
+        
+        
+    	String rtnJson2 = restService.proList("1");   // 마켓 프로 리스트 조회
+        ObjectMapper mapper2 = new ObjectMapper();
+        Map<String, Object> map2 = mapper2.readValue(rtnJson2, new TypeReference<Map<String, Object>>(){});
+
+        mapper2.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
+        
+        // proList => RestFul Service에서 등록한 명
+        List<ProVo> proList2 = mapper2.convertValue(map2.get("proList"), TypeFactory.defaultInstance().constructCollectionType(List.class,ProVo.class));
+        mv.addObject("proList2", proList2);
+        mv.addObject("proCount2", proList2.size());
                 
         mv.setViewName("web/pro/pro_01");
         LOGGER.debug("==================== ProController proList end : ===================={}");
