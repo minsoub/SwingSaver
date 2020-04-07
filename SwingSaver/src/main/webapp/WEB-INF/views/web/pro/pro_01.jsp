@@ -13,8 +13,8 @@
                 <h2 class="right-tit">마켓프로</h2>
 				<div class="col-md-12 fare_info">
                     <ul class="tab">
-                        <li class="current" data-tab="tab1"><a href="#">소속프로</a></li>
-                        <li data-tab="tab2"><a href="#">프리미엄</a></li>
+                        <li class="current" data-tab="tab1"><a href="#">소스윙세이버 프로</a></li>
+                        <li data-tab="tab2"><a href="#">프리미엄 프로</a></li>
                     </ul>
 
 
@@ -25,20 +25,17 @@
                 	<c:forEach var="proInfo" items="${proList}" varStatus="status">
                 	<c:if test="${((status.index + 1 ) mod 2) eq 1}"><div class="col-md-12"></c:if>
                 	
-                    <div class="col-md-6">
-                    <a href="/market/proDetail/${proInfo.id}" class="pro-box">
-                       <div class="pro-img">
+                    <div class="col-md-4">
+                    <a href="/market/proDetail/${proInfo.id}" class="profile-box">                       
                        	<c:if test="${proInfo.photo != '' || proInfo.phpto ne null}"><img class="profile-img" src="${proInfo.photo}"></c:if>                                       
-	            		<c:if test="${proInfo.photo eq ''}"><img class="profile-img" src="/image/profile-img.png"></c:if>                                       	
-                       </div>                       
-                       <div class="pro-info">
-                        <h4>${proInfo.name}</h4>
-                        <span>${proInfo.prolevel_nm}</span>
+	            		<c:if test="${proInfo.photo eq ''}"><img class="profile-img" src="/image/profile-img.png"></c:if>                                       	                       
+                       <div class="pro-txt-info">
+                        <span>Swingsaver</span>
+                        <h4>${proInfo.name} 프로</h4>
                         <ul>
                             ${fn:replace(proInfo.profile, replaceChar, "<br/>")}
                         </ul>
-                        </div>
-                        <p>+</p>                       
+                        </div>                      
                     </a>
                     </div>
                     
@@ -46,11 +43,26 @@
                     </c:forEach>
 
 
-        <div id="tab2" class="tabcontent">
+                    <div id="tab2" class="tabcontent">
                         <div class="col-md-12">
                             <div class="col-md-4">
                                 <a href="#" class="profile-box">
-                       <img src="/image/profile-img.png">
+                       <img src="../image/profile-img.png">
+                       
+                       <div class="pro-txt-info">
+                        <span>Premium</span>
+                        <h4>홍길동 프로</h4>
+                        <ul>
+                            <li>2010 PGA 투어 윈덤 챔피언십 1위</li>
+                            <li>2011 PGA 투어 윈덤 챔피언십 2위</li>
+                            <li>2017 PGA 플레이어스 챔피언십 우승</li>
+                        </ul>
+                        </div>
+                    	</a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="#" class="profile-box">
+                       <img src="../image/profile-img.png">
                        
                        <div class="pro-txt-info">
                         <span>Premium</span>
@@ -65,22 +77,7 @@
                             </div>
                             <div class="col-md-4">
                                 <a href="#" class="profile-box">
-                       <img src="/image/profile-img.png">
-                       
-                       <div class="pro-txt-info">
-                        <span>Premium</span>
-                        <h4>홍길동 프로</h4>
-                        <ul>
-                            <li>2010 PGA 투어 윈덤 챔피언십 1위</li>
-                            <li>2011 PGA 투어 윈덤 챔피언십 2위</li>
-                            <li>2017 PGA 플레이어스 챔피언십 우승</li>
-                        </ul>
-                        </div>
-                    </a>
-                            </div>
-                            <div class="col-md-4">
-                                <a href="#" class="profile-box">
-                       <img src="/image/profile-img.png">
+                       <img src="../image/profile-img.png">
                        
                        <div class="pro-txt-info">
                         <span>Premium</span>
@@ -99,8 +96,6 @@
                     
 
                     </div>
-
-                </div>
 
 
 

@@ -28,16 +28,16 @@
                                     <col width="70%">
                                 </colgroup>
                                 <tbody>
-                                	<tr>
+                                	<!-- tr>
                                        <td class="bold-td" colspan="2">
                                        <c:if test="${proVo.photo != '' || proVo.phpto ne null}"><img class="profile-img" src="${proVo.photo}"></c:if>                                       
                                        <c:if test="${proVo.photo eq ''}"><img class="profile-img" src="/image/profile-img.png"></c:if>
                                        </td>
-                                   </tr>
-                                    <tr>
+                                   </tr  -->
+                                    <!-- tr>
                                         <td><strong>아이디</strong></td>
                                         <td>${proVo.email}</td>
-                                    </tr>                                    
+                                    </tr  -->                                    
                                     <tr>
                                         <td><strong>이름</strong></td>
                                         <td>${proVo.name}</td>
@@ -47,7 +47,7 @@
                                         <td>${proVo.prolevel_nm}</td>
                                     </tr>
                                     <tr>
-                                        <td><strong>자기소개</strong></td>
+                                        <td><strong>프로어필</strong></td>
                                         <td>${fn:replace(proVo.description, replaceChar, "<br/>")}</td>
                                     </tr>                                     
                                     <tr>

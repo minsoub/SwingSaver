@@ -22,7 +22,7 @@
 <body>
 	<%@include file="/WEB-INF/views/web/inc/navi.jsp"%>
 	
-           <section class="container no-padding">
+            <section class="container no-padding">
 
                 <div class="content" style="margin-bottom: 0;">
                     <div class="col-md-12">
@@ -37,6 +37,7 @@
                         
                         <div class="main-ab">
                             <h3 class="com-tit">레슨공유서비스 플랫폼</h3>
+                            <a class="more-btn" href="/web/golfService">자세히보기 +</a>
                             <p>레슨공유서비스 플랫폼는 스마트기기와 IoT Device를 이용하여 <br/><span class="red-font">언제, 어디서나 간편하고 편리하게 현장에서 동작분석</span>이 가능하고, <br/>
                             교육자와 피 교육자간의 레슨정보를 편리하게 공유함으로써 교육의 성과를 극대화 하는 O2O서비스 플랫폼입니다.
                             </p>
@@ -54,7 +55,8 @@
                             </ul>
                         </div>                       
                         <div class="main-ab">
-                            <h3 class="com-tit">스윙세이버 골프장 관제 시스템</h3>
+                            <h3 class="com-tit">스윙세이버 골프장 관제 솔루션</h3>
+                            <a class="more-btn" href="/web/golfManagement">자세히보기 +</a>
                             <p>3개국에 인증받은 자사 통신망과  IoT기술을 적용한 골프장 관제 솔루션으로<br/>국내 및 미국, 일본 등에 수출하여 그 실력을 인정 받고 있습니다.
                             </p>
                             <ul>
@@ -82,6 +84,7 @@
                 </div>
 
             </section>
+
 
     <!-- Footer -->
     <%@include file="/WEB-INF/views/web/inc/footer.jsp"%>

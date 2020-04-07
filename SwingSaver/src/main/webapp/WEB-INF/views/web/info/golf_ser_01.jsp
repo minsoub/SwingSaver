@@ -31,7 +31,7 @@
                    
                     <div class="col-md-12">
                         <div class="main-ab" style="text-align: center;margin-bottom: 8%;">
-                            <h2 class="right-tit">What is <strong>Swingsaver?</strong></h2>
+                            <h2 class="right-tit">What is <strong>Swingsaver Golf Service? </strong></h2>
                             <img src="/image/main-img-01.png" width="90%">
                         </div>
                     </div>
@@ -104,7 +104,8 @@
                 </div>
                 </div>
 
-            </section>  
+            </section>
+    
     
 
     <!-- Footer -->

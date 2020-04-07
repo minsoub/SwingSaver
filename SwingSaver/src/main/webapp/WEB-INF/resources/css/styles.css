@@ -545,6 +545,19 @@ ul.tab li.current {
     margin-top: 10px;
 }
 
+.more-btn{
+    background-color: #ff4444;
+    padding: 10px 20px;
+    color: #ffffff;
+    border-radius: 50px;
+}
+
+.more-btn:hover{
+    background-color: #fff;
+    border: 1px solid #ff4444;
+    color: #ff4444
+}
+
 
 .slide_ban {
     display: block;

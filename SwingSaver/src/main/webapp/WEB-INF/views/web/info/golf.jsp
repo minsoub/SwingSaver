@@ -20,19 +20,21 @@
 
 <body>
 	<%@include file="/WEB-INF/views/web/inc/navi.jsp"%>
+
+
            <section class="container no-padding">
 
                 <div class="content" style="margin-bottom: 0;">
                     <div class="no-padding">
-                        <h2 class="right-tit">골프장 통합관제 시스템<br>
+                        <h2 class="right-tit">골프장 관제 솔루션<br>
                             <p>3개국에 인증받은 자사 통신망과 IoT기술을 적용한 골프장 관제 솔루션으로<br>국내 및 미국, 일본 등에 수출하여 그 실력을 인정 받고 있습니다.</p>
                         </h2>
                     </div>
                     <div class="col-md-12">
                         <ul class="tab">
-                            <li class="current" data-tab="tab1"><a href="#">경기 관제</a></li>
-                            <li data-tab="tab2"><a href="#">시설 관제</a></li>
-                            <li data-tab="tab3"><a href="#">코스 관제</a></li>
+                            <li class="current" data-tab="tab1"><a href="#">경기 관제<br/>S-MARSHAL</a></li>
+                            <li data-tab="tab2"><a href="#">시설 관제<br/>S-FACILITY</a></li>
+                            <li data-tab="tab3"><a href="#">코스 관제<br/>S-COURSE</a></li>
                         </ul>
 
                         <div id="tab1" class="tabcontent current">
@@ -287,6 +289,7 @@
                     </div>
                 </div>
             </section>
+
 
     <!-- Footer -->
     <%@include file="/WEB-INF/views/web/inc/footer.jsp"%>
