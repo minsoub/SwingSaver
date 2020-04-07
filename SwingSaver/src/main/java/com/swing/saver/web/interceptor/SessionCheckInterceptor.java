@@ -2,6 +2,9 @@ package com.swing.saver.web.interceptor;
 
 import com.swing.saver.web.entity.LoginVo;
 import com.swing.saver.web.exception.ApiException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -16,7 +19,7 @@ import java.util.List;
  * Created by mycom on 2019-06-06.
  */
 public class SessionCheckInterceptor extends HandlerInterceptorAdapter {
-    // private static final Logger LOGGER = LoggerFactory.getLogger(SessionCheckInterceptor.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(SessionCheckInterceptor.class);
 
     // 인증 체크가 필요한 URL 리스트
     List<String> urlList;
@@ -34,9 +37,9 @@ public class SessionCheckInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws ApiException, IOException {
-        // LOGGER.debug("======================  Intercepter url is no session check  ======================");
-        // LOGGER.debug("preHandler Start");
-        // LOGGER.debug("== URL : {} ",request.getRequestURI());
+        LOGGER.debug("======================  Intercepter url is no session check  ======================");
+        LOGGER.debug("preHandler Start");
+        LOGGER.debug("== URL : {} ",request.getRequestURI());
         String ajaxCall = (String) request.getHeader("AJAX");
         boolean authPass = false;
         try {
@@ -51,7 +54,7 @@ public class SessionCheckInterceptor extends HandlerInterceptorAdapter {
                         response.sendRedirect("/");
                         return false;
                     }
-                }
+                } 
             }
             // 로그인 체크하는 url
             if(urlList != null && urlList.size() != 0){
@@ -89,19 +92,32 @@ public class SessionCheckInterceptor extends HandlerInterceptorAdapter {
                     	// 관리자 모드로 접속했을 경우 관리자 URL인지 확인 해야 한다.
                     	if (request.getRequestURI().indexOf("/admin") >-1) {
                     		return true;
-                    	}else {
-                    		LoginVo loginVo = (LoginVo) request.getSession().getAttribute("login");
-                    		// 	LOGGER.debug("== loginVo. : {}", loginVo.toString()+" ============================");
+                    	}else {	// 사용자 로긴
+                    		LOGGER.debug("login check interceptor.........");
+                    		
+                    		try
+                    		{
+                    			LoginVo loginVo = (LoginVo) request.getSession().getAttribute("login");
+                    			LOGGER.debug("== loginVo. : {}", loginVo.toString()+" ============================");
 
-                    		String adminYN = loginVo.getGroupadmin();
-                    		long userID = loginVo.getUserid();
+                    			String adminYN = loginVo.getGroupadmin();
+                    			long userID = loginVo.getUserid();
 
                     		// GroupAdmin
-                    		if(!adminYN.equals("Y") && request.getRequestURI().indexOf("/web/group") >-1) {
-                    			response.sendRedirect("/?isApply="+authPass);
+                    			if(!adminYN.equals("Y") && request.getRequestURI().indexOf("/web/group") >-1) {
+                    				response.sendRedirect("/?isApply="+authPass);
+                    				return false;
+                    			}else {
+                    				return true;
+                    			}
+                    		}
+                    		catch(Exception ex)
+                    		{
+                    			LOGGER.debug("== error. : {}",ex.toString());
+                    			HttpSession session = request.getSession();
+                    			session.invalidate();
+                    			response.sendRedirect("/loginForm");
                     			return false;
-                    		}else {
-                    			return true;
                     		}
                     	}
                     }

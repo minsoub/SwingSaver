@@ -41,18 +41,24 @@ public class WebController {
 
     @GetMapping("/mypage")
     public ModelAndView mypage(HttpSession session,ModelAndView mv) throws IOException, ApiException {
-        LoginVo loginVo = (LoginVo)session.getAttribute("login");
-        UserVo userVo = null;
+    	LOGGER.info("/mypage called..");
+    	try
+    	{
+    		LoginVo loginVo = (LoginVo)session.getAttribute("login");
+    		UserVo userVo = null;
 
-        String sgrpRtnJson = "";
-        long userId = loginVo.getUserid();
-        /*회원정보 조회*/
-        userVo = restService.getMemberInfo(userId);
+    		String sgrpRtnJson = "";
+    		long userId = loginVo.getUserid();
+    		/*회원정보 조회*/
+    		userVo = restService.getMemberInfo(userId);
 
-        mv.addObject("userInfo",userVo);
+    		mv.addObject("userInfo",userVo);
 
-
-        mv.setViewName("web/mypage_01");
+    		mv.setViewName("web/mypage_01");
+    	}catch(Exception ex) {
+    		ex.printStackTrace();
+    		mv.setViewName("web/user/login");
+    	}
         return mv;
     }
     /**
