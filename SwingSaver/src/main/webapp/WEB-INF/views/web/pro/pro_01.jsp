@@ -22,8 +22,8 @@
                 			<c:if test="${((status.index + 1 ) mod 3) eq 1}"><div class="col-md-12"></c:if>                	
                     			<div class="col-md-4">
                     				<a href="/market/proDetail/${proInfo.id}" class="profile-box">                       
-                       					<c:if test="${proInfo.photo != '' || proInfo.phpto ne null}"><img src="${proInfo.photo}"></c:if>                                       
-	            						<c:if test="${proInfo.photo eq ''}"><img src="/image/profile-img.png"></c:if>                                       	                       
+                       					<c:if test="${proInfo.profile_img != '' && proInfo.profile_img ne null}"><img src="/m/getImage?fileName=${proInfo.profile_img}" height="328"></c:if>                                       
+	            						<c:if test="${proInfo.profile_img eq '' || proInfo.profile_img eq null}"><img src="/image/profile-img.png"></c:if>                                       	                       
                        					<div class="pro-txt-info">
                         					<span>Swingsaver</span>
                         					<h4>${proInfo.name} 프로</h4>
@@ -48,8 +48,8 @@
                 			<c:if test="${((status.index + 1 ) mod 3) eq 1}"><div class="col-md-12"></c:if>                	
                     			<div class="col-md-4">
                     				<a href="/market/proDetail/${proInfo.id}" class="profile-box">                       
-                       					<c:if test="${proInfo.photo != '' || proInfo.phpto ne null}"><img src="${proInfo.photo}"></c:if>                                       
-	            						<c:if test="${proInfo.photo eq ''}"><img src="/image/profile-img.png"></c:if>                                       	                       
+                       					<c:if test="${proInfo.profile_img != '' && proInfo.profile_img ne null}"><img src="/m/getImage?fileName=${proInfo.profile_img}" height="328"></c:if>                                       
+	            						<c:if test="${proInfo.profile_img eq '' || proInfo.profile_img eq null}"><img src="/image/profile-img.png"></c:if>                                       	                       
                        					<div class="pro-txt-info">
                         					<span>Premium</span>
                         					<h4>${proInfo.name} 프로</h4>

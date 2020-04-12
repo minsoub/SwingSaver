@@ -1,5 +1,6 @@
 package com.swing.saver.web.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -36,6 +37,7 @@ import com.swing.saver.web.entity.AdminVo;
 import com.swing.saver.web.entity.CodeVo;
 import com.swing.saver.web.exception.ApiException;
 import com.swing.saver.web.service.RestService;
+import com.swing.saver.web.util.UploadFileUtils;
 
 /**
  * 마켓 프로 Controller 클래스
@@ -47,7 +49,9 @@ import com.swing.saver.web.service.RestService;
 @RequestMapping(Constant.ADMIN_PREFIX)
 public class MarketController extends CommonController {
 	private final static Logger LOGGER = LoggerFactory.getLogger(MarketController.class);
-	
+	// dispatcher-servlet.xml에 정의
+    @Resource(name = "uploadDataPath")
+    private String uploadPath;
     @Inject
     RestService restService;
     
@@ -154,6 +158,21 @@ public class MarketController extends CommonController {
     	proParams.put("profile", proVo.getProfile());
     	proParams.put("description", proVo.getDescription());
     	proParams.put("region", "KR");
+    	proParams.put("profile_img", proVo.getProfile_img());
+    	
+    	LOGGER.debug(proVo.getImageFile().getOriginalFilename());
+    	if (!proVo.getImageFile().isEmpty())
+    	{
+    		String orginFileName = proVo.getImageFile().getOriginalFilename();
+    		int index = orginFileName.lastIndexOf(".");
+		    String fileExt = orginFileName.substring(index + 1);
+	        String savedName = UploadFileUtils.getTimeStamp()+"."+fileExt;
+	        String filePath = uploadPath + File.separator + savedName;
+	        proVo.getImageFile().transferTo(new File(filePath));
+	    	String paramName = proVo.getImageFile().getName();  // 파라미터명
+	    	proParams.put("profile_img", savedName);
+    	}
+    	
     	////////////////////////////////////////////////////////////////
     	String rtnJson = restService.marketProCreate(proParams);
     	LOGGER.debug(rtnJson);
@@ -264,6 +283,21 @@ public class MarketController extends CommonController {
     	proParams.put("prolevel", proVo.getProlevel());
     	proParams.put("profile", proVo.getProfile());
     	proParams.put("description", proVo.getDescription());
+    	
+    	proParams.put("profile_img", proVo.getProfile_img());
+    	
+    	LOGGER.debug(proVo.getImageFile().getOriginalFilename());
+    	if (!proVo.getImageFile().isEmpty())
+    	{
+    		String orginFileName = proVo.getImageFile().getOriginalFilename();
+    		int index = orginFileName.lastIndexOf(".");
+		    String fileExt = orginFileName.substring(index + 1);
+	        String savedName = UploadFileUtils.getTimeStamp()+"."+fileExt;
+	        String filePath = uploadPath + File.separator + savedName;
+	        proVo.getImageFile().transferTo(new File(filePath));
+	    	String paramName = proVo.getImageFile().getName();  // 파라미터명
+	    	proParams.put("profile_img", savedName);
+    	}
     	
     	String rtnJson = restService.proUpdate(proParams);
     	

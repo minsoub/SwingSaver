@@ -8,9 +8,10 @@
 
                     <div class="form-page joinus-page edit-page">
 
-                        <form id="form1" name="form1" method="post">
+                        <form id="form1" name="form1" method="post" enctype="multipart/form-data">
 						<input type="hidden" name="id" value="${proVo.id}">
 						<input type="hidden" name="userid" value="${proVo.userid}">
+						<input type="hidden" id="profile_img" name="profile_img" value="${proVo.profile_img}">
                             <div class="question">
                                 <p>아이디</p>
                                 <div class="que-info">
@@ -39,7 +40,10 @@
                             <p class="text-t">수상경력</p>
                             <textarea name="description" id="description" placeholder="수상경력을 입력해주세요" cols=50 rows=5>${proVo.description}</textarea>
                         </div> 
-
+                        <div class="question">
+                            <p>프로필 이미지</p>
+                            <input type="file" id="imageFile" name="imageFile" placeholder="프로파일 이미지"/>
+                        </div>
                             <button id="btnSave" class="form-btn">수정</button>
                         </form>
                     </div>

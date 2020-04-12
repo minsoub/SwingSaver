@@ -1,5 +1,7 @@
 package com.swing.saver.web.entity;
 
+import org.springframework.web.multipart.MultipartFile;
+
 /**
  * Market Pro VO Class
  * Table Name : SWMARKETPRO
@@ -24,9 +26,16 @@ public class ProVo {
 	private boolean result;
 	private String error;
 	private String photo;
+	MultipartFile imageFile;
 	
 	
 	
+	public MultipartFile getImageFile() {
+		return imageFile;
+	}
+	public void setImageFile(MultipartFile imageFile) {
+		this.imageFile = imageFile;
+	}
 	public String getPhoto() {
 		return photo;
 	}

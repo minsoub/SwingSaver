@@ -26,8 +26,9 @@
                                 <tbody>
                                    <tr>
                                        <td class="bold-td" colspan="2">
-                                       		<c:if test="${proVo.photo != '' || proVo.phpto ne null}"><img class="profile-img" src="${proVo.photo}"></c:if>                                       
-                                       		<c:if test="${proVo.photo eq ''}"><img class="profile-img" src="/image/profile-img.png"></c:if>
+                       					<c:if test="${proVo.profile_img != '' && proVo.profile_img ne null}"><img src="/m/getImage?fileName=${proVo.profile_img}" height="328"></c:if>                                       
+	            						<c:if test="${proVo.profile_img eq '' || proVo.profile_img eq null}"><img src="/image/profile-img.png"></c:if> 
+
                                        </td>
                                    </tr>
                                     <tr>
@@ -49,7 +50,11 @@
                                     <tr>
                                         <td><strong>수상경력</strong></td>
                                         <td>${fn:replace(proVo.description, replaceChar, "<br/>")}</td>
-                                    </tr>                                    
+                                    </tr> 
+                                    <tr>
+                                        <td><strong>이미지</strong></td>
+                                        <td>${proVo.profile_img}</td>
+                                    </tr>                                                                       
                                 </tbody>
                             </table>
                         </div>

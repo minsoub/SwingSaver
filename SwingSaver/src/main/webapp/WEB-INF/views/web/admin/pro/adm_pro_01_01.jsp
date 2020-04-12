@@ -9,6 +9,7 @@
 
                 <div class="form-page joinus-page edit-page">
                     <form class="form-signin" id='forms1' name="forms1" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" id="profile_img" name="profile_img">
                         <div class="question">
                             <p>아이디</p>
                             <select class="userid" name="userid" id="ueerid"> 
@@ -44,7 +45,11 @@
                         <div class="question">
                             <p class="text-t">수상경력</p>
                             <textarea name="description" id="description" placeholder="수상경력을 입력해주세요" cols=50 rows=5></textarea>
-                        </div>                       
+                        </div> 
+                        <div class="question">
+                            <p>프로필 이미지</p>
+                            <input type="file" id="imageFile" name="imageFile" placeholder="프로파일 이미지"/>
+                        </div>                                              
                        <!--얼랏-->
 <!--                        <p class="alert-p">정보를 모두 입력해주세요.</p>-->
                         <button class="form-btn" id="btnSave">등록</button>
