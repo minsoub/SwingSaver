@@ -20,10 +20,10 @@
                                 <li>
                                     <h4>골프 서비스</h4>
                                     <a href="/web/golfService" class="depth_2">서비스 소개</a>
-                                    <a href="" class="depth_2">스윙밴드</a>
-                                    <a href="/market/proList" class="depth_2">마켓프로</a>
+                                    <a href="/market/proList" class="depth_2">코칭 프로 소개</a>
                                     <a href="/web/information" class="depth_2">이용방법</a>
                                     <a href="/web/fare" class="depth_2">요금제 및 환불</a>
+                                    <a href="" class="depth_2">스윙밴드</a>
                                 </li>
                                 <li>
                                     <h4>서비스 준비중</h4>
@@ -145,11 +145,11 @@
                     <ul class="sub-menu sub-menu-on">
                         <li><a href="/web/company" onclick="fn_smallMenuClick()">스윙세이버</a></li>
                         <li><a href="#" onclick="fn_smallMenuClick()">서비스</a></li>
-                        <li class="m_2depth"><a href="/web/golfService">골프장서비스 소개</a></li>
-                        <li class="m_2depth"><a href="#">스윙밴드</a></li>
-                        <li class="m_2depth"><a href="/market/proList">마켓프로</a></li>
+                        <li class="m_2depth"><a href="/web/golfService">골프장서비스 소개</a></li>                        
+                        <li class="m_2depth"><a href="/market/proList">코칭 프로 소개</a></li>
                         <li class="m_2depth"><a href="/web/information">이용방법</a></li>
                         <li class="m_2depth"><a href="/web/fare">요금제 및 환불</a></li>
+                        <li class="m_2depth"><a href="#">스윙밴드</a></li>
                         <li><a href="/web/golfManagement">골프장관제</a></li>
                         <li><a href="#">고객센터</a></li>
                     </ul>                    

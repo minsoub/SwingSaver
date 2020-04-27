@@ -30,7 +30,7 @@
                 <div class="slide_ban ban_img_1">
                     <div class="ban_con" style="">
                         <h1>배우는 즐거움!<br/>스윙세이버가 더 편리하게 도와드리겠습니다.</h1>
-                        <p>언제 어디서나, 레슨정보 공유서비스</p>
+                        <p>Any where Any time, Online Coaching Service</p>
                         <a href="#">MORE VIEW</a>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                 <div class="slide_ban ban_img_2">
                     <div class="ban_con" style="">
                         <h1>이젠 셀프라운딩!<br/>그 시작을 스윙세이버가 함께하겠습니다.</h1>
-                        <p>안전하고 편리한 골프장 경기 관제 서비스</p>
+                        <p>Safe & Easy, Self Managing Golf Service</p>
                         <a href="#">MORE VIEW</a>
                     </div>
                 </div>
@@ -83,10 +83,10 @@
                     <div class="col-md-4">
                         <a href="/market/proList" class="">
                             <div class="main_box overbox">
-                                <span class="main_sub">lesson market</span>
-                                <h4>레슨마켓 전문가 소개</h4>
+                                <span class="main_sub">Coaching Service</span>
+                                <h4>코칭 전문가 소개</h4>
                                 <ul>
-                                    <li>스윙세이버 레슨마켓에서 제공되는 수준 높은 전문가를<br/>만나보세요!</li>
+                                    <li>스윙세이버에서만 제공되는 수준 높은 코칭 서비스,<br/>코칭 전문가들을 만나보세요!</li>
                                 </ul>
                                <p>+</p>
                             </div>

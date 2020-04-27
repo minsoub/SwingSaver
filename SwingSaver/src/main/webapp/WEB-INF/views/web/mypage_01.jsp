@@ -126,6 +126,22 @@
                                 <p>재확인</p>
                                 <input type="password" id="pwdConfirm" placeholder="비밀번호 재확인" required />
                             </div>
+                            
+                            <!--  신규 추가 -->
+                            <div class="question">
+                                <p>구녁</p>
+                                <input type="text" placeholder="1.5년" required />
+                            </div>
+                            <div class="question">
+                                <p>핸드캡</p>
+                                <input type="text" placeholder="12개" required />
+                            </div>  
+                            <div class="question">
+                                <p>7i비거리</p>
+                                <input type="text" placeholder="7번아이언 비거리" required />
+                            </div>                            
+                            
+                            
                             <button class="form-btn" type="button"  id="member">수정</button>
                         </form>
                     </div>

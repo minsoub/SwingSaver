@@ -10,7 +10,7 @@
     <section class="container no-padding">
         <article class="col-md-12" style="padding: 0;">
             <div class="content" style="padding: 0;">
-                <h2 class="right-tit">마켓프로</h2>
+                <h2 class="right-tit">코칭 프로 소개</h2>
 				<div class="col-md-12 fare_info">
                     <ul class="tab">
                         <li class="current" data-tab="tab1"><a href="#">스윙세이버 프로</a></li>
@@ -20,7 +20,7 @@
                     <div id="tab1" class="tabcontent current">                                                   
                 		<c:forEach var="proInfo" items="${proList1}" varStatus="status">
                 			<c:if test="${((status.index + 1 ) mod 3) eq 1}"><div class="col-md-12"></c:if>                	
-                    			<div class="col-md-4">
+                    			<div class="col-md-4" style="margin-bottom: 20px">
                     				<a href="/market/proDetail/${proInfo.id}" class="profile-box">                       
                        					<c:if test="${proInfo.profile_img != '' && proInfo.profile_img ne null}"><img src="/m/getImage?fileName=${proInfo.profile_img}" height="328"></c:if>                                       
 	            						<c:if test="${proInfo.profile_img eq '' || proInfo.profile_img eq null}"><img src="/image/profile-img.png"></c:if>                                       	                       
@@ -46,7 +46,7 @@
                     <div id="tab2" class="tabcontent">
                 		<c:forEach var="proInfo" items="${proList2}" varStatus="status">
                 			<c:if test="${((status.index + 1 ) mod 3) eq 1}"><div class="col-md-12"></c:if>                	
-                    			<div class="col-md-4">
+                    			<div class="col-md-4" style="margin-bottom: 20px">
                     				<a href="/market/proDetail/${proInfo.id}" class="profile-box">                       
                        					<c:if test="${proInfo.profile_img != '' && proInfo.profile_img ne null}"><img src="/m/getImage?fileName=${proInfo.profile_img}" height="328"></c:if>                                       
 	            						<c:if test="${proInfo.profile_img eq '' || proInfo.profile_img eq null}"><img src="/image/profile-img.png"></c:if>                                       	                       

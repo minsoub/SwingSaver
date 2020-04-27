@@ -46,7 +46,8 @@
 
 /* @import url(https://fonts.googleapis.com/css?family=Dancing+Script:700); */
 
-@import url(/css/notosanskr.css);
+/*@import url(/css/notosanskr.css);*/
+@import url(notosanskr.css);
 
 html,
 body {
@@ -60,7 +61,7 @@ html {
 }
 
 body {
-    font-family: 'Noto Sans KR', sans-serif, 'NotoSans Regular', 'Malgun Gothic', '맑은 고딕', 'Apple SD Gothic Neo', '돋움', dotum, sans-serif;
+    font-family: 'Noto Sans KR', sans-serif, 'NotoSans Regular',  sans-serif!important;
     letter-spacing: -0.5px;
     background-color: #fff;
     color: #333;
@@ -127,7 +128,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: "Noto Sans KR", sans-serif, "NotoSans Regular", "Malgun Gothic", "맑은 고딕", "Apple SD Gothic Neo", "돋움", dotum, sans-serif;
+    font-family: 'Noto Sans KR', sans-serif, 'NotoSans Regular',  sans-serif!important;
 
 }
 
@@ -655,7 +656,9 @@ ul.tab li.current {
 }
 
 .per_fare {
-    padding: 30px;
+    padding: 10px;
+    text-align: center;
+    
 }
 
 #sec {
@@ -675,6 +678,22 @@ ul.tab li.current {
     color: #222222;
     font-weight: bold;
     margin: 20px 0 5px 0;
+}
+
+.fare_btn{
+    border: 1px solid #ff4d4d;
+    padding: 10px 50px;
+    background-color: #ff4d4d;
+    color: #fff;
+    font-size: 18px;
+}
+
+.fare_btn:hover{
+    border: 1px solid #ff4d4d;
+    padding: 10px 50px;
+    background-color: #fff;
+    color: #f94747;
+    font-size: 18px;
 }
 
 .main-ab h3 {
@@ -1094,7 +1113,7 @@ ul.tab li.current {
 
 .form-page form .question input[type="password"] {
     border: 1px solid #dcdcdc;
-    line-height: 42px;
+/*    line-height: 42px;*/
     height: 42px;
     font-size: 17px;
     width: 100%;
@@ -1113,7 +1132,7 @@ ul.tab li.current {
 
 .form-page form .question input[type="text"] {
     border: 1px solid #dcdcdc;
-    line-height: 42px;
+/*    line-height: 42px;*/
     height: 42px;
     font-size: 17px;
     width: 100%;
@@ -1268,7 +1287,7 @@ ul.tab li.current {
 
 .joinus-page form .question select {
     border: 1px solid #dcdcdc;
-    line-height: 42px;
+/*    line-height: 42px;*/
     height: 42px;
     font-size: 13px;
     width: 78%;
@@ -1286,7 +1305,7 @@ ul.tab li.current {
 
 .joinus-page form .question02 input[type="text"] {
     border: 1px solid #dcdcdc;
-    line-height: 42px;
+/*    line-height: 42px;*/
     height: 42px;
     font-size: 13px;
     display: inline-block;
@@ -1303,7 +1322,7 @@ ul.tab li.current {
 
 .joinus-page form .question input[type="password"] {
     border: 1px solid #dcdcdc;
-    line-height: 42px;
+/*    line-height: 42px;*/
     height: 42px;
     font-size: 13px;
     width: 78%;
@@ -1326,7 +1345,7 @@ ul.tab li.current {
 .question input[type="email"],
 .question input[type="textarea"] {
     border: 1px solid #dcdcdc;
-    line-height: 42px;
+/*    line-height: 42px;*/
     height: 42px;
     font-size: 13px;
     width: 78%;
@@ -1384,7 +1403,7 @@ form p {
 .email-q-01 input[type="text"] {
     width: 23%;
     border: 1px solid #dcdcdc;
-    line-height: 42px;
+/*    line-height: 42px;*/
     height: 42px;
     font-size: 13px;
     display: inline-block;
@@ -1411,7 +1430,7 @@ form p {
 .joinus-page form .email-q-01 select {
     width: 26%;
     border: 1px solid #dcdcdc;
-    line-height: 42px;
+/*    line-height: 42px;*/
     height: 42px;
     font-size: 13px;
     display: inline-block;
@@ -1436,7 +1455,7 @@ form p {
 .que-btn-01 input[type="text"] {
     width: 58%;
     border: 1px solid #dcdcdc;
-    line-height: 42px;
+/*    line-height: 42px;*/
     height: 42px;
     font-size: 13px;
     display: inline-block;
@@ -1901,10 +1920,24 @@ table td {
 
 .content {
     margin-bottom: 10%;
-    overflow: hidden;
+/*    overflow: hidden;*/
     height: auto;
 }
 
+.group_fare{
+    padding: 10px;
+    text-align: center;
+    border-top: 1px solid #ededed;
+    margin-top: 50px;
+}
+
+.group_fare h3 {
+    font-size: 20px;
+}
+
+.group_fare p {
+    font-size: 15px;
+}
 
 .content h2 {
     text-align: center;
@@ -1915,7 +1948,7 @@ table td {
 
 .content h2:before {
     content: "";
-    display: block;
+    display: flex;
     width: 60px;
     border-bottom: 3px solid #ff4444;
     margin: 0 auto 30px auto;
@@ -3503,7 +3536,7 @@ tbody {
     .joinus-page form .email-q-01 select {
         width: 74%;
         margin-left: 20%;
-        line-height: 42px;
+/*        line-height: 42px;*/
         height: 42px;
         margin-bottom: 5px;
     }

@@ -36,10 +36,10 @@
                         
                         
                         <div class="main-ab">
-                            <h3 class="com-tit">레슨공유서비스 플랫폼</h3>
+                            <h3 class="com-tit">코칭 서비스 플랫폼</h3>
                             <a class="more-btn" href="/web/golfService">자세히보기 +</a>
-                            <p>레슨공유서비스 플랫폼는 스마트기기와 IoT Device를 이용하여 <br/><span class="red-font">언제, 어디서나 간편하고 편리하게 현장에서 동작분석</span>이 가능하고, <br/>
-                            교육자와 피 교육자간의 레슨정보를 편리하게 공유함으로써 교육의 성과를 극대화 하는 O2O서비스 플랫폼입니다.
+                            <p>스윙세이버 코칭 서비스 플랫폼는 스마트기기와 IoT Device를 이용하여 <br/><span class="red-font">언제, 어디서나 간편하고 편리하게 현장에서 동작분석</span>이 가능하고, <br/>
+                            교육자와 피 교육자간의 코칭 정보를 편리하게 공유함으로써 교육의 성과를 극대화 하는 O2O서비스 플랫폼입니다.
                             </p>
                             <ul>
                                 <li class="tit-li">간편하게 촬영하고 분석하는 App 제공</li>
