@@ -97,11 +97,11 @@
                             <!--  신규 추가 -->
                             <div class="question">
                                 <p>구녁</p>
-                                <input type="number" placeholder="1" name="average" id="average" maxlength="3" required value= "${userInfo.average}" />년
+                                <input type="number" placeholder="1" name="average" id="average" maxlength="3" required value= "${userInfo.average}" />
                             </div>
                             <div class="question">
                                 <p>핸드캡</p>
-                                <input type="number" placeholder="5" name="handicap" id="handicap" required maxlength="5" value= "${userInfo.handicap}" />개
+                                <input type="number" placeholder="5" name="handicap" id="handicap" required maxlength="5" value= "${userInfo.handicap}" />
                             </div>  
                             <div class="question">
                                 <p>7i비거리</p>
