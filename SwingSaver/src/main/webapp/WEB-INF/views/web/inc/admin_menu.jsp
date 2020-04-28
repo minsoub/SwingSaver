@@ -20,7 +20,10 @@
                         	<li><a class="<c:if test="${fn:indexOf(reqUri, 'adm_04') != -1}">active</c:if>" href="/admin/golfList">-골프장정보</a></li>
                     	</ul>
                     </li>
+                    <li><a class="<c:if test="${fn:indexOf(reqUri, 'item') != -1}">active</c:if>" href="/admin/itemList">상품관리</a></li>
                 </ul>
+                
+                
                 <ul>
                 	<li><a class="<c:if test="${fn:indexOf(reqUri, 'sts_list') != -1}">active</c:if>" href="/admin/stsList">QR접속현황</a></li>
                 	<li><a class="<c:if test="${fn:indexOf(reqUri, 'advList') != -1}">active</c:if>" href="/admin/advList">광고관리(모바일)</a></li>
