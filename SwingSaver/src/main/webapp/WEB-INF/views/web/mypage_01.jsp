@@ -36,42 +36,9 @@
     
     <section class="container no-padding">
         <article class="col-xs-12" style="padding: 0;">
-            <div class="content-nav col-xs-3">
-                <div class="side-menu">
-                    <div class="user-info">
-                        <img class="side-profile" src="<c:url value='${userInfo.photo}'/>">
-                        <p class="side-user">${userInfo.email}</p>
-                        <p class="meter-l meter-ti">사용 <span>${userInfo.usedspace}M</span></p>
-                        <c:set var="remaining" value="${userInfo.storagespace-userInfo.usedspace}"/>
-                        <c:set var="rating" value="${(userInfo.usedspace+0.0)/(userInfo.storagespace+0.0)}"/>
-                        <p class="meter-r meter-ti">잔여 <span>${remaining}M</span></p>
-                        <div class="meter info_color">
-                            <c:choose>
-                                <c:when test="${userInfo.usedspace == 0 || rating == 'NaN'}">
-                                    <span style="width: 0%"></span>
-                                </c:when>
-                                <c:otherwise>
-                                    <span style="width:<fmt:formatNumber value="${rating}" type="percent"/>"></span>
-                                </c:otherwise>
-                            </c:choose>
-
-                            <%--<span style="width:<fmt:formatNumber value="${(0+0.0)/(0+0.0)}" type="percent"/>"></span>--%>
-                        </div>
-                        <p class="side-info">등급 1 | 소그룹01 | 총사용량:${userInfo.storagespace}M<br/> 사용가능포인트:${userInfo.availablepoints}p
-                            <br/> 서비스 유효일자:20-10-01</p>
-                    </div>
-                    <ul>
-                        <li><a class="active" href="/web/mypage">개인정보수정</a></li>
-                        <li><a class="active" href="/score/scoreList">내스코어 관리</a></li>
-                        <li><a href="/score/statList">내스코어 통계</a></li>
-                        <li><a href="#">포인트 구매/이용료결제</a></li>
-                        <li><a href="#">결제내역 조회</a></li>
-                        <li><a href="#">서비스 변경</a></li>
-                        <li><a href="#">서비스 해지</a></li>
-                    </ul>
-                </div>
-
-            </div>
+<%@include file="/WEB-INF/views/web/inc/mypage_left_menu.jsp"%>
+            
+            
             <div class="content col-xs-9" style="padding: 0;">
                 <div class="col-xs-12 no-padding">
                     <h2 class="right-tit">개인정보수정</h2>
@@ -130,15 +97,15 @@
                             <!--  신규 추가 -->
                             <div class="question">
                                 <p>구녁</p>
-                                <input type="text" placeholder="1.5년" required />
+                                <input type="number" placeholder="1" name="average" id="average" maxlength="3" required value= "${userInfo.average}" />년
                             </div>
                             <div class="question">
                                 <p>핸드캡</p>
-                                <input type="text" placeholder="12개" required />
+                                <input type="number" placeholder="5" name="handicap" id="handicap" required maxlength="5" value= "${userInfo.handicap}" />개
                             </div>  
                             <div class="question">
                                 <p>7i비거리</p>
-                                <input type="text" placeholder="7번아이언 비거리" required />
+                                <input type="number" placeholder="7번아이언 비거리" name="distance" id="distance" maxlength="3" required value= "${userInfo.distance}" />
                             </div>                            
                             
                             
@@ -176,6 +143,9 @@
             var gender = $(':input:radio[name="gender"]:checked').val();
             var pwd = $("#pwd").val();
             var pwdConfirm = $("#pwdConfirm").val();
+            var average = $("#average").val();
+            var handicap = $("#handicap").val();
+            var distance = $("#distance").val();
 
             if(email ==""){
                 alert("이메일 정보를 확인 하세요");
@@ -221,6 +191,10 @@
             obj.phone = phone;
             obj.gender = gender;
             obj.password = pwd;
+            obj.average = average;
+            obj.handicap = handicap;
+            obj.distance = distance;
+            
             var jsonData = JSON.stringify(obj);
             console.log(jsonData);
             AjaxCall("/web/user/modify","POST",jsonData)

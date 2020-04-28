@@ -297,6 +297,15 @@ public class WebController {
         return "web/user/joinResult";
     }
 
+    /**
+     * 마이페이지 정보를 수정한다. 
+     * 
+     * @param params
+     * @param request
+     * @return
+     * @throws ApiException
+     * @throws IOException
+     */
     @PostMapping("/user/modify")
     @ResponseBody
     public ModelAndView memberModify(@RequestBody Map<String, String> params, HttpServletRequest request) throws ApiException, IOException {

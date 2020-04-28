@@ -24,9 +24,9 @@
                             <br/> 서비스 유효일자:20-10-01</p>
                     </div>
                     <ul>
-                        <li><a href="/web/mypage">개인정보수정</a></li>
-                        <li><a class="active" href="/score/scoreList">내스코어 관리</a></li>
-                        <li><a href="/score/statList">내스코어 통계</a></li>
+                        <li><a class="<c:if test="${fn:indexOf(reqUri, 'mypage_01') != -1}">active</c:if>" href="/web/mypage">개인정보수정</a></li>
+                        <li><a class="<c:if test="${fn:indexOf(reqUri, 'score_01') != -1}">active</c:if>" href="/score/scoreList">내스코어 관리</a></li>
+                        <li><a class="<c:if test="${fn:indexOf(reqUri, 'data_01') != -1}">active</c:if>"href="/score/statList">내스코어 통계</a></li>
                         <li><a href="#">포인트 구매/이용료결제</a></li>
                         <li><a href="#">결제내역 조회</a></li>
                         <li><a href="#">서비스 변경</a></li>
