@@ -13,49 +13,9 @@
 	
     <section class="container no-padding">
         <article class="col-xs-12" style="padding: 0;">
-            <div class="content-nav col-xs-3">
-                <div class="side-menu">
-                    <div class="user-info">
-                        <p class="side-user">ID : <span>${groupInfo.id}</span></p>
-                        <p class="meter-l meter-ti">현재회원 <span>${groupInfo.membercount}</span></p>
-                        <p class="meter-r meter-ti">등록가능회원 <span>${groupInfo.quota-groupInfo.membercount}</span></p>
-
-                        <div class="meter info_color">
-                            <c:set var="rating" value="${(groupInfo.membercount+0.0)/(groupInfo.quota+0.0)}"/>
-                            <c:choose>
-                                <c:when test="${groupInfo.membercount == 0 || rating == 'NaN'}">
-                                    <span style="width: 0%"></span>
-                                </c:when>
-                                <c:otherwise>
-                                    <span style="width:<fmt:formatNumber value="${rating}" type="percent"/>"></span>
-                                </c:otherwise>
-                            </c:choose>
-                        </div>
-
-
-
-                        <p class="side-info">${groupInfo.groupname} |
-                            <c:choose>
-                                <c:when test="${groupInfo.grouptype eq 'A'}">
-                                    Academy
-                                </c:when>
-                                <c:otherwise>
-                                    Range
-                                </c:otherwise>
-                            </c:choose>
-                            <br/>할당회원:${groupInfo.quota} | 1인당 스토리지:${groupInfo.storagespace}M</p>
-                    </div>
-                    <ul>
-                        <li><a href="/group/mygroup">그룹정보수정</a></li>
-                        <li><a class="active" href="/group/groupmember">그룹멤버관리</a></li>
-                        <li><a href="/group/subgroup">소그룹관리</a></li>
-                        <li><a href="#">월 이용 결제</a></li>
-                        <li><a href="#">결제내역 조회</a></li>
-                        <li><a href="#">서비스 변경 요청</a></li>
-                    </ul>
-                </div>
-
-            </div>
+            
+            <%@include file="/WEB-INF/views/web/inc/group_left_menu.jsp"%>
+            
             <div class="content col-xs-9" style="padding: 0;">
             <div class="col-xs-12 no-padding">                
                 <h2 class="right-tit">그룹멤버관리</h2>

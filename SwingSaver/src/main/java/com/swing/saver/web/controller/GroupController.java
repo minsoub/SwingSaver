@@ -26,6 +26,7 @@ import java.util.Map;
 
 /**
  * Created by mycom on 2019-06-09.
+ * 사용자 페이지에서 그룹을 호출 했을 때 불려진다.
  */
 @Controller
 @RequestMapping(Constant.GRP_PREFIX)
@@ -35,6 +36,13 @@ public class GroupController {
     @Inject
     RestService restService;
 
+    /**
+     * 그룹관리자인 경우 그룹정보 수정 페이지로 
+     * 그룹관리자가 아닌경우 그룹 및 멤버 신청 페이지 호출
+     * 
+     * @param session
+     * @return
+     */
     @GetMapping("/grpenter")
     public ModelAndView group(HttpSession session){
         LoginVo loginVo = (LoginVo) session.getAttribute("login");
@@ -44,11 +52,41 @@ public class GroupController {
         if(groupAdminYn.equals("Y")){
             mv.setViewName("forward:/group/mygroup");
         }else {
-            mv.setViewName("web/g_reg_01");//그룹 및 멤버 신청
+            mv.setViewName("web/group/g_reg_01");//그룹 및 멤버 신청
         }
         return mv;
     }
+    
+    /**
+     * 그룹 생성 폼 호출
+     * 
+     * @return
+     */
+    @GetMapping("/grpcreate")
+    public ModelAndView groupCreate(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("web/group/g_reg_01_01");
+        return mv;
+    }
+    /**
+     * 그룹 멤버 신청 폼 호출
+     * 
+     * @return
+     */
+    @GetMapping("/grpmember")
+    public ModelAndView groupMemberCreate(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("web/group/g_reg_02_01");
+        return mv;
+    }    
 
+    /**
+     * 그룹 정보 수정 메인 페이지 호출
+     * @param session
+     * @return
+     * @throws IOException
+     * @throws ApiException
+     */
     @GetMapping("/mygroup")
     public ModelAndView groupModify(HttpSession session) throws IOException, ApiException {
         ModelAndView mv = new ModelAndView();
@@ -63,7 +101,7 @@ public class GroupController {
         if(groupadminYn.equals("Y") && !StringUtils.isEmpty(groupId)){
             groupVo = restService.getUserGroupInfo(groupId);
             mv.addObject("groupInfo",groupVo);
-            mv.setViewName("web/g_info_01");
+            mv.setViewName("web/group/g_info_01");
         }else{
             mv.setViewName("forward:/web/mypage");
         }
@@ -72,19 +110,16 @@ public class GroupController {
         return mv;
     }
 
-    @GetMapping("/grpcreate")
-    public ModelAndView groupCreate(){
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("web/g_reg_01_01");
-        return mv;
-    }
-    @GetMapping("/grpmember")
-    public ModelAndView groupMemberCreate(){
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("web/g_reg_02_01");
-        return mv;
-    }
 
+
+    /**
+     * 신규 그룹 등록 
+     * 
+     * @param params
+     * @return
+     * @throws JsonProcessingException
+     * @throws ApiException
+     */
     @PostMapping("/insertGroup")
     public ModelAndView insertGroup(@RequestBody Map<String, String> params) throws JsonProcessingException, ApiException {
         ModelAndView mv = new ModelAndView();
@@ -96,6 +131,14 @@ public class GroupController {
         return mv;
     }
 
+    /**
+     * 그룹 정보 수정
+     * 
+     * @param params
+     * @return
+     * @throws JsonProcessingException
+     * @throws ApiException
+     */
     @PostMapping("/updateGroup")
     public ModelAndView updateGroup(@RequestBody Map<String, String> params) throws JsonProcessingException, ApiException {
         ModelAndView mv = new ModelAndView();
@@ -106,14 +149,28 @@ public class GroupController {
         LOGGER.debug("GroupController updateGroup 종료");
         return mv;
     }
+    /**
+     * 그룹등록 완료 페이지 호출
+     * 
+     * @param code
+     * @return
+     */
     @GetMapping("/groupSuccess/{code}")
     public ModelAndView groupSuccess(@PathVariable String code){
         ModelAndView mv = new ModelAndView();
         mv.addObject("groupCode",code);
-        mv.setViewName("web/g_reg_01_02");
+        mv.setViewName("web/group/g_reg_01_02");
         return mv;
     }
 
+    /**
+     * 그룹 멤버 신청 저장
+     * 
+     * @param params
+     * @return
+     * @throws JsonProcessingException
+     * @throws ApiException
+     */
     @PostMapping("/insertGrpMmeber")
     public ModelAndView insertGrpMmeber(@RequestBody Map<String, String> params) throws JsonProcessingException, ApiException {
         ModelAndView mv = new ModelAndView();
@@ -125,13 +182,25 @@ public class GroupController {
         return mv;
     }
 
+    /**
+     * 그룹 멤버 신청 완료 페이지 호출
+     * @return
+     */
     @GetMapping("/groupMemberSucc")
     public ModelAndView groupSuccess(){
         ModelAndView mv = new ModelAndView();
 
-        mv.setViewName("web/g_reg_02_02");
+        mv.setViewName("web/group/g_reg_02_02");
         return mv;
     }
+    /**
+     * 그룹 멤버 관리 페이지 호출
+     * 
+     * @param session
+     * @return
+     * @throws ApiException
+     * @throws IOException
+     */
     @GetMapping("/groupmember")
     public ModelAndView getGroupMember(HttpSession session) throws ApiException, IOException {
         ModelAndView mv = new ModelAndView();
@@ -154,12 +223,20 @@ public class GroupController {
         List<UserVo> memberList = mapper.convertValue(map.get("groupmembers"), TypeFactory.defaultInstance().constructCollectionType(List.class,UserVo.class));
 
         mv.addObject("memberList",memberList);
-        mv.setViewName("web/g_mem_01");
+        mv.setViewName("web/group/g_mem_01");
 
 
         LOGGER.debug("GroupController getGroupMember 끝",memberList.toString());
         return mv;
     }
+    /**
+     * 소그룹 관리 페이지 호출
+     * 
+     * @param session
+     * @return
+     * @throws IOException
+     * @throws ApiException
+     */
     @GetMapping("/subgroup")
     public ModelAndView getSubGroupMng(HttpSession session) throws IOException, ApiException {
         ModelAndView mv = new ModelAndView();
@@ -180,12 +257,19 @@ public class GroupController {
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
 
         List<SubGroupVo> subGroupList = mapper.convertValue(map.get("subgroups"), TypeFactory.defaultInstance().constructCollectionType(List.class,SubGroupVo.class));
-        mv.setViewName("web/g_sub_01");
+        mv.setViewName("web/group/g_sub_01");
         mv.addObject("subGroupList",subGroupList);
 
         LOGGER.debug("GroupController getSubGroupMng 끝",subGroupList.toString());
         return mv;
     }
+    /**
+     * 소그룹 생성 폼
+     * @param session
+     * @return
+     * @throws IOException
+     * @throws ApiException
+     */
     @GetMapping("/subgroup/subGrpCreate")
     public ModelAndView subGroupCreate(HttpSession session) throws IOException, ApiException {
         ModelAndView mv = new ModelAndView();
@@ -208,9 +292,17 @@ public class GroupController {
 
         mv.addObject("memberList",memberList);
 
-        mv.setViewName("web/g_sub_01_01");
+        mv.setViewName("web/group/g_sub_01_01");
         return mv;
     }
+    /**
+     * 소그룹 상세 정보 보기
+     * @param session
+     * @param sid
+     * @return
+     * @throws IOException
+     * @throws ApiException
+     */
     @GetMapping("/subgroup/subGrpDetail/{sid}")
     public ModelAndView subGroupDeaail(HttpSession session,@PathVariable String sid) throws IOException, ApiException {
         ModelAndView mv = new ModelAndView();
@@ -243,7 +335,7 @@ public class GroupController {
 
         mv.addObject("subGroupList",subGroupList);
 
-        mv.setViewName("web/g_sub_02_01");
+        mv.setViewName("web/group/g_sub_02_01");
         LOGGER.debug("GroupController subGrpDetail 끝");
         return mv;
     }
@@ -258,6 +350,15 @@ public class GroupController {
         LOGGER.debug("GroupController subGroupInsert 종료");
         return mv;
     }
+    /**
+     * 소그룹 수정 폼
+     * 
+     * @param request
+     * @param session
+     * @return
+     * @throws IOException
+     * @throws ApiException
+     */
     @PostMapping(value="/subgroup/subGroupModify")
     public ModelAndView subGroupModify(HttpServletRequest request,HttpSession session) throws IOException, ApiException {
         ModelAndView mv = new ModelAndView();
@@ -294,7 +395,7 @@ public class GroupController {
         mv.addObject("memberList",memberList);
 
 
-        mv.setViewName("web/g_sub_02_02");
+        mv.setViewName("web/group/g_sub_02_02");
         LOGGER.debug("GroupController subGroupModify 끝");
         return mv;
     }
