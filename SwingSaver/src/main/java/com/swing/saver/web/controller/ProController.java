@@ -22,9 +22,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.swing.saver.web.entity.AdminVo;
 import com.swing.saver.web.entity.Constant;
+import com.swing.saver.web.entity.ItemVo;
 import com.swing.saver.web.entity.LoginVo;
 import com.swing.saver.web.entity.ProVo;
 import com.swing.saver.web.exception.ApiException;
+import com.swing.saver.web.service.ItemService;
 import com.swing.saver.web.service.RestService;
 
 @Controller
@@ -34,6 +36,9 @@ public class ProController {
 	
     @Inject
     RestService restService;
+    
+    @Inject
+    ItemService itemService;
     
     /**
      * 마켓 프로 리스트를 조회한다.
@@ -102,6 +107,59 @@ public class ProController {
     	mv.addObject("proVo", proVo);
         mv.setViewName("web/pro/pro_02");
         LOGGER.debug("==================== ProController proDetail end : ===================={}");
+        return mv;
+    }
+    
+    
+    /**
+     * 프로의 마켓 상품관리 리스트를 조회한다.
+     * 
+     * @param request
+     * @return
+     * @throws ApiException
+     * @throws IOException
+     */
+    @GetMapping(value="/itemList")
+    public ModelAndView  itemList(HttpServletRequest request) throws ApiException, IOException {
+        ModelAndView mv = new ModelAndView();
+        LOGGER.debug("==================== ProController itemList Strart : ===================={}");
+    	LoginVo loginVo = (LoginVo)request.getSession().getAttribute("login");
+    	
+        // 현재 회원수와 등록가능회원수 조회 : 용도에 대한 정의 필요
+    	
+    	// 등록한 상품 리스트 조회
+    	String rtnJson1 = itemService.getItemListById(loginVo.getUserid());
+
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> map = mapper.readValue(rtnJson1, new TypeReference<Map<String, Object>>(){});
+
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
+        
+        // proList => RestFul Service에서 등록한 명
+        List<ItemVo> itemList = mapper.convertValue(map.get("itemList"), TypeFactory.defaultInstance().constructCollectionType(List.class,ItemVo.class));
+        mv.addObject("proList1", itemList);
+                
+        mv.setViewName("web/market/item_list");
+        LOGGER.debug("==================== ProController itemList end : ===================={}");
+        return mv;
+    } 
+    
+    /**
+     * 상품 등록 폼
+     * 
+     * @param request
+     * @return
+     * @throws ApiException
+     * @throws IOException
+     */
+    @GetMapping(value="/itemAddform")
+    public ModelAndView  itemAddForm(HttpServletRequest request) throws ApiException, IOException {
+        ModelAndView mv = new ModelAndView();
+        LOGGER.debug("==================== ProController itemAddform Strart : ===================={}");
+        
+        
+        mv.setViewName("web/market/item_reg");
+        LOGGER.debug("==================== ProController itemAddform end : ===================={}");
         return mv;
     }
 }

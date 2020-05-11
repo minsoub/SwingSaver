@@ -127,7 +127,7 @@ public class ItemController {
     	proParams.put("title",       itemVo.getTitle());
     	proParams.put("item_type",   itemVo.getItem_type());
     	proParams.put("price",       String.valueOf(itemVo.getPrice()));
-    	proParams.put("period",      String.valueOf(itemVo.getPeriod()));
+    	//proParams.put("period",      String.valueOf(itemVo.getPeriod()));
     	proParams.put("description", itemVo.getDescription());
     	proParams.put("lessoncount", String.valueOf(itemVo.getLessoncount()));
     	proParams.put("status",      itemVo.getStatus());
@@ -250,7 +250,7 @@ public class ItemController {
     	proParams.put("title",       itemVo.getTitle());
     	proParams.put("item_type",   itemVo.getItem_type());
     	proParams.put("price",       String.valueOf(itemVo.getPrice()));
-    	proParams.put("period",      String.valueOf(itemVo.getPeriod()));
+    	//proParams.put("period",      String.valueOf(itemVo.getPeriod()));
     	proParams.put("description", itemVo.getDescription());
     	proParams.put("lessoncount", String.valueOf(itemVo.getLessoncount()));
     	proParams.put("status",      itemVo.getStatus());

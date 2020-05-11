@@ -19,6 +19,23 @@ public class ItemService {
     @Autowired
     private SendMessage sendMessage;
     
+    /**
+     * 프로가 등록한 상품 리스트를 조회한다. 
+     * 
+     * @param id
+     * @return
+     * @throws ApiException
+     */
+    public String getItemListById(long id) throws ApiException
+    {
+        String rtnJson = "";
+
+        rtnJson = sendMessage.sendHttpsStr("/ords/swing/saver/itemlist/"+id, "GET", "application/x-www-form-urlencoded",true);
+
+        LOGGER.debug("프로가 등록한 상품 리스트를 조회 응답:{}",rtnJson);
+
+        return rtnJson;
+    }
 	/**
 	 * 상품 리스트 조회
 	 * 

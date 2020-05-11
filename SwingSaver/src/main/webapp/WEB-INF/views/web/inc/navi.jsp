@@ -55,6 +55,10 @@
                             <li>
                                 <a href="/web/mypage" class="depth_2">내정보</a>
                                 <a href="/group/grpenter" class="depth_2">그룹정보</a>
+                                <!-- 마켓 프로일 경우 -->
+                                <c:if test="${sessionScope.login.grouppro == 'Y'}">
+                                	<a href="/market/itemList" class="depth_2">마켓정보</a>
+                                </c:if>
                             </li>
                         </ul>
                     </li>

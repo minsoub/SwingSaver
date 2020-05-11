@@ -627,7 +627,8 @@ public class LoginController {
             /*로그인 호출 LoginVo 리턴*/
             loginVo = restService.loginProcess(loginVo,session);
             if(loginVo != null && "true".equals(loginVo.getResult())){
-                LOGGER.debug("로그인 성공 사용자id:{},사용자 권한:{}",loginVo.getUserid(),loginVo.getGroupadmin());
+                LOGGER.debug("로그인 성공 사용자id:{},사용자 권한:{}, ",loginVo.getUserid(),loginVo.getGroupadmin());
+                LOGGER.debug("로그인 성공 사용자 정보{}, ",loginVo);
                 /*session.setMaxInactiveInterval(60*60);*/
                 session.setAttribute("login",loginVo);
                 /*mv.addObject("isLoign",loginVo.getResult());*/
