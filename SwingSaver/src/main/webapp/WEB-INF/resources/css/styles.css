@@ -1277,6 +1277,13 @@ ul.tab li.current {
 
 }
 
+.tbl_btn{
+    color: #ff4444;
+    padding: 0px 7px;
+    border-radius: 50px;
+    border: 1px solid #ff4444;
+}
+
 .search-login li:last-child {
     padding-left: 10px;
     margin-left: 10px;
@@ -1337,7 +1344,25 @@ ul.tab li.current {
     float: right;
 }
 
+.question textarea{
+    border: 1px solid #dcdcdc;
+    font-size: 13px;
+    width: 78%;
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 11px 15px;
+    border-radius: 0px;
+    color: #777;
+    font-weight: 200;
+    position: relative;
+    z-index: 1;
+    float: right;
+}
 
+
+.text_t{
+    height: 113px;
+}
 
 .joinus-page form .question input[type="text"],
 .question input[type="number"],
