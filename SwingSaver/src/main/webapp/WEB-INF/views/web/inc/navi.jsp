@@ -169,6 +169,10 @@
                     <ul class="sub-menu sub-menu-on">
                          <li><a href="/web/mypage" class="depth_2">내정보</a></li>
                          <li><a href="/group/grpenter" class="depth_2">그룹정보</a></li>
+                                <!-- 마켓 프로일 경우 -->
+                                <c:if test="${sessionScope.login.grouppro == 'Y'}">
+                                	<li><a href="/market/itemList" class="depth_2">마켓정보</a></li>
+                                </c:if>                         
                     </ul>                    
                 </li>
             </ul> 

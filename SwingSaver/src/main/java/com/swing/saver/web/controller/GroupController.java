@@ -47,10 +47,14 @@ public class GroupController {
     public ModelAndView group(HttpSession session){
         LoginVo loginVo = (LoginVo) session.getAttribute("login");
         ModelAndView mv = new ModelAndView();
-        String groupAdminYn = loginVo.getGroupadmin();
-        String groupMember = loginVo.getGroupmember();
+        String groupAdminYn = loginVo.getGroupadmin();  // 그룹 관리자인 경우
+        String groupMember = loginVo.getGroupmember();  // 그룹 멤버인경우
+        
+        
         if(groupAdminYn.equals("Y")){
             mv.setViewName("forward:/group/mygroup");
+        }else if(groupMember.equals("Y")) {
+        	mv.setViewName("forward:/group/subgroup");
         }else {
             mv.setViewName("web/group/g_reg_01");//그룹 및 멤버 신청
         }
@@ -340,10 +344,21 @@ public class GroupController {
         return mv;
     }
 
+    /**
+     * 서브그룹 등록
+     * 
+     * @param params
+     * @return
+     * @throws JsonProcessingException
+     * @throws ApiException
+     */
     @PostMapping("/subgroup/subGroupInsert")
-    public ModelAndView subGroupInsert(@RequestBody Map<String, String> params) throws JsonProcessingException, ApiException {
+    public ModelAndView subGroupInsert(@RequestBody Map<String, String> params, HttpSession session) throws JsonProcessingException, ApiException {
         ModelAndView mv = new ModelAndView();
+        LoginVo loginVo = (LoginVo) session.getAttribute("login");
         LOGGER.debug("GroupController subGroupInsert 시작");
+        // 사용자 로그인 아이디를 넘겨야 한다. (서브그룹 등록은 그룹 멤버만 가능) 
+        params.put("memberid", String.valueOf(loginVo.getUserid()));
         String rtn = restService.subGroupInsert(params);
         mv.addObject("data",rtn);
         mv.setViewName("jsonView");
@@ -375,7 +390,7 @@ public class GroupController {
         subgrpmap.put("groupname",request.getParameter("groupname"));
         subgrpmap.put("subgroupid",request.getParameter("subgroupid"));
         subgrpmap.put("quota",request.getParameter("quota"));
-        subgrpmap.put("userid",request.getParameter("userid"));
+        subgrpmap.put("userid", String.valueOf(loginVo.getUserid()));  // request.getParameter("userid"));
         subgrpmap.put("startdate",changeDateToFormat(request.getParameter("startdate")));
         subgrpmap.put("enddate",changeDateToFormat(request.getParameter("enddate")));
         subgrpmap.put("lastname",request.getParameter("lastname"));
@@ -400,9 +415,11 @@ public class GroupController {
         return mv;
     }
     @PostMapping("/subgroup/subGroupUpdate")
-    public ModelAndView subGroupUpdate (@RequestBody Map<String, String> params) throws JsonProcessingException, ApiException {
+    public ModelAndView subGroupUpdate (@RequestBody Map<String, String> params, HttpSession session) throws JsonProcessingException, ApiException {
         ModelAndView mv= new ModelAndView();
+        LoginVo loginVo = (LoginVo) session.getAttribute("login");
         LOGGER.debug("GroupController subGroupUpdate 시작");
+        params.put("memberid", String.valueOf(loginVo.getUserid()));
         String rtn = restService.subGroupUpdate(params);
         mv.addObject("data",rtn);
         mv.setViewName("jsonView");

@@ -17,48 +17,48 @@
                     <div class="form-page joinus-page edit-page">
 
 
-                        <form>
+                        <form class="form-signin" id='forms1' name="forms1" method="POST">
+                        <input type="hidden" id="groupid"    name="groupid">
+                        <input type="hidden" id="subgroupid" name="subgroupid">
                             <div class="question">
                                 <p>상품종류</p>
-                                <select name="grouptype">
-                                  <option value=" " selected="selected">상품종류를 선택해주세요</option>
-                                  <option value="월정액">월정액</option>
-                                  <option value="원포인트">원포인트</option>
+                                <select name="item_type">
+                                  <option value="" selected="selected">상품종류를 선택해주세요</option>
+                                  <option value="1">월정액</option>
+                                  <option value="2">원포인트</option>
                                 </select>
                             </div>
-
                             <div class="question">
                                 <p>상품명</p>
-                                <input type="text" class="que-val" value="상품명" required />
+                                <input type="text" class="que-val" id="title" name="title" placeholder="상품명" required />
                             </div>
                             <div class="question">
                                 <p class="text_t">상품설명</p>
-                            <textarea name="" id="" placeholder="상품설명을 입력해주세요" cols="50" rows="5"></textarea>
+                            	<textarea name="description" id="description" placeholder="상품설명을 입력해주세요" cols="50" rows="5"></textarea>
                            </div>                            
                             
                             <div class="question">
                                 <p>상품가격</p>
-                                <input type="number" class="que-val" value="상품가격" required />
+                                <input type="number" class="que-val" id="price" name="price" required />
                             </div>
                             <div class="question">
                                 <p>사용횟수</p>
-                                <input type="number" class="que-val" value="사용횟수" required />
+                                <input type="number" class="que-val" id="lessoncount" name="lessoncount" required />
                             </div>
                             
                         <!--상품종류 원포인트 선택시만 노출-->
                             <div class="question">
                                 <p>사용기한</p>
-                                <select name="grouptype">
-                                  <option value=" " selected="selected">사용기한을 선택해주세요</option>
-                                  <option value="3개월">3개월</option>
-                                  <option value="6개월">6개월</option>
-                                  <option value="12개월">12개월</option>
+                                <select name="expiryperiod">
+                                  <option value="" selected="selected">사용기한을 선택해주세요</option>
+                                  <option value="3">3개월</option>
+                                  <option value="6">6개월</option>
+                                  <option value="12">12개월</option>
                                 </select>
                             </div>
                         <!--상품종류 원포인트 선택시만 노출-->
                             
-                            <button class="form-btn">생성</button>
-
+                            <button class="form-btn" id="btnSave">저장</button>
 
                         </form>
                     </div>
@@ -108,9 +108,59 @@
 
     <!-- Footer -->
 
+<script>
+$(document).ready(function(){
+    $("#btnSave").click(function(){
+    	fn_Save();
+    });		
+    
+    
+});
+
+function fn_Save()
+{
+    if($("#item_type").val() == ""){
+        alert("상품종류를 선택하세요!!!");
+        $("#item_type").focus();
+        return;
+    }	
+    if($("#title").val() == ""){
+        alert("상품명을 입력하세요");
+        $("#title").focus();
+        return;
+    }    
+    if($("#description").val() == ""){
+        alert("상품설명  입력하세요");
+        $("#description").focus();
+        return;
+    }
+    		
+    if($("#price").val() == ""){
+        alert("가격을 입력하세요");
+        $("#price").focus();
+        return;
+    }
+	if ($("#item_type").val() == "2")
+	{
+		if ($("#lessoncount").val() == "")
+		{
+			alert("사용횟수를 입력하세요!!!");
+			$("#lessoncount").focus();
+			return;
+		}
+		if ($("#expiryperiod").val() == "")
+		{
+			alert("사용기한을 선택하세요!!");
+			$("#expiryperiod").focus();
+			return;
+		}
+	}
+
+    document.forms1.action = "/market/itemSave";
+    document.forms1.submit();
+}
+</script>
+
 
 </body>
-
-
-
 </html>

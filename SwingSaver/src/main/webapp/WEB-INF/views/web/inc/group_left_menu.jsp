@@ -33,14 +33,10 @@
                     </div>    
                     <ul>
                     
-                        <li><a class="<c:if test="${fn:indexOf(reqUri, 'g_info_01') != -1}">active</c:if>" href="/group/mygroup">그룹정보수정</a></li>
-                        <li><a class="<c:if test="${fn:indexOf(reqUri, 'g_mem_01') != -1}">active</c:if>" href="/group/groupmember">그룹멤버관리</a></li>
+                        <li><a class="<c:if test="${fn:indexOf(reqUri, 'g_info_01') != -1}">active</c:if>" href="<c:if test="${sessionScope.login.grouppro == 'Y'}">#</c:if><c:if test="${sessionScope.login.grouppro == 'N'}">/group/mygroup</c:if>">그룹정보수정</a></li>
+                        <li><a class="<c:if test="${fn:indexOf(reqUri, 'g_mem_01') != -1}">active</c:if>" href="<c:if test="${sessionScope.login.grouppro == 'Y'}">#</c:if><c:if test="${sessionScope.login.grouppro == 'N'}">/group/groupmember</c:if>">그룹멤버관리</a></li>
                         
                         <li><a class="<c:if test="${fn:indexOf(reqUri, 'g_sub_0') != -1}">active</c:if>" href="/group/subgroup">소그룹관리</a></li>
-                        <c:if test="${groupInfo.proid != 0}">
-                        	<li><a href="#">월 정액상품 관리</a></li>
-                        	<li><a href="#">원포인트 묶음 상품 관리</a></li>
-                        </c:if>
                         <li><a href="#">월 이용 결제</a></li>
                         <li><a href="#">결제내역 조회</a></li>
                         <li><a href="#">서비스 변경 요청</a></li>
