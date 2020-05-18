@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <%@include file="/WEB-INF/views/web/inc/header.jsp"%>
+<%@include file="/WEB-INF/views/web/inc/header.jsp"%>
 </head>
 <body>
     <%@include file="/WEB-INF/views/web/inc/navi.jsp"%>
@@ -17,12 +17,12 @@
                     <div class="form-page joinus-page edit-page">
 
 
-                        <form class="form-signin" id='forms1' name="forms1" method="POST">
-                        <input type="hidden" id="groupid"    name="groupid">
+                        <form id='forms1' name="forms1" method="POST">
+                        <input type="hidden" id="groupid"    name="groupid" value="${sessionScope.login.groupid}">
                         <input type="hidden" id="subgroupid" name="subgroupid">
                             <div class="question">
                                 <p>상품종류</p>
-                                <select name="item_type">
+                                <select name="item_type" id="item_type" onchange="javascript:change(this.value);">
                                   <option value="" selected="selected">상품종류를 선택해주세요</option>
                                   <option value="1">월정액</option>
                                   <option value="2">원포인트</option>
@@ -34,22 +34,36 @@
                             </div>
                             <div class="question">
                                 <p class="text_t">상품설명</p>
-                            	<textarea name="description" id="description" placeholder="상품설명을 입력해주세요" cols="50" rows="5"></textarea>
-                           </div>                            
-                            
+                            	<textarea name="description" id="description" placeholder="상품설명을 입력해주세요"  required  cols="50" rows="5"></textarea>
+                           </div>   
                             <div class="question">
                                 <p>상품가격</p>
-                                <input type="number" class="que-val" id="price" name="price" required />
+                                <input type="number" class="que-val" id="price" name="price" required maxlength="5" oninput="maxLengthCheck(this)" />
                             </div>
                             <div class="question">
                                 <p>사용횟수</p>
-                                <input type="number" class="que-val" id="lessoncount" name="lessoncount" required />
+                                <input type="number" class="que-val" id="lessoncount" name="lessoncount" maxlength="2" oninput="maxLengthCheck(this)" required />
                             </div>
                             
-                        <!--상품종류 원포인트 선택시만 노출-->
-                            <div class="question">
+                           <!-- 그룹정보  -->
+                           <div class="question grouptype">
+                                <p>사용인원</p>
+                                <input type="number" class="que-val" id="quota" name="quota" required maxlength="5" oninput="maxLengthCheck(this)" />
+                           </div>
+                            <div class="question grouptype">
+                                <p>시작 날짜</p>
+                                <input type="text" id="startdate" name="startdate" placeholder="소그룹 시작 날짜 입력" required />
+                            </div>
+                            <div class="question grouptype">
+                                <p>종료 날짜</p>
+                                <input type="text" id="enddate" name="enddate" placeholder="소그룹 종료 날짜 입력" required />
+                            </div>                                                      
+                           <!-- 그룹정보 End -->                         
+                            
+                           <!--상품종류 원포인트 선택시만 노출-->
+                            <div class="question onetype">
                                 <p>사용기한</p>
-                                <select name="expiryperiod">
+                                <select name="expiryperiod"  id="expiryperiod" required>
                                   <option value="" selected="selected">사용기한을 선택해주세요</option>
                                   <option value="3">3개월</option>
                                   <option value="6">6개월</option>
@@ -112,10 +126,19 @@
 $(document).ready(function(){
     $("#btnSave").click(function(){
     	fn_Save();
-    });		
-    
-    
+    });		    
 });
+
+function change(val)
+{
+	if (val == "1") {		
+		$('.grouptype').show();
+		$('.onetype').hide();
+	}else if(val == "2") {
+		$('.grouptype').hide();
+		$('.onetype').show();		
+	}
+}
 
 function fn_Save()
 {
@@ -131,7 +154,7 @@ function fn_Save()
     }    
     if($("#description").val() == ""){
         alert("상품설명  입력하세요");
-        $("#description").focus();
+        //$("#description").focus();
         return;
     }
     		
@@ -140,23 +163,43 @@ function fn_Save()
         $("#price").focus();
         return;
     }
+	if ($("#lessoncount").val() == "")
+	{
+		alert("사용횟수를 입력하세요!!!");
+		$("#lessoncount").focus();
+		return;
+	}
+	
 	if ($("#item_type").val() == "2")
 	{
-		if ($("#lessoncount").val() == "")
-		{
-			alert("사용횟수를 입력하세요!!!");
-			$("#lessoncount").focus();
-			return;
-		}
+
 		if ($("#expiryperiod").val() == "")
 		{
 			alert("사용기한을 선택하세요!!");
 			$("#expiryperiod").focus();
 			return;
 		}
+	}else if($("#item_type").val() == "1") {
+		if ($("#quota").val() == "")
+		{
+			alert("사용인원을 입력하세요!!!");
+			$("#quota").focus();
+			return;
+		}	
+        //var startdate=$("#startdate").val();
+        //var enddate=$("#enddate").val();
+        if($("#startdate").val() == ""){
+            alert("소그룹 시작일자를 입력 하세요");
+            return;
+        }
+        if($("#enddate").val() == ""){
+            alert("소그룹 종료일자를 입력 하세요");
+            return;
+        }
 	}
-
-    document.forms1.action = "/market/itemSave";
+	
+	
+    document.forms1.action = "/market/item/save";
     document.forms1.submit();
 }
 </script>

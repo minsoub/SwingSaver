@@ -23,9 +23,9 @@
                             <colgroup>
                                 <col width="3%">
                                 <col width="22%">
-                                <col width="15%">
-                                <col width="15%">
-                                <col width="15%">
+                                <col width="12%">
+                                <col width="20%">
+                                <col width="13%">
                                 <col width="15%">
                                 <col width="15%">
                             </colgroup>
@@ -41,52 +41,18 @@
                                 </tr>
                             </thead>
                             <tbody>
+                               <c:forEach var="info" items="${itemList}" varStatus="status">
                                 <tr>
-                                    <td><input type="checkbox" name=" " value=" "></td>
-                                    <td>초보 기초 완성반</td>
-                                    <td>월정액</td>
-                                    <td>1개월</td>
-                                    <td>4회</td>
-                                    <td>100,000원</td>
-                                    <td>사용가능</td>
+                                    <td><input type="checkbox" class="id" name="id" id="id" value="${info.id},${info.title}"></td>
+                                    <td><a href="/market/item/detail?id=${info.id}&item_type=${info.item_type}">${info.title}</a></td>
+                                    <td>${info.item_type_name}</td>
+                                    <td><c:if test="${info.item_type=='1'}">${info.startdate}~${info.enddate}</c:if>
+                                            <c:if test="${info.item_type=='2'}">${info.expiryperiod}</c:if></td>
+                                    <td>${info.lessoncount}회</td>
+                                    <td><fmt:formatNumber type="number" maxFractionDigits="3" value="${info.price}" />원</td>
+                                    <td>${info.status_name}</td>
                                 </tr>
-                                <tr>
-                                    <td><input type="checkbox" name=" " value=" "></td>
-                                    <td>중급 기본 완성반</td>
-                                    <td>월정액</td>
-                                    <td>1개월</td>
-                                    <td>4회</td>
-                                    <td>100,000원</td>
-                                    <td>사용불가</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" name=" " value=" "></td>
-                                    <td>고급 실전 완성반</td>
-                                    <td>월정액</td>
-                                    <td>1개월</td>
-                                    <td>4회</td>
-                                    <td>100,000원</td>
-                                    <td>사용가능</td>
-                                </tr>                                
-                                <tr>
-                                    <td><input type="checkbox" name=" " value=" "></td>
-                                    <td>자세교정 완성반(중급)</td>
-                                    <td>원포인트</td>
-                                    <td>6개월</td>
-                                    <td>12회</td>
-                                    <td>200,000원</td>
-                                    <td>매진</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" name=" " value=" "></td>
-                                    <td>자세교정 완성반(고급)</td>
-                                    <td>원포인트</td>
-                                    <td>12개월</td>
-                                    <td>25회</td>
-                                    <td>400,000원</td>
-                                    <td>사용가능</td>
-                                </tr>
-
+                               </c:forEach>
                             </tbody>
                         </table>
                     </div>
@@ -111,7 +77,7 @@
 
                 </div>
                 <div class="modal-body text-center">
-                    <h5>상품 이름1</h5>
+                    <h5><div id="delgrp"></div></h5>
                     <p>해당 상품을 정말로 삭제하시겠습니까?</p>
                     <!-- 모달 내용 -->
                 </div>
@@ -135,19 +101,58 @@
     <%@include file="/WEB-INF/views/web/inc/footer.jsp"%>
 
     <!-- Footer -->
-
+<input type="hidden" id="deleteIds">
 <script>
 
     $(document).ready(function(){
+        $('.check-all' ).click( function() {
+            $('.id' ).prop( 'checked', this.checked );
+        } );
+        
     	$("#btnAdd").click(function(){
-    		location.href="/market/itemAddform";
+    		location.href="/market/item/Addform";
     	});
+    	
+        $('#btnDelete').click(function() {
+            var chklen = $("input[id=id]:checkbox:checked").length;
+            var _text = "";
+            var _idtext = "";
+
+            if(chklen == 0){
+                alert("삭제할 상품을 선택해주세요");
+                return;
+            }else{
+            	console.dir("whereis...");
+                var i = 1;
+                $('#id:checked').each(function() {
+                    _idtext = _idtext+$(this).val().split(",")[0];
+                    _text= _text+$(this).val().split(",")[1];
+                    if(i<chklen){
+                        _idtext =_idtext+",";
+                        _text= _text+"</br>";
+                    }
+                    i++;
+                });
+                $("#g_sub_01_02").modal("show");
+                $("#delgrp").html(_text);
+                $("#deleteIds").val(_idtext);
+            }
+        });  
+        
+        $("#delete").click(function(){
+            var ids = $("#deleteIds").val();
+
+            var obj = new Object();
+            obj.id = ids;
+
+            var jsonData = JSON.stringify(obj);
+            console.dir(jsonData);
+            AjaxCall("/market/item/delete","POST",jsonData);
+        });
+        
     });
     
 </script> 
 
 </body>
 </html>
-
- 
-    }

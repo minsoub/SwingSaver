@@ -139,6 +139,10 @@ function pageUri() {
     	nextUri = "/admin/market/proList";
     }else if("advDetail.jsp" == arrayUri[maxLen-1]) {
     	nextUri = "/admin/advList";
+    }else if("item_detail.jsp" == arrayUri[maxLen-1]) {
+    	nextUri = "/market/item/list";
+    }else if("class_detail.jsp" == arrayUri[maxLen-1]) {
+    	nextUri = "/market/class/list";
     }
     
     //alert(nextUri);
@@ -278,3 +282,4 @@ function maxLengthCheck(object){
         object.value = object.value.slice(0, object.maxLength);
     }    
 }
+

@@ -57,7 +57,7 @@
                                 <a href="/group/grpenter" class="depth_2">그룹정보</a>
                                 <!-- 마켓 프로일 경우 -->
                                 <c:if test="${sessionScope.login.grouppro == 'Y'}">
-                                	<a href="/market/itemList" class="depth_2">마켓정보</a>
+                                	<a href="/market/item/list" class="depth_2">마켓정보</a>
                                 </c:if>
                             </li>
                         </ul>
@@ -171,7 +171,7 @@
                          <li><a href="/group/grpenter" class="depth_2">그룹정보</a></li>
                                 <!-- 마켓 프로일 경우 -->
                                 <c:if test="${sessionScope.login.grouppro == 'Y'}">
-                                	<li><a href="/market/itemList" class="depth_2">마켓정보</a></li>
+                                	<li><a href="/market/item/list" class="depth_2">마켓정보</a></li>
                                 </c:if>                         
                     </ul>                    
                 </li>

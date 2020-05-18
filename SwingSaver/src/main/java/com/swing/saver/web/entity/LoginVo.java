@@ -9,10 +9,10 @@ public class LoginVo extends BaseEntity {
     private long userid;
     private String result;
 
-    private String groupadmin;
-    private String grouppro;
-    private String groupmember;
-    private String groupid;
+    private String groupadmin;		// 그룹어드민 여부
+    private String grouppro;        // 그룹멤버의 프로여부
+    private String groupmember;     // 그룹의 멤버 여부
+    private String groupid;         // 그룹 아이디
     
     private String prev_url;
 

@@ -12,14 +12,18 @@ public class ItemVo {
 	private String	description;
 	private int		price;
 	private String	status;
+	private String	status_name;
 	private String  groupid;
 	private String  subgroupid;
 	
 	private String	item_type;
 	private String	item_type_name;  // 월정액(1), 원포인트(2)
-	private int		expiryperiod;
+	private String	expiryperiod;
 	private int		lessoncount;
 	
+	private String	quota;
+	private String  startdate;
+	private String  enddate;
 	
 	private int     buycount;
 	private boolean result;
