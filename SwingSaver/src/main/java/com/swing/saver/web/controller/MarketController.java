@@ -23,11 +23,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.swing.saver.web.entity.Constant;
-import com.swing.saver.web.entity.GroupVo;
-import com.swing.saver.web.entity.LoginVo;
-import com.swing.saver.web.entity.ProVo;
-import com.swing.saver.web.entity.UserVo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -35,7 +30,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.swing.saver.web.entity.AdminVo;
 import com.swing.saver.web.entity.CodeVo;
+import com.swing.saver.web.entity.Constant;
+import com.swing.saver.web.entity.ItemVo;
+import com.swing.saver.web.entity.ProVo;
+import com.swing.saver.web.entity.UserVo;
 import com.swing.saver.web.exception.ApiException;
+import com.swing.saver.web.service.ItemService;
 import com.swing.saver.web.service.RestService;
 import com.swing.saver.web.util.UploadFileUtils;
 
@@ -54,6 +54,10 @@ public class MarketController extends CommonController {
     private String uploadPath;
     @Inject
     RestService restService;
+    
+    @Inject
+    ItemService itemService;
+    
     
 	/**
 	 * 마켓 프로 리스트 조회
@@ -191,6 +195,37 @@ public class MarketController extends CommonController {
         LOGGER.debug("==================== MarketController markerProAdd end : ===================={}");
         return mv;
     }
+    /**
+     * 마켓 요금 상세 리스트 조회
+     * @param id
+     * @param request
+     * @param session
+     * @return
+     * @throws ApiException
+     * @throws IOException
+     */
+    @GetMapping(value="/market/feeDetail/{id}")
+    public ModelAndView  feeDetail(@PathVariable Long id, HttpServletRequest request, HttpSession session) throws ApiException, IOException {
+        ModelAndView mv = new ModelAndView();
+        LOGGER.debug("==================== MarketController feeDetail Strart : ===================={}");
+    	AdminVo loginVo = (AdminVo)request.getSession().getAttribute("login");
+
+    	String rtnJson = itemService.getItemListById(id);   // 마켓 요금 상세 리스트 조회
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});
+
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
+        
+        // proList => RestFul Service에서 등록한 명
+        List<ItemVo> itemList = mapper.convertValue(map.get("itemList"), TypeFactory.defaultInstance().constructCollectionType(List.class,ItemVo.class));
+        
+        mv.addObject("itemList", itemList);
+                
+        mv.setViewName("web/admin/pro/fee_list");
+        LOGGER.debug("==================== MarketController feeDetail end : ===================={}");
+        return mv;
+    } 
+    
     /**
      * 상세 정보를 출력한다. 
      * 

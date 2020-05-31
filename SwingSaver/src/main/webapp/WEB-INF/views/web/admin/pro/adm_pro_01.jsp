@@ -36,9 +36,18 @@
                                     <td>${proInfo.email}</td>
                                     <td><a href="javascript:ProView('${proInfo.id}');">${proInfo.name}</a></td>
                                     <td>${proInfo.lessonprice}</td>
-                                    <td>${proInfo.prolevel_nm}</td>
+                                    <!--  td>${proInfo.prolevel_nm}</td  -->
+                                    <td><a class="tbl_btn" href="javascript:FeeView('${proInfo.userid}');">요금상세</a></td>
                                 </tr>
-                            </c:forEach>                                
+                            </c:forEach>   
+                                  <tr>
+                                    <td>></td>
+                                    <td>minsoub@gmail.com</td>
+                                    <td><a href="javascript:ProView('13');">정민섭</a></td>
+                                    <td>테스트비용</td>
+                                    <!--  td>${proInfo.prolevel_nm}</td  -->
+                                    <td><a class="tbl_btn" href="javascript:FeeView('462');">요금상세</a></td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -146,6 +155,11 @@ function fn_proAdd()
 function ProView(id)
 {
 	location.href="/admin/market/proDetail/"+id;
+}
+
+function FeeView(id)
+{
+	location.href="/admin/market/feeDetail/"+id;
 }
 </script>
     

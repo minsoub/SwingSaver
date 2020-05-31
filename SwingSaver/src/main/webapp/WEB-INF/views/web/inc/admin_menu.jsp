@@ -20,12 +20,12 @@
                         	<li><a class="<c:if test="${fn:indexOf(reqUri, 'adm_04') != -1}">active</c:if>" href="/admin/golfList">-골프장정보</a></li>
                     	</ul>
                     </li>
-                    <li><a href="#">상품관리</a>
+                    <!-- li><a href="#">상품관리</a>
                          <ul class="side-sub">
                             <li><a class="<c:if test="${fn:indexOf(reqUri, 'item') != -1}">active</c:if>" href="/admin/itemList">월정액상품</a></li>
                             <li><a class="<c:if test="${fn:indexOf(reqUri, 'item') != -1}">active</c:if>" href="/admin/itemList">원포인트레슨상품</a></li>
                          </ul>
-                    </li>
+                    </li  -->
                 </ul>
                 
                 

@@ -26,7 +26,7 @@
                         <button type="button" id="btnDelete" class="edit-btn" data-toggle="modal" data-target="#adm_02_02_01">삭제</button>
                         <button type="button" id="btnList"   class="sea-btn add-btn" data-target="#">
                         <img src="/image/back-list.png" cwidth="100%">    
-                            지역목록</button>
+                            상품목록</button>
                     </div>
 
                         

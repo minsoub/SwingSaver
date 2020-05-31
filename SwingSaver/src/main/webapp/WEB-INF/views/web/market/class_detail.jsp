@@ -20,7 +20,7 @@
                     <div class="sub-g-btn">
 <!--                        <button type="button" class="edit-btn" data-target="#">수정</button>-->
 <!--                        <button type="button" class="edit-btn" data-toggle="modal" data-target="#g_sub_01_02">삭제</button>-->
-                        <button type="button" class="sea-btn add-btn" data-target="#">
+                        <button type="button" id="btnList"  class="sea-btn add-btn" data-target="#">
                         <img src="/image/back-list.png" cwidth="100%">    
                             클래스목록</button>
                     </div>
@@ -205,6 +205,16 @@
             $("#subgrpmember").modal("hide");
         });
         
+
+        $("#btnList").click(function(){
+        	fn_List();
+        });        
+        
     });
+    
+    function fn_List()
+    {
+    	location.href="/market/class/list";
+    }    
     </script>        
 </html>

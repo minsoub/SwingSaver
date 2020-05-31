@@ -1368,6 +1368,7 @@ ul.tab li.current {
 .question input[type="number"],
 .question input[type="tel"],
 .question input[type="email"],
+.question input[type="date"],
 .question input[type="textarea"] {
     border: 1px solid #dcdcdc;
 /*    line-height: 42px;*/
@@ -2821,6 +2822,7 @@ tbody {
     text-decoration: underline;
 }
 
+
 .pl-num {
     background: #ff6191;
     border-radius: 50px;
@@ -2838,6 +2840,17 @@ tbody {
     color: #333;
     line-height: 2 !important;
 }
+
+.sc-pl-num{
+    background: #ff4762;
+    border-radius: 50px;
+    color: #fff;
+    margin: auto;
+    font-size: 13px;
+    width: 23px;
+    height: 23px;
+}
+
 
 
 .mi-num {
@@ -3342,6 +3355,7 @@ tbody {
 
     .joinus-page form .question input[type="text"],
     .question input[type="email"],
+    .question input[type="date"],
     .question input[type="number"],
     .question input[type="tel"] {
         width: 74%;
