@@ -25,8 +25,9 @@
                                     <th><input type="checkbox" name="all" class="check-all"></th>
                                     <th>아이디</th>
                                     <th>이름</th>
-                                    <th>레슨가격</th>
                                     <th>프로레벨</th>
+                                    <th>레슨가격</th>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
@@ -35,17 +36,17 @@
                                     <td><input type="checkbox" class="id" name="id" id="id" value="${proInfo.id},${proInfo.name}"></td>
                                     <td>${proInfo.email}</td>
                                     <td><a href="javascript:ProView('${proInfo.id}');">${proInfo.name}</a></td>
-                                    <td>${proInfo.lessonprice}</td>
-                                    <!--  td>${proInfo.prolevel_nm}</td  -->
+                                    <%-- <td>${proInfo.lessonprice}</td> --%>
+                                    <td>${proInfo.prolevel_nm}</td>
                                     <td><a class="tbl_btn" href="javascript:FeeView('${proInfo.userid}');">요금상세</a></td>
                                 </tr>
                             </c:forEach>   
                                   <tr>
-                                    <td>></td>
+                                    <td><></td>
                                     <td>minsoub@gmail.com</td>
                                     <td><a href="javascript:ProView('13');">정민섭</a></td>
-                                    <td>테스트비용</td>
-                                    <!--  td>${proInfo.prolevel_nm}</td  -->
+                                    <!-- <td>테스트비용</td> -->
+                                    <td>${proInfo.prolevel_nm}</td>
                                     <td><a class="tbl_btn" href="javascript:FeeView('462');">요금상세</a></td>
                                 </tr>
                             </tbody>

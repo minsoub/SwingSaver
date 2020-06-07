@@ -28,17 +28,17 @@
                   <div>
                     <table>
                       <colgroup>
-                        <col width="19%"/>
-                        <col width="7%"/>
-                        <col width="7%"/>
-                        <col width="7%"/>
-                        <col width="7%"/>
-                        <col width="7%"/>
-                        <col width="7%"/>
-                        <col width="7%"/>
-                        <col width="7%"/>
-                        <col width="7%"/>
-                        <col width="18%"/>                      
+                                <col width="18%"/>
+                                <col width="8%"/>
+                                <col width="8%"/>
+                                <col width="8%"/>
+                                <col width="8%"/>
+                                <col width="8%"/>
+                                <col width="8%"/>
+                                <col width="8%"/>
+                                <col width="8%"/>
+                                <col width="8%"/>
+                                <col width="10%"/>                      
                       </colgroup>
                       <tr class=" ">
                         <th class=" ">HOLE</th>
@@ -68,59 +68,59 @@
                       </tr>
                       <tr class="user-td">
                         <td>${qrInfo.username}</td>
-                        <td class="<c:if test="${scoreVo.scorechk1 < 0}">pl-num</c:if><c:if test="${scoreVo.scorechk1 == 0}">pl2-num</c:if><c:if test="${scoreVo.scorechk1 > 0}">mi-num</c:if>"><c:if test="${scoreVo.score1 == 0}">&nbsp;</c:if><c:if test="${scoreVo.score1 != 0}">${scoreVo.scorechk1}</c:if></td>
-                        <td class="<c:if test="${scoreVo.scorechk2 < 0}">pl-num</c:if><c:if test="${scoreVo.scorechk2 == 0}">pl2-num</c:if><c:if test="${scoreVo.scorechk2 > 0}">mi-num</c:if>"><c:if test="${scoreVo.score2 == 0}">&nbsp;</c:if><c:if test="${scoreVo.score2 != 0}">${scoreVo.scorechk2}</c:if></td>
-                        <td class="<c:if test="${scoreVo.scorechk3 < 0}">pl-num</c:if><c:if test="${scoreVo.scorechk3 == 0}">pl2-num</c:if><c:if test="${scoreVo.scorechk3 > 0}">mi-num</c:if>"><c:if test="${scoreVo.score3 == 0}">&nbsp;</c:if><c:if test="${scoreVo.score3 != 0}">${scoreVo.scorechk3}</c:if></td>
-                        <td class="<c:if test="${scoreVo.scorechk4 < 0}">pl-num</c:if><c:if test="${scoreVo.scorechk4 == 0}">pl2-num</c:if><c:if test="${scoreVo.scorechk4 > 0}">mi-num</c:if>"><c:if test="${scoreVo.score4 == 0}">&nbsp;</c:if><c:if test="${scoreVo.score4 != 0}">${scoreVo.scorechk4}</c:if></td>
-                        <td class="<c:if test="${scoreVo.scorechk5 < 0}">pl-num</c:if><c:if test="${scoreVo.scorechk5 == 0}">pl2-num</c:if><c:if test="${scoreVo.scorechk5 > 0}">mi-num</c:if>"><c:if test="${scoreVo.score5 == 0}">&nbsp;</c:if><c:if test="${scoreVo.score5 != 0}">${scoreVo.scorechk5}</c:if></td>
-                        <td class="<c:if test="${scoreVo.scorechk6 < 0}">pl-num</c:if><c:if test="${scoreVo.scorechk6 == 0}">pl2-num</c:if><c:if test="${scoreVo.scorechk6 > 0}">mi-num</c:if>"><c:if test="${scoreVo.score6 == 0}">&nbsp;</c:if><c:if test="${scoreVo.score6 != 0}">${scoreVo.scorechk6}</c:if></td>
-                        <td class="<c:if test="${scoreVo.scorechk7 < 0}">pl-num</c:if><c:if test="${scoreVo.scorechk7 == 0}">pl2-num</c:if><c:if test="${scoreVo.scorechk7 > 0}">mi-num</c:if>"><c:if test="${scoreVo.score7 == 0}">&nbsp;</c:if><c:if test="${scoreVo.score7 != 0}">${scoreVo.scorechk7}</c:if></td>
-                        <td class="<c:if test="${scoreVo.scorechk8 < 0}">pl-num</c:if><c:if test="${scoreVo.scorechk8 == 0}">pl2-num</c:if><c:if test="${scoreVo.scorechk8 > 0}">mi-num</c:if>"><c:if test="${scoreVo.score8 == 0}">&nbsp;</c:if><c:if test="${scoreVo.score8 != 0}">${scoreVo.scorechk8}</c:if></td>
-                        <td class="<c:if test="${scoreVo.scorechk9 < 0}">pl-num</c:if><c:if test="${scoreVo.scorechk9 == 0}">pl2-num</c:if><c:if test="${scoreVo.scorechk9 > 0}">mi-num</c:if>"><c:if test="${scoreVo.score9 == 0}">&nbsp;</c:if><c:if test="${scoreVo.score9 != 0}">${scoreVo.scorechk9}</c:if></td>
+                        <td><c:if test="${scoreVo.scorechk1 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo.scorechk1 > 0}">${scoreVo.scorechk1}</c:if><c:if test="${scoreVo.scorechk1 < 0}">${scoreVo.scorechk1}</p></c:if></td>
+                        <td><c:if test="${scoreVo.scorechk2 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo.scorechk2 > 0}">${scoreVo.scorechk2}</c:if><c:if test="${scoreVo.scorechk2 < 0}">${scoreVo.scorechk2}</p></c:if></td>
+                        <td><c:if test="${scoreVo.scorechk3 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo.scorechk3 > 0}">${scoreVo.scorechk3}</c:if><c:if test="${scoreVo.scorechk3 < 0}">${scoreVo.scorechk3}</p></c:if></td>
+                        <td><c:if test="${scoreVo.scorechk4 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo.scorechk4 > 0}">${scoreVo.scorechk4}</c:if><c:if test="${scoreVo.scorechk4 < 0}">${scoreVo.scorechk4}</p></c:if></td>
+                        <td><c:if test="${scoreVo.scorechk5 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo.scorechk5 > 0}">${scoreVo.scorechk5}</c:if><c:if test="${scoreVo.scorechk5 < 0}">${scoreVo.scorechk5}</p></c:if></td>
+                        <td><c:if test="${scoreVo.scorechk6 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo.scorechk6 > 0}">${scoreVo.scorechk6}</c:if><c:if test="${scoreVo.scorechk6 < 0}">${scoreVo.scorechk6}</p></c:if></td>
+                        <td><c:if test="${scoreVo.scorechk7 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo.scorechk7 > 0}">${scoreVo.scorechk7}</c:if><c:if test="${scoreVo.scorechk7 < 0}">${scoreVo.scorechk7}</p></c:if></td>
+                        <td><c:if test="${scoreVo.scorechk8 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo.scorechk8 > 0}">${scoreVo.scorechk8}</c:if><c:if test="${scoreVo.scorechk8 < 0}">${scoreVo.scorechk8}</p></c:if></td>
+                        <td><c:if test="${scoreVo.scorechk9 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo.scorechk9 > 0}">${scoreVo.scorechk9}</c:if><c:if test="${scoreVo.scorechk9 < 0}">${scoreVo.scorechk9}</p></c:if></td>                       
                         <td>${scoreVo.scorechksum1}</td>
                       </tr>
                       <c:if test="${scoreVo2.error != 'NO'}">
                       <tr class="team-td">
                         <td>${qrInfo.othername1}</td>
-                        <td class="<c:if test="${scoreVo2.scorechk1 < 0}">pl-num</c:if><c:if test="${scoreVo2.scorechk1 == 0}">pl2-num</c:if><c:if test="${scoreVo2.scorechk1 > 0}">mi-num</c:if>"><c:if test="${scoreVo2.score1 == 0}">&nbsp;</c:if><c:if test="${scoreVo2.score1 != 0}">${scoreVo2.scorechk1}</c:if></td>
-                        <td class="<c:if test="${scoreVo2.scorechk2 < 0}">pl-num</c:if><c:if test="${scoreVo2.scorechk2 == 0}">pl2-num</c:if><c:if test="${scoreVo2.scorechk2 > 0}">mi-num</c:if>"><c:if test="${scoreVo2.score2 == 0}">&nbsp;</c:if><c:if test="${scoreVo2.score2 != 0}">${scoreVo2.scorechk2}</c:if></td>
-                        <td class="<c:if test="${scoreVo2.scorechk3 < 0}">pl-num</c:if><c:if test="${scoreVo2.scorechk3 == 0}">pl2-num</c:if><c:if test="${scoreVo2.scorechk3 > 0}">mi-num</c:if>"><c:if test="${scoreVo2.score3 == 0}">&nbsp;</c:if><c:if test="${scoreVo2.score3 != 0}">${scoreVo2.scorechk3}</c:if></td>
-                        <td class="<c:if test="${scoreVo2.scorechk4 < 0}">pl-num</c:if><c:if test="${scoreVo2.scorechk4 == 0}">pl2-num</c:if><c:if test="${scoreVo2.scorechk4 > 0}">mi-num</c:if>"><c:if test="${scoreVo2.score4 == 0}">&nbsp;</c:if><c:if test="${scoreVo2.score4 != 0}">${scoreVo2.scorechk4}</c:if></td>
-                        <td class="<c:if test="${scoreVo2.scorechk5 < 0}">pl-num</c:if><c:if test="${scoreVo2.scorechk5 == 0}">pl2-num</c:if><c:if test="${scoreVo2.scorechk5 > 0}">mi-num</c:if>"><c:if test="${scoreVo2.score5 == 0}">&nbsp;</c:if><c:if test="${scoreVo2.score5 != 0}">${scoreVo2.scorechk5}</c:if></td>
-                        <td class="<c:if test="${scoreVo2.scorechk6 < 0}">pl-num</c:if><c:if test="${scoreVo2.scorechk6 == 0}">pl2-num</c:if><c:if test="${scoreVo2.scorechk6 > 0}">mi-num</c:if>"><c:if test="${scoreVo2.score6 == 0}">&nbsp;</c:if><c:if test="${scoreVo2.score6 != 0}">${scoreVo2.scorechk6}</c:if></td>
-                        <td class="<c:if test="${scoreVo2.scorechk7 < 0}">pl-num</c:if><c:if test="${scoreVo2.scorechk7 == 0}">pl2-num</c:if><c:if test="${scoreVo2.scorechk7 > 0}">mi-num</c:if>"><c:if test="${scoreVo2.score7 == 0}">&nbsp;</c:if><c:if test="${scoreVo2.score7 != 0}">${scoreVo2.scorechk7}</c:if></td>
-                        <td class="<c:if test="${scoreVo2.scorechk8 < 0}">pl-num</c:if><c:if test="${scoreVo2.scorechk8 == 0}">pl2-num</c:if><c:if test="${scoreVo2.scorechk8 > 0}">mi-num</c:if>"><c:if test="${scoreVo2.score8 == 0}">&nbsp;</c:if><c:if test="${scoreVo2.score8 != 0}">${scoreVo2.scorechk8}</c:if></td>
-                        <td class="<c:if test="${scoreVo2.scorechk9 < 0}">pl-num</c:if><c:if test="${scoreVo2.scorechk9 == 0}">pl2-num</c:if><c:if test="${scoreVo2.scorechk9 > 0}">mi-num</c:if>"><c:if test="${scoreVo2.score9 == 0}">&nbsp;</c:if><c:if test="${scoreVo2.score9 != 0}">${scoreVo2.scorechk9}</c:if></td>
+                        <td><c:if test="${scoreVo2.scorechk1 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo2.scorechk1 > 0}">${scoreVo2.scorechk1}</c:if><c:if test="${scoreVo2.scorechk1 < 0}">${scoreVo2.scorechk1}</p></c:if></td>
+						<td><c:if test="${scoreVo2.scorechk2 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo2.scorechk2 > 0}">${scoreVo2.scorechk2}</c:if><c:if test="${scoreVo2.scorechk2 < 0}">${scoreVo2.scorechk2}</p></c:if></td>
+                        <td><c:if test="${scoreVo2.scorechk3 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo2.scorechk3 > 0}">${scoreVo2.scorechk3}</c:if><c:if test="${scoreVo2.scorechk3 < 0}">${scoreVo2.scorechk3}</p></c:if></td>
+                        <td><c:if test="${scoreVo2.scorechk4 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo2.scorechk4 > 0}">${scoreVo2.scorechk4}</c:if><c:if test="${scoreVo2.scorechk4 < 0}">${scoreVo2.scorechk4}</p></c:if></td>
+                        <td><c:if test="${scoreVo2.scorechk5 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo2.scorechk5 > 0}">${scoreVo2.scorechk5}</c:if><c:if test="${scoreVo2.scorechk5 < 0}">${scoreVo2.scorechk5}</p></c:if></td>
+                        <td><c:if test="${scoreVo2.scorechk6 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo2.scorechk6 > 0}">${scoreVo2.scorechk6}</c:if><c:if test="${scoreVo2.scorechk6 < 0}">${scoreVo2.scorechk6}</p></c:if></td>
+                        <td><c:if test="${scoreVo2.scorechk7 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo2.scorechk7 > 0}">${scoreVo2.scorechk7}</c:if><c:if test="${scoreVo2.scorechk7 < 0}">${scoreVo2.scorechk7}</p></c:if></td>
+                        <td><c:if test="${scoreVo2.scorechk8 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo2.scorechk8 > 0}">${scoreVo2.scorechk8}</c:if><c:if test="${scoreVo2.scorechk8 < 0}">${scoreVo2.scorechk8}</p></c:if></td>
+                        <td><c:if test="${scoreVo2.scorechk9 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo2.scorechk9 > 0}">${scoreVo2.scorechk9}</c:if><c:if test="${scoreVo2.scorechk9 < 0}">${scoreVo2.scorechk9}</p></c:if></td>                        
                         <td>${scoreVo2.scorechksum1}</td>
                       </tr>  
                       </c:if>   
                       <c:if test="${scoreVo3.error != 'NO'}">                         
                       <tr class="team-td">
                         <td>${qrInfo.othername2}</td>
-                        <td class="<c:if test="${scoreVo3.scorechk1 < 0}">pl-num</c:if><c:if test="${scoreVo3.scorechk1 == 0}">pl2-num</c:if><c:if test="${scoreVo3.scorechk1 > 0}">mi-num</c:if>"><c:if test="${scoreVo3.score1 == 0}">&nbsp;</c:if><c:if test="${scoreVo3.score1 != 0}">${scoreVo3.scorechk1}</c:if></td>
-                        <td class="<c:if test="${scoreVo3.scorechk2 < 0}">pl-num</c:if><c:if test="${scoreVo3.scorechk2 == 0}">pl2-num</c:if><c:if test="${scoreVo3.scorechk2 > 0}">mi-num</c:if>"><c:if test="${scoreVo3.score2 == 0}">&nbsp;</c:if><c:if test="${scoreVo3.score2 != 0}">${scoreVo3.scorechk2}</c:if></td>
-                        <td class="<c:if test="${scoreVo3.scorechk3 < 0}">pl-num</c:if><c:if test="${scoreVo3.scorechk3 == 0}">pl2-num</c:if><c:if test="${scoreVo3.scorechk3 > 0}">mi-num</c:if>"><c:if test="${scoreVo3.score3 == 0}">&nbsp;</c:if><c:if test="${scoreVo3.score3 != 0}">${scoreVo3.scorechk3}</c:if></td>
-                        <td class="<c:if test="${scoreVo3.scorechk4 < 0}">pl-num</c:if><c:if test="${scoreVo3.scorechk4 == 0}">pl2-num</c:if><c:if test="${scoreVo3.scorechk4 > 0}">mi-num</c:if>"><c:if test="${scoreVo3.score4 == 0}">&nbsp;</c:if><c:if test="${scoreVo3.score4 != 0}">${scoreVo3.scorechk4}</c:if></td>
-                        <td class="<c:if test="${scoreVo3.scorechk5 < 0}">pl-num</c:if><c:if test="${scoreVo3.scorechk5 == 0}">pl2-num</c:if><c:if test="${scoreVo3.scorechk5 > 0}">mi-num</c:if>"><c:if test="${scoreVo3.score5 == 0}">&nbsp;</c:if><c:if test="${scoreVo3.score5 != 0}">${scoreVo3.scorechk5}</c:if></td>
-                        <td class="<c:if test="${scoreVo3.scorechk6 < 0}">pl-num</c:if><c:if test="${scoreVo3.scorechk6 == 0}">pl2-num</c:if><c:if test="${scoreVo3.scorechk6 > 0}">mi-num</c:if>"><c:if test="${scoreVo3.score6 == 0}">&nbsp;</c:if><c:if test="${scoreVo3.score6 != 0}">${scoreVo3.scorechk6}</c:if></td>
-                        <td class="<c:if test="${scoreVo3.scorechk7 < 0}">pl-num</c:if><c:if test="${scoreVo3.scorechk7 == 0}">pl2-num</c:if><c:if test="${scoreVo3.scorechk7 > 0}">mi-num</c:if>"><c:if test="${scoreVo3.score7 == 0}">&nbsp;</c:if><c:if test="${scoreVo3.score7 != 0}">${scoreVo3.scorechk7}</c:if></td>
-                        <td class="<c:if test="${scoreVo3.scorechk8 < 0}">pl-num</c:if><c:if test="${scoreVo3.scorechk8 == 0}">pl2-num</c:if><c:if test="${scoreVo3.scorechk8 > 0}">mi-num</c:if>"><c:if test="${scoreVo3.score8 == 0}">&nbsp;</c:if><c:if test="${scoreVo3.score8 != 0}">${scoreVo3.scorechk8}</c:if></td>
-                        <td class="<c:if test="${scoreVo3.scorechk9 < 0}">pl-num</c:if><c:if test="${scoreVo3.scorechk9 == 0}">pl2-num</c:if><c:if test="${scoreVo3.scorechk9 > 0}">mi-num</c:if>"><c:if test="${scoreVo3.score9 == 0}">&nbsp;</c:if><c:if test="${scoreVo3.score9 != 0}">${scoreVo3.scorechk9}</c:if></td>
+                        <td><c:if test="${scoreVo3.scorechk1 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo3.scorechk1 > 0}">${scoreVo3.scorechk1}</c:if><c:if test="${scoreVo3.scorechk1 < 0}">${scoreVo3.scorechk1}</p></c:if></td>
+						<td><c:if test="${scoreVo3.scorechk2 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo3.scorechk2 > 0}">${scoreVo3.scorechk2}</c:if><c:if test="${scoreVo3.scorechk2 < 0}">${scoreVo3.scorechk2}</p></c:if></td>
+                        <td><c:if test="${scoreVo3.scorechk3 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo3.scorechk3 > 0}">${scoreVo3.scorechk3}</c:if><c:if test="${scoreVo3.scorechk3 < 0}">${scoreVo3.scorechk3}</p></c:if></td>
+                        <td><c:if test="${scoreVo3.scorechk4 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo3.scorechk4 > 0}">${scoreVo3.scorechk4}</c:if><c:if test="${scoreVo3.scorechk4 < 0}">${scoreVo3.scorechk4}</p></c:if></td>
+                        <td><c:if test="${scoreVo3.scorechk5 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo3.scorechk5 > 0}">${scoreVo3.scorechk5}</c:if><c:if test="${scoreVo3.scorechk5 < 0}">${scoreVo3.scorechk5}</p></c:if></td>
+                        <td><c:if test="${scoreVo3.scorechk6 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo3.scorechk6 > 0}">${scoreVo3.scorechk6}</c:if><c:if test="${scoreVo3.scorechk6 < 0}">${scoreVo3.scorechk6}</p></c:if></td>
+                        <td><c:if test="${scoreVo3.scorechk7 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo3.scorechk7 > 0}">${scoreVo3.scorechk7}</c:if><c:if test="${scoreVo3.scorechk7 < 0}">${scoreVo3.scorechk7}</p></c:if></td>
+                        <td><c:if test="${scoreVo3.scorechk8 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo3.scorechk8 > 0}">${scoreVo3.scorechk8}</c:if><c:if test="${scoreVo3.scorechk8 < 0}">${scoreVo3.scorechk8}</p></c:if></td>
+                        <td><c:if test="${scoreVo3.scorechk9 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo3.scorechk9 > 0}">${scoreVo3.scorechk9}</c:if><c:if test="${scoreVo3.scorechk9 < 0}">${scoreVo3.scorechk9}</p></c:if></td>                       
                         <td>${scoreVo3.scorechksum1}</td>
                       </tr> 
                       </c:if>
                       <c:if test="${scoreVo4.error != 'NO'}">                     
                       <tr class="team-td">
                         <td>${qrInfo.othername3}</td>
-                        <td class="<c:if test="${scoreVo4.scorechk1 < 0}">pl-num</c:if><c:if test="${scoreVo4.scorechk1 == 0}">pl2-num</c:if><c:if test="${scoreVo4.scorechk1 > 0}">mi-num</c:if>"><c:if test="${scoreVo4.score1 == 0}">&nbsp;</c:if><c:if test="${scoreVo4.score1 != 0}">${scoreVo4.scorechk1}</c:if></td>
-                        <td class="<c:if test="${scoreVo4.scorechk2 < 0}">pl-num</c:if><c:if test="${scoreVo4.scorechk2 == 0}">pl2-num</c:if><c:if test="${scoreVo4.scorechk2 > 0}">mi-num</c:if>"><c:if test="${scoreVo4.score2 == 0}">&nbsp;</c:if><c:if test="${scoreVo4.score2 != 0}">${scoreVo4.scorechk2}</c:if></td>
-                        <td class="<c:if test="${scoreVo4.scorechk3 < 0}">pl-num</c:if><c:if test="${scoreVo4.scorechk3 == 0}">pl2-num</c:if><c:if test="${scoreVo4.scorechk3 > 0}">mi-num</c:if>"><c:if test="${scoreVo4.score3 == 0}">&nbsp;</c:if><c:if test="${scoreVo4.score3 != 0}">${scoreVo4.scorechk3}</c:if></td>
-                        <td class="<c:if test="${scoreVo4.scorechk4 < 0}">pl-num</c:if><c:if test="${scoreVo4.scorechk4 == 0}">pl2-num</c:if><c:if test="${scoreVo4.scorechk4 > 0}">mi-num</c:if>"><c:if test="${scoreVo4.score4 == 0}">&nbsp;</c:if><c:if test="${scoreVo4.score4 != 0}">${scoreVo4.scorechk4}</c:if></td>
-                        <td class="<c:if test="${scoreVo4.scorechk5 < 0}">pl-num</c:if><c:if test="${scoreVo4.scorechk5 == 0}">pl2-num</c:if><c:if test="${scoreVo4.scorechk5 > 0}">mi-num</c:if>"><c:if test="${scoreVo4.score5 == 0}">&nbsp;</c:if><c:if test="${scoreVo4.score5 != 0}">${scoreVo4.scorechk5}</c:if></td>
-                        <td class="<c:if test="${scoreVo4.scorechk6 < 0}">pl-num</c:if><c:if test="${scoreVo4.scorechk6 == 0}">pl2-num</c:if><c:if test="${scoreVo4.scorechk6 > 0}">mi-num</c:if>"><c:if test="${scoreVo4.score6 == 0}">&nbsp;</c:if><c:if test="${scoreVo4.score6 != 0}">${scoreVo4.scorechk6}</c:if></td>
-                        <td class="<c:if test="${scoreVo4.scorechk7 < 0}">pl-num</c:if><c:if test="${scoreVo4.scorechk7 == 0}">pl2-num</c:if><c:if test="${scoreVo4.scorechk7 > 0}">mi-num</c:if>"><c:if test="${scoreVo4.score7 == 0}">&nbsp;</c:if><c:if test="${scoreVo4.score7 != 0}">${scoreVo4.scorechk7}</c:if></td>
-                        <td class="<c:if test="${scoreVo4.scorechk8 < 0}">pl-num</c:if><c:if test="${scoreVo4.scorechk8 == 0}">pl2-num</c:if><c:if test="${scoreVo4.scorechk8 > 0}">mi-num</c:if>"><c:if test="${scoreVo4.score8 == 0}">&nbsp;</c:if><c:if test="${scoreVo4.score8 != 0}">${scoreVo4.scorechk8}</c:if></td>
-                        <td class="<c:if test="${scoreVo4.scorechk9 < 0}">pl-num</c:if><c:if test="${scoreVo4.scorechk9 == 0}">pl2-num</c:if><c:if test="${scoreVo4.scorechk9 > 0}">mi-num</c:if>"><c:if test="${scoreVo4.score9 == 0}">&nbsp;</c:if><c:if test="${scoreVo4.score9 != 0}">${scoreVo4.scorechk9}</c:if></td>
+                        <td><c:if test="${scoreVo4.scorechk1 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo4.scorechk1 > 0}">${scoreVo4.scorechk1}</c:if><c:if test="${scoreVo4.scorechk1 < 0}">${scoreVo4.scorechk1}</p></c:if></td>
+						<td><c:if test="${scoreVo4.scorechk2 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo4.scorechk2 > 0}">${scoreVo4.scorechk2}</c:if><c:if test="${scoreVo4.scorechk2 < 0}">${scoreVo4.scorechk2}</p></c:if></td>
+                        <td><c:if test="${scoreVo4.scorechk3 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo4.scorechk3 > 0}">${scoreVo4.scorechk3}</c:if><c:if test="${scoreVo4.scorechk3 < 0}">${scoreVo4.scorechk3}</p></c:if></td>
+                        <td><c:if test="${scoreVo4.scorechk4 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo4.scorechk4 > 0}">${scoreVo4.scorechk4}</c:if><c:if test="${scoreVo4.scorechk4 < 0}">${scoreVo4.scorechk4}</p></c:if></td>
+                        <td><c:if test="${scoreVo4.scorechk5 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo4.scorechk5 > 0}">${scoreVo4.scorechk5}</c:if><c:if test="${scoreVo4.scorechk5 < 0}">${scoreVo4.scorechk5}</p></c:if></td>
+                        <td><c:if test="${scoreVo4.scorechk6 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo4.scorechk6 > 0}">${scoreVo4.scorechk6}</c:if><c:if test="${scoreVo4.scorechk6 < 0}">${scoreVo4.scorechk6}</p></c:if></td>
+                        <td><c:if test="${scoreVo4.scorechk7 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo4.scorechk7 > 0}">${scoreVo4.scorechk7}</c:if><c:if test="${scoreVo4.scorechk7 < 0}">${scoreVo4.scorechk7}</p></c:if></td>
+                        <td><c:if test="${scoreVo4.scorechk8 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo4.scorechk8 > 0}">${scoreVo4.scorechk8}</c:if><c:if test="${scoreVo4.scorechk8 < 0}">${scoreVo4.scorechk8}</p></c:if></td>
+                        <td><c:if test="${scoreVo4.scorechk9 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo4.scorechk9 > 0}">${scoreVo4.scorechk9}</c:if><c:if test="${scoreVo4.scorechk9 < 0}">${scoreVo4.scorechk9}</p></c:if></td>                        
                         <td>${scoreVo4.scorechksum1}</td>
                       </tr>   
                       </c:if>                       
@@ -167,59 +167,59 @@
                       </tr>
                       <tr class="user-td">
                         <td>${qrInfo.username}</td>
-                        <td class="<c:if test="${scoreVo.scorechk10 < 0}">pl-num</c:if><c:if test="${scoreVo.scorechk10 == 0}">pl2-num</c:if><c:if test="${scoreVo.scorechk10 > 0}">mi-num</c:if>"><c:if test="${scoreVo.score10 == 0}">&nbsp;</c:if><c:if test="${scoreVo.score10 != 0}">${scoreVo.scorechk10}</c:if></td>
-                        <td class="<c:if test="${scoreVo.scorechk11 < 0}">pl-num</c:if><c:if test="${scoreVo.scorechk11 == 0}">pl2-num</c:if><c:if test="${scoreVo.scorechk11 > 0}">mi-num</c:if>"><c:if test="${scoreVo.score11 == 0}">&nbsp;</c:if><c:if test="${scoreVo.score11 != 0}">${scoreVo.scorechk11}</c:if></td>
-                        <td class="<c:if test="${scoreVo.scorechk12 < 0}">pl-num</c:if><c:if test="${scoreVo.scorechk12 == 0}">pl2-num</c:if><c:if test="${scoreVo.scorechk12 > 0}">mi-num</c:if>"><c:if test="${scoreVo.score12 == 0}">&nbsp;</c:if><c:if test="${scoreVo.score12 != 0}">${scoreVo.scorechk12}</c:if></td>
-                        <td class="<c:if test="${scoreVo.scorechk13 < 0}">pl-num</c:if><c:if test="${scoreVo.scorechk13 == 0}">pl2-num</c:if><c:if test="${scoreVo.scorechk13 > 0}">mi-num</c:if>"><c:if test="${scoreVo.score13 == 0}">&nbsp;</c:if><c:if test="${scoreVo.score13 != 0}">${scoreVo.scorechk13}</c:if></td>
-                        <td class="<c:if test="${scoreVo.scorechk14 < 0}">pl-num</c:if><c:if test="${scoreVo.scorechk14 == 0}">pl2-num</c:if><c:if test="${scoreVo.scorechk14 > 0}">mi-num</c:if>"><c:if test="${scoreVo.score14 == 0}">&nbsp;</c:if><c:if test="${scoreVo.score14 != 0}">${scoreVo.scorechk14}</c:if></td>
-                        <td class="<c:if test="${scoreVo.scorechk15 < 0}">pl-num</c:if><c:if test="${scoreVo.scorechk15 == 0}">pl2-num</c:if><c:if test="${scoreVo.scorechk15 > 0}">mi-num</c:if>"><c:if test="${scoreVo.score15 == 0}">&nbsp;</c:if><c:if test="${scoreVo.score15 != 0}">${scoreVo.scorechk15}</c:if></td>
-                        <td class="<c:if test="${scoreVo.scorechk16 < 0}">pl-num</c:if><c:if test="${scoreVo.scorechk16 == 0}">pl2-num</c:if><c:if test="${scoreVo.scorechk16 > 0}">mi-num</c:if>"><c:if test="${scoreVo.score16 == 0}">&nbsp;</c:if><c:if test="${scoreVo.score16 != 0}">${scoreVo.scorechk16}</c:if></td>
-                        <td class="<c:if test="${scoreVo.scorechk17 < 0}">pl-num</c:if><c:if test="${scoreVo.scorechk17 == 0}">pl2-num</c:if><c:if test="${scoreVo.scorechk17 > 0}">mi-num</c:if>"><c:if test="${scoreVo.score17 == 0}">&nbsp;</c:if><c:if test="${scoreVo.score17 != 0}">${scoreVo.scorechk17}</c:if></td>
-                        <td class="<c:if test="${scoreVo.scorechk18 < 0}">pl-num</c:if><c:if test="${scoreVo.scorechk18 == 0}">pl2-num</c:if><c:if test="${scoreVo.scorechk18 > 0}">mi-num</c:if>"><c:if test="${scoreVo.score18 == 0}">&nbsp;</c:if><c:if test="${scoreVo.score18 != 0}">${scoreVo.scorechk18}</c:if></td>
+                        <td><c:if test="${scoreVo.scorechk10 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo.scorechk10 > 0}">${scoreVo.scorechk10}</c:if><c:if test="${scoreVo.scorechk10 < 0}">${scoreVo.scorechk10}</p></c:if></td>
+                        <td><c:if test="${scoreVo.scorechk11 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo.scorechk11 > 0}">${scoreVo.scorechk11}</c:if><c:if test="${scoreVo.scorechk11 < 0}">${scoreVo.scorechk11}</p></c:if></td>
+                        <td><c:if test="${scoreVo.scorechk12 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo.scorechk12 > 0}">${scoreVo.scorechk12}</c:if><c:if test="${scoreVo.scorechk12 < 0}">${scoreVo.scorechk12}</p></c:if></td>
+                        <td><c:if test="${scoreVo.scorechk13 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo.scorechk13 > 0}">${scoreVo.scorechk13}</c:if><c:if test="${scoreVo.scorechk13 < 0}">${scoreVo.scorechk13}</p></c:if></td>
+                        <td><c:if test="${scoreVo.scorechk14 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo.scorechk14 > 0}">${scoreVo.scorechk14}</c:if><c:if test="${scoreVo.scorechk14 < 0}">${scoreVo.scorechk14}</p></c:if></td>
+                        <td><c:if test="${scoreVo.scorechk15 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo.scorechk15 > 0}">${scoreVo.scorechk15}</c:if><c:if test="${scoreVo.scorechk15 < 0}">${scoreVo.scorechk15}</p></c:if></td>
+                        <td><c:if test="${scoreVo.scorechk16 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo.scorechk16 > 0}">${scoreVo.scorechk16}</c:if><c:if test="${scoreVo.scorechk16 < 0}">${scoreVo.scorechk16}</p></c:if></td>
+                        <td><c:if test="${scoreVo.scorechk17 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo.scorechk17 > 0}">${scoreVo.scorechk17}</c:if><c:if test="${scoreVo.scorechk17 < 0}">${scoreVo.scorechk17}</p></c:if></td>
+                        <td><c:if test="${scoreVo.scorechk18 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo.scorechk18 > 0}">${scoreVo.scorechk18}</c:if><c:if test="${scoreVo.scorechk18 < 0}">${scoreVo.scorechk18}</p></c:if></td>                        
                         <td>${scoreVo.scorechksum2}</td>
                       </tr>
                       <c:if test="${scoreVo2.error != 'NO'}">
                       <tr class="team-td">
                         <td>${qrInfo.othername1}</td>
-                        <td class="<c:if test="${scoreVo2.scorechk10 < 0}">pl-num</c:if><c:if test="${scoreVo2.scorechk10 == 0}">pl2-num</c:if><c:if test="${scoreVo2.scorechk10 > 0}">mi-num</c:if>"><c:if test="${scoreVo2.score10 == 0}">&nbsp;</c:if><c:if test="${scoreVo2.score10 != 0}">${scoreVo2.scorechk10}</c:if></td>
-                        <td class="<c:if test="${scoreVo2.scorechk11 < 0}">pl-num</c:if><c:if test="${scoreVo2.scorechk11 == 0}">pl2-num</c:if><c:if test="${scoreVo2.scorechk11 > 0}">mi-num</c:if>"><c:if test="${scoreVo2.score11 == 0}">&nbsp;</c:if><c:if test="${scoreVo2.score11 != 0}">${scoreVo2.scorechk11}</c:if></td>
-                        <td class="<c:if test="${scoreVo2.scorechk12 < 0}">pl-num</c:if><c:if test="${scoreVo2.scorechk12 == 0}">pl2-num</c:if><c:if test="${scoreVo2.scorechk12 > 0}">mi-num</c:if>"><c:if test="${scoreVo2.score12 == 0}">&nbsp;</c:if><c:if test="${scoreVo2.score12 != 0}">${scoreVo2.scorechk12}</c:if></td>
-                        <td class="<c:if test="${scoreVo2.scorechk13 < 0}">pl-num</c:if><c:if test="${scoreVo2.scorechk13 == 0}">pl2-num</c:if><c:if test="${scoreVo2.scorechk13 > 0}">mi-num</c:if>"><c:if test="${scoreVo2.score13 == 0}">&nbsp;</c:if><c:if test="${scoreVo2.score13 != 0}">${scoreVo2.scorechk13}</c:if></td>
-                        <td class="<c:if test="${scoreVo2.scorechk14 < 0}">pl-num</c:if><c:if test="${scoreVo2.scorechk14 == 0}">pl2-num</c:if><c:if test="${scoreVo2.scorechk14 > 0}">mi-num</c:if>"><c:if test="${scoreVo2.score14 == 0}">&nbsp;</c:if><c:if test="${scoreVo2.score14 != 0}">${scoreVo2.scorechk14}</c:if></td>
-                        <td class="<c:if test="${scoreVo2.scorechk15 < 0}">pl-num</c:if><c:if test="${scoreVo2.scorechk15 == 0}">pl2-num</c:if><c:if test="${scoreVo2.scorechk15 > 0}">mi-num</c:if>"><c:if test="${scoreVo2.score15 == 0}">&nbsp;</c:if><c:if test="${scoreVo2.score15 != 0}">${scoreVo2.scorechk15}</c:if></td>
-                        <td class="<c:if test="${scoreVo2.scorechk16 < 0}">pl-num</c:if><c:if test="${scoreVo2.scorechk16 == 0}">pl2-num</c:if><c:if test="${scoreVo2.scorechk16 > 0}">mi-num</c:if>"><c:if test="${scoreVo2.score16 == 0}">&nbsp;</c:if><c:if test="${scoreVo2.score16 != 0}">${scoreVo2.scorechk16}</c:if></td>
-                        <td class="<c:if test="${scoreVo2.scorechk17 < 0}">pl-num</c:if><c:if test="${scoreVo2.scorechk17 == 0}">pl2-num</c:if><c:if test="${scoreVo2.scorechk17 > 0}">mi-num</c:if>"><c:if test="${scoreVo2.score17 == 0}">&nbsp;</c:if><c:if test="${scoreVo2.score17 != 0}">${scoreVo2.scorechk17}</c:if></td>
-                        <td class="<c:if test="${scoreVo2.scorechk18 < 0}">pl-num</c:if><c:if test="${scoreVo2.scorechk18 == 0}">pl2-num</c:if><c:if test="${scoreVo2.scorechk18 > 0}">mi-num</c:if>"><c:if test="${scoreVo2.score18 == 0}">&nbsp;</c:if><c:if test="${scoreVo2.score18 != 0}">${scoreVo2.scorechk18}</c:if></td>
+                        <td><c:if test="${scoreVo2.scorechk10 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo2.scorechk10 > 0}">${scoreVo2.scorechk10}</c:if><c:if test="${scoreVo2.scorechk10 < 0}">${scoreVo2.scorechk10}</p></c:if></td>
+                        <td><c:if test="${scoreVo2.scorechk11 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo2.scorechk11 > 0}">${scoreVo2.scorechk11}</c:if><c:if test="${scoreVo2.scorechk11 < 0}">${scoreVo2.scorechk11}</p></c:if></td>
+                        <td><c:if test="${scoreVo2.scorechk12 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo2.scorechk12 > 0}">${scoreVo2.scorechk12}</c:if><c:if test="${scoreVo2.scorechk12 < 0}">${scoreVo2.scorechk12}</p></c:if></td>
+                        <td><c:if test="${scoreVo2.scorechk13 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo2.scorechk13 > 0}">${scoreVo2.scorechk13}</c:if><c:if test="${scoreVo2.scorechk13 < 0}">${scoreVo2.scorechk13}</p></c:if></td>
+                        <td><c:if test="${scoreVo2.scorechk14 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo2.scorechk14 > 0}">${scoreVo2.scorechk14}</c:if><c:if test="${scoreVo2.scorechk14 < 0}">${scoreVo2.scorechk14}</p></c:if></td>
+                        <td><c:if test="${scoreVo2.scorechk15 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo2.scorechk15 > 0}">${scoreVo2.scorechk15}</c:if><c:if test="${scoreVo2.scorechk15 < 0}">${scoreVo2.scorechk15}</p></c:if></td>
+                        <td><c:if test="${scoreVo2.scorechk16 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo2.scorechk16 > 0}">${scoreVo2.scorechk16}</c:if><c:if test="${scoreVo2.scorechk16 < 0}">${scoreVo2.scorechk16}</p></c:if></td>
+                        <td><c:if test="${scoreVo2.scorechk17 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo2.scorechk17 > 0}">${scoreVo2.scorechk17}</c:if><c:if test="${scoreVo2.scorechk17 < 0}">${scoreVo2.scorechk17}</p></c:if></td>
+                        <td><c:if test="${scoreVo2.scorechk18 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo2.scorechk18 > 0}">${scoreVo2.scorechk18}</c:if><c:if test="${scoreVo2.scorechk18 < 0}">${scoreVo2.scorechk18}</p></c:if></td>                       
                         <td>${scoreVo2.scorechksum2}</td>
                       </tr> 
                       </c:if>
                       <c:if test="${scoreVo3.error != 'NO'}">                                
                       <tr class="team-td">
                         <td>${qrInfo.othername2}</td>
-                        <td class="<c:if test="${scoreVo3.scorechk10 < 0}">pl-num</c:if><c:if test="${scoreVo3.scorechk10 == 0}">pl2-num</c:if><c:if test="${scoreVo3.scorechk10 > 0}">mi-num</c:if>"><c:if test="${scoreVo3.score10 == 0}">&nbsp;</c:if><c:if test="${scoreVo3.score10 != 0}">${scoreVo3.scorechk10}</c:if></td>
-                        <td class="<c:if test="${scoreVo3.scorechk11 < 0}">pl-num</c:if><c:if test="${scoreVo3.scorechk11 == 0}">pl2-num</c:if><c:if test="${scoreVo3.scorechk11 > 0}">mi-num</c:if>"><c:if test="${scoreVo3.score11 == 0}">&nbsp;</c:if><c:if test="${scoreVo3.score11 != 0}">${scoreVo3.scorechk11}</c:if></td>
-                        <td class="<c:if test="${scoreVo3.scorechk12 < 0}">pl-num</c:if><c:if test="${scoreVo3.scorechk12 == 0}">pl2-num</c:if><c:if test="${scoreVo3.scorechk12 > 0}">mi-num</c:if>"><c:if test="${scoreVo3.score12 == 0}">&nbsp;</c:if><c:if test="${scoreVo3.score12 != 0}">${scoreVo3.scorechk12}</c:if></td>
-                        <td class="<c:if test="${scoreVo3.scorechk13 < 0}">pl-num</c:if><c:if test="${scoreVo3.scorechk13 == 0}">pl2-num</c:if><c:if test="${scoreVo3.scorechk13 > 0}">mi-num</c:if>"><c:if test="${scoreVo3.score13 == 0}">&nbsp;</c:if><c:if test="${scoreVo3.score13 != 0}">${scoreVo3.scorechk13}</c:if></td>
-                        <td class="<c:if test="${scoreVo3.scorechk14 < 0}">pl-num</c:if><c:if test="${scoreVo3.scorechk14 == 0}">pl2-num</c:if><c:if test="${scoreVo3.scorechk14 > 0}">mi-num</c:if>"><c:if test="${scoreVo3.score14 == 0}">&nbsp;</c:if><c:if test="${scoreVo3.score14 != 0}">${scoreVo3.scorechk14}</c:if></td>
-                        <td class="<c:if test="${scoreVo3.scorechk15 < 0}">pl-num</c:if><c:if test="${scoreVo3.scorechk15 == 0}">pl2-num</c:if><c:if test="${scoreVo3.scorechk15 > 0}">mi-num</c:if>"><c:if test="${scoreVo3.score15 == 0}">&nbsp;</c:if><c:if test="${scoreVo3.score15 != 0}">${scoreVo3.scorechk15}</c:if></td>
-                        <td class="<c:if test="${scoreVo3.scorechk16 < 0}">pl-num</c:if><c:if test="${scoreVo3.scorechk16 == 0}">pl2-num</c:if><c:if test="${scoreVo3.scorechk16 > 0}">mi-num</c:if>"><c:if test="${scoreVo3.score16 == 0}">&nbsp;</c:if><c:if test="${scoreVo3.score16 != 0}">${scoreVo3.scorechk16}</c:if></td>
-                        <td class="<c:if test="${scoreVo3.scorechk17 < 0}">pl-num</c:if><c:if test="${scoreVo3.scorechk17 == 0}">pl2-num</c:if><c:if test="${scoreVo3.scorechk17 > 0}">mi-num</c:if>"><c:if test="${scoreVo3.score17 == 0}">&nbsp;</c:if><c:if test="${scoreVo3.score17 != 0}">${scoreVo3.scorechk17}</c:if></td>
-                        <td class="<c:if test="${scoreVo3.scorechk18 < 0}">pl-num</c:if><c:if test="${scoreVo3.scorechk18 == 0}">pl2-num</c:if><c:if test="${scoreVo3.scorechk18 > 0}">mi-num</c:if>"><c:if test="${scoreVo3.score18 == 0}">&nbsp;</c:if><c:if test="${scoreVo3.score18 != 0}">${scoreVo3.scorechk18}</c:if></td>
+                        <td><c:if test="${scoreVo3.scorechk10 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo3.scorechk10 > 0}">${scoreVo3.scorechk10}</c:if><c:if test="${scoreVo3.scorechk10 < 0}">${scoreVo3.scorechk10}</p></c:if></td>
+                        <td><c:if test="${scoreVo3.scorechk11 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo3.scorechk11 > 0}">${scoreVo3.scorechk11}</c:if><c:if test="${scoreVo3.scorechk11 < 0}">${scoreVo3.scorechk11}</p></c:if></td>
+                        <td><c:if test="${scoreVo3.scorechk12 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo3.scorechk12 > 0}">${scoreVo3.scorechk12}</c:if><c:if test="${scoreVo3.scorechk12 < 0}">${scoreVo3.scorechk12}</p></c:if></td>
+                        <td><c:if test="${scoreVo3.scorechk13 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo3.scorechk13 > 0}">${scoreVo3.scorechk13}</c:if><c:if test="${scoreVo3.scorechk13 < 0}">${scoreVo3.scorechk13}</p></c:if></td>
+                        <td><c:if test="${scoreVo3.scorechk14 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo3.scorechk14 > 0}">${scoreVo3.scorechk14}</c:if><c:if test="${scoreVo3.scorechk14 < 0}">${scoreVo3.scorechk14}</p></c:if></td>
+                        <td><c:if test="${scoreVo3.scorechk15 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo3.scorechk15 > 0}">${scoreVo3.scorechk15}</c:if><c:if test="${scoreVo3.scorechk15 < 0}">${scoreVo3.scorechk15}</p></c:if></td>
+                        <td><c:if test="${scoreVo3.scorechk16 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo3.scorechk16 > 0}">${scoreVo3.scorechk16}</c:if><c:if test="${scoreVo3.scorechk16 < 0}">${scoreVo3.scorechk16}</p></c:if></td>
+                        <td><c:if test="${scoreVo3.scorechk17 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo3.scorechk17 > 0}">${scoreVo3.scorechk17}</c:if><c:if test="${scoreVo3.scorechk17 < 0}">${scoreVo3.scorechk17}</p></c:if></td>
+                        <td><c:if test="${scoreVo3.scorechk18 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo3.scorechk18 > 0}">${scoreVo3.scorechk18}</c:if><c:if test="${scoreVo3.scorechk18 < 0}">${scoreVo3.scorechk18}</p></c:if></td>                                                                       
                         <td>${scoreVo3.scorechksum2}</td>
                       </tr>
                       </c:if>
                       <c:if test="${scoreVo4.error != 'NO'}">                  
                       <tr class="team-td">
                         <td>${qrInfo.othername3}</td>
-                        <td class="<c:if test="${scoreVo4.scorechk10 < 0}">pl-num</c:if><c:if test="${scoreVo4.scorechk10 == 0}">pl2-num</c:if><c:if test="${scoreVo4.scorechk10 > 0}">mi-num</c:if>"><c:if test="${scoreVo4.score10 == 0}">&nbsp;</c:if><c:if test="${scoreVo4.score10 != 0}">${scoreVo4.scorechk10}</c:if></td>
-                        <td class="<c:if test="${scoreVo4.scorechk11 < 0}">pl-num</c:if><c:if test="${scoreVo4.scorechk11 == 0}">pl2-num</c:if><c:if test="${scoreVo4.scorechk11 > 0}">mi-num</c:if>"><c:if test="${scoreVo4.score11 == 0}">&nbsp;</c:if><c:if test="${scoreVo4.score11 != 0}">${scoreVo4.scorechk11}</c:if></td>
-                        <td class="<c:if test="${scoreVo4.scorechk12 < 0}">pl-num</c:if><c:if test="${scoreVo4.scorechk12 == 0}">pl2-num</c:if><c:if test="${scoreVo4.scorechk12 > 0}">mi-num</c:if>"><c:if test="${scoreVo4.score12 == 0}">&nbsp;</c:if><c:if test="${scoreVo4.score12 != 0}">${scoreVo4.scorechk12}</c:if></td>
-                        <td class="<c:if test="${scoreVo4.scorechk13 < 0}">pl-num</c:if><c:if test="${scoreVo4.scorechk13 == 0}">pl2-num</c:if><c:if test="${scoreVo4.scorechk13 > 0}">mi-num</c:if>"><c:if test="${scoreVo4.score13 == 0}">&nbsp;</c:if><c:if test="${scoreVo4.score13 != 0}">${scoreVo4.scorechk13}</c:if></td>
-                        <td class="<c:if test="${scoreVo4.scorechk14 < 0}">pl-num</c:if><c:if test="${scoreVo4.scorechk14 == 0}">pl2-num</c:if><c:if test="${scoreVo4.scorechk14 > 0}">mi-num</c:if>"><c:if test="${scoreVo4.score14 == 0}">&nbsp;</c:if><c:if test="${scoreVo4.score14 != 0}">${scoreVo4.scorechk14}</c:if></td>
-                        <td class="<c:if test="${scoreVo4.scorechk15 < 0}">pl-num</c:if><c:if test="${scoreVo4.scorechk15 == 0}">pl2-num</c:if><c:if test="${scoreVo4.scorechk15 > 0}">mi-num</c:if>"><c:if test="${scoreVo4.score15 == 0}">&nbsp;</c:if><c:if test="${scoreVo4.score15 != 0}">${scoreVo4.scorechk15}</c:if></td>
-                        <td class="<c:if test="${scoreVo4.scorechk16 < 0}">pl-num</c:if><c:if test="${scoreVo4.scorechk16 == 0}">pl2-num</c:if><c:if test="${scoreVo4.scorechk16 > 0}">mi-num</c:if>"><c:if test="${scoreVo4.score16 == 0}">&nbsp;</c:if><c:if test="${scoreVo4.score16 != 0}">${scoreVo4.scorechk16}</c:if></td>
-                        <td class="<c:if test="${scoreVo4.scorechk17 < 0}">pl-num</c:if><c:if test="${scoreVo4.scorechk17 == 0}">pl2-num</c:if><c:if test="${scoreVo4.scorechk17 > 0}">mi-num</c:if>"><c:if test="${scoreVo4.score17 == 0}">&nbsp;</c:if><c:if test="${scoreVo4.score17 != 0}">${scoreVo4.scorechk17}</c:if></td>
-                        <td class="<c:if test="${scoreVo4.scorechk18 < 0}">pl-num</c:if><c:if test="${scoreVo4.scorechk18 == 0}">pl2-num</c:if><c:if test="${scoreVo4.scorechk18 > 0}">mi-num</c:if>"><c:if test="${scoreVo4.score18 == 0}">&nbsp;</c:if><c:if test="${scoreVo4.score18 != 0}">${scoreVo4.scorechk18}</c:if></td>
+                        <td><c:if test="${scoreVo4.scorechk10 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo4.scorechk10 > 0}">${scoreVo4.scorechk10}</c:if><c:if test="${scoreVo4.scorechk10 < 0}">${scoreVo4.scorechk10}</p></c:if></td>
+                        <td><c:if test="${scoreVo4.scorechk11 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo4.scorechk11 > 0}">${scoreVo4.scorechk11}</c:if><c:if test="${scoreVo4.scorechk11 < 0}">${scoreVo4.scorechk11}</p></c:if></td>
+                        <td><c:if test="${scoreVo4.scorechk12 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo4.scorechk12 > 0}">${scoreVo4.scorechk12}</c:if><c:if test="${scoreVo4.scorechk12 < 0}">${scoreVo4.scorechk12}</p></c:if></td>
+                        <td><c:if test="${scoreVo4.scorechk13 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo4.scorechk13 > 0}">${scoreVo4.scorechk13}</c:if><c:if test="${scoreVo4.scorechk13 < 0}">${scoreVo4.scorechk13}</p></c:if></td>
+                        <td><c:if test="${scoreVo4.scorechk14 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo4.scorechk14 > 0}">${scoreVo4.scorechk14}</c:if><c:if test="${scoreVo4.scorechk14 < 0}">${scoreVo4.scorechk14}</p></c:if></td>
+                        <td><c:if test="${scoreVo4.scorechk15 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo4.scorechk15 > 0}">${scoreVo4.scorechk15}</c:if><c:if test="${scoreVo4.scorechk15 < 0}">${scoreVo4.scorechk15}</p></c:if></td>
+                        <td><c:if test="${scoreVo4.scorechk16 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo4.scorechk16 > 0}">${scoreVo4.scorechk16}</c:if><c:if test="${scoreVo4.scorechk16 < 0}">${scoreVo4.scorechk16}</p></c:if></td>
+                        <td><c:if test="${scoreVo4.scorechk17 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo4.scorechk17 > 0}">${scoreVo4.scorechk17}</c:if><c:if test="${scoreVo4.scorechk17 < 0}">${scoreVo4.scorechk17}</p></c:if></td>
+                        <td><c:if test="${scoreVo4.scorechk18 < 0}"><p class='sc-pl-num'></c:if><c:if test="${scoreVo4.scorechk18 > 0}">${scoreVo4.scorechk18}</c:if><c:if test="${scoreVo4.scorechk18 < 0}">${scoreVo4.scorechk18}</p></c:if></td>                                                
                         <td>${scoreVo4.scorechksum2}</td>
                       </tr>
                       </c:if>
