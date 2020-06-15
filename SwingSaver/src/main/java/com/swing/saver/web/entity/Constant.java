@@ -22,6 +22,7 @@ public enum Constant {
     public static final String SCORE_PREFIX = "/score";
     public static final String MARKET_PREFIX = "/market";
     public static final String MOBILE_PREFIX = "/m";
+    public static final String PAY_PREFIX = "/pay";
 
     private static Map<String, MediaType> mediaMap;
 
