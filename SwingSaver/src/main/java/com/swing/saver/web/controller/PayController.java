@@ -72,10 +72,12 @@ public class PayController {
             
             List<PayVo> payList = mapper.convertValue(map.get("payList"), TypeFactory.defaultInstance().constructCollectionType(List.class,PayVo.class));
             
-            PayVo pay = payList.get(0);
-            pay.setArtype(artype);
-            pay.setArid(arid);
-            mv.addObject("payInfo", pay);            
+            if (payList != null && payList.size() != 0) {
+            	PayVo pay = payList.get(0);
+            	pay.setArtype(artype);
+            	pay.setArid(arid);
+            	mv.addObject("payInfo", pay);
+            }
             
             
             /* kcp와 통신후 kcp 서버에서 전송되는 결제 요청 정보 */

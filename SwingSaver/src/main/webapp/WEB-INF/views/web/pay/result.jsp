@@ -24,7 +24,7 @@
     /* ============================================================================== */
 %>
 <%
-    request.setCharacterEncoding("euc-kr") ;
+    request.setCharacterEncoding("utf-8") ;
     /* ============================================================================== */
     /* =   지불 결과                                                                = */
     /* = -------------------------------------------------------------------------- = */
@@ -142,7 +142,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="Cache-Control" content="No-Cache">
 <meta http-equiv="Pragma" content="No-Cache">
-<link href="css/style.css" rel="stylesheet" type="text/css" id="cssLink"/>
+<link href="/css/kcp/style.css" rel="stylesheet" type="text/css" id="cssLink"/>
 <script type="text/javascript">
     var controlCss = "/css/kcp/style_mobile.css";
     var isMobile = {
