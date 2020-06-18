@@ -152,7 +152,7 @@
 
             ordr_data_set_no = c_PayPlus.mf_add_set( "ordr_data" );
 
-            c_PayPlus.mf_set_us( ordr_data_set_no, "ordr_mony", "1");  // good_mny ); // 변경해야 됨
+            c_PayPlus.mf_set_us( ordr_data_set_no, "ordr_mony", good_mny);  // "1");  // good_mny ); // 변경해야 됨
             
     }
     /* = -------------------------------------------------------------------------- = */
@@ -164,7 +164,7 @@
     /* = -------------------------------------------------------------------------- = */
     if ( tran_cd.length() > 0 )
     {
-        c_PayPlus.mf_do_tx( g_conf_site_cd, g_conf_site_key, tran_cd, "", ordr_idxx, g_conf_log_level, "0" );
+        c_PayPlus.mf_do_tx( g_conf_site_cd, g_conf_site_key, tran_cd, "", ordr_idxx, g_conf_log_level, "1" );
     }
     else
     {
@@ -360,7 +360,7 @@
                 c_PayPlus.mf_set_us( mod_data_set_no, "mod_ip",   cust_ip  ); // 변경 요청자 IP
                 c_PayPlus.mf_set_us( mod_data_set_no, "mod_desc", "가맹점 결과 처리 오류 - 가맹점에서 취소 요청"  ); // 변경 사유
 
-                c_PayPlus.mf_do_tx( g_conf_site_cd, g_conf_site_key, tran_cd, "", ordr_idxx, g_conf_log_level, "0" );
+                c_PayPlus.mf_do_tx( g_conf_site_cd, g_conf_site_key, tran_cd, "", ordr_idxx, g_conf_log_level, "1" );
 
                 res_cd  = c_PayPlus.m_res_cd;                                 // 결과 코드
                 res_msg = c_PayPlus.m_res_msg;                                // 결과 메시지

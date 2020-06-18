@@ -210,13 +210,13 @@
 <form name="cancel" method="post">
 <div id="sample_wrap">
   <!--타이틀-->
-  <h1>[결과출력] <span>이 페이지는 결제 결과를 출력하는 샘플(예시) 페이지입니다.</span></h1>
+  <h1>[결과출력] <span>스윙세이버 결제 결과</span></h1>
   <!--//타이틀-->
   <div class="sample">
     <!--상단문구-->
     <p>
-      요청 결과를 출력하는 페이지 입니다.<br />
-      요청이 정상적으로 처리된 경우 결과코드(res_cd)값이 0000으로 표시됩니다.
+      아래 결제 요청에 대한 처리 결과입니다.<br />
+      <!-- 요청이 정상적으로 처리된 경우 결과코드(res_cd)값이 0000으로 표시됩니다. -->
     </p>
     <!--//상단문구-->
 
@@ -367,7 +367,7 @@
 %>
                     <tr>
                         <th>영수증 확인</th>
-                         <td class="sub_content1"><a href="javascript:receiptView('<%=tno%>','<%= ordr_idxx %>','<%= amount %>')"><img src="../sample/img/btn_receipt.png" alt="영수증을 확인합니다." />
+                         <td class="sub_content1"><a href="javascript:receiptView('<%=tno%>','<%= ordr_idxx %>','<%= amount %>')">영수증 확인
                     </td>
                     </tr>
                     </table>

@@ -139,6 +139,24 @@
 	
     v_frm.action = PayUrl;
 
+    // 인코딩 방식에 따른 변경 -- Start
+    if(v_frm.encoding_trans == undefined)
+    {
+        v_frm.action = PayUrl;
+    }
+    else
+    {
+        if(v_frm.encoding_trans.value == "UTF-8")
+        {
+            v_frm.action = PayUrl.substring(0,PayUrl.lastIndexOf("/"))  + "/jsp/encodingFilter/encodingFilter.jsp";
+            v_frm.PayUrl.value = PayUrl;
+        }
+        else
+        {
+           v_frm.action = PayUrl;
+        }
+    }
+    
     if (v_frm.Ret_URL.value == "")
     {
 	  /* Ret_URL값은 현 페이지의 URL 입니다. */
@@ -218,13 +236,13 @@
 <div id="sample_wrap">
 <form name="order_info" method="post">
   <!-- 타이틀 -->
-  <h1>[결제요청] <span>이 페이지는 결제를 요청하는 샘플(예시) 페이지입니다.</span></h1>
+  <h1>[결제요청] <span>스윙세이버 서비스 결제신청</span></h1>
 
   <div class="sample">
 
     <!-- 상단 문구 -->
     <p>
-      이 페이지는 결제를 요청하는 페이지입니다
+      고객님에 결제요청하신 정보입니다.
     </p>
 
     <!-- 주문 정보 -->
@@ -234,8 +252,7 @@
         <th>지불 방법</th>
         <td>
             <select name="ActionResult" onchange="jsf__chk_type();">
-                <option value="" selected>선택하십시오</option>
-                <option value="card">신용카드</option>
+                <option value="card" selected>신용카드</option>
                 <option value="acnt">계좌이체</option>
                 <option value="vcnt">가상계좌</option>
                 <option value="mobx">휴대폰</option>
@@ -249,23 +266,23 @@
       </tr>
       <tr>
         <th>주문 번호</th>
-        <td><input type="text" name="ordr_idxx" class="w200" value=""></td>
+        <td><input type="text" name="ordr_idxx" class="w200" value=""  readonly></td>
       </tr>
       <tr>
         <th>상품명</th>
-        <td><input type="text" name="good_name" class="w100" value="${payInfo.good_name}"></td>
+        <td><input type="text" name="good_name" class="w100" value="${payInfo.good_name}" readonly></td>
       </tr>
       <tr>
         <th>결제 금액</th>
-        <td><input type="text" name="good_mny" class="w100" value="${payInfo.good_mny}"></td>
+        <td><input type="text" name="good_mny" class="w100" value="${payInfo.good_mny}"  readonly></td>
       </tr>
       <tr>
         <th>주문자명</th>
-        <td><input type="text" name="buyr_name" class="w100" value="${payInfo.buyr_name}"></td>
+        <td><input type="text" name="buyr_name" class="w100" value="${payInfo.buyr_name}"  readonly></td>
       </tr>
       <tr>
         <th>E-mail</th>
-        <td><input type="text" name="buyr_mail" class="w200" value="${payInfo.buyr_mail}"></td>
+        <td><input type="text" name="buyr_mail" class="w200" value="${payInfo.buyr_mail}"  readonly></td>
       </tr>
       <tr>
         <th>전화번호</th>
@@ -320,6 +337,7 @@
 
   <!-- 결제 정보 등록시 응답 타입 ( 필드가 없거나 값이 '' 일경우 TEXT, 값이 XML 또는 JSON 지원 -->
   <input type="hidden" name="response_type"  value="TEXT"/>
+  <input type="hidden" name="encoding_trans" value="UTF-8" /> 
   <input type="hidden" name="PayUrl"   id="PayUrl"   value=""/>
   <input type="hidden" name="traceNo"  id="traceNo"  value=""/>
 
