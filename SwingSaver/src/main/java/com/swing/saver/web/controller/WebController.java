@@ -1,31 +1,39 @@
 package com.swing.saver.web.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.swing.saver.web.entity.Constant;
-import com.swing.saver.web.entity.GroupVo;
-import com.swing.saver.web.entity.LoginVo;
-import com.swing.saver.web.entity.UserVo;
-import com.swing.saver.web.exception.ApiException;
-import com.swing.saver.web.service.RestService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
-
-import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.TypeFactory;
+import com.swing.saver.web.entity.Constant;
+import com.swing.saver.web.entity.LoginVo;
+import com.swing.saver.web.entity.PayInfoVo;
+import com.swing.saver.web.entity.UserVo;
+import com.swing.saver.web.exception.ApiException;
+import com.swing.saver.web.service.ItemService;
+import com.swing.saver.web.service.RestService;
 
 /**
  * Created by mycom on 2019-06-03.
@@ -38,6 +46,9 @@ public class WebController {
 
     @Inject
     RestService restService;
+    
+    @Inject
+    ItemService itemService;
 
     @GetMapping("/mypage")
     public ModelAndView mypage(HttpSession session,ModelAndView mv) throws IOException, ApiException {
@@ -61,6 +72,47 @@ public class WebController {
     	}
         return mv;
     }
+    /**
+     * 개인 결제 내역 조회
+     * 
+     * @param session
+     * @param mv
+     * @return
+     * @throws IOException
+     * @throws ApiException
+     */
+    @GetMapping("/mypay")
+    public ModelAndView mypay(HttpSession session,ModelAndView mv) throws IOException, ApiException {
+    	LOGGER.info("/mypay called..");
+    	try
+    	{
+    		LoginVo loginVo = (LoginVo)session.getAttribute("login");
+    		UserVo userVo = null;
+
+    		String sgrpRtnJson = "";
+    		long userId = loginVo.getUserid();
+    		
+        	// 결제내역 현황 조회
+        	String rtnJson1 = itemService.getPayList("P", loginVo.getUserid());  // P : 개인 회원 결제 내역 
+
+            ObjectMapper mapper = new ObjectMapper();
+            Map<String, Object> map = mapper.readValue(rtnJson1, new TypeReference<Map<String, Object>>(){});
+
+            mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
+            
+            // proList => RestFul Service에서 등록한 명
+            List<PayInfoVo> payList = mapper.convertValue(map.get("payList"), TypeFactory.defaultInstance().constructCollectionType(List.class,PayInfoVo.class));
+            mv.addObject("payList", payList);
+    		userVo = restService.getMemberInfo(userId);
+
+    		mv.addObject("userInfo",userVo);
+    		mv.setViewName("web/mypage/mypay_list");
+    	}catch(Exception ex) {
+    		ex.printStackTrace();
+    		mv.setViewName("web/user/login");
+    	}
+        return mv;
+    }    
     /**
      * 개인정보 보호정책
      * @param session

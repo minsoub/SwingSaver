@@ -40,7 +40,7 @@
                            </div>                            
                             
                             <div class="question">
-                                <p>상품가격</p>
+                                <p>상품가격(천단위)</p>
                                 <input type="number" class="que-val" id="price" name="price" value="${info.price}" required maxlength="5" oninput="maxLengthCheck(this)" />
                             </div>
                             <div class="question">

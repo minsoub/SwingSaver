@@ -1,6 +1,5 @@
 package com.swing.saver.web.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -14,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,14 +25,13 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.swing.saver.web.entity.AdminVo;
-import com.swing.saver.web.entity.CodeVo;
 import com.swing.saver.web.entity.Constant;
 import com.swing.saver.web.entity.ItemVo;
+import com.swing.saver.web.entity.PayInfoVo;
 import com.swing.saver.web.entity.ProVo;
 import com.swing.saver.web.exception.ApiException;
 import com.swing.saver.web.service.ItemService;
 import com.swing.saver.web.service.RestService;
-import com.swing.saver.web.util.UploadFileUtils;
 
 /**
  * Item Controller classs
@@ -151,63 +148,63 @@ public class ItemController {
         return mv;
     }
     
-    /**
-     * 상세 정보를 출력한다. 
-     * 
-     * @param id
-     * @param request
-     * @param session
-     * @return
-     * @throws IOException
-     * @throws ApiException
-     */
-    @GetMapping("/item/detail/{id}")
-    public ModelAndView itemDetail(@PathVariable String id, HttpServletRequest request, HttpSession session) throws IOException, ApiException {
-        LOGGER.debug("==================== ItemController itemDetail Strart : ===================={}");
-        ModelAndView mv = new ModelAndView();
-    	AdminVo loginVo = (AdminVo)request.getSession().getAttribute("login");
-    	
-    	String rtnJson  = service.itemDetail(id);
-        ObjectMapper mapper = new ObjectMapper();
-        ItemVo item = mapper.readValue(rtnJson, ItemVo.class);
-        mv.addObject("itemInfo", item);
-            	
-        mv.setViewName("web/admin/item/item_detail");
-        LOGGER.debug("==================== ItemController itemDetail end : ===================={}");
-        return mv;
-    }
-    
-    /**
-     * 제품 상세 정보 수정하기 위한 폼 호출
-     * 
-     * @param id
-     * @param request
-     * @param session
-     * @param mv
-     * @param redirectAttribute
-     * @return
-     * @throws IOException
-     * @throws ApiException
-     */
-    @PostMapping("/item/modify/{id}")
-    public ModelAndView itemModify(@PathVariable String id, HttpServletRequest request, HttpSession session) throws IOException, ApiException {
-        LOGGER.debug("==================== ItemController itemModify Strart : ===================={}");
-    	AdminVo loginVo = (AdminVo)request.getSession().getAttribute("login");
-    	
-        ModelAndView mv = new ModelAndView();
-    	
-    	String rtnJson  = service.itemDetail(id);
-        ObjectMapper mapper = new ObjectMapper();
-        ItemVo item = mapper.readValue(rtnJson, ItemVo.class);
-        mv.addObject("itemInfo", item);
-        
-        List<ProVo> codeList = getProList();		// 프로 조회
-        mv.addObject("proList", codeList);
-            	
-        mv.setViewName("web/admin/item/item_reg");
-        LOGGER.debug("==================== ItemController itemModify end : ===================={}");
-        return mv;
-    }
+//    /**
+//     * 상세 정보를 출력한다. 
+//     * 
+//     * @param id
+//     * @param request
+//     * @param session
+//     * @return
+//     * @throws IOException
+//     * @throws ApiException
+//     */
+//    @GetMapping("/item/detail/{id}")
+//    public ModelAndView itemDetail(@PathVariable String id, HttpServletRequest request, HttpSession session) throws IOException, ApiException {
+//        LOGGER.debug("==================== ItemController itemDetail Strart : ===================={}");
+//        ModelAndView mv = new ModelAndView();
+//    	AdminVo loginVo = (AdminVo)request.getSession().getAttribute("login");
+//    	
+//    	String rtnJson  = service.itemDetail(id);
+//        ObjectMapper mapper = new ObjectMapper();
+//        ItemVo item = mapper.readValue(rtnJson, ItemVo.class);
+//        mv.addObject("itemInfo", item);
+//            	
+//        mv.setViewName("web/admin/item/item_detail");
+//        LOGGER.debug("==================== ItemController itemDetail end : ===================={}");
+//        return mv;
+//    }
+//    
+//    /**
+//     * 제품 상세 정보 수정하기 위한 폼 호출
+//     * 
+//     * @param id
+//     * @param request
+//     * @param session
+//     * @param mv
+//     * @param redirectAttribute
+//     * @return
+//     * @throws IOException
+//     * @throws ApiException
+//     */
+//    @PostMapping("/item/modify/{id}")
+//    public ModelAndView itemModify(@PathVariable String id, HttpServletRequest request, HttpSession session) throws IOException, ApiException {
+//        LOGGER.debug("==================== ItemController itemModify Strart : ===================={}");
+//    	AdminVo loginVo = (AdminVo)request.getSession().getAttribute("login");
+//    	
+//        ModelAndView mv = new ModelAndView();
+//    	
+//    	String rtnJson  = service.itemDetail(id);
+//        ObjectMapper mapper = new ObjectMapper();
+//        ItemVo item = mapper.readValue(rtnJson, ItemVo.class);
+//        mv.addObject("itemInfo", item);
+//        
+//        List<ProVo> codeList = getProList();		// 프로 조회
+//        mv.addObject("proList", codeList);
+//            	
+//        mv.setViewName("web/admin/item/item_reg");
+//        LOGGER.debug("==================== ItemController itemModify end : ===================={}");
+//        return mv;
+//    }
     
     /**
      * 제품 삭제
@@ -265,31 +262,86 @@ public class ItemController {
     } 
     
 	/**
-	 * 상품 구매 리스트를 조회한다. 
+	 * 개인 상품 구매 리스트를 조회한다. 
 	 * 
 	 * @param request
 	 * @return
 	 * @throws ApiException
 	 * @throws IOException
 	 */
-	@GetMapping(value="/pay/payList")
-	public ModelAndView  payList(HttpServletRequest request) throws ApiException, IOException {
+	@GetMapping(value="/pay/memberList")
+	public ModelAndView  memberList(HttpServletRequest request) throws ApiException, IOException {
         ModelAndView mv = new ModelAndView();
-        LOGGER.debug("==================== ItemController payList Strart : ===================={}");
+        LOGGER.debug("==================== ItemController pay-memberList Strart : ===================={}");
     	AdminVo loginVo = (AdminVo)request.getSession().getAttribute("login");
 
-    	String rtnJson = service.getItemList();
+    	String rtnJson = service.getPayList("P");
         ObjectMapper mapper = new ObjectMapper();
         Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});
 
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
-        
-        // proList => RestFul Service에서 등록한 명
-        List<ItemVo> payList = mapper.convertValue(map.get("payList"), TypeFactory.defaultInstance().constructCollectionType(List.class, ItemVo.class));
+
+        List<PayInfoVo> payList = mapper.convertValue(map.get("payList"), TypeFactory.defaultInstance().constructCollectionType(List.class, PayInfoVo.class));
         mv.addObject("payList", payList);
                 
-        mv.setViewName("web/admin/pay/pay_list");
-        LOGGER.debug("==================== ItemController payList end : ===================={}");
+        mv.setViewName("web/admin/buy/person_pay_list");
+        LOGGER.debug("==================== ItemController pay-memberList end : ===================={}");
+        return mv;
+    } 
+	
+	/**
+	 * 그룹 상품 구매 리스트를 조회한다. 
+	 * 
+	 * @param request
+	 * @return
+	 * @throws ApiException
+	 * @throws IOException
+	 */
+	@GetMapping(value="/pay/groupList")
+	public ModelAndView  groupList(HttpServletRequest request) throws ApiException, IOException {
+        ModelAndView mv = new ModelAndView();
+        LOGGER.debug("==================== ItemController pay-groupList Strart : ===================={}");
+    	AdminVo loginVo = (AdminVo)request.getSession().getAttribute("login");
+
+    	String rtnJson = service.getPayList("G");
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});
+
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
+
+        List<PayInfoVo> payList = mapper.convertValue(map.get("payList"), TypeFactory.defaultInstance().constructCollectionType(List.class, PayInfoVo.class));
+        mv.addObject("payList", payList);
+                
+        mv.setViewName("web/admin/buy/group_pay_list");
+        LOGGER.debug("==================== ItemController pay-groupList end : ===================={}");
+        return mv;
+    } 	
+	
+	/**
+	 * 마켓 상품 구매 리스트를 조회한다. 
+	 * 
+	 * @param request
+	 * @return
+	 * @throws ApiException
+	 * @throws IOException
+	 */
+	@GetMapping(value="/pay/marketList")
+	public ModelAndView  marketList(HttpServletRequest request) throws ApiException, IOException {
+        ModelAndView mv = new ModelAndView();
+        LOGGER.debug("==================== ItemController pay-marketList Strart : ===================={}");
+    	AdminVo loginVo = (AdminVo)request.getSession().getAttribute("login");
+
+    	String rtnJson = service.getPayList("M");
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});
+
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
+
+        List<PayInfoVo> payList = mapper.convertValue(map.get("payList"), TypeFactory.defaultInstance().constructCollectionType(List.class, PayInfoVo.class));
+        mv.addObject("payList", payList);
+                
+        mv.setViewName("web/admin/buy/market_pay_list");
+        LOGGER.debug("==================== ItemController pay-marketList end : ===================={}");
         return mv;
     } 
 	

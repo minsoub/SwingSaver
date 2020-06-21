@@ -14,7 +14,7 @@
                     <ul>
                         <li><a class="<c:if test="${fn:indexOf(reqUri, 'item_') != -1}">active</c:if>" href="/market/item/list">상품관리</a></li>
                         <li><a class="<c:if test="${fn:indexOf(reqUri, 'class_') != -1}">active</c:if>" href="/market/class/list">클래스관리</a></li>
-                        <li><a href="#">매출조회</a></li>
+                        <li><a class="<c:if test="${fn:indexOf(reqUri, 'pay_') != -1}">active</c:if>" href="/market/pay/list">매출조회</a></li>
                     </ul>
                 </div>
             </div>

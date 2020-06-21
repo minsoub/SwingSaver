@@ -37,8 +37,8 @@
                             	<textarea name="description" id="description" placeholder="상품설명을 입력해주세요"  required  cols="50" rows="5"></textarea>
                            </div>   
                             <div class="question">
-                                <p>상품가격</p>
-                                <input type="number" class="que-val" id="price" name="price" required maxlength="5" oninput="maxLengthCheck(this)" />
+                                <p>상품가격(천단위)</p>
+                                <input type="number" class="que-val" id="price" name="price" required placeholder="단위는 천원단위입니다." maxlength="5" oninput="maxLengthCheck(this)" />
                             </div>
                             <div class="question">
                                 <p>사용횟수</p>

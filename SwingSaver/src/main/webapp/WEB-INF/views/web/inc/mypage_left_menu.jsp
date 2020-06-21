@@ -28,7 +28,7 @@
                         <li><a class="<c:if test="${fn:indexOf(reqUri, 'score_01') != -1}">active</c:if>" href="/score/scoreList">내스코어 관리</a></li>
                         <li><a class="<c:if test="${fn:indexOf(reqUri, 'data_01') != -1}">active</c:if>"href="/score/statList">내스코어 통계</a></li>
                         <li><a href="#">포인트 구매/이용료결제</a></li>
-                        <li><a href="#">결제내역 조회</a></li>
+                        <li><a class="<c:if test="${fn:indexOf(reqUri, 'mypay_list') != -1}">active</c:if>"href="/web/mypay">결제내역 조회</a></li>
                         <li><a href="#">서비스 변경</a></li>
                         <li><a href="#">서비스 해지</a></li>
                     </ul>

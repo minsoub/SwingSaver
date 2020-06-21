@@ -20,6 +20,13 @@
                         	<li><a class="<c:if test="${fn:indexOf(reqUri, 'adm_04') != -1}">active</c:if>" href="/admin/golfList">-골프장정보</a></li>
                     	</ul>
                     </li>
+                    <li><a href="#">구매내역</a>
+                         <ul class="side-sub">
+                            <li><a class="<c:if test="${fn:indexOf(reqUri, 'person_pay') != -1}">active</c:if>" href="/admin/pay/memberList">개인회원구매내역</a></li>
+                            <li><a class="<c:if test="${fn:indexOf(reqUri, 'group_pay') != -1}">active</c:if>" href="/admin/pay/groupList">그룹구매내역</a></li>
+                            <li><a class="<c:if test="${fn:indexOf(reqUri, 'market_pay') != -1}">active</c:if>" href="/admin/pay/marketList">마켓구매내역</a></li>
+                         </ul>
+                    </li>                    
                     <!-- li><a href="#">상품관리</a>
                          <ul class="side-sub">
                             <li><a class="<c:if test="${fn:indexOf(reqUri, 'item') != -1}">active</c:if>" href="/admin/itemList">월정액상품</a></li>

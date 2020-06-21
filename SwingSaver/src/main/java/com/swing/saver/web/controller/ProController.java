@@ -25,13 +25,12 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
-import com.swing.saver.web.entity.AdminVo;
 import com.swing.saver.web.entity.Constant;
 import com.swing.saver.web.entity.ItemVo;
 import com.swing.saver.web.entity.LoginVo;
+import com.swing.saver.web.entity.PayInfoVo;
 import com.swing.saver.web.entity.ProVo;
 import com.swing.saver.web.entity.SubGroupVo;
-import com.swing.saver.web.entity.UserVo;
 import com.swing.saver.web.exception.ApiException;
 import com.swing.saver.web.service.ItemService;
 import com.swing.saver.web.service.RestService;
@@ -436,5 +435,38 @@ public class ProController {
         LOGGER.debug("==================== ProController itemDetail end : ===================={}");
         return mv;
     }
+    
+    /**
+     * 프로의 마켓의 결제 현황 내역을 조회한다.
+     * 
+     * @param request
+     * @return
+     * @throws ApiException
+     * @throws IOException
+     */
+    @GetMapping(value="/pay/list")
+    public ModelAndView  payList(HttpServletRequest request) throws ApiException, IOException {
+        ModelAndView mv = new ModelAndView();
+        LOGGER.debug("==================== ProController payList Strart : ===================={}");
+    	LoginVo loginVo = (LoginVo)request.getSession().getAttribute("login");	// 세션에 그룹아이디가 포함되어 있다.
+    	
+        // 현재 회원수와 등록가능회원수 조회 : 용도에 대한 정의 필요
+    	
+    	// 결제내역 현황 조회
+    	String rtnJson1 = itemService.getPayList("M", loginVo.getUserid());  // M : 마켓 프로상품 
+
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> map = mapper.readValue(rtnJson1, new TypeReference<Map<String, Object>>(){});
+
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
+        
+        // proList => RestFul Service에서 등록한 명
+        List<PayInfoVo> payList = mapper.convertValue(map.get("payList"), TypeFactory.defaultInstance().constructCollectionType(List.class,PayInfoVo.class));
+        mv.addObject("payList", payList);
+                
+        mv.setViewName("web/market/pay_list");
+        LOGGER.debug("==================== ProController payList end : ===================={}");
+        return mv;
+    }  
         
 }

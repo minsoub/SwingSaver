@@ -184,4 +184,41 @@ public class ItemService {
         return rtnJson;
     }
     
+    
+	/**
+	 * 상품 결제 현황 정보 조회
+	 * artype에 따라서 결제 구분 : M (마켓 프로 상품), G (Group), P (개인)
+	 * 
+	 * @return
+	 * @throws ApiException
+	 */
+    public String getPayList(String artype, long id) throws ApiException
+    {
+        String rtnJson = "";
+
+        rtnJson = sendMessage.sendHttpsStr("/ords/swing/saver/paylist/"+artype+"/"+id, "GET", "application/x-www-form-urlencoded",true);
+
+        LOGGER.debug("마켓 상품 결제 현황 정보 조회 응답:{}",rtnJson);
+
+        return rtnJson;
+    }
+    
+    
+	/**
+	 * 상품 결제 현황 정보 조회 (관리자용)
+	 * artype에 따라서 결제 구분 : M (마켓 프로 상품), G (Group), P (개인)
+	 * 
+	 * @return
+	 * @throws ApiException
+	 */
+    public String getPayList(String artype) throws ApiException
+    {
+        String rtnJson = "";
+
+        rtnJson = sendMessage.sendHttpsStr("/ords/swing/saver/pay?artype="+artype, "GET", "application/x-www-form-urlencoded",true);
+
+        LOGGER.debug("마켓 상품 결제 현황 정보 조회 응답:{}",rtnJson);
+
+        return rtnJson;
+    }
 }
