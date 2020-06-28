@@ -10,7 +10,9 @@ body {
     font-family: "Malgun Gothic", "Lucida Grande", 'Noto Sans KR'sans-serif;
 }
 
-p{margin: 0}
+p {
+    margin: 0
+}
 
 select,
 input {
@@ -19,7 +21,6 @@ input {
 
 a:active,
 a:hover {
-    color: #333;
     text-decoration: none;
 }
 
@@ -32,7 +33,6 @@ a {
 a:link,
 a:active,
 a:visited {
-    color: #333;
     text-decoration: none;
     border: 0px;
 }
@@ -75,30 +75,39 @@ table {
 
 #contents {
     padding: 62px 0 100px 0;
+    height: 100vh;
 }
+
 .gnb-menu {
     width: 20px;
-    margin: 20px 0 0 20px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
 
 }
 
 .gnb-ser {
     width: 22px;
-    float: right;
-    margin: 20px 20px 0 0;
+    position: absolute;
+    top: 20px;
+    right: 20px;
 
 }
 
+.main_con {
+    background-color: #333333;
+}
+
 .logo {
-    display: inline-block;
-    text-align: center;
-    width: 77%;
-    font-size: 18px;
+    display: block;
+    width: 10%;
+    margin: auto;
+    margin-top: 18px;
 }
 
 .select-area {
     padding: 20px;
-    background-color: #ededed;
+    background-color: #333333;
     padding: 10px 20px;
 }
 
@@ -113,6 +122,11 @@ table {
 
 .bud-tab {
     border-bottom: 1px solid #acacac;
+    background-color: #333333;
+}
+
+.bud-tab a {
+    color: #ededed;
 }
 
 .tab-01 {
@@ -123,14 +137,20 @@ table {
     font-size: 16px;
 }
 
+.gray_con {
+    background-color: #ededed;
+}
+
 .bud-tab .active {
     color: #ee6d6d;
     border-bottom: 4px solid #e62424;
 }
 
 .list {
-    padding: 10px 20px;
-    border-bottom: 1px solid #cecece;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin: 8px 10px;
 }
 
 .list-img {
@@ -144,7 +164,7 @@ table {
 }
 
 .list-info {
-    width: 60%;
+    width: 50%;
     display: inline-block;
     margin-left: 5px;
 
@@ -157,12 +177,12 @@ table {
 
 .list-info h4 {
     margin: 5px 0 0 0;
-    font-size: 16px;
+    font-size: 1.3em;
 }
 
 .list-info p {
     margin: 0;
-    font-size: 12px;
+    font-size: 1em;
     color: #919191;
 }
 
@@ -174,11 +194,11 @@ table {
 .play {
     display: block;
     border-radius: 50px;
-    border: 1px solid #ffdada;
+    border: 1px solid #7d7d7d;
     padding: 3px 15px;
     margin-top: 8px;
     font-size: 14px;
-    color: #ffdada;
+    color: #7d7d7d;
 }
 
 
@@ -188,11 +208,12 @@ table {
 }
 
 #gnb {
-    border-top: 1px solid #acacac;
+    box-shadow: 0px 10px 20px 6px rgba(0, 0, 0, 0.3);
     padding: 10px;
     background-color: #fff;
     position: fixed;
     bottom: 0;
+    width: 100%;
 }
 
 .menu-gnb {
@@ -206,29 +227,26 @@ table {
 }
 
 #gnb .active p {
-    opacity: 1;
+    color: #ff4141;
+    font-weight: 600;
 }
 
-#gnb .active .gnb-01 {
-    opacity: 1;
-}
+#gnb .active .gnb-01 {}
 
 .gnb-01 {
     height: 20px;
-    opacity: 0.3;
 }
 
 .menu-gnb p {
-    font-size: 12px;
+    font-size: 1.1em;
     margin: 3px 0;
-    opacity: 0.5;
 }
 
 .search-wrap {
     padding: 10px 20px;
 }
 
-.sear-btn{
+.sear-btn {
     margin-bottom: 10px;
 }
 
@@ -257,14 +275,14 @@ table {
 
 }
 
-.search-area{
+.search-area {
     padding: 20px;
     background-color: #fff;
     padding: 10px 20px;
     border-bottom: 1px solid #cecece;
 }
 
-.search-area input{
+.search-area input {
     width: 81%;
     background-color: #ededed;
     padding: 10px;
@@ -272,7 +290,8 @@ table {
     font-size: 14px;
     border: none;
 }
-.search-area button{
+
+.search-area button {
     font-size: 16px;
     font-weight: 600;
     padding: 0px;
@@ -280,96 +299,142 @@ table {
     line-height: 2.5;
 }
 
-.main-btn{
-    padding: 20px;
+.main-btn {
+    padding: 0 20px 10px 20px;
 }
 
-.main-btn a{
+.main-btn a {
     display: inline-block;
-    background: #ededed;
+    /*    background: #ededed;*/
     text-align: center;
     border-radius: 10px;
+    color: #fff;
     width: 49%;
     vertical-align: top;
 }
 
-
-.main-btn a img{
-    width: 40%;
-    margin: 20px 0 10px 0;
+.main-btn p span {
+    display: block;
+    font-weight: 100;
+    color: #bbbbbb;
+    font-size: 0.9em;
 }
 
-.main-btn p{
-    font-size: 16px;
-    font-weight: 600;
-    padding-bottom: 17px;
+
+.main-btn a img {
+    margin: 0 0 10px 0;
 }
 
-.recomend{
-    padding: 10px 20px;
+.swing-bn {
+    font-size: 1.5em;
+    color: #fff;
+    display: block;
+    background-color: #131313;
+    margin: 0 20px;
+    padding: 20px;
+    text-align: center;
+    border-radius: 14px;
 }
 
-.rec-list{
-/*    width: 600px;*/
-	width:1000px;
-	height:150px;
-	white-space:nowrap;
-	overflow-x:scroll;
+.swing-bn img {
+    width: 8%;
+    vertical-align: middle;
+    margin-left: 10px;
 }
-.rec-data{
-	float: left;
+
+.main-btn p {
+    font-size: 1.5em;
+    font-weight: 200;
+    line-height: 21px;
+    letter-spacing: -0.5px;
 }
-.rec-list a{
-    width: 100px;
+
+.main-bn {
+    padding: 20px;
+}
+
+.main-bn img {
+    border-radius: 14px;
+}
+
+.recomend {
+    padding-left: 20px;
+    color: #Fff;
+    margin-top: 30px;
+}
+
+.recomend h2 {
+    font-weight: 100;
+    font-size: 1.4em;
+}
+
+.rec-list {
+    width: 600px;
+    display: block;
+}
+
+.rec-list a {
+    width: 140px;
     display: inline-block;
     margin-right: 5px;
+    position: relative;
+    background-color: #fff;
+    border-radius: 10px;
+    text-align: center;
+    height: auto;
+    padding-top: 5px;
+    vertical-align: middle;
 }
 
-.rec-list a img{
-    border-radius: 5px;
+.rec-list a img {
+    width: 60%;
+    margin: 10px 0 30px 0;
 }
 
-.rec-list a p{
-    color: #acacac;
-    margin-top: 5px;
+.rec-list a p {
+    color: #333333;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    bottom: 10px;
 }
 
-.rec-list a h4{
+.rec-list a h4 {
     margin: 0;
 }
 
-.gfmain-btn{
+.gfmain-btn {
     padding: 20px 0;
 }
 
-.golf-main{
+.golf-main {
     padding: 20px;
     background-color: #ffffff;
     position: relative;
     top: -30px;
     border-radius: 20px;
-    
+
 }
 
-.golf-info{
+.golf-info {
     text-align: center;
     margin: 10px;
 }
 
-.golf-info img{
+.golf-info img {
     float: right;
 }
 
-.golf-info p{
+.golf-info p {
     color: #acacac;
     font-size: 14px;
 }
 
-.golf-info h2{
+.golf-info h2 {
     margin: 5px;
 }
 
-.play-btn{
+.play-btn {
     width: 100%;
     background-color: #f25555;
     padding: 20px 0;
@@ -377,18 +442,237 @@ table {
     text-align: center;
 }
 
-.play-btn a{
+.play-btn a {
     color: #fff;
     font-size: 20px;
 }
 
-@media all and (min-width:768px) {
-/*
-    #header {
-        width: 100%;
-        color: #fff;
-        background-color: #333333;
-    }
-*/
 
+
+
+.text-center {
+    text-align: center;
+}
+
+form p {
+    display: inline-block;
+    width: 21%;
+}
+
+.joinus-page form .question input[type="text"],
+.question input[type="email"],
+.question input[type="date"],
+.question input[type="number"],
+.question input[type="tel"] {
+    width: 74%;
+}
+
+.form-btn {
+    margin-top: 30px;
+    background-color: #353636;
+    border: 1px solid #353636;
+    line-height: 0;
+    font-size: 17px;
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 20px 15px;
+    border-radius: 0px;
+    color: #ffffff;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 60px;
+}
+
+
+.form-btn {
+    padding: 0;
+}
+
+
+.joinus-page form .question input[type="text"],
+.question input[type="number"],
+.question input[type="tel"],
+.question input[type="email"],
+.question input[type="date"],
+.question input[type="textarea"],
+.joinus-page form .question input[type="password"] {
+    border: 1px solid #dcdcdc;
+    /* line-height: 42px; */
+    height: 42px;
+    font-size: 13px;
+    width: 78%;
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 11px 15px;
+    border-radius: 0px;
+    color: #777;
+    font-weight: 200;
+    position: relative;
+    z-index: 1;
+    float: right;
+}
+
+.search-login li:first-child {
+    padding-right: 10px;
+    margin-right: 10px;
+    border-right: 1px solid #777;
+}
+
+.search-login li {
+    display: inline-block;
+}
+
+.search-login li:last-child {
+    padding-left: 10px;
+    margin-left: 10px;
+    border-left: 1px solid #777;
+}
+
+.form-page p {
+    font-size: 15px;
+    line-height: 41px;
+    margin-bottom: 0px;
+}
+
+.auto-log {
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.search-login {
+    text-align: center;
+    line-height: 14px;
+    margin-top: 13px;
+    display: inline-block;
+    float: right;
+    padding: 0;
+}
+
+.naver_log {
+    background-color: #3cce42;
+    border: 1px solid #3cce42;
+    padding-right: 15px;
+    text-align: left;
+    padding-left: 30px;
+    margin-right: 10px;
+}
+
+.form-page {
+    min-width: 354px !important;
+    position: relative;
+    display: inline-block;
+    max-width: 500px;
+    box-sizing: border-box;
+    padding: 0px 10px;
+    background-color: white;
+    border-radius: 40px;
+    margin: 10% 0 20% 0;
+    left: 50%;
+    -moz-transform: translate(-50%, 0);
+    -ms-transform: translate(-50%, 0);
+    -webkit-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+}
+
+.form-page h1 {
+    margin-bottom: 30px;
+    font-size: 28px;
+}
+
+.form-page form .question {
+    position: relative;
+    padding: 5px 0;
+}
+
+.form-btn img {
+    padding-right: 15px;
+    border-right: 1px solid #fff;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+
+.form-btn {
+    margin-top: 30px;
+    background-color: #353636;
+    border: 1px solid #353636;
+    line-height: 0;
+    font-size: 17px;
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 17px 15px;
+    border-radius: 0px;
+    color: #ffffff;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 60px;
+}
+
+.form-btn {
+    margin-top: 20px;
+}
+
+.naver_log {
+    background-color: #3cce42;
+    border: 1px solid #3cce42;
+    padding-right: 15px;
+    text-align: left;
+    padding-left: 30px;
+    margin-right: 10px;
+}
+
+
+.face_log {
+    background-color: #2b7be6;
+    text-align: left;
+    padding-left: 30px;
+    border: 1px solid #2b7be6;
+    margin-top: 5px;
+}
+
+.face_log {
+    margin-top: 5px !important;
+}
+
+.face_log {
+    background-color: #2b7be6;
+    text-align: left;
+    padding-left: 30px;
+    border: 1px solid #2b7be6;
+    margin-top: 5px;
+}
+
+.kakao_log {
+    background-color: #ffcd37;
+    text-align: left;
+    padding-left: 30px;
+    border: 1px solid #ffcd37;
+    margin-top: 5px;
+    color: #321d1d;
+}
+
+.kakao_log {
+    margin-top: 5px !important;
+}
+
+
+@media screen and (min-width: 700px){
+    .logo {
+    width: 35%;
+    }
+
+}
+
+
+@media screen and (max-width: 900px){
+
+    .form-page{
+    margin: 30% 0 20% 0;    
+    }
 }
