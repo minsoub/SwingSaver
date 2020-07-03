@@ -44,7 +44,7 @@ public class PayInfoVo {
 	
 	private String  user_name;  // 구매자명
 	private int     amount;		// 결제금액
-	private String  recieved;   // 결제상태
+	private String  received;   // 결제상태
 	private String  pay_dt;     // 결제일자
 	private String  duedate;    // 만기일자
 	
