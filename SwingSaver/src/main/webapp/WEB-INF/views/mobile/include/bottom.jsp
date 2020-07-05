@@ -24,8 +24,8 @@
             <p>QUICK</p>
             </a>
         </div>         
-        <div class="menu-gnb <c:if test="${setMenu eq 'mypage'}">active</c:if>">
-        	<a href="/web/mypage">
+        <div class="menu-gnb <c:if test="${setMenu eq 'score'}">active</c:if>">
+        	<a href="/m/score">
             <img src="/mobile/image/gnb-05.svg" class="gnb-01" width="100%">
             <p>SCORE</p>
             </a>
