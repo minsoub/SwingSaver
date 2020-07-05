@@ -9,16 +9,16 @@
 <title>버디야</title>
 
 <script src="/js/jquery-latest.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
+<!-- script src="/js/bootstrap.min.js"></script  -->
 <script src="/js/jsUtil.js"></script>
 <script src="/mobile/js/Common.js"></script>
     
 <!-- script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js"></script>
+<!-- script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js"></script>
 <script src="/js/morris.js-0.5.1/morris.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r224/prettify.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r224/prettify.min.css">
-<link rel="stylesheet" href="/js/morris.js-0.5.1/morris.css">    
+<link rel="stylesheet" href="/js/morris.js-0.5.1/morris.css"  -->    
 <link rel="stylesheet" href="/mobile/css/style.css">
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

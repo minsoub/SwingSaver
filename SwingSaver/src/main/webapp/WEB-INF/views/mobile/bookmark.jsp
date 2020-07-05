@@ -3,11 +3,11 @@
     
     <nav id="header">
         <img src="/mobile/image/gnb-menu.svg" class="gnb-menu" width="100%">
-        <div class="logo">buddyya</div>
-        <img src="/mobile/image/gnb-ser.svg" class="gnb-ser" width="100%">
+        <div class="logo"><img src="/mobile/image/head-logo.png" class="" width="100%"></div>
+        <a href="/m/search.do"><img src="/mobile/image/gnb-ser.svg" class="gnb-ser" width="100%"></a>
     </nav>
     
-<section id="contents">
+<section id="contents" class="gray_con">
 
     <div class="list-wrap">
 
@@ -23,7 +23,7 @@
             </div>
             <div class="list-right">
                 <img src="<c:if test="${golfInfo.alliance_check eq 'Y'}">/mobile/image/like-on.svg</c:if><c:if test="${golfInfo.alliance_check ne 'Y'}">/mobile/image/like-off.svg</c:if>" class="list-like" width="100%">
-                <a class="play" href="javascript:CallApp('${golfInfo.countryclub_id}');">Play</a>
+                <a class="play active" href="javascript:CallApp('${golfInfo.countryclub_id}');">Play</a>
             </div>            
         </div>
         </c:forEach>             

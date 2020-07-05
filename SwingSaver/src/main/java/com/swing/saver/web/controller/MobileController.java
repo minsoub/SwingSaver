@@ -220,6 +220,40 @@ public class MobileController extends CommonController {
         return mv;
     }    
     
+    
+    /**
+     * Mobile Index Page
+     * 골프장 추천 리스트를 조회해서 출력한다. 
+     * 
+     * @param request
+     * @return
+     */
+    @GetMapping("/score")
+    public ModelAndView scoreForm(HttpServletRequest request) throws IOException, ApiException {    	
+    	ModelAndView mv = new ModelAndView();
+    	
+    	String rtnJson = restService.golfRecommandList();
+    	ObjectMapper mapper = new ObjectMapper();
+    	Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});
+    	
+    	mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
+    	
+    	List<GolfVo> golfList = mapper.convertValue(map.get("golfList"), TypeFactory.defaultInstance().constructCollectionType(List.class, GolfVo.class));
+    	mv.addObject("golfList", golfList);
+    	mv.setViewName("mobile/score");
+    	mv.addObject("setMenu", "score");
+    	    	    	
+    	rtnJson = restService.getAdvList();   //  광고관리 정보 조회 (use_yn이 Y인 것에 대해서만 화면상에 보여 주어야 한다)
+    	ObjectMapper mapp= new ObjectMapper();
+        Map<String, Object> mapAd = mapp.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
+        List<AdverVo> advList = mapp.convertValue(mapAd.get("advList"), TypeFactory.defaultInstance().constructCollectionType(List.class,AdverVo.class));
+        mv.addObject("advList", advList);
+    	
+        return mv;
+    }
+    
+    
     /**
      * 이미지 URL을 호출 받아서 이미지를 읽어서 리턴한다. 
      * 
