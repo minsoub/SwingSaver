@@ -579,6 +579,23 @@ public class RestServiceImpl implements RestService {
 
         return groupVo;
     }
+    
+	/**
+	 * 그룹 상세정보를 조회한다. 
+	 */
+    @Override
+    public GroupVo getGroupInfo(String groupid) throws ApiException, IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        GroupVo groupVo = null;
+
+        String rtnJson= "";
+        String param = groupid;
+        rtnJson = sendMessage.sendHttpsStr("/ords/swing/saver/groupinfo/"+param,"GET", "application/json",true);
+        LOGGER.debug("그룹 정보 파라미터:{},응답:{}",param,rtnJson);
+        groupVo = mapper.readValue(rtnJson,GroupVo.class);
+
+        return groupVo;
+    }    
 	
     /**
      * 관리자모드에서 그룹정보 업데이트 처리 

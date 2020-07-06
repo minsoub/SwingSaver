@@ -233,7 +233,7 @@ public class AdminController extends CommonController {
         List<CodeVo> useList = getCodeList("use");
         mv.addObject("useList", useList);
         
-        GroupVo groupInfo =  restService.getGroupInfo(Long.parseLong(groupVo.getGroupid()));   // 그룹 상세 정보 조회
+        GroupVo groupInfo =  restService.getGroupInfo(groupVo.getGroupid());   // 그룹 상세 정보 조회
         
         mv.addObject("groupInfo", groupInfo);
         
@@ -250,7 +250,7 @@ public class AdminController extends CommonController {
     public ModelAndView groupDetail(HttpServletRequest request,@PathVariable String groupid)  throws IOException, ApiException 
     {
     	ModelAndView mv = new ModelAndView();
-        GroupVo groupInfo =  restService.getGroupInfo(Long.parseLong(groupid));   // 그룹 상세 정보 조회
+        GroupVo groupInfo =  restService.getGroupInfo(groupid);   // 그룹 상세 정보 조회
         mv.addObject("groupInfo", groupInfo);
                
         mv.setViewName("web/admin/adm_01_02");

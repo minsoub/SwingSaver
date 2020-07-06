@@ -73,6 +73,7 @@ public interface RestService {
     public String getGroupList() throws ApiException;   				// 그룹 리스트 조회
     public String getGroupAdminList() throws ApiException;				// 그룹관리자로 등록할 회원리스트 조회
     public GroupVo getGroupInfo(long groupid) throws ApiException, IOException;					// 그룹 상세정보 조회
+    public GroupVo getGroupInfo(String groupid) throws ApiException, IOException;					// 그룹 상세정보 조회
     public String getCodeList(String groupType) throws ApiException;	// 코드 리스트 조회
     public String groupUpdate(Map<String, String> params) throws JsonProcessingException, ApiException;
     
