@@ -18,12 +18,6 @@
                                		<!-- option value="${userInfo.userid}">${userInfo.lastname}${userInfo.firstname}(${userInfo.email})</option  -->
                               	</c:forEach>	                            
                             </select>
-                            <!--  input type="text" placeholder="이름이나 이메일 입력" required /  -->
-                            <!-- div class="inquiry-box">
-                                <p>홍길동 (sample@mail.com)</p>
-                                <p>홍길동 (acser@mail.com)</p>
-                                <p class="con-blue">*스윙세이버회원만 조회가능합니다.</p>
-                            </div  -->
                         </div>
                         <div class="question">
                             <p>레슨가격</p>
@@ -40,11 +34,11 @@
                         </div>
                         <div class="question">
                             <p class="text-t">프로필</p>
-                            <textarea  name="profile" id="profile" placeholder="프로필을 입력해주세요" cols=50 rows=5></textarea>
+                            <textarea  name="profile" id="profile" placeholder="프로필을 입력해주세요" cols=50 rows=4></textarea>
                         </div> 
                         <div class="question">
-                            <p class="text-t">수상경력</p>
-                            <textarea name="description" id="description" placeholder="수상경력을 입력해주세요" cols=50 rows=5></textarea>
+                            <p class="text-t">레슨방향</p>
+                            <textarea name="description" id="description" placeholder="레슨방향을 입력해주세요" cols=50 rows=4></textarea>
                         </div> 
                         <div class="question">
                             <p>프로필 이미지</p>

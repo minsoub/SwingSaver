@@ -26,6 +26,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="reqUri" value="${pageContext.request.requestURI}"></c:set>
 <script>var currUri ='<c:out value="${reqUri}"/>'</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
         
 <script type="text/javascript">
 <!--

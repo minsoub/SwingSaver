@@ -253,6 +253,70 @@ public class MobileController extends CommonController {
         return mv;
     }
     
+    /**
+     * Mobile 스코어 등록
+     * 
+     * @param request
+     * @return
+     */
+    @GetMapping("/score_add")
+    public ModelAndView scorAddForm(HttpServletRequest request) throws IOException, ApiException {    	
+    	ModelAndView mv = new ModelAndView();
+    	
+    	String rtnJson = restService.golfRecommandList();
+    	ObjectMapper mapper = new ObjectMapper();
+    	Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});
+    	
+    	mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
+    	
+    	List<GolfVo> golfList = mapper.convertValue(map.get("golfList"), TypeFactory.defaultInstance().constructCollectionType(List.class, GolfVo.class));
+    	mv.addObject("golfList", golfList);
+    	mv.setViewName("mobile/score_add");
+    	mv.addObject("setMenu", "score");
+    	    	    	
+    	rtnJson = restService.getAdvList();   //  광고관리 정보 조회 (use_yn이 Y인 것에 대해서만 화면상에 보여 주어야 한다)
+    	ObjectMapper mapp= new ObjectMapper();
+        Map<String, Object> mapAd = mapp.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
+        List<AdverVo> advList = mapp.convertValue(mapAd.get("advList"), TypeFactory.defaultInstance().constructCollectionType(List.class,AdverVo.class));
+        mv.addObject("advList", advList);
+    	
+        return mv;
+    }
+    
+    
+    /**
+     * Mobile 통계 페이지 
+     * 모바일 통계 페이지 출력
+     * 
+     * @param request
+     * @return
+     */
+    @GetMapping("/score_sts")
+    public ModelAndView scoreStsForm(HttpServletRequest request) throws IOException, ApiException {    	
+    	ModelAndView mv = new ModelAndView();
+    	
+    	String rtnJson = restService.golfRecommandList();
+    	ObjectMapper mapper = new ObjectMapper();
+    	Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});
+    	
+    	mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
+    	
+    	List<GolfVo> golfList = mapper.convertValue(map.get("golfList"), TypeFactory.defaultInstance().constructCollectionType(List.class, GolfVo.class));
+    	mv.addObject("golfList", golfList);
+    	mv.setViewName("mobile/score_sts");
+    	mv.addObject("setMenu", "score");
+    	    	    	
+    	rtnJson = restService.getAdvList();   //  광고관리 정보 조회 (use_yn이 Y인 것에 대해서만 화면상에 보여 주어야 한다)
+    	ObjectMapper mapp= new ObjectMapper();
+        Map<String, Object> mapAd = mapp.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
+        List<AdverVo> advList = mapp.convertValue(mapAd.get("advList"), TypeFactory.defaultInstance().constructCollectionType(List.class,AdverVo.class));
+        mv.addObject("advList", advList);
+    	
+        return mv;
+    }
+    
     
     /**
      * 이미지 URL을 호출 받아서 이미지를 읽어서 리턴한다. 

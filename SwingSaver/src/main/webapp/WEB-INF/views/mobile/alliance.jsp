@@ -2,9 +2,9 @@
 <%@include file="/WEB-INF/views/mobile/include/top.jsp"%>
     
     <nav id="header">
-        <img src="./image/gnb-menu.svg" class="gnb-menu" width="100%">
+        <img src="/mobile/image/gnb-menu.svg" class="gnb-menu" width="100%">
         <div class="logo">buddyya</div>
-        <img src="./image/gnb-ser.svg" class="gnb-ser" width="100%">
+        <a href="/m/search.do"><img src="/mobile/image/gnb-ser.svg" class="gnb-ser" width="100%"></a>
     </nav>
     
 <section id="contents">

@@ -4,7 +4,7 @@
     <nav id="header">
         <img src="/mobile/image/gnb-menu.svg" class="gnb-menu" width="100%">
         <div class="logo">${golfInfo.countryclub_nm}</div>
-        <img src="/mobile/image/gnb-ser.svg" class="gnb-ser" width="100%">
+        <a href="/m/search.do"><img src="/mobile/image/gnb-ser.svg" class="gnb-ser" width="100%"></a>
     </nav>
     
 	<section id="contents">

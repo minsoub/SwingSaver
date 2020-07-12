@@ -34,11 +34,11 @@
                         
                         <div class="question">
                             <p class="text-t">프로필</p>
-                            <textarea  name="profile" id="profile" placeholder="프로필을 입력해주세요" cols=50 rows=5>${proVo.profile}</textarea>
+                            <textarea  name="profile" id="profile" placeholder="프로필을 입력해주세요" cols=50 rows=4>${proVo.profile}</textarea>
                         </div> 
                         <div class="question">
-                            <p class="text-t">수상경력</p>
-                            <textarea name="description" id="description" placeholder="수상경력을 입력해주세요" cols=50 rows=5>${proVo.description}</textarea>
+                            <p class="text-t">레슨방향</p>
+                            <textarea name="description" id="description" placeholder="수상경력을 입력해주세요" cols=50 rows=4>${proVo.description}</textarea>
                         </div> 
                         <div class="question">
                             <p>프로필 이미지</p>

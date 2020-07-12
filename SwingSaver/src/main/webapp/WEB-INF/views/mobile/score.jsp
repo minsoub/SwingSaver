@@ -2,14 +2,14 @@
 <%@include file="/WEB-INF/views/mobile/include/top.jsp"%>
     
     <nav id="header">
-        <img src="./image/gnb-menu.svg" class="gnb-menu" width="100%">
+        <img src="/mobile/image/gnb-menu.svg" class="gnb-menu" width="100%">
         <div class="logo">buddyya</div>
-        <img src="./image/gnb-ser.svg" class="gnb-ser" width="100%">
+        <a href="/m/search.do"><img src="/mobile/image/gnb-ser.svg" class="gnb-ser" width="100%"></a>
     </nav>
 
     <section id="contents" class="gray_con">
         <div class="con-wrap">
-            <a href="#" class="sc-add">새로운 스코어 추가 +</a>
+            <a href="/m/score_add" class="sc-add">새로운 스코어 추가 +</a>
            
             <h2>조회기간</h2>
             <div class="month-wrap">
@@ -21,7 +21,7 @@
             
             <div class="date-wrap">
                 <div class="sc-date">2020.02.22 ~ 2020.03.22</div>
-                <a href="#" class="sta-btn">통계보기</a>
+                <a href="/m/score_sts" class="sta-btn">통계보기</a>
             </div>
             
         </div>
