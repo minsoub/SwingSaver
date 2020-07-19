@@ -9,10 +9,11 @@
     
 	<section id="contents">
 
-		<div class="main-bn">
+		<div class="">
         	<!-- img src="/mobile/image/golf-main-bn.png"width="100%"  -->
         	<img src="<c:url value='${golfInfo.assets_url}'/>" width="100%">
 		</div>
+		
     	<div class="golf-main"> 
    			<div class="golf-info">
         		<img src="/mobile/image/like-on.svg" class="list-like" width="100%">

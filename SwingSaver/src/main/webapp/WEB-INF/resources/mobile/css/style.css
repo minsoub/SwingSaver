@@ -34,7 +34,7 @@ a:link,
 a:active,
 a:visited {
     text-decoration: none;
-    border: 0px;
+/*    border: 0px;*/
 }
 
 span.button,
@@ -101,9 +101,15 @@ table {
 
 .logo {
     display: block;
-    width: 10%;
+/*    width: 10%;*/
     margin: auto;
     margin-top: 20px;
+    text-align: center;
+    font-size: 1.6em;
+}
+
+.logo img{
+    width: 10%;
 }
 
 .select-area {
@@ -185,6 +191,11 @@ table {
     margin: 0;
     font-size: 1em;
     color: #919191;
+    width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-wrap: normal;
+    overflow: hidden;
 }
 
 .list-like {
@@ -240,7 +251,7 @@ table {
 
 .menu-gnb p {
     font-size: 1.1em;
-    margin: 3px 0;
+    margin: 0;
 }
 
 .search-wrap {
@@ -304,15 +315,8 @@ table {
     padding: 0 20px 10px 20px;
 }
 
-.main-btn a {
-    display: inline-block;
-    /*    background: #ededed;*/
-    text-align: center;
-    border-radius: 10px;
-    color: #fff;
-    width: 49%;
-    vertical-align: top;
-}
+
+
 
 .main-btn p span {
     display: block;
@@ -372,6 +376,7 @@ table {
 .rec-list {
     width: 600px;
     display: block;
+    height: 98px;
 }
 
 .rec-list a {
@@ -390,6 +395,7 @@ table {
 .rec-list a img {
     width: 60%;
     margin: 10px 0 30px 0;
+    max-height: 50px;
 }
 
 .rec-list a p {
@@ -408,6 +414,27 @@ table {
     padding: 20px 0;
 }
 
+.gfmain-btn a {
+    display: inline-block;
+     background: #ededed;
+    text-align: center;
+    border-radius: 10px;
+    color: #fff;
+    width: 49%;
+    vertical-align: top;
+    padding: 30px 0;
+}
+
+
+.gfmain-btn img{
+    width: 50%;
+}
+
+.gfmain-btn p{
+    color: #333;
+    font-weight: 400;
+}
+
 .golf-main {
     padding: 20px;
     background-color: #ffffff;
@@ -417,13 +444,27 @@ table {
 
 }
 
+.main-btn a {
+    display: inline-block;
+    /*    background: #ededed;*/
+    text-align: center;
+    border-radius: 10px;
+    color: #fff;
+    width: 49%;
+    vertical-align: top;
+}
+
+
+
+
 .golf-info {
     text-align: center;
     margin: 10px;
 }
 
 .golf-info img {
-    float: right;
+    position: absolute;
+    right: 20px;
 }
 
 .golf-info p {
@@ -433,6 +474,7 @@ table {
 
 .golf-info h2 {
     margin: 5px;
+    font-size: 1.8em;
 }
 
 .play-btn {
@@ -715,6 +757,68 @@ form p {
     border-radius: 5px;
 }
 
+.bud-btn{
+    width: 100%;
+    background-color: #333333;
+    display: block;
+    color: #fff;
+    text-align: center;
+    font-size: 1.4em;
+    padding: 20px 0;
+    bottom: 64px;
+    left: 0;
+    margin: 5px 0;
+}
+
+.red-btn{
+    background-color: #ff4141;
+}
+
+.ai-list{
+   width: 65%; 
+}
+
+.thumb-sm{
+    width: 62px;
+    height: 62px;
+    display: inline-block;
+    vertical-align: top;  
+    background-color: #222;
+    position: relative;
+}
+
+.thumb-video{
+    width: 100%;
+    opacity: 0.6;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+
+.play-img{
+    width: 50%;
+    position: absolute;
+    top: 16px;
+    left: 16px;
+}
+
+.list-p{
+    color: #131313!important;
+    font-size: 1.1em!important;
+    margin-top: 4px!important;
+    
+}
+
+.pay-btn{
+    color: #222222;
+    padding: 2px 5px;
+    border-radius: 5px;
+    font-size: 1em;
+    border: 1px solid #222;
+    margin-left: 10px;
+}
+
 .list-arrow {
     width: 10px;
     margin-top: 19px;
@@ -904,12 +1008,13 @@ form p {
 
 .con-wrap h2{
     font-size: 1.4em;
+    margin: 20px 0;
 }
 
 
 
 @media screen and (max-width: 700px) {
-    .logo {
+    .logo img {
         width: 25%;
     }
 

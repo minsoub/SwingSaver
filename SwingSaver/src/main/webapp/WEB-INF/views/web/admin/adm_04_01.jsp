@@ -40,11 +40,11 @@
                             <input type="number" id="hole_value" name="hole_value" placeholder="골프장홀수" maxlength=2  oninput="maxLengthCheck(this)"  />
                         </div>
                         <div class="question">
-                            <p>이미지경로</p>
+                            <p>골프장로고</p>
                             <input type="file" id="imageFile" name="imageFile" placeholder="기본이미지 저장경로" style="width:350;"  />
                         </div>
                         <div class="question">
-                            <p>Asset경로</p>
+                            <p>골프장이미지</p>
                             <input type="file" id="assetsFile" name="assetsFile" placeholder="Asset 저장 경로"  style="width:350;"   />
                         </div>
                         <div class="question">

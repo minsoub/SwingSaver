@@ -51,12 +51,12 @@
                                         <td>${golfInfo.hole_value}홀</td>
                                     </tr>
                                     <tr>
-                                        <td><strong>이미지경로
+                                        <td><strong>골프장로고
                                         </strong></td>
                                         <td>${golfInfo.image}</td>
                                     </tr>
                                     <tr>
-                                        <td><strong>Asset경로</strong></td>
+                                        <td><strong>골프장이미지</strong></td>
                                         <td>${golfInfo.assets}</td>
                                     </tr>
                                     <tr>

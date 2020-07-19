@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <div id="gnb">
     
-        <div class="menu-gnb">
+        <div class="menu-gnb <c:if test="${setMenu eq 'aicoach'}">active</c:if>">
+        	<a href="/m/aicoach.do">
             <img src="/mobile/image/gnb-01.svg" class="gnb-01" width="100%">
             <p>AI COACH</p>
+            </a>
         </div>    
     
         <div class="menu-gnb <c:if test="${setMenu eq 'golflist'}">active</c:if>">

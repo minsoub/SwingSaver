@@ -32,12 +32,12 @@
                             <input type="text" id="hole_value" name="hole_value" placeholder="골프장홀수" value="${golfInfo.hole_value}" maxlength=2 oninput="maxLengthCheck(this)"  />
                         </div>
                         <div class="question">
-                            <p>이미지경로</p>
+                            <p>골프장로고</p>
                             <input type="file" id="imageFile" name="imageFile" placeholder="기본이미지 저장경로" value="${golfInfo.image}"  maxlength="100"  />
                             [${golfInfo.image}]
                         </div>
                         <div class="question">
-                            <p>Asset경로</p>
+                            <p>골프장이미지</p>
                             <input type="file" id="assetsFile" name="assetsFile" placeholder="Asset 저장 경로" value="${golfInfo.assets}" maxlength="100"  />
                             [${golfInfo.assets}]
                         </div>
