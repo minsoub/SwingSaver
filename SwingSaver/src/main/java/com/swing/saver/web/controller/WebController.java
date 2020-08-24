@@ -210,9 +210,9 @@ public class WebController {
         }else if(page.equals("pw")){			// 비밀번호 재설정
             viewPage = "web/user/log_03_01_01";
         }else if(page.equals("pwreset")){		// 이메일 전송 완료 페이지
-            viewPage = "web/log_03_01_02";
+            viewPage = "web/user/log_03_01_02";
         }else if(page.equals("pwresetComp")){ 	// 비밀번호 재설정 완료 페이지
-            viewPage = "web/log_03_02_02";
+            viewPage = "web/user/log_03_02_02";
         }
 
         return viewPage;
