@@ -33,9 +33,13 @@ import com.swing.saver.web.entity.AdverVo;
 import com.swing.saver.web.entity.AreaVo;
 import com.swing.saver.web.entity.Constant;
 import com.swing.saver.web.entity.GolfVo;
+import com.swing.saver.web.entity.LoginVo;
+import com.swing.saver.web.entity.ScoreListVo;
+import com.swing.saver.web.entity.UserVo;
 import com.swing.saver.web.exception.ApiException;
 import com.swing.saver.web.service.MobileService;
 import com.swing.saver.web.service.RestService;
+import com.swing.saver.web.util.CommonUtil;
 
 /**
  * Buddya 모바일 홈페이지 Controller Class
@@ -223,32 +227,57 @@ public class MobileController extends CommonController {
     
     /**
      * Mobile Index Page
-     * 골프장 추천 리스트를 조회해서 출력한다. 
+     * 내가 등록한 스코어 리스트를 조회한다. 
+     * 1개월, 2개월, 3개월, 월별 리스트 데이터를 가져온다. 
+     * parameter : m=1, m=2, m=3, m=list
      * 
      * @param request
      * @return
      */
     @GetMapping("/score")
-    public ModelAndView scoreForm(HttpServletRequest request) throws IOException, ApiException {    	
+    public ModelAndView scoreForm(HttpServletRequest request, HttpSession session) throws IOException, ApiException {    	
     	ModelAndView mv = new ModelAndView();
     	
-    	String rtnJson = restService.golfRecommandList();
+    	LoginVo loginVo = (LoginVo)session.getAttribute("login");
+    	UserVo userVo = null;		
+    	long userId = -1;
+    	
+    	if (loginVo != null)
+    		userId = loginVo.getUserid();
+    	
+    	LOGGER.debug("Login userID : " + userId);
+    	
+    	String param = request.getParameter("p");
+    	LOGGER.debug(param);
+    	
+    	String fromDt = null;
+    	String toDt = null;
+    	if (param == null)
+    	{
+    		param = "1";
+    	}
+    	
+    	
+    	fromDt = CommonUtil.getDiffDate(Integer.parseInt(param), "yyyy.MM.dd");
+    	toDt   = CommonUtil.getCurrentFromatDate("yyyy.MM.dd");
+    	
+    	String search_period = fromDt + " ~ " + toDt;  // 검색 기간
+    	
+    	// 주어진 기간으로 골프장 스코어 리스트를 조회한다. 
+    	String rtnJson = restService.getScoreList(userId, fromDt, toDt);
+    	
+    	//String rtnJson = restService.golfRecommandList();
     	ObjectMapper mapper = new ObjectMapper();
     	Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});
     	
     	mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
     	
-    	List<GolfVo> golfList = mapper.convertValue(map.get("golfList"), TypeFactory.defaultInstance().constructCollectionType(List.class, GolfVo.class));
-    	mv.addObject("golfList", golfList);
+    	List<ScoreListVo> scoreList = mapper.convertValue(map.get("scoreList"), TypeFactory.defaultInstance().constructCollectionType(List.class, ScoreListVo.class));
+    	mv.addObject("scoreList",      scoreList);
+    	mv.addObject("search_period",  search_period);
+    	mv.addObject("m",              param);
+    	mv.addObject("setMenu",        "score");
     	mv.setViewName("mobile/score");
-    	mv.addObject("setMenu", "score");
-    	    	    	
-    	rtnJson = restService.getAdvList();   //  광고관리 정보 조회 (use_yn이 Y인 것에 대해서만 화면상에 보여 주어야 한다)
-    	ObjectMapper mapp= new ObjectMapper();
-        Map<String, Object> mapAd = mapp.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});
-        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
-        List<AdverVo> advList = mapp.convertValue(mapAd.get("advList"), TypeFactory.defaultInstance().constructCollectionType(List.class,AdverVo.class));
-        mv.addObject("advList", advList);
     	
         return mv;
     }

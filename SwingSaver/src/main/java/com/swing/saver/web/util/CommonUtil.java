@@ -9,19 +9,12 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.type.TypeFactory;
-import com.swing.saver.web.entity.CodeVo;
-import com.swing.saver.web.exception.ApiException;
 
 /**
  * 공통 유틸 클래스 정의 
@@ -62,6 +55,40 @@ public class CommonUtil {
 		Date now = new Date();
 		
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		
+		return format.format(now);
+	}
+	/**
+	 * 현재 날짜에서 주어진 월을 뺀 날짜의 포멧을 리턴한다. 
+	 * 
+	 * @param m
+	 * @param fmt
+	 * @return
+	 */
+	public static String getDiffDate(int m, String fmt)
+	{
+		Date now = new Date();
+		Calendar cal = Calendar.getInstance(); 
+		cal.setTime(now);
+		cal.add(Calendar.MONTH, -m);
+
+			
+		SimpleDateFormat format = new SimpleDateFormat(fmt);
+		
+		return format.format(cal.getTime());
+	}
+	
+	/**
+	 * 주어진 포멧으로 날짜를 리턴한다.
+	 * 
+	 * @param fmt
+	 * @return
+	 */
+	public static String getCurrentFromatDate(String fmt)
+	{
+		Date now = new Date();
+		
+		SimpleDateFormat format = new SimpleDateFormat(fmt);
 		
 		return format.format(now);
 	}

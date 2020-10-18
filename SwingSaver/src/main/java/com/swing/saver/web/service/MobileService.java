@@ -38,5 +38,17 @@ public interface MobileService {
      * @return
      * @throws ApiException
      */
-    public String getAdvList() throws ApiException;															
+    public String getAdvList() throws ApiException;		
+    
+    /**
+     * 주어진 일자로 골프장 스코어 리스트를 조회한다. 
+     * 
+     * @param userId
+     * @param fromDt
+     * @param toDt
+     * @return
+     * @throws JsonProcessingException
+     * @throws ApiException
+     */
+    public String getScoreList(long userId, String fromDt, String toDt)  throws JsonProcessingException, ApiException;	
 }

@@ -1,5 +1,6 @@
 package com.swing.saver.web.service;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -75,6 +76,33 @@ public class MobileServiceImpl implements MobileService {
         rtnJson = sendMessage.sendHttpsStr("/ords/swing/saver/advlist", "GET", "application/x-www-form-urlencoded",true);
 
         LOGGER.debug("광고 등록 리스트 조회 응답:{}",rtnJson);
+
+        return rtnJson;
+    }
+    
+    /**
+     * 주어진 일자로 골프장 스코어 리스트를 조회한다. 
+     * 
+     * @param userId
+     * @param fromDt
+     * @param toDt
+     * @return
+     * @throws JsonProcessingException
+     * @throws ApiException
+     */
+    public String getScoreList(long userId, String fromDt, String toDt)  throws JsonProcessingException, ApiException
+    {
+        String rtnJson = "";
+        ObjectMapper mapper = new ObjectMapper();
+        
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("userid", String.valueOf(userId));
+        params.put("fromDt", String.valueOf(fromDt));
+        params.put("toDt", String.valueOf(toDt));
+
+        rtnJson = sendMessage.sendHttpsStr(mapper.writeValueAsString(params), "/ords/swing/saver/mscorelist", "GET", "application/x-www-form-urlencoded",true);
+
+        LOGGER.debug("골프장 스코어 리스트를 조회 응답:{}",rtnJson);
 
         return rtnJson;
     }

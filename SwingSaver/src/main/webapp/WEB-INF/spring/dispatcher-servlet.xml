@@ -24,6 +24,7 @@
                 <value>/admin/golfList</value>
                 <value>/admin/par</value>
                 <value>/admin/market</value>
+                <value>/m/score</value>
             </list>
         </property>
         <property name="loginAfterUrlLit"><!-- 로그인 후 접속 불가 url 기입 -->
