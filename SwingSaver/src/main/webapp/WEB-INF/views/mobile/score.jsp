@@ -35,7 +35,7 @@
                     <p>Thru <strong>0</strong> Shru <strong>0</strong> Score <strong>${scoreInfo.score_sum}</strong></p>
                 </div>
                 <div class="list-right">
-                    <a class=""><img src="/mobile/image/arrow-btn.png" class="list-arrow"></a>
+                    <a href="/m/scoredetail.do?seq_no=${scoreInfo.seq_no}" class=""><img src="/mobile/image/arrow-btn.png" class="list-arrow"></a>
                 </div>
             </div>
           </c:forEach>

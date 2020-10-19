@@ -51,4 +51,15 @@ public interface MobileService {
      * @throws ApiException
      */
     public String getScoreList(long userId, String fromDt, String toDt)  throws JsonProcessingException, ApiException;	
+    
+    /**
+     * 스코어 상세 정보를 조회한다. 
+     * 
+     * @param userId
+     * @param seq_no
+     * @return
+     * @throws JsonProcessingException
+     * @throws ApiException
+     */
+    public String getScoreDetail(long userId, String seq_no) throws JsonProcessingException, ApiException;
 }

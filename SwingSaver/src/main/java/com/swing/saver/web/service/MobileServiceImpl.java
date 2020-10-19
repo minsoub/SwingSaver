@@ -106,4 +106,24 @@ public class MobileServiceImpl implements MobileService {
 
         return rtnJson;
     }
+    
+    /**
+     * 스코어 상세 정보를 조회한다. 
+     * 
+     */
+    public String getScoreDetail(long userId, String seq_no) throws JsonProcessingException, ApiException
+    {
+        String rtnJson = "";
+        ObjectMapper mapper = new ObjectMapper();
+        
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("userid", String.valueOf(userId));
+        params.put("seq_no", String.valueOf(seq_no));
+
+        rtnJson = sendMessage.sendHttpsStr(mapper.writeValueAsString(params), "/ords/swing/saver/mscoredetail", "GET", "application/x-www-form-urlencoded",true);
+
+        LOGGER.debug("골프장 스코어 상세정보 조회 응답:{}",rtnJson);
+
+        return rtnJson;
+    }
 }

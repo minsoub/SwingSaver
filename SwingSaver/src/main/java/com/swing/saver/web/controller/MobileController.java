@@ -35,6 +35,7 @@ import com.swing.saver.web.entity.Constant;
 import com.swing.saver.web.entity.GolfVo;
 import com.swing.saver.web.entity.LoginVo;
 import com.swing.saver.web.entity.ScoreListVo;
+import com.swing.saver.web.entity.ScoreDetailVo;
 import com.swing.saver.web.entity.UserVo;
 import com.swing.saver.web.exception.ApiException;
 import com.swing.saver.web.service.MobileService;
@@ -281,6 +282,45 @@ public class MobileController extends CommonController {
     	
         return mv;
     }
+    
+    /**
+     * Mobile Index Page
+     * 내가 등록한 스코어 리스트를 조회한다. 
+     * 1개월, 2개월, 3개월, 월별 리스트 데이터를 가져온다. 
+     * parameter : m=1, m=2, m=3, m=list
+     * 
+     * @param request
+     * @return
+     */
+    @GetMapping("/scoredetail")
+    public ModelAndView scoreDetail(HttpServletRequest request, HttpSession session) throws IOException, ApiException {    	
+    	ModelAndView mv = new ModelAndView();
+    	
+    	LoginVo loginVo = (LoginVo)session.getAttribute("login");
+    	UserVo userVo = null;		
+    	long userId = -1;
+    	
+    	if (loginVo != null)
+    		userId = loginVo.getUserid();
+    	
+    	LOGGER.debug("Login userID : " + userId);
+    	
+    	String param = request.getParameter("seq_no");
+    	LOGGER.debug(param);
+    	
+    	// seq_no를 통해서 스코어 상세 정보를 조회한다. 
+    	String rtnJson = restService.getScoreDetail(userId, param);
+    	ObjectMapper mapper = new ObjectMapper();
+    	ScoreDetailVo scoreInfo = mapper.readValue(rtnJson, ScoreDetailVo.class);
+
+    	mv.addObject("scoreInfo",      scoreInfo);
+    	mv.addObject("m",              param);
+    	mv.addObject("setMenu",        "score");
+    	mv.setViewName("mobile/score");
+    	
+        return mv;
+    }
+    
     
     /**
      * Mobile 스코어 등록
