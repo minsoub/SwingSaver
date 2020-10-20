@@ -10,7 +10,7 @@
 
     <section id="contents" class="gray_con">
         <div class="con-wrap">
-            <a href="/m/score_add" class="sc-add">새로운 스코어 추가 +</a>
+            <a href="/score/scoreRegister" class="sc-add">새로운 스코어 추가 +</a>
            
             <h2>조회기간</h2>
             <div class="month-wrap">
@@ -35,7 +35,7 @@
                     <p>Thru <strong>0</strong> Shru <strong>0</strong> Score <strong>${scoreInfo.score_sum}</strong></p>
                 </div>
                 <div class="list-right">
-                    <a href="/m/scoredetail.do?seq_no=${scoreInfo.seq_no}" class=""><img src="/mobile/image/arrow-btn.png" class="list-arrow"></a>
+                    <a href="/m/scoredetail.do?visit_date=${scoreInfo.visit_date}&countryclub_id=${scoreInfo.countryclub_id}&seq_no=${scoreInfo.seq_no}&start_course=${scoreInfo.start_course}&end_course=${scoreInfo.end_course}" class=""><img src="/mobile/image/arrow-btn.png" class="list-arrow"></a>
                 </div>
             </div>
           </c:forEach>

@@ -100,7 +100,7 @@ public class MobileServiceImpl implements MobileService {
         params.put("fromDt", String.valueOf(fromDt));
         params.put("toDt", String.valueOf(toDt));
 
-        rtnJson = sendMessage.sendHttpsStr(mapper.writeValueAsString(params), "/ords/swing/saver/mscorelist", "GET", "application/x-www-form-urlencoded",true);
+        rtnJson = sendMessage.sendHttpsStr(mapper.writeValueAsString(params), "/ords/swing/saver/mscorelist", "POST", "application/json",true);
 
         LOGGER.debug("골프장 스코어 리스트를 조회 응답:{}",rtnJson);
 
@@ -111,16 +111,19 @@ public class MobileServiceImpl implements MobileService {
      * 스코어 상세 정보를 조회한다. 
      * 
      */
-    public String getScoreDetail(long userId, String seq_no) throws JsonProcessingException, ApiException
+    public String getScoreDetail(String visit_date, String countryclub_id, String seq_no, String user_id) throws JsonProcessingException, ApiException
     {
         String rtnJson = "";
         ObjectMapper mapper = new ObjectMapper();
         
         Map<String, String> params = new HashMap<String, String>();
-        params.put("userid", String.valueOf(userId));
-        params.put("seq_no", String.valueOf(seq_no));
+        params.put("visit_date",      visit_date);
+        params.put("seq_no", 	  	  seq_no);		     
+        params.put("user_id",     	  user_id);		     
+        params.put("countryclub_id",  countryclub_id);
+        
 
-        rtnJson = sendMessage.sendHttpsStr(mapper.writeValueAsString(params), "/ords/swing/saver/mscoredetail", "GET", "application/x-www-form-urlencoded",true);
+        rtnJson = sendMessage.sendHttpsStr( "/ords/swing/saver/scoredetail/"+visit_date+"/"+countryclub_id+"/"+seq_no+"/"+user_id, "GET", "application/x-www-form-urlencoded",true);
 
         LOGGER.debug("골프장 스코어 상세정보 조회 응답:{}",rtnJson);
 

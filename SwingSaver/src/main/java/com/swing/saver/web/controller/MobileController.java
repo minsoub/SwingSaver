@@ -32,10 +32,11 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.swing.saver.web.entity.AdverVo;
 import com.swing.saver.web.entity.AreaVo;
 import com.swing.saver.web.entity.Constant;
+import com.swing.saver.web.entity.FarVo;
 import com.swing.saver.web.entity.GolfVo;
 import com.swing.saver.web.entity.LoginVo;
 import com.swing.saver.web.entity.ScoreListVo;
-import com.swing.saver.web.entity.ScoreDetailVo;
+import com.swing.saver.web.entity.ScoreMaster;
 import com.swing.saver.web.entity.UserVo;
 import com.swing.saver.web.exception.ApiException;
 import com.swing.saver.web.service.MobileService;
@@ -305,18 +306,34 @@ public class MobileController extends CommonController {
     	
     	LOGGER.debug("Login userID : " + userId);
     	
-    	String param = request.getParameter("seq_no");
-    	LOGGER.debug(param);
+    	String seq_no = request.getParameter("seq_no");
+    	String countryclub_id = request.getParameter("countryclub_id");
+    	String visit_date = request.getParameter("visit_date").replace(".", "").replace(".", "");
+    	String start_course = request.getParameter("start_course");
+    	String end_course = request.getParameter("end_course");
     	
     	// seq_no를 통해서 스코어 상세 정보를 조회한다. 
-    	String rtnJson = restService.getScoreDetail(userId, param);
+    	String rtnJson = restService.getScoreDetail(visit_date, countryclub_id, seq_no, String.valueOf(userId));
     	ObjectMapper mapper = new ObjectMapper();
-    	ScoreDetailVo scoreInfo = mapper.readValue(rtnJson, ScoreDetailVo.class);
+    	ScoreMaster scoreInfo = mapper.readValue(rtnJson, ScoreMaster.class);
 
+        // Hole에 대한 PAR 정보를 조회
+    	FarVo parInfo1 =  service.getParInfo(" ", " ", countryclub_id, start_course);   // 골프장 Par 정보 상세 정보 조회 (Start Course)
+    	FarVo parInfo2 =  service.getParInfo(" ", " ", countryclub_id, end_course);     // 골프장 Par 정보 상세 정보 조회 (End Course)
+    	
+    	// PAR에 대한 SUM 합계
+    	parInfo1.setSum(parInfo1.getHole1()+parInfo1.getHole2()+parInfo1.getHole3()+parInfo1.getHole4()+parInfo1.getHole5()+parInfo1.getHole6()
+    					+parInfo1.getHole7()+parInfo1.getHole8()+parInfo1.getHole9());
+    	parInfo2.setSum(parInfo2.getHole1()+parInfo2.getHole2()+parInfo2.getHole3()+parInfo2.getHole4()+parInfo2.getHole5()+parInfo2.getHole6()
+		+parInfo2.getHole7()+parInfo2.getHole8()+parInfo2.getHole9());
+    	
+        mv.addObject("parInfo1", parInfo1);
+        mv.addObject("parInfo2", parInfo2);
+        
+        
     	mv.addObject("scoreInfo",      scoreInfo);
-    	mv.addObject("m",              param);
     	mv.addObject("setMenu",        "score");
-    	mv.setViewName("mobile/score");
+    	mv.setViewName("mobile/score_add");
     	
         return mv;
     }

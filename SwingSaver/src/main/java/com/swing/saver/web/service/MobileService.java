@@ -55,11 +55,13 @@ public interface MobileService {
     /**
      * 스코어 상세 정보를 조회한다. 
      * 
-     * @param userId
+     * @param visit_date
+     * @param countryclub_id
      * @param seq_no
+     * @param user_id
      * @return
      * @throws JsonProcessingException
      * @throws ApiException
      */
-    public String getScoreDetail(long userId, String seq_no) throws JsonProcessingException, ApiException;
+    public String getScoreDetail(String visit_date, String countryclub_id, String seq_no, String user_id) throws JsonProcessingException, ApiException;
 }
