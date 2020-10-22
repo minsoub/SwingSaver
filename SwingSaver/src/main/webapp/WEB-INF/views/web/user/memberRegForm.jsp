@@ -204,7 +204,7 @@
             obj.userpassword = pwd;
             var jsonData = JSON.stringify(obj);
             console.log(jsonData);
-            AjaxCall("/web/user/join","POST",jsonData);
+            AjaxCallReg("/web/user/join","POST",jsonData);
 
         });
     });

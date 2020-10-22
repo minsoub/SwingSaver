@@ -148,6 +148,7 @@ function pageUri() {
     //alert(nextUri);
     return nextUri;
 }
+
 function AjaxCall(url,method,data,direct) {
     $.ajax({
         type: method,
@@ -194,6 +195,55 @@ function AjaxCall(url,method,data,direct) {
         }
     });
 }
+
+function AjaxCallReg(url,method,data,direct) {
+    $.ajax({
+        type: method,
+        url : url,
+        data: data,
+        dataType:"json",
+        async:true,
+        contentType:"application/json;charset=UTF-8",
+        success : function(rtnData) {
+
+        	console.dir(rtnData);
+            var reqdata = JSON.parse(rtnData.data);
+            var pathuri = "";
+
+            $("#ajax").remove();
+            if(reqdata.result == "true"){
+                //alert("정상적으로 처리가 완료되었습니다.");
+                if(!isEmpty(reqdata.groupid)){
+                    pathuri = "/"+reqdata.groupid;
+                }else if(!isEmpty(reqdata.subgroupid)){
+                    pathuri = "/"+reqdata.subgroupid;
+                }
+                //console.log(data.subgroupid);
+                if ( direct != undefined && direct != null && direct != '' ){
+                	location.href= direct+pathuri;
+                }else {
+                	location.href= pageUri()+pathuri;
+                }
+                
+                return true;
+            }else{
+                if(!isEmpty(reqdata.error)){
+                    alert(reqdata.error);
+                }else{
+                    alert("처리중 오류가 발생했습니다.");
+                }
+
+                return false;
+            }
+
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR.responseText);
+        }
+    });
+}
+
+
 function isEmpty(str){
 
     if(typeof str == "undefined" || str == null || str == "")
