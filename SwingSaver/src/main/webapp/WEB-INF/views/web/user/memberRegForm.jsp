@@ -45,9 +45,35 @@
             </div>
             <div class="question02">
                 <p><span></span>생년월일</p>
-                <input class="tex-01" type="text" id="year" name="year" placeholder="년도(4글자)"  />
+                <select id="year" name="year" class="que-val">
+                	<c:forEach var="i" begin="1940" end="2010">
+                		<option value="${i}">${i} 년</option>
+                	</c:forEach>
+                </select>
+                <select id="month" name="month" class="que-val">
+                	<c:forEach var="i" begin="1" end="12">
+                		<c:if test='${i < 10}'>
+                			<option value="0${i}">${i}월</option>
+                		</c:if>
+                		<c:if test='${i > 9}'>
+                			<option value="${i}">${i}월</option>
+                		</c:if>
+                	</c:forEach>
+                </select>
+                <select id="day" name="day" class="que-val">
+                	<c:forEach var="i" begin="1" end="31">
+                		<c:if test='${i < 10}'>
+                			<option value="0${i}">${i}일</option>
+                		</c:if>
+                		<c:if test='${i > 9}'>
+                			<option value="${i}">${i}일</option>
+                		</c:if>
+                	</c:forEach>
+                </select>
+                                                
+                <!-- input class="tex-01" type="text" id="year" name="year" placeholder="년도(4글자)"  />
                 <input class="tex-03" type="text" id="month" name="month" placeholder="월"  />
-                <input class="tex-03 tex-04" type="text" id="day" name="day" placeholder="일"  />
+                <input class="tex-03 tex-04" type="text" id="day" name="day" placeholder="일"  /   -->
             </div>
 
             <div class="question">
