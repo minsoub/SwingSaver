@@ -70,10 +70,37 @@
                             <div class="question02">
                                 <p>생년월일</p>
                                 <c:set var="dobStr" value="${userInfo.dob}"/>
-
-                                <input class="tex-01 que-val" type="text" id="year" value="${fn:substring(dobStr,0,4) }" required />
+                <select id="year" name="year" class="que-val">
+                	<c:forEach var="i" begin="1940" end="2010">
+                		<option value="${i}" <c:if test="${fn:substring(dobStr,0,4) eq i}">selected</c:if>>${i} 년</option>
+                	</c:forEach>
+                </select>
+                <select id="month" name="month" class="que-val">
+                	<c:forEach var="i" begin="1" end="12">
+                		<c:if test='${i < 10}'>
+                			<c:set var="t1" value="0${i}" />
+                			<option value="0${i}" <c:if test="${fn:substring(dobStr,4,6) eq t1}">selected</c:if>>${i}월</option>
+                		</c:if>
+                		<c:if test='${i > 9}'>
+                			<option value="${i}" <c:if test="${fn:substring(dobStr,4,6) eq i}">selected</c:if>>${i}월</option>
+                		</c:if>
+                	</c:forEach>
+                </select>
+                <select id="day" name="day" class="que-val">
+                	<c:forEach var="i" begin="1" end="31">
+                		<c:if test='${i < 10}'>
+                		    <c:set var="t1" value="0${i}" />
+                			<option value="0${i}" <c:if test="${fn:substring(dobStr,6, 8) eq t1}">selected</c:if>>${i}일</option>
+                		</c:if>
+                		<c:if test='${i > 9}'>
+                			<option value="${i}" <c:if test="${fn:substring(dobStr,6, 8) eq i}">selected</c:if>>${i}일</option>
+                		</c:if>
+                	</c:forEach>
+                </select>
+                
+                                <!--  input class="tex-01 que-val" type="text" id="year" value="${fn:substring(dobStr,0,4) }" required />
                                 <input class="tex-03 que-val" type="text" id="month" value="${fn:substring(dobStr,4,6) }" required />
-                                <input class="tex-03 tex-04 que-val" type="text" id="day" value="${fn:substring(dobStr,6,8) }" required />
+                                <input class="tex-03 tex-04 que-val" type="text" id="day" value="${fn:substring(dobStr,6,8) }" required /   -->
                             </div>
                             <div class="question">
                                 <p>전화번호</p>
@@ -96,7 +123,7 @@
                             
                             <!--  신규 추가 -->
                             <div class="question">
-                                <p>구녁</p>
+                                <p>구력</p>
                                 <input type="number" placeholder="1" name="average" id="average" maxlength="3" required value= "${userInfo.average}" />
                             </div>
                             <div class="question">
