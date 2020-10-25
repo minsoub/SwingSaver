@@ -195,6 +195,7 @@ function AjaxCall(url,method,data,direct) {
         }
     });
 }
+ 
 
 function AjaxCallReg(url,method,data,direct) {
     $.ajax({

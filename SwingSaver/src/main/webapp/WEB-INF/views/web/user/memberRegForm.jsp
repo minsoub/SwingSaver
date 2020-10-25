@@ -43,38 +43,12 @@
                 <input class="tex-02" type="text" id="firstname" placeholder="이름"  />
                 
             </div>
-            <div class="question02">
-                <p><span></span>생년월일</p>
-                <select id="year" name="year" class="que-val">
-                	<c:forEach var="i" begin="1940" end="2010">
-                		<option value="${i}">${i} 년</option>
-                	</c:forEach>
-                </select>
-                <select id="month" name="month" class="que-val">
-                	<c:forEach var="i" begin="1" end="12">
-                		<c:if test='${i < 10}'>
-                			<option value="0${i}">${i}월</option>
-                		</c:if>
-                		<c:if test='${i > 9}'>
-                			<option value="${i}">${i}월</option>
-                		</c:if>
-                	</c:forEach>
-                </select>
-                <select id="day" name="day" class="que-val">
-                	<c:forEach var="i" begin="1" end="31">
-                		<c:if test='${i < 10}'>
-                			<option value="0${i}">${i}일</option>
-                		</c:if>
-                		<c:if test='${i > 9}'>
-                			<option value="${i}">${i}일</option>
-                		</c:if>
-                	</c:forEach>
-                </select>
-                                                
-                <!-- input class="tex-01" type="text" id="year" name="year" placeholder="년도(4글자)"  />
+            <!-- div class="question02">
+                <p><span></span>생년월일</p>                                               
+                <input class="tex-01" type="text" id="year" name="year" placeholder="년도(4글자)"  />
                 <input class="tex-03" type="text" id="month" name="month" placeholder="월"  />
-                <input class="tex-03 tex-04" type="text" id="day" name="day" placeholder="일"  /   -->
-            </div>
+                <input class="tex-03 tex-04" type="text" id="day" name="day" placeholder="일"  />
+            </div  -->
 
             <div class="question">
                 <p><span></span>비밀번호</p>
@@ -144,9 +118,9 @@
 <script>
 
     $(document).ready(function(){
-        $("#year").keyup(function(){ $(this).val($(this).val().replace(/[^0-9]/gi,"") );  }); //숫자만
-        $("#month").keyup(function(){ $(this).val($(this).val().replace(/[^0-9]/gi,"") );  }); //숫자만
-        $("#day").keyup(function(){ $(this).val($(this).val().replace(/[^0-9]/gi,"") );  }); //숫자만
+        //$("#year").keyup(function(){ $(this).val($(this).val().replace(/[^0-9]/gi,"") );  }); //숫자만
+        //$("#month").keyup(function(){ $(this).val($(this).val().replace(/[^0-9]/gi,"") );  }); //숫자만
+        //$("#day").keyup(function(){ $(this).val($(this).val().replace(/[^0-9]/gi,"") );  }); //숫자만
 
 
         $("#member").click(function(){
@@ -155,9 +129,10 @@
             var selemail02 = $("#stremail02").val();
             var firstname = $("#firstname").val();
             var lastname=$("#lastname").val();
-            var year=$("#year").val();
-            var month=$("#month").val();
-            var day=$("#day").val();
+            //var year=$("#year").val();
+            //var month=$("#month").val();
+            //var day=$("#day").val();
+            
             /*var phone=$("#phone").val();
             var gender = $(':input:radio[name="gender"]:checked').val();*/
 
@@ -179,14 +154,14 @@
                 $("#lastname").focus();
                 return;
             }
-            if(year == "" || month == ""  || day == "" ){
-                alert("생년월일을 입력 하세요");
-                return;
-            }
-            if(!birthChk(year+month+day)){
-                alert("생년월일을 다시 입력해주세요.");
-                return;
-            }
+            //if(year == "" || month == ""  || day == "" ){
+            //    alert("생년월일을 입력 하세요");
+            //    return;
+            //}
+            //if(!birthChk(year+month+day)){
+            //    alert("생년월일을 다시 입력해주세요.");
+            //    return;
+            //}
 
 
             /*if(phone.length == ""){
@@ -224,7 +199,7 @@
             obj.email = email;
             obj.firstname = firstname;
             obj.lastname = lastname;
-            obj.dob = year+month+day;
+            obj.dob = "";  // year+month+day;
             /*obj.phone = phone;
             obj.gender = gender;*/
             obj.userpassword = pwd;

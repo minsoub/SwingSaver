@@ -118,7 +118,7 @@
     	var state = "${state}";
     	var url = "https://nid.naver.com/oauth2.0/authorize?client_id="+client_id+"&response_type="+response_type+"&redirect_uri="+redirect_uri+"&state="+state;
     	//alert(url);
-    	document.domain = "localhost";
+    	document.domain = "www.swingsaver.co.kr";  // "localhost";
     	window.open(url, "popup", "width=400, height=600, resizable=yes, scrollbars=auto");
     }
     
@@ -129,7 +129,7 @@
     	var redirect_uri = "${kakaoUrl}";  
     	var state = "${state}";
     	var url = "https://kauth.kakao.com/oauth/authorize?client_id="+client_id+"&redirect_uri="+redirect_uri+"&response_type="+response_type;
-    	document.domain = "localhost";
+    	document.domain = www.swingsaver.co.kr";  // "localhost";
     	window.open(url, "popup", "width=400, height=600, resizable=yes, scrollbars=auto");	
     }
     
@@ -140,7 +140,7 @@
     	var redirect_uri = "${facebookUrl}";  
     	var state = "${state}";
     	var url = "https://www.facebook.com/v6.0/dialog/oauth?client_id="+client_id+"&redirect_uri="+redirect_uri+"&resource_type="+resource_type+"&state="+state;
-    	document.domain = "localhost";
+    	document.domain = www.swingsaver.co.kr";  // "localhost";
     	window.open(url, "popup", "width=600, height=600, resizable=yes, scrollbars=auto");	
     }
     
