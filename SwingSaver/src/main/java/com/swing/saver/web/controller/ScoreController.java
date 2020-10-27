@@ -779,7 +779,8 @@ public class ScoreController {
     	LOGGER.debug(rtnJson);
     	/////////////////////////////////////////////////////////////////////////////////////
     	LOGGER.debug("==================== ScoreController qrAdd end : ===================");
-    	mv.setViewName("web/score/screen_02");
+    	// mv.setViewName("web/score/screen_02");
+    	mv.setViewName("web/score/screen_03");
     	return mv;
     }
 
