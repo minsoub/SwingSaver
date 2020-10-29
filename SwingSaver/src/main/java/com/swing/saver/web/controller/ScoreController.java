@@ -895,6 +895,7 @@ public class ScoreController {
     	LOGGER.debug(vo.getZone_id());
     	
     	mv.addObject("prev_url", "redirect:/score/scoreRegister");
+    	
     	mv.setViewName("web/user/login");
     	
     	return mv;

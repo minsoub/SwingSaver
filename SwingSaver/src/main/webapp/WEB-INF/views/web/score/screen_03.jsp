@@ -6,15 +6,12 @@
         <div class="col-xs-12" style="padding: 0">
             <div class="score-page form-page" style="margin: 0px">
                
-                <div class="sc-ad">
-                    <p><strong>스코어 관리</strong>가 필요하신가요?<br/>
-                    <a href="javascript:fn_mngScoreList();"><span>스윙세이버를 시작! <strong>Click!</strong></span></a></p>
-                </div>
+
 
                 <div class="myCanvas" style="overflow-x: scroll;">
                     <div class="score-wrap">
                         <div class="ph-wrap">
-                            <img class="bir-logo" src="/image/bir_logo_img.png">
+                            <img class="bir-logo preview" src="/image/bir_logo_img.png">
                         </div>
                         <div class="sc-wrap">
                             <img class="gol-logo" src="<c:url value='${golfInfo.image_url}'/>">
@@ -212,10 +209,13 @@
                     </div>
                </div>
 
-
+                <div class="sc-ad">
+                    <p><strong>스코어 관리</strong>가 필요하신가요?<br/>
+                    <a href="javascript:fn_mngScoreList();"><span>스윙세이버를 시작! <strong>Click!</strong></span></a></p>
+                </div>
 
                 <button id="btnSave" class="form-btn" onclick="#">이미지저장하기</button>
-                <button id="btnPrint" class="img-btn" onclick="#">인쇄하기</button>
+                <button id="btnChange" class="img-btn" onclick="#">사진변경</button>
 
 
 

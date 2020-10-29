@@ -13,7 +13,7 @@
     <%@include file="/WEB-INF/views/web/inc/navi.jsp"%>
     <div class="form-page">
         <form class="form-signin" id='forms1' name="forms1" method="POST">
-        <input type="hidden" name="prev_url" value="${prev_url}">
+        <input type="hidden" name="prev_url" id="prev_url" value="${prev_url}">
             <h1 class="text-center">LOGIN</h1>
             <div class="question">
                 <input type="text" id="email" name="email" required="" onchange="emailChange()" onfocus="$('#emailLabel').css('display','none');" onkeyup="emailChange()"  oninput="emailChange()">
@@ -39,6 +39,49 @@
         
     </div>
     <div id="naver_id_login"></div>
+    
+   <!--    모바일웹으로 접속 시  -->
+
+    <div class="modal fade back_modal" id="mobile_web" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog " role="document">
+            <div class="modal-pop">
+                <!-- 모달 이름 -->
+                <div class="window">
+                    <div class="mask-te">
+                        <div class="qr_adv_logo">
+                        <h4>폰 하나로 충분합니다</h4>
+                        <img src="/mobile/image/qr_adv_logo.png">
+                        </div>
+                        <div class="ad-box-wrap">
+                            <div class="ad-box-left">
+                                <img src="/mobile/image/qr_adv.png" width="100%;">
+                            </div>
+                            <div class="ad-box-right">
+                                <p>AI 코치로 나에게<br>딱맞는 코칭 제공!</p>
+                                <p>캐디없이도 나혼자<br>셀프라운딩을!</p>
+                                <p>이젠 내 스코어도<br>통계 & 분석 & 관리</p>
+                                <p>거리, 방향, 풍향 등<br>다양한 정보 한눈에!</p>
+                            </div> 
+                        <div class="ad-box-bottom">
+                            <img src="/mobile/image/googleplay_logo.png" width="100%;">
+                            <p>지금 플레이스토어에서 버디야 앱을<br>다운받으면, 편리하게 이용 가능해요.</p>
+                        </div>   
+                            
+                            <a href="#">버디야 앱으로 보기 ＞</a>
+                        </div>
+
+                    </div>
+
+                </div>
+                <button type="button" class="mo-pop-x" data-dismiss="modal">괜찮습니다. 모바일웹으로 볼게요.</button>
+
+
+            </div>
+        </div>
+    </div>
+	 <!-- 모바일로 접속  시 -->
+
+    
     <!-- Footer -->
 
     <%@include file="/WEB-INF/views/web/inc/footer.jsp"%>
@@ -53,6 +96,12 @@
         alert("로그인에 실패하였습니다. \n Email 및 비밀번호를 확인해주세요");
     }
     console.log(message);
+    
+    if ($("#prev_url").val() == "redirect:/score/scoreRegister")
+    {
+    	//$("#mobile_web").modal();
+    }
+    
     $(document).ready(function(){
         $("#login").click(function(){
         	fn_login();
