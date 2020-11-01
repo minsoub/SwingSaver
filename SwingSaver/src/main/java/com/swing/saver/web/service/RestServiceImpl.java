@@ -219,6 +219,10 @@ public class RestServiceImpl implements RestService {
         return rtnJson;
     }    
 
+    /**
+     * 그룹 멤버 가입
+     * 
+     */
     @Override
     public String grpMemberCreate(Map<String, String> params) throws JsonProcessingException, ApiException {
         ObjectMapper mapper = new ObjectMapper();

@@ -28,12 +28,19 @@
                 <input type="text" id="quota" placeholder="총 사용인원" required />
             </div>
 
-            <div class="question"><p>1인사용</p>
+            <div class="question"><p>1인사용건수</p>
                 <select id="storagespace">
-                    <option value="" selected="selected">1인당 사용 용량 선택</option>
-                    <option value="100">100M</option>
-                    <option value="500">500M</option>
-                    <option value="1000">1000M</option>
+                    <option value="" selected="selected">1인당 사용 건수 선택</option>
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                    <option value="40">40</option>
+                    <option value="50">50</option>
+                    <option value="60">60</option>
+                    <option value="70">70</option>
+                    <option value="80">80</option>
+                    <option value="90">90</option>
+                    <option value="100">100</option>
                 </select>
             </div>  
             
@@ -85,7 +92,7 @@
                 return;
             }
             if(storagespace == ""){
-                alert("1인당 사용 용량을 선택 하세요");
+                alert("1인당 사용건수를 선택 하세요");
                 return;
             }
             if(!checkCorporateRegistrationNumber(address)){

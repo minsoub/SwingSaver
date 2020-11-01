@@ -50,11 +50,11 @@
                     <div class="mask-te">
                         <div class="qr_adv_logo">
                         <h4>폰 하나로 충분합니다</h4>
-                        <img src="/mobile/image/qr_adv_logo.png">
+                        <img src="/image/qr_adv_logo.png">
                         </div>
                         <div class="ad-box-wrap">
                             <div class="ad-box-left">
-                                <img src="/mobile/image/qr_adv.png" width="100%;">
+                                <img src="/image/qr_adv.png" width="100%;">
                             </div>
                             <div class="ad-box-right">
                                 <p>AI 코치로 나에게<br>딱맞는 코칭 제공!</p>
@@ -63,7 +63,7 @@
                                 <p>거리, 방향, 풍향 등<br>다양한 정보 한눈에!</p>
                             </div> 
                         <div class="ad-box-bottom">
-                            <img src="/mobile/image/googleplay_logo.png" width="100%;">
+                            <img src="/image/googleplay_logo.png" width="100%;">
                             <p>지금 플레이스토어에서 버디야 앱을<br>다운받으면, 편리하게 이용 가능해요.</p>
                         </div>   
                             
@@ -99,7 +99,7 @@
     
     if ($("#prev_url").val() == "redirect:/score/scoreRegister")
     {
-    	//$("#mobile_web").modal();
+    	// $("#mobile_web").modal();
     }
     
     $(document).ready(function(){

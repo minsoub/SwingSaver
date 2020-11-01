@@ -29,7 +29,7 @@
                                 Range
                             </c:otherwise>
                         </c:choose>
-                        <br/>할당회원:${groupInfo.quota} | 1인당 스토리지:${groupInfo.storagespace}M</p>
+                        <br/>할당회원:${groupInfo.quota} | 1인당 사용건수:${groupInfo.storagespace}</p>
                     </div>    
                     <ul>
                     
