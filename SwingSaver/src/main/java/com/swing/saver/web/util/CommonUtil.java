@@ -25,15 +25,15 @@ import org.slf4j.LoggerFactory;
 public class CommonUtil {
 	private static final Logger LOGGER = LoggerFactory.getLogger(CommonUtil.class);
 	
-	public static final String naverReturUrl = "https://localhost:8443/naverLoginReturn";
+	public static final String naverReturUrl = "https://www.swingsaver.co.kr/naverLoginReturn";  // "https://localhost:8443/naverLoginReturn";
 	public static final String naverClientId = "HU7BlUDoiX1K80yIxsVP";
 	public static final String naverKey = "9vEYPAM0l3";
 	
-	public static final String kakaoReturnUrl = "https://localhost:8443/kakaoLoginReturn";
+	public static final String kakaoReturnUrl = "https://www.swingsaver.co.kr/kakaoLoginReturn";  // https://localhost:8443/kakaoLoginReturn";
 	public static final String kakaoClientId = "21ca63a0efd9cb05762db8191f2b8761";
 	public static final String kakaoApiKey = "2pub5fZbTBSXhHTfiJQ7KI812J04XtAh";
 	
-	public static final String facebookReturnUrl = "https://localhost:8443/facebookLoginReturn";
+	public static final String facebookReturnUrl = "https://www.swingsaver.co.kr/facebookLoginReturn";   // "https://localhost:8443/facebookLoginReturn";
 	public static final String facebookClientId = "187211659375164";
 	public static final String facebookKey = "a163d69ecb147510993e83943a46db58";
 	
