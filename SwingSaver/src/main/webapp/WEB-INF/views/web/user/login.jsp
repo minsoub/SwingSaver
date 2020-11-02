@@ -6,6 +6,110 @@
     <%@include file="/WEB-INF/views/web/inc/header.jsp"%>
     
     <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+    
+       <style>
+        .mask-te {
+            margin: 20% 2% 0 2%;
+        }
+
+        .qr_adv_logo {
+            text-align: center;
+        }
+
+        .ad-box-wrap {
+            background-color: #fff;
+            border-radius: 10px;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .ad-box-left {
+            width: 46%;
+        }
+
+        .qr_adv_logo h4 {
+            text-align: center;
+            color: #fff;
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .qr_adv_logo img {
+            width: 70%;
+        }
+
+        .ad-box-left,
+        .ad-box-right {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .ad-box-right p {
+            line-height: 1.3;
+            margin: 0;
+            padding: 10px 0;
+            border-bottom: 1px solid #d5d5d5;
+            font-size: 15px;
+        }
+
+        .ad-box-left img {
+            padding: 10px 0 10px 10px;
+        }
+
+        .ad-box-right {
+            padding: 10px;
+        }
+
+        .ad-box-right {
+            width: 52%;
+        }
+
+        .ad-box-left,
+        .ad-box-right {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .ad-box-bottom img {
+            width: 17%;
+            position: absolute;
+            top: -8px;
+            left: 23px;
+        }
+
+        .ad-box-bottom p {
+            line-height: 1.3;
+            font-size: 13px;
+            display: inline-block;
+            letter-spacing: -0.5;
+            margin-left: 29%;
+        }
+
+        .ad-box-bottom {
+            background-color: #ededed;
+            padding-top: 15px;
+            position: relative;
+        }
+
+        .mask-te a {
+            background: #e03535;
+            border: 1px solid #e03535;
+            color: #fff;
+            display: block;
+            text-align: center;
+            font-size: 17px;
+            font-weight: 100;
+            padding: 17px;
+        }
+
+        a:link,
+        a:active,
+        a:visited {
+            text-decoration: none;
+            /* border: 0px; */
+        }
+
+    </style>
 </head>
 
 <body>
@@ -99,7 +203,7 @@
     
     if ($("#prev_url").val() == "redirect:/score/scoreRegister")
     {
-    	// $("#mobile_web").modal();
+    	 $("#mobile_web").modal();
     }
     
     $(document).ready(function(){
