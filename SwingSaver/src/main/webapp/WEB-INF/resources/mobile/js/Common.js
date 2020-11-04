@@ -9,7 +9,7 @@
 					// xml 파일 (안드로이드)
 					// <data​ android:host="goActivity"​ android:scheme="webApp" />
 					//location.href = "intent://커스텀스킴주소#Intent; scheme=스킴; action=..;category=..; package=com.android.xxx; end;";
-					location.href="webApp://goActivity?countryclub_id="+countryclub_id;			
+					location.href="birdieya://birdieya_main?countryclub_id="+countryclub_id;			
 				}, 1000);
 			}else {
 				// 크롬 이외의 브라우저
@@ -22,7 +22,7 @@
 		}
 		var iframe = document.createElement("iframe");
 		iframe.style.visibility = "hidden";
-		iframe.src = "webApp://goActivity?countryclub_id="+countryclub_id;	
+		iframe.src = "birdieya://birdieya_main?countryclub_id="+countryclub_id;	
 		document.body.appendChild(iframe);
 		document.body.removeChild(iframe);		// back 호출시 캐싱될 수 있으므로 제거한다.
 	}
