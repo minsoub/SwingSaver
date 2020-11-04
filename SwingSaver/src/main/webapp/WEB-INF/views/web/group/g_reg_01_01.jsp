@@ -112,6 +112,7 @@
             obj.address = address;
             obj.phone = phone;
             obj.userid = userid;
+            obj.sts = "Y";
 
             var jsonData = JSON.stringify(obj);
             console.log(jsonData);

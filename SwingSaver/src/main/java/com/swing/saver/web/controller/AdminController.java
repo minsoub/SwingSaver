@@ -96,7 +96,7 @@ public class AdminController extends CommonController {
     public String logout(HttpSession session) throws ApiException, UnsupportedEncodingException {
 
         LOGGER.debug("==================== AdminController logout Start: {}====================");
-        if ( session.getAttribute("login") != null ){
+        if ( session.getAttribute("adminlogin") != null ){
             // 기존에 login이란 세션 값이 존재한다면
             session.invalidate(); // 세션 전체를 날려버림
         }
@@ -134,7 +134,7 @@ public class AdminController extends CommonController {
     		if (loginVo != null && "true".contentEquals(loginVo.getResult()))
     		{
     			LOGGER.debug("Admin Login success ID:{}", loginVo.getUserid());
-    			session.setAttribute("login", loginVo);
+    			session.setAttribute("adminlogin", loginVo);
     			rtnUrl = "redirect:/admin/groupList";
     		}else {
     			LOGGER.debug("Login fail : {}", loginVo.getResult());
@@ -147,9 +147,11 @@ public class AdminController extends CommonController {
     	mv.setViewName(rtnUrl);
     	LOGGER.debug("==================== AdminController adminLogin End :"+rtnUrl+" ====================");
     	return mv;
-    }    
+    }   
+    
     /**
      * 그룹 리스트 조회
+     * 
      * @param session
      * @return
      * @throws IOException
@@ -159,9 +161,9 @@ public class AdminController extends CommonController {
     public ModelAndView groupList(HttpSession session)  throws IOException, ApiException {
     	LOGGER.debug("==================== AdminController groupList Start : ===================");
     	ModelAndView mv = new ModelAndView();
-    	AdminVo loginVo = (AdminVo) session.getAttribute("login");
+    	AdminVo loginVo = (AdminVo) session.getAttribute("adminlogin");
     	// 그룹관리 정보 조회
-    	String rtnJson = restService.getGroupList();   // 관리자가 그룹 관리 정보 조회
+    	String rtnJson = restService.getGroupList();   // 관리자가 그룹 관리 정보 조회 (삭제건은 제외)
         ObjectMapper mapper = new ObjectMapper();
         Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});
 
@@ -171,7 +173,7 @@ public class AdminController extends CommonController {
         List<GroupVo> groupList = mapper.convertValue(map.get("groupList"), TypeFactory.defaultInstance().constructCollectionType(List.class,GroupVo.class));
 
         mv.addObject("groupList", groupList);
-        mv.setViewName("web/admin/adm_01");
+        mv.setViewName("web/admin/group/adm_01");
         LOGGER.debug("==================== AdminController groupList end : ===================");
         return mv;
     }
@@ -203,7 +205,7 @@ public class AdminController extends CommonController {
         List<CodeVo> useList = getCodeList("use");
         mv.addObject("useList", useList);
         
-        mv.setViewName("web/admin/adm_01_01");
+        mv.setViewName("web/admin/group/adm_01_01");
         
     	return mv;
     }
@@ -237,7 +239,7 @@ public class AdminController extends CommonController {
         
         mv.addObject("groupInfo", groupInfo);
         
-        mv.setViewName("web/admin/adm_01_02_01");
+        mv.setViewName("web/admin/group/adm_01_02_01");
         
     	return mv;
     }    
@@ -253,7 +255,7 @@ public class AdminController extends CommonController {
         GroupVo groupInfo =  restService.getGroupInfo(groupid);   // 그룹 상세 정보 조회
         mv.addObject("groupInfo", groupInfo);
                
-        mv.setViewName("web/admin/adm_01_02");
+        mv.setViewName("web/admin/group/adm_01_02");
         
     	return mv;
     }
@@ -281,12 +283,13 @@ public class AdminController extends CommonController {
     	params.put("address", groupVo.getAddress());
     	params.put("phone", groupVo.getPhone());
     	params.put("userid", groupVo.getUserid());
-    	
+    	params.put("sts", groupVo.getSts());
+    	    	
     	String rtnJson = restService.groupCreate(params);
     	
     	LOGGER.debug(rtnJson);
     	LOGGER.debug("==================== AdminController groupAdd end : ===================");
-    	mv.setViewName("web/admin/adm_01_01_01");
+    	mv.setViewName("web/admin/group/adm_01_01_01");
     	return mv;
     }
     /**
@@ -314,13 +317,14 @@ public class AdminController extends CommonController {
     	params.put("address", groupVo.getAddress());
     	params.put("phone", groupVo.getPhone());
     	params.put("userid", groupVo.getUserid());
+    	params.put("sts", groupVo.getSts());
     	
     	String rtnJson = restService.groupUpdate(params);
     	
     	LOGGER.debug(rtnJson);
     	
     	LOGGER.debug("==================== AdminController groupUpdate end : ===================");
-    	mv.setViewName("web/admin/adm_01_01_01");
+    	mv.setViewName("web/admin/group/adm_01_01_01");
     	return mv;
     }    
     /**
@@ -342,6 +346,8 @@ public class AdminController extends CommonController {
         return mv;
     }    
     
+    
+    
     /**
      * 지역정보 리스트 조회
      * @param session
@@ -353,7 +359,7 @@ public class AdminController extends CommonController {
     public ModelAndView areaList(HttpSession session)  throws IOException, ApiException {
     	LOGGER.debug("==================== AdminController areaList Start : ===================");
     	ModelAndView mv = new ModelAndView();
-    	AdminVo loginVo = (AdminVo) session.getAttribute("login");
+    	AdminVo loginVo = (AdminVo) session.getAttribute("adminlogin");
     	// 그룹관리 정보 조회
     	String rtnJson = restService.getAreaList();   // 관리자가 지역 정보 조회
     	LOGGER.debug(rtnJson);
@@ -538,7 +544,7 @@ public class AdminController extends CommonController {
     public ModelAndView golfList(HttpSession session)  throws IOException, ApiException {
     	LOGGER.debug("==================== AdminController golfList Start : ===================");
     	ModelAndView mv = new ModelAndView();
-    	AdminVo loginVo = (AdminVo) session.getAttribute("login");
+    	AdminVo loginVo = (AdminVo) session.getAttribute("adminlogin");
 
     	String rtnJson = restService.getGolfList();   // 관리자가 골프장 정보 조회
     	LOGGER.debug(rtnJson);
@@ -1014,7 +1020,7 @@ public class AdminController extends CommonController {
     public ModelAndView advList(HttpSession session)  throws IOException, ApiException {
     	LOGGER.debug("==================== AdminController advList Start : ===================");
     	ModelAndView mv = new ModelAndView();
-    	AdminVo loginVo = (AdminVo) session.getAttribute("login");
+    	AdminVo loginVo = (AdminVo) session.getAttribute("adminlogin");
 
     	String rtnJson = adminService.getAdvList();   // 관리자가 광고관리 정보 조회
         ObjectMapper mapper = new ObjectMapper();
@@ -1250,7 +1256,7 @@ public class AdminController extends CommonController {
     		@RequestParam(value="zone_id", required=false)String zone_id, @RequestParam(value="countryclub_id", required=false)String countryclub_id, HttpServletRequest request) throws ApiException, IOException {
         ModelAndView mv = new ModelAndView();
         LOGGER.debug("==================== AdminController stsList Strart : ===================={}");
-        AdminVo loginVo = (AdminVo)request.getSession().getAttribute("login");
+        AdminVo loginVo = (AdminVo)request.getSession().getAttribute("adminlogin");
 
     	LOGGER.debug("Parameter info : ");
     	LOGGER.debug("Parameter info : " + stdate);

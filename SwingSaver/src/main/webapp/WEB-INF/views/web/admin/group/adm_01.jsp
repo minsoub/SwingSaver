@@ -21,7 +21,8 @@
                                 <col width="23%">
                                 <col width="20%">
                                 <col width="15%">
-                                <col width="10%">                                
+                                <col width="10%">      
+                                <col width="10%">                          
                             </colgroup>
                             <thead>
                                 <tr>
@@ -32,6 +33,7 @@
                                     <th>그룹타입</th>
                                     <th>1인사용용량</th>
                                     <th>멤버수</th>
+                                    <th>상태</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -44,6 +46,7 @@
                                     <td>${groupVo.grouptypename}</td>
                                     <td>${groupVo.storagespace}M</td>
                                     <td>${groupVo.membercount}</td>
+                                    <td>${groupVo.sts_name}</td>
                                 </tr>
 							 </c:forEach>
 

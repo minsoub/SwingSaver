@@ -71,7 +71,7 @@ public class MarketController extends CommonController {
     public ModelAndView  marketProGetList(HttpServletRequest request) throws ApiException, IOException {
         ModelAndView mv = new ModelAndView();
         LOGGER.debug("==================== MarketController marketProGetList Strart : ===================={}");
-    	AdminVo loginVo = (AdminVo)request.getSession().getAttribute("login");
+    	AdminVo loginVo = (AdminVo)request.getSession().getAttribute("adminlogin");
     	
         /*회원정보 조회*/
     	//userVo = restService.getMemberInfo(AdminVo);
@@ -103,7 +103,7 @@ public class MarketController extends CommonController {
     public ModelAndView  marketProAddForm(HttpServletRequest request) throws ApiException, IOException {
         ModelAndView mv = new ModelAndView();
         LOGGER.debug("==================== MarketController marketProAddForm Strart : ===================={}");
-    	AdminVo loginVo = (AdminVo)request.getSession().getAttribute("login");
+    	AdminVo loginVo = (AdminVo)request.getSession().getAttribute("adminlogin");
     	
         // 공통코드 조회
         List<CodeVo> codeList = getCodeList("lvl");		// 프로레벨 조회
@@ -152,7 +152,7 @@ public class MarketController extends CommonController {
     @PostMapping(value="/market/proAdd")
     public ModelAndView markerProAdd(ProVo proVo, HttpServletRequest request, HttpSession session, ModelAndView mv, RedirectAttributes redirectAttributes)  throws ApiException, IOException {
         LOGGER.debug("==================== MarketController markerProAdd Strart : ===================={}");
-    	AdminVo loginVo = (AdminVo)request.getSession().getAttribute("login");
+    	AdminVo loginVo = (AdminVo)request.getSession().getAttribute("adminlogin");
     	
     	Map<String, String> proParams = new HashMap<String, String>();
     	proParams.put("id", proVo.getId());
@@ -208,7 +208,7 @@ public class MarketController extends CommonController {
     public ModelAndView  feeDetail(@PathVariable Long id, HttpServletRequest request, HttpSession session) throws ApiException, IOException {
         ModelAndView mv = new ModelAndView();
         LOGGER.debug("==================== MarketController feeDetail Strart : ===================={}");
-    	AdminVo loginVo = (AdminVo)request.getSession().getAttribute("login");
+    	AdminVo loginVo = (AdminVo)request.getSession().getAttribute("adminlogin");
 
     	String rtnJson = itemService.getItemListById(id);   // 마켓 요금 상세 리스트 조회
         ObjectMapper mapper = new ObjectMapper();
@@ -240,7 +240,7 @@ public class MarketController extends CommonController {
     public ModelAndView proDetail(@PathVariable String id, HttpServletRequest request, HttpSession session) throws IOException, ApiException {
         LOGGER.debug("==================== MarketController proDetail Strart : ===================={}");
         ModelAndView mv = new ModelAndView();
-    	AdminVo loginVo = (AdminVo)request.getSession().getAttribute("login");
+    	AdminVo loginVo = (AdminVo)request.getSession().getAttribute("adminlogin");
     	
     	ProVo proVo = restService.getProDetail(id);
     	
@@ -264,7 +264,7 @@ public class MarketController extends CommonController {
     @PostMapping("/market/proModify")
     public ModelAndView proModify(ProVo proVo, HttpServletRequest request, HttpSession session, ModelAndView mv, RedirectAttributes redirectAttribute) throws IOException, ApiException {
         LOGGER.debug("==================== MarketController proModify Strart : ===================={}");
-    	AdminVo loginVo = (AdminVo)request.getSession().getAttribute("login");
+    	AdminVo loginVo = (AdminVo)request.getSession().getAttribute("adminlogin");
     	
     	ProVo detailVo = restService.getProDetail(proVo.getId());    	
     	mv.addObject("proVo", detailVo);

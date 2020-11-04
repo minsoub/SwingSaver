@@ -3,68 +3,73 @@
 <%@include file="/WEB-INF/views/web/inc/admin_menu.jsp"%>
 
             <div class="content" style="margin-bottom: 0;">
-                <div class="no-padding adm-con" >
-                    <h2 class="right-tit">그룹 수정</h2>
+                <div class="no-padding adm-con" >   
+                    <h2 class="right-tit">그룹등록</h2>
 
                     <div class="form-page joinus-page edit-page">
 
-                        <form id="form1" name="form1" method="post">
-						<input type="hidden" name="groupid" value="${groupInfo.id}">
-                            <div class="question">
-                                <p>그룹아이디</p>
-                                <div class="que-info">
-                                    <p>${groupInfo.id}</p>
-                                </div>
-                            </div>
+
+                        <form class="form-signin" id='forms1' name="forms1" method="POST">
+                        
+                        <input type="hidden" name="membercount" value="0">
+                        <input type="hidden" name="proid" value="0">
                             <div class="question">
                                 <p>그룹이름</p>
-                                <input type="text" id="groupname" name="groupname" class="que-val" value="${groupInfo.groupname}" required />
+                                <input type="text" id="groupname" name="groupname" maxlength="50" placeholder="그룹이름 입력" required />
                             </div>
                             <div class="question">
                                 <p>그룹관리자</p>
                                 <select name="userid" id="userid">    
                                     <option value="">스윙세이버 회원선택</option>                            
                                 	<c:forEach var="memInfo" items="${memList}" varStatus="status">
-                                    	<option <c:if test="${memInfo.userid == groupInfo.userid}">selected</c:if> value="${memInfo.userid}">${memInfo.lastname}${memInfo.firstname}(${memInfo.email})</option>
+                                    	<option value="${memInfo.userid}">${memInfo.lastname}${memInfo.firstname}(${memInfo.email})</option>
                                  	</c:forEach>
-                                 </select> 
+                                 </select>                                 
                             </div>
                             <div class="question">
                                 <p>그룹타입</p>
                                 <select name="grouptype" id="grouptype">
-                  <option value="">그룹타입을 선택해주세요.</option>
+                  <option value="" selected="selected">그룹타입을 선택해주세요.</option>
                   <c:forEach var="grpCode" items="${grpTypList}" varStatus="status">
-                  	<option <c:if test="${grpCode.code == groupInfo.grouptype}">selected</c:if> value="${grpCode.code}">${grpCode.codename}</option>
+                  	<option value="${grpCode.code}">${grpCode.codename}</option>
                   </c:forEach>
                 </select>
                             </div>
                             <div class="question">
                                 <p>사용인원</p>
-                                <input type="text" id="quota" name="quota" class="que-val" value="${groupInfo.quota}" maxlength="4" required />
+                                <input type="text" id="quota" name="quota" maxlength="4" placeholder="총 사용인원" required />
                             </div>
 
                             <div class="question">
                                 <p>1인사용</p>
                                 <select name="storagespace" id="storagespace">
-                  <option value="">1인당 사용 용량 선택</option>
+                  <option value="" selected="selected">1인당 사용 용량 선택</option>
                   <c:forEach var="useCode" items="${useList}" varStatus="status">
-                  	<option <c:if test="${useCode.code == groupInfo.storagespace}">selected</c:if> value="${useCode.code}">${useCode.codename}</option>
+                  	<option value="${useCode.code}">${useCode.codename}</option>
                   </c:forEach>
                 </select>
                             </div>
 
                             <div class="question">
                                 <p>사업자번호</p>
-                                <input type="text" id="address" name="address" class="que-val" value="${groupInfo.address}" required />
+                                <input type="text" name="address" id="address" maxlength="50" placeholder="사업자번호 입력(-빼고 입력)" required />
                             </div>
 
                             <div class="question">
                                 <p>연락처</p>
-                                <input type="text" id="phone" name="phone" class="que-val" value="${groupInfo.phone}" required />
+                                <input type="text" name="phone" id="phone" maxlength="50" placeholder="전화번호(-빼고 입력)" required />
                             </div>
-<!--                                알럿-->
-<!--                            <p class="alert-p">정보를 모두 입력해주세요.</p>-->
-                            <button id="btnUpdate" class="form-btn">수정</button>
+                            <div class="question">
+                                <p>그룹상태</p>
+                                 <select name="sts" id="sts">
+                                 	<option value="Y">Active</option>
+                                 	<option value="N">InActive</option>
+                                 	<option value="P">Pending</option>
+                                 </select>
+                            </div>
+
+                            <p class="alert-p">정보를 모두 입력해주세요.</p>
+                            <button id="btnSave" class="form-btn">등록</button>
                         </form>
                     </div>
 
@@ -72,10 +77,10 @@
             </div>
  </section>
  
- <script>
+<script>
 
 $(document).ready(function(){
-    $("#btnUpdate").click(function(){
+    $("#btnSave").click(function(){
     	fn_groupSave();
     });
 });
@@ -112,9 +117,27 @@ $(document).ready(function(){
 	        $("#phone").focus();
 	        return;
 	    }	    
-	    document.form1.action = "/admin/group/update";
-	    document.form1.submit();
+	    document.forms1.action = "/admin/group/add";
+	    document.forms1.submit();
 	}
 </script>
+
+
+
+
+
+
+
+
+
+    <!-- Footer
+
+    <div id="footer">
+        <div class="text-center footer-bt">
+            <p>Copyright © 2019 Swingsaver. All rights reserved. 문의사항 : support@email.com</p>
+        </div>
+    </div>
+
+   -->
 
 <%@include file="/WEB-INF/views/web/inc/admin_footer.jsp"%>

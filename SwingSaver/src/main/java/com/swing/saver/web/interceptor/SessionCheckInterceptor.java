@@ -44,18 +44,36 @@ public class SessionCheckInterceptor extends HandlerInterceptorAdapter {
         boolean authPass = false;
         try {
             // 로그인 후 접속 불가 url
-            if(loginAfterUrlLit != null && loginAfterUrlLit.size() > 0  && request.getSession().getAttribute("login") != null ) {
-                for(String url : loginAfterUrlLit) {
-                    if(request.getRequestURI().indexOf(url) >-1) {
-                        /*
-							로그인 되어있는 경우 메인으로 이동 (url 직접 입력할 경우)
-							ex) 로그인 화면 등..
-						*/
-                        response.sendRedirect("/");
-                        return false;
-                    }
-                } 
+            if(loginAfterUrlLit != null && loginAfterUrlLit.size() > 0) {
+            	
+            	if(request.getRequestURI().indexOf("admin") == -1) 
+            	{
+            		if ( request.getSession().getAttribute("login") != null ) {
+            			for(String url : loginAfterUrlLit) {
+            				if(request.getRequestURI().indexOf(url) >-1) {
+            					/*
+									로그인 되어있는 경우 메인으로 이동 (url 직접 입력할 경우)
+									ex) 로그인 화면 등..
+            					 */
+            					response.sendRedirect("/");
+            					return false;
+            				}
+            			}
+            		}
+            	} else if(request.getSession().getAttribute("adminlogin") != null) {
+            		for(String url : loginAfterUrlLit) {
+            			if(request.getRequestURI().indexOf(url) >-1) {
+            				/*
+								로그인 되어있는 경우 메인으로 이동 (url 직접 입력할 경우)
+								ex) 로그인 화면 등..
+            				 */
+            				response.sendRedirect("/admin");
+            				return false;
+            			}
+            		}
+            	}
             }
+            
             // 로그인 체크하는 url
             if(urlList != null && urlList.size() != 0){
                 boolean loginChkType = false;
@@ -69,7 +87,8 @@ public class SessionCheckInterceptor extends HandlerInterceptorAdapter {
                 }
 				
                 if(loginChkType) {
-                    if(request.getSession().getAttribute("login") == null) {
+                    if(request.getSession().getAttribute("login") == null && request.getSession().getAttribute("adminlogin") == null) {
+                    	LOGGER.debug("Session is not found....");
                         if(ajaxCall != null && Boolean.parseBoolean(ajaxCall)) {
                             response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
                         }else {
@@ -90,9 +109,9 @@ public class SessionCheckInterceptor extends HandlerInterceptorAdapter {
                         return false;
                     }else {
                     	// 관리자 모드로 접속했을 경우 관리자 URL인지 확인 해야 한다.
-                    	if (request.getRequestURI().indexOf("/admin") >-1) {
+                    	if (request.getRequestURI().indexOf("/admin") >-1 && request.getSession().getAttribute("adminlogin") != null) {
                     		return true;
-                    	}else {	// 사용자 로긴
+                    	}else if(request.getSession().getAttribute("login") != null) {	// 사용자 로긴
                     		LOGGER.debug("login check interceptor.........");
                     		
                     		try

@@ -62,7 +62,7 @@ public class ItemController {
 	public ModelAndView  itemList(HttpServletRequest request) throws ApiException, IOException {
         ModelAndView mv = new ModelAndView();
         LOGGER.debug("==================== ItemController itemList Strart : ===================={}");
-    	AdminVo loginVo = (AdminVo)request.getSession().getAttribute("login");
+    	AdminVo loginVo = (AdminVo)request.getSession().getAttribute("adminlogin");
 
     	String rtnJson = service.getItemList();
         ObjectMapper mapper = new ObjectMapper();
@@ -91,7 +91,7 @@ public class ItemController {
     public ModelAndView  itemAddForm(HttpServletRequest request) throws ApiException, IOException {
         ModelAndView mv = new ModelAndView();
         LOGGER.debug("==================== ItemController addform Strart : ===================={}");
-    	AdminVo loginVo = (AdminVo)request.getSession().getAttribute("login");
+    	AdminVo loginVo = (AdminVo)request.getSession().getAttribute("adminlogin");
 
         List<ProVo> codeList = getProList();		// 프로 조회
         mv.addObject("proList", codeList);
@@ -117,7 +117,7 @@ public class ItemController {
     @PostMapping(value="/item/add")
     public ModelAndView itemAdd(ItemVo itemVo, HttpServletRequest request, HttpSession session, ModelAndView mv, RedirectAttributes redirectAttributes)  throws ApiException, IOException {
         LOGGER.debug("==================== ItemController markerProAdd Strart : ===================={}");
-    	AdminVo loginVo = (AdminVo)request.getSession().getAttribute("login");
+    	AdminVo loginVo = (AdminVo)request.getSession().getAttribute("adminlogin");
     	
     	Map<String, String> proParams = new HashMap<String, String>();
     	proParams.put("proid",       String.valueOf(itemVo.getProid()));
@@ -273,7 +273,7 @@ public class ItemController {
 	public ModelAndView  memberList(HttpServletRequest request) throws ApiException, IOException {
         ModelAndView mv = new ModelAndView();
         LOGGER.debug("==================== ItemController pay-memberList Strart : ===================={}");
-    	AdminVo loginVo = (AdminVo)request.getSession().getAttribute("login");
+    	AdminVo loginVo = (AdminVo)request.getSession().getAttribute("adminlogin");
 
     	String rtnJson = service.getPayList("P");
         ObjectMapper mapper = new ObjectMapper();
@@ -301,7 +301,7 @@ public class ItemController {
 	public ModelAndView  groupList(HttpServletRequest request) throws ApiException, IOException {
         ModelAndView mv = new ModelAndView();
         LOGGER.debug("==================== ItemController pay-groupList Strart : ===================={}");
-    	AdminVo loginVo = (AdminVo)request.getSession().getAttribute("login");
+    	AdminVo loginVo = (AdminVo)request.getSession().getAttribute("adminlogin");
 
     	String rtnJson = service.getPayList("G");
         ObjectMapper mapper = new ObjectMapper();
@@ -329,7 +329,7 @@ public class ItemController {
 	public ModelAndView  marketList(HttpServletRequest request) throws ApiException, IOException {
         ModelAndView mv = new ModelAndView();
         LOGGER.debug("==================== ItemController pay-marketList Strart : ===================={}");
-    	AdminVo loginVo = (AdminVo)request.getSession().getAttribute("login");
+    	AdminVo loginVo = (AdminVo)request.getSession().getAttribute("adminlogin");
 
     	String rtnJson = service.getPayList("M");
         ObjectMapper mapper = new ObjectMapper();

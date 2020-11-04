@@ -59,7 +59,10 @@
                                         <td><strong>연락처</strong></td>
                                         <td>${groupInfo.phone}</td>
                                     </tr>                                    
-                                    
+                                    <tr>
+                                        <td><strong>상태</strong></td>
+                                        <td>${groupInfo.sts_name}</td>
+                                    </tr>                                      
                                     
                                 </tbody>
                             </table>

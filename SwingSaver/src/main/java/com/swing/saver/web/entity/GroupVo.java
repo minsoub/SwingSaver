@@ -21,7 +21,9 @@ public class GroupVo {
     private String startdate;
     private String enddate;
     private int membercount;
-    private String status;
+    private String sts;
+    private String sts_name;     // 그룹 상태 (Y:Active, N:Inactive, P:Pending)
+    private String del_yn;			// 삭제 여부 Y:삭제, N:미삭제
     private String userid;
     private String groupadmin;
     private int proid;	// 마켓 프로인 경우 마켓 프로 아이디

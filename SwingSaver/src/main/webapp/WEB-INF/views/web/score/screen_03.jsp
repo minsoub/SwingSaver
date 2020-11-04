@@ -10,8 +10,8 @@
 
                 <div class="myCanvas" style="overflow-x: scroll;">
                     <div class="score-wrap">
-                        <div class="ph-wrap">
-                            <img class="bir-logo preview" src="/image/bir_logo_img.png">
+                        <div class="ph-wrap" id="preview">
+                            <img  class="bir-logo" src="/image/bir_logo_img.png">
                         </div>
                         <div class="sc-wrap">
                             <img class="gol-logo" src="<c:url value='${golfInfo.image_url}'/>">
@@ -242,7 +242,11 @@
 
 <input type="file" name="attachFile00" id="attachFile00" onchange="readURL(this);" style="display:none;"/>
 
+<form id="imgForm" action="/score/imgDown.do" method="post" target="ifrm">
+    <input type="hidden" name="data" id="data" />
+</form>
 
+<iframe name="ifrm" width="0" height="0" style="display:none"></iframe>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
 <script type="text/javascript" src="/js/html2canvas.min.js"></script>
@@ -287,11 +291,16 @@ $(document).ready(function(){
         	// save as image
         	//Canvas2Image.saveAsImage(canvas, w, h, type, f);
         	
-        	var a = document.createElement('a');
+        	
+        	$("#data").val(canvas.toDataURL("image/png"));
+    		$("#imgForm").submit();
+    
+    
+        	//var a = document.createElement('a');
             // toDataURL defaults to png, so we need to request a jpeg, then convert for file download.
-            a.href = canvas.toDataURL("image/png").replace("image/jpeg", "image/octet-stream");
-            a.download = 'myScore.jpg';
-            a.click()
+            //a.href = canvas.toDataURL("image/png").replace("image/jpeg", "image/octet-stream");
+            //a.download = 'myScore.jpg';
+            //a.click()
             
   		});
 	});
@@ -321,7 +330,10 @@ function readURL(input) {
 	if (input.files && input.files[0]) { 
 		var reader = new FileReader(); 
 		reader.onload = function (e) { 
-			$('#preview').attr('src', e.target.result); 
+		    var img = "url("+e.target.result+")";
+			//$("#nd01").css({"background":"url(img.png)"}); 		
+			$("#preview").css({"background":img});
+			//$('#preview').attr('src', e.target.result); 
 		} 
 		reader.readAsDataURL(input.files[0]); 
 	} 

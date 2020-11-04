@@ -1,20 +1,45 @@
 package com.swing.saver.web.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.tomcat.util.codec.binary.Base64;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.support.RequestContextUtils;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
-import com.swing.saver.web.entity.AdminVo;
 import com.swing.saver.web.entity.AreaVo;
 import com.swing.saver.web.entity.CodeVo;
 import com.swing.saver.web.entity.Constant;
 import com.swing.saver.web.entity.FarVo;
 import com.swing.saver.web.entity.GolfVo;
-import com.swing.saver.web.entity.GroupVo;
 import com.swing.saver.web.entity.LoginVo;
 import com.swing.saver.web.entity.QRInfoVo;
-import com.swing.saver.web.entity.ScoreDetailVo;
 import com.swing.saver.web.entity.ScoreListVo;
 import com.swing.saver.web.entity.ScoreMaster;
 import com.swing.saver.web.entity.ScoreVo;
@@ -23,35 +48,6 @@ import com.swing.saver.web.exception.ApiException;
 import com.swing.saver.web.service.AdminService;
 import com.swing.saver.web.service.RestService;
 import com.swing.saver.web.util.CommonUtil;
-import com.swing.saver.web.util.UploadFileUtils;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.support.RequestContextUtils;
-import org.springframework.web.multipart.*;
-
-import javax.annotation.Resource;
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-import java.util.Map.Entry;
 
 @Controller
 @RequestMapping(Constant.SCORE_PREFIX)
@@ -782,6 +778,29 @@ public class ScoreController {
     	// mv.setViewName("web/score/screen_02");
     	mv.setViewName("web/score/screen_03");
     	return mv;
+    }
+    
+    @PostMapping(value="/imgDown")
+    public void imgDown(HttpServletRequest request, HttpServletResponse response)
+    {
+    	try {
+            String data = request.getParameter("data");
+            data = data.replaceAll("data:image/png;base64,", "");
+            byte[] file = Base64.decodeBase64(data);
+            ByteArrayInputStream is = new ByteArrayInputStream(file);
+
+            Date dt = new Date();
+            String fmDate = "MyScore";  // DateUtils.formatDate(dt, "yyyyMMddHHmmss");
+            
+            response.setContentType("image/png");
+            response.setHeader("Content-Disposition", "attachment; filename=" + fmDate + ".png");
+            
+            org.apache.commons.io.IOUtils.copy(is,  response.getOutputStream());
+            
+            response.flushBuffer();
+        } catch (Exception e) {
+            
+        }
     }
 
     
