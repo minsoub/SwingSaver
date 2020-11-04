@@ -280,6 +280,10 @@ public class RestServiceImpl implements RestService {
         return rtnJson;
     }
 
+    /**
+     * 소그룹 신규 등록
+     * 
+     */
     @Override
     public String subGroupInsert(Map<String, String> params) throws JsonProcessingException, ApiException {
         ObjectMapper mapper = new ObjectMapper();

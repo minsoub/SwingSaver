@@ -33,7 +33,7 @@
                                 <p>소그룹이름</p>
                                 <input type="text" class="que-val" id="groupname" value="${subGroupInfo.groupname}" required />
                             </div>
-                            <%--
+                            
                             <div class="question">
                                 <p>소그룹관리자</p>
                                 <c:set var="sname" value="${subGroupInfo.lastname}${subGroupInfo.firstname}"/>
@@ -54,7 +54,7 @@
                                     </c:forEach>
                                 </select>
                             </div>
-                             --%>
+                           
 
                             <div class="question">
                                 <p>멤버 수</p>
@@ -98,7 +98,7 @@
             var groupid = $("#groupid").val();
             var groupname = $("#groupname").val();
             var quota = $("#quota").val();
-            //var userid = $("#userid option:selected").val();
+            var userid = $("#userid option:selected").val();
             var startdate=$("#startdate").val();
             var enddate=$("#enddate").val();
 
@@ -108,10 +108,10 @@
                 return;
             }
 
-            //if(userid ==""){
-            //    alert("소그룹 관리자를 선택해 주세요");
-            //    return
-            //}
+            if(userid ==""){
+                alert("소그룹 관리자를 선택해 주세요");
+                return
+            }
             if(quota ==""){
                 alert("멤버 수를 입력해 주세요");
                 return
@@ -129,7 +129,7 @@
             obj.subgroupid = subgroupid;
             obj.groupid = groupid;
             obj.groupname = groupname;
-            //obj.userid = userid;
+            obj.userid = userid;
             obj.quota = quota;
             obj.startdate = replaceAll(startdate,'-','');
             obj.enddate = replaceAll(enddate,'-','');

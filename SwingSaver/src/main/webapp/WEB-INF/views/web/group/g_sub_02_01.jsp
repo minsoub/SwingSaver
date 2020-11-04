@@ -75,6 +75,7 @@
                     <div class="sub-mem-list">
                     <h4 class="sub-tit">소그룹멤버</h4>
                     <div class="sub-g-btn">
+                        <!-- button type="button"  class="edit-btn" id="memberReg">등록</button  -->
                         <button type="button"  class="edit-btn" id="subgrpmove">이동</button>
                         <button type="button"  class="edit-btn" id="memberdelete">삭제</button>
                     </div>
@@ -338,6 +339,7 @@
                 .append(firstname)
             $form.submit();
         });
+        
     });
 </script>
 

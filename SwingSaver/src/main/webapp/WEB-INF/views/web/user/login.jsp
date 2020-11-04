@@ -168,16 +168,17 @@
                             </div> 
                         <div class="ad-box-bottom">
                             <img src="/image/googleplay_logo.png" width="100%;">
-                            <p>지금 플레이스토어에서 버디야 앱을<br>다운받으면, 편리하게 이용 가능해요.</p>
+                            <p>11월 런칭 예정! 버디야 앱을<br>다운받으면, 편리하게 이용 가능해요.</p>
+                            <!-- p>지금 플레이스토어에서 버디야 앱을<br>다운받으면, 편리하게 이용 가능해요.</p  -->
                         </div>   
                             
-                            <a href="#">버디야 앱으로 보기 ＞</a>
+                            <a href="#">버디야 스코어 이력 관리 ＞</a>
                         </div>
 
                     </div>
 
                 </div>
-                <button type="button" class="mo-pop-x" data-dismiss="modal">괜찮습니다. 모바일웹으로 볼게요.</button>
+                <!-- button type="button" class="mo-pop-x" data-dismiss="modal">괜찮습니다. 모바일웹으로 볼게요.</button  -->
 
 
             </div>

@@ -358,7 +358,7 @@ public class GroupController {
         LoginVo loginVo = (LoginVo) session.getAttribute("login");
         LOGGER.debug("GroupController subGroupInsert 시작");
         // 사용자 로그인 아이디를 넘겨야 한다. (서브그룹 등록은 그룹 멤버만 가능) 
-        params.put("memberid", String.valueOf(loginVo.getUserid()));
+        params.put("memberid", params.get("userid").toString());  // 관리자가 선택해서 넘어온다.   String.valueOf(loginVo.getUserid()));
         String rtn = restService.subGroupInsert(params);
         mv.addObject("data",rtn);
         mv.setViewName("jsonView");
@@ -426,6 +426,14 @@ public class GroupController {
         LOGGER.debug("GroupController subGroupUpdate 종료");
         return mv;
     }
+    /**
+     * 소그룹 삭제 - 멤버도 같이 삭제해야 한다. 
+     * 
+     * @param params
+     * @return
+     * @throws JsonProcessingException
+     * @throws ApiException
+     */
     @PostMapping("/subgroup/subGroupDelete")
     public ModelAndView subGroupDelete(@RequestBody Map<String, String> params) throws JsonProcessingException, ApiException {
         ModelAndView mv= new ModelAndView();
@@ -479,6 +487,7 @@ public class GroupController {
     	
     }
     
+      
     private String changeDateToFormat(String dt){
     	if ( dt != null && dt.length() == 8 ){
     		dt = dt.substring(0, 4) + "-" + dt.substring(4,6) + "-" + dt.substring(6,8);
