@@ -19,9 +19,15 @@ public class QRInfoVo {
 	private String score2;			// 동반자 2의 점수
 	private String othername3;		// 동반자 3
 	private String score3;			// 동반자 3의 점수
+	private String utime;			// 티업타임 13:050
 	
 	
-	
+	public String getUtime() {
+		return utime;
+	}
+	public void setUtime(String utime) {
+		this.utime = utime;
+	}
 	public String getCountry_id() {
 		return country_id;
 	}

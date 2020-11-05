@@ -56,9 +56,19 @@
                                         <td>${golfInfo.image}</td>
                                     </tr>
                                     <tr>
-                                        <td><strong>골프장이미지</strong></td>
+                                        <td><strong>골프장홈피용</strong></td>
                                         <td>${golfInfo.assets}</td>
                                     </tr>
+                                    <tr>
+                                        <td><strong>스코어이미지
+                                        </strong></td>
+                                        <td>${golfInfo.simage}</td>
+                                    </tr>  
+                                    <tr>
+                                        <td><strong>Assets 파일
+                                        </strong></td>
+                                        <td>${golfInfo.fdata}</td>
+                                    </tr>                                                                       
                                     <tr>
                                         <td><strong>담당자주소</strong></td>
                                         <td>${golfInfo.address}</td>

@@ -15,9 +15,9 @@
                         </div>
                         <div class="sc-wrap">
                             <img class="gol-logo" src="<c:url value='${golfInfo.image_url}'/>">
-                            <h3 class="name-date">${qrInfo.username}&emsp;<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" />&ensp;<fmt:formatDate value="${now}" pattern="a KK:mm" /></h3>
+                            <h3 class="name-date">${qrInfo.username}&emsp;<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" />&ensp;${qrInfo.utime}<!-- fmt:formatDate value="${now}" pattern="a KK:mm" /  --></h3>
                             <div class="sc-box">
-                                <h4 class="cou">Course.1</h4>
+                                <h4 class="cou">Course.${parInfo1.course_nm}</h4>
                                 <table>
                                     <tr class="hole">
                                         <th class="sc-tit">HOLE</th>
@@ -108,7 +108,7 @@
 
                             </div>
                             <div class="sc-box">
-                                <h4 class="cou">Course.2</h4>
+                                <h4 class="cou">Course.${parInfo2.course_nm}</h4>
                                 <table>
                                     <tr class="hole">
                                         <th class="sc-tit">HOLE</th>
@@ -254,8 +254,12 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
+	
+	// 골프장 스코어 이미지가 존재하면 자동으로 출력한다. 
+	$("#preview").css({"background":"${golfInfo.simage_url}"});
+	
 	var test = $(".myCanvas").get(0);  // html 얻기
-
+	
     $("#btnMng").click(function(){
     	fn_mngScoreList();
     });

@@ -16,6 +16,8 @@ public class GolfVo {
 	String phone;			// 연락처
 	String email;			// 담당자 메일
 	String assets;			// 저장경로
+	String simage;			// 스코어 이미지 경로
+	String fdata;			// Assets 파일 경로
 	String description;		// 비고
 	String link_check;		// 링크여부
 	String alliance_check;	// 제휴여부
@@ -27,6 +29,8 @@ public class GolfVo {
 	String zone_nm;			// 지역명
 	String image_url;		// 이미지 경로
 	String assets_url;		// 저장이미지 경로
+	String simage_url;		// 스코어 이미지 경로
+	String fdata_url;
 	String qr_cnt;
 	
 	String mode;			// 검색구분 : "" or ALL 전체, REC : 추천
@@ -34,9 +38,47 @@ public class GolfVo {
 	
 	MultipartFile imageFile;
 	MultipartFile assetsFile;
+	MultipartFile simageFile;
+	MultipartFile fdataFile;
 	
 	
 	
+	public String getFdata() {
+		return fdata;
+	}
+	public void setFdata(String fdata) {
+		this.fdata = fdata;
+	}
+	public String getSimage_url() {
+		return simage_url;
+	}
+	public void setSimage_url(String simage_url) {
+		this.simage_url = simage_url;
+	}
+	public String getFdata_url() {
+		return fdata_url;
+	}
+	public void setFdata_url(String fdata_url) {
+		this.fdata_url = fdata_url;
+	}
+	public MultipartFile getFdataFile() {
+		return fdataFile;
+	}
+	public void setFdataFile(MultipartFile fdataFile) {
+		this.fdataFile = fdataFile;
+	}
+	public String getSimage() {
+		return simage;
+	}
+	public void setSimage(String simage) {
+		this.simage = simage;
+	}
+	public MultipartFile getSimageFile() {
+		return simageFile;
+	}
+	public void setSimageFile(MultipartFile simageFile) {
+		this.simageFile = simageFile;
+	}
 	public String getQr_cnt() {
 		return qr_cnt;
 	}

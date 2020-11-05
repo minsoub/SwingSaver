@@ -12,6 +12,8 @@
                     <form class="form-signin" id='forms1' name="forms1" method="POST" enctype="multipart/form-data">
                     <input type="hidden" id="image" name="image">
                     <input type="hidden" id="assets" name="assets">
+                    <input type="hidden" id="simage" name="simage">
+                    <input type="hidden" id="fdata" name="fdata">
                         <div class="question">
                             <p>국가코드</p>
                                 <select name="country_id" id="country_id" onchange="javascript:changeCountry(this.value);">    
@@ -44,9 +46,17 @@
                             <input type="file" id="imageFile" name="imageFile" placeholder="기본이미지 저장경로" style="width:350;"  />
                         </div>
                         <div class="question">
-                            <p>골프장이미지</p>
+                            <p>골프장홈피용</p>
                             <input type="file" id="assetsFile" name="assetsFile" placeholder="Asset 저장 경로"  style="width:350;"   />
                         </div>
+                        <div class="question">
+                            <p>스코어이미지</p>
+                            <input type="file" id="simageFile" name="simageFile" placeholder="스코어이미지 저장 경로"  style="width:350;"   />
+                        </div>                        
+                        <div class="question">
+                            <p>Assets 파일</p>
+                            <input type="file" id="fdataFile" name="fdataFile" placeholder="Assets 저장 경로"  style="width:350;"   />
+                        </div>                          
                         <div class="question">
                             <p>담당자주소</p>
                             <input type="text" id="address" name="address" placeholder="담당자 주소" maxlength="100"  />

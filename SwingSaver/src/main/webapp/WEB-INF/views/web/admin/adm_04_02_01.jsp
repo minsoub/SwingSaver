@@ -10,7 +10,9 @@
 
                     <form class="form-signin" id='forms1' name="forms1" method="POST"  enctype="multipart/form-data">
                     <input type="hidden" id="image" name="image" value="${golfInfo.image}">
-                    <input type="hidden" id="assets" name="assets" value="${golfInfo.assets}">                    
+                    <input type="hidden" id="assets" name="assets" value="${golfInfo.assets}">    
+                    <input type="hidden" id="simage" name="simage" value="${golfInfo.simage}">   
+                    <input type="hidden" id="fdata" name="fdata" value="${golfInfo.fdata}">             
                         <div class="question">
                             <p>국가코드</p>
                                 <input type="text" id="country_id" name="country_id" placeholder="국가코드" value="${golfInfo.country_id}" readonly maxlength="4" required /> 
@@ -37,10 +39,20 @@
                             [${golfInfo.image}]
                         </div>
                         <div class="question">
-                            <p>골프장이미지</p>
+                            <p>골프장홈피용</p>
                             <input type="file" id="assetsFile" name="assetsFile" placeholder="Asset 저장 경로" value="${golfInfo.assets}" maxlength="100"  />
                             [${golfInfo.assets}]
                         </div>
+                        <div class="question">
+                            <p>스코어이미지</p>
+                            <input type="file" id="simageFile" name="simageFile" placeholder="스코어이미지 저장경로" value="${golfInfo.simage}"  maxlength="100"  />
+                            [${golfInfo.simage}]
+                        </div>        
+                        <div class="question">
+                            <p>Assets 파일</p>
+                            <input type="file" id="fdataFile" name="fdataFile" placeholder="스코어이미지 저장경로" value="${golfInfo.fdata}"  maxlength="100"  />
+                            [${golfInfo.fdata}]
+                        </div>                                            
                         <div class="question">
                             <p>담당자주소</p>
                             <input type="text" id="address" name="address" placeholder="담당자 주소" value="${golfInfo.address}" maxlength="100"  />

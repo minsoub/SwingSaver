@@ -620,6 +620,8 @@ public class AdminController extends CommonController {
     	params.put("countryclub_nm", golfVo.getCountryclub_nm());
     	params.put("image", "");  // file
     	params.put("assets", ""); // file
+    	params.put("simage", "");  // file
+    	params.put("fdata", "");  // file
     	params.put("hole_value", String.valueOf(golfVo.getHole_value()));
     	params.put("address", golfVo.getAddress());
     	params.put("phone", golfVo.getPhone());
@@ -657,6 +659,29 @@ public class AdminController extends CommonController {
 	        golfVo.getAssetsFile().transferTo(new File(filePath));
 	    	String paramName = golfVo.getAssetsFile().getName();  // 파라미터명
 	    	params.put("assets", savedName);
+    	}
+    	
+    	if (!golfVo.getSimageFile().isEmpty())
+    	{
+    		String orginFileName = golfVo.getSimageFile().getOriginalFilename();
+    		int index = orginFileName.lastIndexOf(".");
+		    String fileExt = orginFileName.substring(index + 1);
+	        String savedName = UploadFileUtils.getTimeStamp()+"."+fileExt;
+	        String filePath = uploadPath + File.separator + savedName;
+	        golfVo.getSimageFile().transferTo(new File(filePath));
+	    	String paramName = golfVo.getSimageFile().getName();  // 파라미터명
+	    	params.put("simage", savedName);
+    	}
+    	if (!golfVo.getFdataFile().isEmpty())
+    	{
+    		String orginFileName = golfVo.getFdataFile().getOriginalFilename();
+    		int index = orginFileName.lastIndexOf(".");
+		    String fileExt = orginFileName.substring(index + 1);
+	        String savedName = UploadFileUtils.getTimeStamp()+"."+fileExt;
+	        String filePath = uploadPath + File.separator + savedName;
+	        golfVo.getFdataFile().transferTo(new File(filePath));
+	    	String paramName = golfVo.getFdataFile().getName();  // 파라미터명
+	    	params.put("fdata", savedName);
     	}
 
     	String rtnJson = restService.golfCreate(params);
@@ -747,6 +772,7 @@ public class AdminController extends CommonController {
     	params.put("countryclub_nm", golfVo.getCountryclub_nm());
     	params.put("image", golfVo.getImage());
     	params.put("assets", golfVo.getAssets());
+    	params.put("simage", golfVo.getSimage());
     	params.put("hole_value", String.valueOf(golfVo.getHole_value()));
     	params.put("address", golfVo.getAddress());
     	params.put("phone", golfVo.getPhone());
@@ -781,6 +807,17 @@ public class AdminController extends CommonController {
 	    	String paramName = golfVo.getAssetsFile().getName();  // 파라미터명
 	    	params.put("assets", savedName);
     	}
+    	if (!golfVo.getSimageFile().isEmpty())
+    	{
+    		String orginFileName = golfVo.getSimageFile().getOriginalFilename();
+    		int index = orginFileName.lastIndexOf(".");
+		    String fileExt = orginFileName.substring(index + 1);
+	        String savedName = UploadFileUtils.getTimeStamp()+"."+fileExt;
+	        String filePath = uploadPath + File.separator + savedName;
+	        golfVo.getSimageFile().transferTo(new File(filePath));
+	    	String paramName = golfVo.getSimageFile().getName();  // 파라미터명
+	    	params.put("simage", savedName);
+    	}    	
     	
     	String rtnJson = restService.golfUpdate(params);
     	

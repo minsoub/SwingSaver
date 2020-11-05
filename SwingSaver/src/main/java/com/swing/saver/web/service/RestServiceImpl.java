@@ -753,6 +753,7 @@ public class RestServiceImpl implements RestService {
 	
 	/**
 	 * 골프장정보를 신규 등록한다
+	 * 
 	 */
     @Override
     public String golfCreate(Map<String, String> params) throws JsonProcessingException, ApiException {
@@ -824,6 +825,8 @@ public class RestServiceImpl implements RestService {
 
         return rtnJson;
     } 
+    
+    
     public String getGolfImgIncludeDetail(String country_id, String zone_id, String countryclub_id) throws ApiException, IOException
     {
         ObjectMapper mapper = new ObjectMapper();
