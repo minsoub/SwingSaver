@@ -139,6 +139,12 @@ public class ScoreController {
     						+scoreVo.getScore13() + scoreVo.getScore14() + scoreVo.getScore15() + scoreVo.getScore16()
     						+scoreVo.getScore17() + scoreVo.getScore18()
     				);
+    		scoreVo.setSum1(scoreVo.getScore1()+scoreVo.getScore2()+scoreVo.getScore3()+scoreVo.getScore4()
+    						+scoreVo.getScore5() + scoreVo.getScore6() + scoreVo.getScore7()+scoreVo.getScore8()
+    						+scoreVo.getScore9());
+    		scoreVo.setSum2(scoreVo.getScore10() + scoreVo.getScore11() + scoreVo.getScore12()
+    						+scoreVo.getScore13() + scoreVo.getScore14() + scoreVo.getScore15() + scoreVo.getScore16()
+    						+scoreVo.getScore17() + scoreVo.getScore18());
     		scoreVo.setScore_plus_sum(scoreVo.getScore_sum() - (parInfo1.getSum()+parInfo2.getSum()));
     		
     		// 스코어 계산
@@ -301,7 +307,12 @@ public class ScoreController {
     						+scoreVo2.getScore17() + scoreVo2.getScore18()
     				);
     		scoreVo2.setScore_plus_sum(scoreVo2.getScore_sum() - (parInfo1.getSum()+parInfo2.getSum()));
-    		
+    		scoreVo2.setSum1(scoreVo2.getScore1()+scoreVo2.getScore2()+scoreVo2.getScore3()+scoreVo2.getScore4()
+			+scoreVo2.getScore5() + scoreVo2.getScore6() + scoreVo2.getScore7()+scoreVo2.getScore8()
+			+scoreVo2.getScore9());
+    		scoreVo2.setSum2(scoreVo2.getScore10() + scoreVo2.getScore11() + scoreVo2.getScore12()
+			+scoreVo2.getScore13() + scoreVo2.getScore14() + scoreVo2.getScore15() + scoreVo2.getScore16()
+			+scoreVo2.getScore17() + scoreVo2.getScore18());
     		// 스코어 계산
     		if (scoreVo2.getScore1() == 0)
     		{
@@ -462,7 +473,12 @@ public class ScoreController {
     						+scoreVo3.getScore17() + scoreVo3.getScore18()
     				);
     		scoreVo3.setScore_plus_sum(scoreVo3.getScore_sum() - (parInfo1.getSum()+parInfo2.getSum()));
-    		
+    		scoreVo3.setSum1(scoreVo3.getScore1()+scoreVo3.getScore2()+scoreVo3.getScore3()+scoreVo3.getScore4()
+			+scoreVo3.getScore5() + scoreVo3.getScore6() + scoreVo3.getScore7()+scoreVo3.getScore8()
+			+scoreVo3.getScore9());
+    		scoreVo3.setSum2(scoreVo3.getScore10() + scoreVo3.getScore11() + scoreVo3.getScore12()
+			+scoreVo3.getScore13() + scoreVo3.getScore14() + scoreVo3.getScore15() + scoreVo3.getScore16()
+			+scoreVo3.getScore17() + scoreVo3.getScore18());
     		// 스코어 계산
     		if (scoreVo3.getScore1() == 0)
     		{
@@ -623,7 +639,12 @@ public class ScoreController {
     						+scoreVo4.getScore17() + scoreVo4.getScore18()
     				);
     		scoreVo4.setScore_plus_sum(scoreVo4.getScore_sum() - (parInfo1.getSum()+parInfo2.getSum()));
-    		
+    		scoreVo4.setSum1(scoreVo4.getScore1()+scoreVo4.getScore2()+scoreVo4.getScore3()+scoreVo4.getScore4()
+			+scoreVo4.getScore5() + scoreVo4.getScore6() + scoreVo4.getScore7()+scoreVo4.getScore8()
+			+scoreVo4.getScore9());
+    		scoreVo4.setSum2(scoreVo4.getScore10() + scoreVo4.getScore11() + scoreVo4.getScore12()
+			+scoreVo4.getScore13() + scoreVo4.getScore14() + scoreVo4.getScore15() + scoreVo4.getScore16()
+			+scoreVo4.getScore17() + scoreVo4.getScore18());
     		// 스코어 계산
     		if (scoreVo4.getScore1() == 0)
     		{

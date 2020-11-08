@@ -57,7 +57,7 @@
                         				<td <c:if test="${scoreVo.scorechk7 < 0}">class="s-he"</c:if>><c:if test="${scoreVo.score7 == 0}">&nbsp;</c:if><c:if test="${scoreVo.score7 != 0}">${scoreVo.scorechk7}</c:if></td>
                         				<td <c:if test="${scoreVo.scorechk8 < 0}">class="s-he"</c:if>><c:if test="${scoreVo.score8 == 0}">&nbsp;</c:if><c:if test="${scoreVo.score8 != 0}">${scoreVo.scorechk8}</c:if></td>
                         				<td <c:if test="${scoreVo.scorechk9 < 0}">class="s-he"</c:if>><c:if test="${scoreVo.score9 == 0}">&nbsp;</c:if><c:if test="${scoreVo.score9 != 0}">${scoreVo.scorechk9}</c:if></td>                                                                       
-                                        <td class="sc-gray">${scoreVo.scorechksum1}</td>
+                                        <td class="sc-gray">${scoreVo.sum1}</td>
                                     </tr>
                                 <c:if test="${scoreVo2.error != 'NO'}">    
                                     <tr>
@@ -71,7 +71,7 @@
                         				<td <c:if test="${scoreVo2.scorechk7 < 0}">class="s-he"</c:if>><c:if test="${scoreVo2.score7 == 0}">&nbsp;</c:if><c:if test="${scoreVo2.score7 != 0}">${scoreVo2.scorechk7}</c:if></td>
                         				<td <c:if test="${scoreVo2.scorechk8 < 0}">class="s-he"</c:if>><c:if test="${scoreVo2.score8 == 0}">&nbsp;</c:if><c:if test="${scoreVo2.score8 != 0}">${scoreVo2.scorechk8}</c:if></td>
                         				<td <c:if test="${scoreVo2.scorechk9 < 0}">class="s-he"</c:if>><c:if test="${scoreVo2.score9 == 0}">&nbsp;</c:if><c:if test="${scoreVo2.score9 != 0}">${scoreVo2.scorechk9}</c:if></td>                                                                       
-                                        <td class="sc-gray">${scoreVo2.scorechksum1}</td>
+                                        <td class="sc-gray">${scoreVo2.sum1}</td>
                                     </tr>
                                </c:if>
                                 <c:if test="${scoreVo3.error != 'NO'}">    
@@ -86,7 +86,7 @@
                         				<td <c:if test="${scoreVo3.scorechk7 < 0}">class="s-he"</c:if>><c:if test="${scoreVo3.score7 == 0}">&nbsp;</c:if><c:if test="${scoreVo3.score7 != 0}">${scoreVo3.scorechk7}</c:if></td>
                         				<td <c:if test="${scoreVo3.scorechk8 < 0}">class="s-he"</c:if>><c:if test="${scoreVo3.score8 == 0}">&nbsp;</c:if><c:if test="${scoreVo3.score8 != 0}">${scoreVo3.scorechk8}</c:if></td>
                         				<td <c:if test="${scoreVo3.scorechk9 < 0}">class="s-he"</c:if>><c:if test="${scoreVo3.score9 == 0}">&nbsp;</c:if><c:if test="${scoreVo3.score9 != 0}">${scoreVo3.scorechk9}</c:if></td>                                                                       
-                                        <td class="sc-gray">${scoreVo3.scorechksum1}</td>
+                                        <td class="sc-gray">${scoreVo3.sum1}</td>
                                     </tr>
                                </c:if>
                                 <c:if test="${scoreVo4.error != 'NO'}">    
@@ -101,7 +101,7 @@
                         				<td <c:if test="${scoreVo4.scorechk7 < 0}">class="s-he"</c:if>><c:if test="${scoreVo4.score7 == 0}">&nbsp;</c:if><c:if test="${scoreVo4.score7 != 0}">${scoreVo4.scorechk7}</c:if></td>
                         				<td <c:if test="${scoreVo4.scorechk8 < 0}">class="s-he"</c:if>><c:if test="${scoreVo4.score8 == 0}">&nbsp;</c:if><c:if test="${scoreVo4.score8 != 0}">${scoreVo4.scorechk8}</c:if></td>
                         				<td <c:if test="${scoreVo4.scorechk9 < 0}">class="s-he"</c:if>><c:if test="${scoreVo4.score9 == 0}">&nbsp;</c:if><c:if test="${scoreVo4.score9 != 0}">${scoreVo4.scorechk9}</c:if></td>                                                                       
-                                        <td class="sc-gray">${scoreVo3.scorechksum1}</td>
+                                        <td class="sc-gray">${scoreVo4.sum1}</td>
                                     </tr>
                                </c:if>
                                 </table>
@@ -148,7 +148,7 @@
                         				<td <c:if test="${scoreVo.scorechk16 < 0}">class="s-he"</c:if>><c:if test="${scoreVo.score16 == 0}">&nbsp;</c:if><c:if test="${scoreVo.score16 != 0}">${scoreVo.scorechk16}</c:if></td>
                         				<td <c:if test="${scoreVo.scorechk17 < 0}">class="s-he"</c:if>><c:if test="${scoreVo.score17 == 0}">&nbsp;</c:if><c:if test="${scoreVo.score17 != 0}">${scoreVo.scorechk17}</c:if></td>
                         				<td <c:if test="${scoreVo.scorechk18 < 0}">class="s-he"</c:if>><c:if test="${scoreVo.score18 == 0}">&nbsp;</c:if><c:if test="${scoreVo.score18 != 0}">${scoreVo.scorechk18}</c:if></td>                                                                       
-                                        <td class="sc-gray">${scoreVo.scorechksum2}</td>
+                                        <td class="sc-gray">${scoreVo.sum2}/${scoreVo.sum1+scoreVo.sum2}</td>
                                     </tr>
                                  <c:if test="${scoreVo2.error != 'NO'}">
                                     <tr>
@@ -162,7 +162,7 @@
                         				<td <c:if test="${scoreVo2.scorechk16 < 0}">class="s-he"</c:if>><c:if test="${scoreVo2.score16 == 0}">&nbsp;</c:if><c:if test="${scoreVo2.score16 != 0}">${scoreVo2.scorechk16}</c:if></td>
                         				<td <c:if test="${scoreVo2.scorechk17 < 0}">class="s-he"</c:if>><c:if test="${scoreVo2.score17 == 0}">&nbsp;</c:if><c:if test="${scoreVo2.score17 != 0}">${scoreVo2.scorechk17}</c:if></td>
                         				<td <c:if test="${scoreVo2.scorechk18 < 0}">class="s-he"</c:if>><c:if test="${scoreVo2.score18 == 0}">&nbsp;</c:if><c:if test="${scoreVo2.score18 != 0}">${scoreVo2.scorechk18}</c:if></td>                                                                       
-                                        <td class="sc-gray">${scoreVo2.scorechksum2}</td>
+                                        <td class="sc-gray">${scoreVo2.sum2}/${scoreVo2.sum1+scoreVo2.sum2}</td>
                                     </tr>
                                  </c:if>
                                  <c:if test="${scoreVo3.error != 'NO'}">
@@ -177,7 +177,7 @@
                         				<td <c:if test="${scoreVo3.scorechk16 < 0}">class="s-he"</c:if>><c:if test="${scoreVo3.score16 == 0}">&nbsp;</c:if><c:if test="${scoreVo3.score16 != 0}">${scoreVo3.scorechk16}</c:if></td>
                         				<td <c:if test="${scoreVo3.scorechk17 < 0}">class="s-he"</c:if>><c:if test="${scoreVo3.score17 == 0}">&nbsp;</c:if><c:if test="${scoreVo3.score17 != 0}">${scoreVo3.scorechk17}</c:if></td>
                         				<td <c:if test="${scoreVo3.scorechk18 < 0}">class="s-he"</c:if>><c:if test="${scoreVo3.score18 == 0}">&nbsp;</c:if><c:if test="${scoreVo3.score18 != 0}">${scoreVo3.scorechk18}</c:if></td>                                                                       
-                                        <td class="sc-gray">${scoreVo3.scorechksum2}</td>
+                                        <td class="sc-gray">${scoreVo3.sum2}/${scoreVo3.sum1+scoreVo3.sum2}</td>
                                     </tr>
                                  </c:if>
                                  <c:if test="${scoreVo4.error != 'NO'}">
@@ -192,7 +192,7 @@
                         				<td <c:if test="${scoreVo4.scorechk16 < 0}">class="s-he"</c:if>><c:if test="${scoreVo4.score16 == 0}">&nbsp;</c:if><c:if test="${scoreVo4.score16 != 0}">${scoreVo4.scorechk16}</c:if></td>
                         				<td <c:if test="${scoreVo4.scorechk17 < 0}">class="s-he"</c:if>><c:if test="${scoreVo4.score17 == 0}">&nbsp;</c:if><c:if test="${scoreVo4.score17 != 0}">${scoreVo4.scorechk17}</c:if></td>
                         				<td <c:if test="${scoreVo4.scorechk18 < 0}">class="s-he"</c:if>><c:if test="${scoreVo4.score18 == 0}">&nbsp;</c:if><c:if test="${scoreVo4.score18 != 0}">${scoreVo4.scorechk18}</c:if></td>                                                                       
-                                        <td class="sc-gray">${scoreVo4.scorechksum2}</td>
+                                        <td class="sc-gray">${scoreVo4.sum2}/${scoreVo4.sum1+scoreVo4.sum2}</td>
                                     </tr>
                                  </c:if>
                                 </table>
