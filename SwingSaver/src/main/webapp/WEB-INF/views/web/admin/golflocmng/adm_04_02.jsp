@@ -82,13 +82,22 @@
                                         <td>${golfInfo.email}</td>
                                     </tr>
                                     <tr>
+                                    	<td><strong>제휴여부</strong>
+                                    	<td>${golfInfo.alliance_check}
+                                    </tr>  
+                                    <tr>
+                                    	<td><strong>예약 URL</strong></td>
+                                    	<td>${golfInfo.rsv_url}</td>
+                                    </tr>
+                                    <tr>
+                                    	<td><strong>이벤트 URL</strong></td>
+                                    	<td>${golfInfo.evt_url}</td>
+                                    </tr>
+                                                                                                                                              
+                                    <tr>
                                     	<td><strong>링크여부</strong>
                                     	<td>${golfInfo.link_check}
                                     </tr>                                    
-                                    <tr>
-                                    	<td><strong>제휴여부</strong>
-                                    	<td>${golfInfo.alliance_check}
-                                    </tr>
                                     <tr>
                                     	<td><strong>프로그램호출인자</strong></td>
                                     	<td>${golfInfo.pgm_call_param}</td>

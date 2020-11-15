@@ -1,16 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/mobile/include/top.jsp"%>
     
- <nav id="header">
-    <img src="/mobile/image/gnb-menu.svg" class="gnb-menu" width="100%">
-    <div class="logo"><img src="/mobile/image/head-logo.png" class="" width="100%"></div>
-    <a href="/m/search.do"><img src="/mobile/image/gnb-ser.svg" class="gnb-ser" width="100%"></a>
- </nav>
+<%@include file="/WEB-INF/views/mobile/include/top_menu.jsp"%>
 
 
     <section id="contents" class="gray_con">
         <div class="con-wrap">
-            <a href="/score/scoreRegister" class="sc-add">새로운 스코어 추가 +</a>
+            <a href="/score/scoreAdd" class="sc-add">새로운 스코어 추가 +</a>
            
             <h2>조회기간</h2>
             <div class="month-wrap">

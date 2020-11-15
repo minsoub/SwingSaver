@@ -272,9 +272,9 @@ $(document).ready(function(){
 	$('#btnSave').click(function(e) {
   		html2canvas(test).then(function(canvas) {
     		// canvas width
-    		var canvasWidth = 600; //canvas.width;
+    		var canvasWidth = canvas.width;
     		// canvas height
-    		var canvasHeight = 400; // canvas.height;
+    		var canvasHeight = canvas.height;
     		// render canvas
     		$('.toCanvas').after(canvas);
     		// show 'to image' button

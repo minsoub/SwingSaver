@@ -21,12 +21,12 @@
         		<h2>${golfInfo.countryclub_nm}</h2>
    			</div>
    			<div class="main-btn gfmain-btn">
-        		<a href="#" class="">
+        		<a href="<c:if test='${empty golfInfo.rsv_url}'>#</c:if><c:if test='${not empty golfInfo.rsv_url}'>${golfInfo.rsv_url}</c:if>" class="">
         		<img src="/mobile/image/main-reserve.png" width="100%">
         		<p>골프장예약</p>
         		</a>
         
-        		<a href="#" class="">
+        		<a href="<c:if test='${empty golfInfo.evt_url}'>#</c:if><c:if test='${not empty golfInfo.evt_url}'>${golfInfo.evt_url}</c:if>" class="">
         		<img src="/mobile/image/main-event.png" width="100%">
         		<p>이벤트</p>
         		</a>

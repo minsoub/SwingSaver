@@ -1,5 +1,33 @@
 package com.swing.saver.web.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -13,45 +41,12 @@ import com.swing.saver.web.entity.Constant;
 import com.swing.saver.web.entity.FarVo;
 import com.swing.saver.web.entity.GolfVo;
 import com.swing.saver.web.entity.GroupVo;
-import com.swing.saver.web.entity.LoginVo;
-import com.swing.saver.web.entity.ScoreListVo;
 import com.swing.saver.web.entity.StsVo;
 import com.swing.saver.web.entity.UserVo;
 import com.swing.saver.web.exception.ApiException;
 import com.swing.saver.web.service.AdminService;
 import com.swing.saver.web.service.RestService;
-
 import com.swing.saver.web.util.UploadFileUtils;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.multipart.*;
-
-import javax.annotation.Resource;
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-import java.util.Map.Entry;
 
 /**
  * Admin Controller classs
@@ -557,7 +552,7 @@ public class AdminController extends CommonController {
         List<GolfVo> golfList = mapper.convertValue(map.get("golfList"), TypeFactory.defaultInstance().constructCollectionType(List.class,GolfVo.class));
 
         mv.addObject("golfList", golfList);
-        mv.setViewName("web/admin/adm_04");
+        mv.setViewName("web/admin/golflocmng/adm_04");
         LOGGER.debug("==================== AdminController golfList end : ===================");
         return mv;
     }    
@@ -575,7 +570,7 @@ public class AdminController extends CommonController {
         List<CodeVo> countryList = getCodeList("ctry");
         mv.addObject("countryList", countryList);
         
-        mv.setViewName("web/admin/adm_04_01");
+        mv.setViewName("web/admin/golflocmng/adm_04_01");
         
     	return mv;
     }   
@@ -627,6 +622,8 @@ public class AdminController extends CommonController {
     	params.put("phone", golfVo.getPhone());
     	params.put("email", golfVo.getEmail());
     	params.put("description", golfVo.getDescription());
+    	params.put("rsv_url", golfVo.getRsv_url());
+    	params.put("evt_url", golfVo.getEvt_url());
     	
     	params.put("pgm_call_param", golfVo.getPgm_call_param());
     	
@@ -702,7 +699,7 @@ public class AdminController extends CommonController {
                 
         mv.addObject("result", golfVo);
     	LOGGER.debug("==================== AdminController golfAdd end : ===================");
-    	mv.setViewName("web/admin/adm_04_01_01");
+    	mv.setViewName("web/admin/golflocmng/adm_04_01_01");
     	return mv;
     }   
     
@@ -744,7 +741,7 @@ public class AdminController extends CommonController {
         List<CodeVo> countryList = getCodeList("ctry");
         mv.addObject("countryList", countryList);
         
-        mv.setViewName("web/admin/adm_04_02_01");
+        mv.setViewName("web/admin/golflocmng/adm_04_02_01");
         
     	return mv;
     }  
@@ -778,6 +775,8 @@ public class AdminController extends CommonController {
     	params.put("phone", golfVo.getPhone());
     	params.put("email", golfVo.getEmail());
     	params.put("description", golfVo.getDescription());
+    	params.put("rsv_url", golfVo.getRsv_url());
+    	params.put("evt_url", golfVo.getEvt_url());
     	
     	params.put("pgm_call_param", golfVo.getPgm_call_param());
     	if (golfVo.getAlliance_check() == null || golfVo.getAlliance_check().isEmpty()) golfVo.setAlliance_check("N");
@@ -824,7 +823,7 @@ public class AdminController extends CommonController {
     	LOGGER.debug(rtnJson);
     	
     	LOGGER.debug("==================== golfUpdate areaUpdate end : ===================");
-    	mv.setViewName("web/admin/adm_04_01_01");
+    	mv.setViewName("web/admin/golflocmng/adm_04_01_01");
     	return mv;
     }      
     
@@ -855,7 +854,7 @@ public class AdminController extends CommonController {
         List<FarVo> parList = mapper.convertValue(map.get("parList"), TypeFactory.defaultInstance().constructCollectionType(List.class,FarVo.class));
         mv.addObject("parList", parList);
                
-        mv.setViewName("web/admin/adm_04_02");
+        mv.setViewName("web/admin/golflocmng/adm_04_02");
         
     	return mv;
     }    
@@ -873,7 +872,7 @@ public class AdminController extends CommonController {
     	mv.addObject("zone_id", zone_id);
         mv.addObject("countryclub_id", countryclub_id);
         
-        mv.setViewName("web/admin/adm_04_03");
+        mv.setViewName("web/admin/golflocmng/adm_04_03");
         
     	return mv;
     } 
@@ -938,7 +937,7 @@ public class AdminController extends CommonController {
         mv.addObject("parList", parList);
         
     	LOGGER.debug("==================== AdminController parAdd end : ===================");
-    	mv.setViewName("web/admin/adm_04_02");
+    	mv.setViewName("web/admin/golflocmng/adm_04_02");
     	return mv;
     }  
     
@@ -955,7 +954,7 @@ public class AdminController extends CommonController {
     	FarVo parInfo =  restService.getParInfo(country_id, zone_id, countryclub_id, course);   // 골프장 Par 정보 상세 정보 조회
         mv.addObject("parInfo", parInfo);
 
-        mv.setViewName("web/admin/adm_04_04");
+        mv.setViewName("web/admin/golflocmng/adm_04_04");
         
     	return mv;
     } 
@@ -1040,7 +1039,7 @@ public class AdminController extends CommonController {
         mv.addObject("parList", parList);
         
     	LOGGER.debug("==================== AdminController parUpdate end : ===================");
-    	mv.setViewName("web/admin/adm_04_02");
+    	mv.setViewName("web/admin/golflocmng/adm_04_02");
     	return mv;
     }       
         

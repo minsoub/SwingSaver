@@ -5,7 +5,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=yes"> 
+
 
 
     <title>스윙세이버</title>
@@ -28,6 +29,19 @@
     <c:set var="reqUri" value="${pageContext.request.requestURI}"></c:set>
     <script>var currUri ='<c:out value="${reqUri}"/>'</script>
     
+<style> 
+  @media( orientation: portrait ){ 
+	html { 
+		transform: rotate(-90deg); 
+		transform-origin: top left; 
+		position: absolute; 
+		top: 100%; 
+		left: 0; 
+		width: 100vh; 
+		height: 100vw; 
+	} 
+  } 
+</style>    
 </head>
 
 <body>

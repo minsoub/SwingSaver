@@ -99,11 +99,10 @@
 }   
 </style>
 
- <nav id="header">
-    <img src="/mobile/image/gnb-menu.svg" class="gnb-menu" width="100%">
-    <div class="logo"><img src="/mobile/image/head-logo.png" class="" width="100%"></div>
-    <a href="/m/search.do"><img src="/mobile/image/gnb-ser.svg" class="gnb-ser" width="100%"></a>
- </nav>
+
+<%@include file="/WEB-INF/views/mobile/include/top_menu.jsp"%>
+
+
     
  <section id="contents" class="main_con">
    <div class="main-btn">
