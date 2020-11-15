@@ -201,6 +201,15 @@ public class MobileController extends CommonController {
      */
     @GetMapping("/golflist")
     public ModelAndView mobileGolfList(GolfVo vo, HttpServletRequest request,HttpSession session, ModelAndView mv, RedirectAttributes redirectAttributes) throws ApiException, IOException {
+    	LoginVo loginVo = (LoginVo)session.getAttribute("login");
+    	UserVo userVo = null;		
+    	long userId = -1;
+    	
+    	if (loginVo != null)
+    		userId = loginVo.getUserid();
+    	
+    	LOGGER.debug("Login userID : " + userId);
+    	
     	// 지역 코드 조회
         List<AreaVo> areaList = getAreaList("KR");	// Default KR
         mv.addObject("areaList", areaList); 
@@ -211,6 +220,7 @@ public class MobileController extends CommonController {
     	params.put("country_id",     "");
     	params.put("countryclub_id", "");
     	params.put("alliance_check", vo.getAlliance_check());
+    	params.put("userid", String.valueOf(userId));
     	params.put("word", "");
     	
     	String rtnJson = restService.getGolfList(params);
@@ -456,5 +466,22 @@ public class MobileController extends CommonController {
     	return IOUtils.toByteArray(in);
     }
     
-    
+    /**
+     * 파일  URL을 호출 받아서 이미지를 읽어서 리턴한다. 
+     * 
+     * @param request
+     * @return
+     * @throws IOException
+     */
+    @GetMapping(value="/getFile", produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)  // .IMAGE_JPEG_VALUE)
+    public @ResponseBody byte[] getFile(HttpServletRequest request) throws IOException {
+    	InputStream in = null;   // 이미지 read
+    	String imageName = request.getParameter("fileName");
+    	String filePath = uploadPath + File.separator + imageName;
+    	
+    	System.out.println("filePath : " + filePath);
+    	in = new FileInputStream(filePath);
+    	
+    	return IOUtils.toByteArray(in);
+    }
 }

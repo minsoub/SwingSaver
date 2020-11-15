@@ -31,7 +31,12 @@
             </div>
             <div class="list-right">
                 <img src="<c:if test="${golfInfo.alliance_check eq 'Y'}">/mobile/image/like-on.svg</c:if><c:if test="${golfInfo.alliance_check ne 'Y'}">/mobile/image/like-off.svg</c:if>" class="list-like" width="100%">
+				<c:if test="${golfInfo.pay_chk eq 'Y'}">                
                 <a class="play active" href="javascript:CallApp('${golfInfo.countryclub_id}');">Play</a>
+                </c:if>
+				<c:if test="${golfInfo.pay_chk ne 'Y'}">                
+                <a class="play" href="javascript:Pay('${golfInfo.country_id}', '${golfInfo.zone_id}', '${golfInfo.countryclub_id}');">Download</a>
+                </c:if>                
             </div>            
         </div>
         </c:forEach>       
@@ -45,6 +50,12 @@
 </section>
 
 <script>
+	function Pay(country_id, zone_id, countryclub_id)
+	{
+		// 결제 창을 띄우고 결제가 완료되면 파일을 다운로드 받게 한다. 
+		var newWindow = window.open("about:blank");
+		newWindow.location.href="/pay/assets/"+country_id+"/"+zone_id+"/"+countryclub_id;
+	}
 	function GolfList(data)
 	{
 		$("#alliance_check").val(data);

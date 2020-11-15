@@ -84,4 +84,24 @@ public class PayService {
         return rtnJson;
 	}	
 	
+	/**
+	 * Asset 다운로드 전 결제 초기 시작 - 미리 상품 정보 등록해야 한다. 
+	 * 
+	 * @param params
+	 * @return
+	 * @throws JsonProcessingException
+	 * @throws ApiException
+	 */
+	public String saveAsst(Map<String, Object> params) throws JsonProcessingException, ApiException
+	{
+        ObjectMapper mapper = new ObjectMapper();
+        String rtnJson = "";
+
+        rtnJson = sendMessage.sendHttpsStr(mapper.writeValueAsString(params), "/ords/swing/saver/payasset", "POST", "application/json", true);
+
+        LOGGER.debug("결제 완료 등록 :{},응답:{}",params.toString(), rtnJson);
+
+        return rtnJson;
+	}
+	
 }

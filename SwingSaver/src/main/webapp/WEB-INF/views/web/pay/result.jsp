@@ -97,9 +97,10 @@
     /* 기타 파라메터 추가 부분 - Start - */
     String param_opt_1     = f_get_parm( request.getParameter( "param_opt_1"    ) );       // 기타 파라메터 추가 부분
     String param_opt_2     = f_get_parm( request.getParameter( "param_opt_2"    ) );       // 기타 파라메터 추가 부분
-    String param_opt_3     = f_get_parm( request.getParameter( "param_opt_3"    ) );       // 기타 파라메터 추가 부분
+    String param_opt_3     = f_get_parm( request.getParameter( "param_opt_3"    ) );       // 기타 파라메터 추가 부분    
     /* 기타 파라메터 추가 부분 - End -   */
     /* ============================================================================== */
+    String asset_url = f_get_parm(request.getParameter("asset_url"));
 
   String req_tx_name      = "";
 
@@ -611,6 +612,14 @@
                 <tr>
 
                 <div class="btnset">
+                <%
+                	if (!"".equals(asset_url))
+                	{
+				%>
+				<a href="<%=asset_url%>" class="home">다운로드</a>
+				<%                		
+                	}
+                %>
                 <a href="javascript:self.close();" class="home">닫기</a>
                 </div>
                 </tr>

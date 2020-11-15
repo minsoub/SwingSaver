@@ -22,7 +22,9 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.swing.saver.web.entity.Constant;
+import com.swing.saver.web.entity.LoginVo;
 import com.swing.saver.web.entity.PayVo;
+import com.swing.saver.web.entity.UserVo;
 import com.swing.saver.web.exception.ApiException;
 import com.swing.saver.web.service.PayService;
 
@@ -45,8 +47,122 @@ public class PayController {
 	 /**
 	  * 앱에서 결제 페이지 호출 
 	  * 
-	  * @param artype
-	  * @param arid
+	  * @param artype (P: 개인, G : 그룹, M : 마켓)
+	  * @param arid  (ARPerson, ARGroup, ARMarket의 ID 값)
+	  * @param request
+	  * @param session
+	  * @return
+	  * @throws ApiException
+	  * @throws IOException
+	  */
+	 @RequestMapping(value="/assets/{country_id}/{zone_id}/{countryclub_id}")
+	 public ModelAndView  payAssets(@PathVariable String country_id, @PathVariable String zone_id, @PathVariable String countryclub_id, 
+			 							HttpServletRequest request, HttpSession session) throws ApiException, IOException {		 
+		ModelAndView mv = new ModelAndView();
+        LOGGER.debug("==================== PayController payAssets Strart : ===================={}");
+    	LoginVo loginVo = (LoginVo)session.getAttribute("login");
+    	UserVo userVo = null;		
+    	long userId = -1;
+    	
+    	if (loginVo != null)
+    		userId = loginVo.getUserid();
+    	
+    	
+        if (country_id == null || zone_id == null || countryclub_id == null)
+        {
+        	 mv.setViewName("web/pay/pay_error");
+        }else {
+        	
+        	// arid는 없다. 신규로 등록하고 가져와야 된다. 
+        	Map<String, Object> info = new HashMap<String, Object>();
+        	info.put("country_id",     country_id);
+        	info.put("zone_id",        zone_id);
+        	info.put("countryclub_id", countryclub_id);
+        	info.put("p_type",         "A");
+        	info.put("userid",          String.valueOf(userId));
+        	info.put("description",    "Assets 구매-"+countryclub_id);
+        	info.put("amount",         "1");   // 구매금액 (1=>1000원)
+        	info.put("received",       "N");      // 결제완료여부
+        	info.put("months",         "6");      // 6개월
+        	
+        	String result = service.saveAsst(info);
+        	ObjectMapper mapper = new ObjectMapper();
+        	Map<String, Object> rmap = mapper.readValue(result, new TypeReference<Map<String, Object>>(){});
+        	
+        	String artype = "P";
+        	String arid = rmap.get("arid").toString();
+        	
+        	// 사용자 정보 및 물건 정보, 결제금액 등을 가져와야 된다. 
+        	String rtnJson = service.getBuyItemById(artype, arid);   // 제품 상세 정보 조회
+            
+            Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});
+
+            mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
+            
+            List<PayVo> payList = mapper.convertValue(map.get("payList"), TypeFactory.defaultInstance().constructCollectionType(List.class,PayVo.class));
+            
+            if (payList != null && payList.size() != 0) {
+            	PayVo pay = payList.get(0);
+            	pay.setArtype(artype);
+            	pay.setArid(arid);
+            	mv.addObject("payInfo", pay);
+            }
+            
+            /* kcp와 통신후 kcp 서버에서 전송되는 결제 요청 정보 */
+            String req_tx          =  request.getParameter( "req_tx"         ) ; // 요청 종류         
+            String res_cd          =  request.getParameter( "res_cd"         ) ; // 응답 코드         
+            String tran_cd         =  request.getParameter( "tran_cd"        ) ; // 트랜잭션 코드     
+            String ordr_idxx       =  request.getParameter( "ordr_idxx"      ) ; // 쇼핑몰 주문번호   
+            String good_name       =  request.getParameter( "good_name"      ) ; // 상품명            
+            String good_mny        =  request.getParameter( "good_mny"       ) ; // 결제 총금액       
+            String buyr_name       =  request.getParameter( "buyr_name"      ) ; // 주문자명          
+            String buyr_tel1       =  request.getParameter( "buyr_tel1"      ) ; // 주문자 전화번호   
+            String buyr_tel2       =  request.getParameter( "buyr_tel2"      ) ; // 주문자 핸드폰 번호
+            String buyr_mail       =  request.getParameter( "buyr_mail"      ) ; // 주문자 E-mail 주소
+            String use_pay_method  =  request.getParameter( "use_pay_method" ) ; // 결제 방법          
+        	String enc_info        =  request.getParameter( "enc_info"       ) ; // 암호화 정보       
+            String enc_data        =  request.getParameter( "enc_data"       ) ; // 암호화 데이터     
+            String cash_yn         =  request.getParameter( "cash_yn"        ) ;
+            String cash_tr_code    =  request.getParameter( "cash_tr_code"   ) ;
+            /* 기타 파라메터 추가 부분 - Start - */
+            String param_opt_1    =  request.getParameter( "param_opt_1"     ) ; // 기타 파라메터 추가 부분
+            String param_opt_2    =  request.getParameter( "param_opt_2"     ) ; // 기타 파라메터 추가 부분
+            String param_opt_3    =  request.getParameter( "param_opt_3"     ) ; // 기타 파라메터 추가 부분
+            /* 기타 파라메터 추가 부분 - End -   */
+            
+            request.setAttribute("req_tx", req_tx);
+            request.setAttribute("res_cd", res_cd);
+            request.setAttribute("tran_cd", tran_cd);
+            request.setAttribute("ordr_idxx", ordr_idxx);
+            request.setAttribute("good_name", good_name);
+            request.setAttribute("good_mny", good_mny);
+            request.setAttribute("buyr_name", buyr_name);
+            request.setAttribute("buyr_tel1", buyr_tel1);
+            request.setAttribute("buyr_tel2", buyr_tel2);
+            request.setAttribute("buyr_mail", buyr_mail);
+            request.setAttribute("use_pay_method", use_pay_method);
+            request.setAttribute("enc_info", enc_info);
+            request.setAttribute("enc_data", enc_data);
+            request.setAttribute("cash_yn", cash_yn);
+            request.setAttribute("cash_tr_code", cash_tr_code);
+            request.setAttribute("param_opt_1", param_opt_1);
+            request.setAttribute("param_opt_2", param_opt_2);
+            request.setAttribute("param_opt_3", param_opt_3);
+            
+            
+            // 결제완료 후 호출된다. 
+        	mv.setViewName("web/pay/pay_process");
+        }
+        LOGGER.debug("==================== PayController payAssets end : ===================={}");
+        return mv;
+	 }
+	 
+	 
+	 /**
+	  * 앱에서 결제 페이지 호출 
+	  * 
+	  * @param artype (P: 개인, G : 그룹, M : 마켓)
+	  * @param arid  (ARPerson, ARGroup, ARMarket의 ID 값)
 	  * @param request
 	  * @param session
 	  * @return
@@ -378,6 +494,15 @@ public class PayController {
 	        	
 	        	result = service.paymentRegister(map);
 	        	LOGGER.debug("Result : " + result);
+	        	
+	        	ObjectMapper mapper = new ObjectMapper();
+	        	Map<String, Object> rmap = mapper.readValue(result, new TypeReference<Map<String, Object>>(){});
+	        	try {
+	        		String asset_url = rmap.get("asset_url").toString();
+	        		request.setAttribute("asset_url", asset_url);
+	        	}catch(Exception ex) {
+	        		request.setAttribute("asset_url", "");
+	        	}
 	        }
 
 	        /* = -------------------------------------------------------------------------- = */
@@ -440,6 +565,8 @@ public class PayController {
 	        	
 	        	String result = service.paymentRegister(map);
 	        	LOGGER.debug("Result : " + result);
+	        	
+	        	
 	        }
 	    }
 	    

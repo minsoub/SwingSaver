@@ -43,6 +43,9 @@ public class GolfVo {
 	String mode;			// 검색구분 : "" or ALL 전체, REC : 추천
 	String word;			// 검색단어
 	
+	String pay_chk;         // 결제여부 (Y, N)
+	int pay_dt;             // 남은유효기간
+	
 	MultipartFile imageFile;
 	MultipartFile assetsFile;
 	MultipartFile simageFile;
