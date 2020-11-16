@@ -29,7 +29,7 @@
     <c:set var="reqUri" value="${pageContext.request.requestURI}"></c:set>
     <script>var currUri ='<c:out value="${reqUri}"/>'</script>
     
-<style> 
+<!-- style> 
   @media( orientation: portrait ){ 
 	html { 
 		transform: rotate(-90deg); 
@@ -41,7 +41,7 @@
 		height: 100vw; 
 	} 
   } 
-</style>    
+</style  -->    
 </head>
 
 <body>
