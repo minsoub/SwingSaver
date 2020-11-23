@@ -129,4 +129,21 @@ public class MobileServiceImpl implements MobileService {
 
         return rtnJson;
     }
+    
+    /**
+     * 골프장 리스트를 검색한다. [ 골프장 명칭으로 ] 
+     * @param countryclub_nm
+     * @return
+     * @throws JsonProcessingException
+     * @throws ApiException
+     */
+    public String getCountryclubList(String countryclub_nm) throws JsonProcessingException, ApiException
+    {
+        String rtnJson = "";
+        rtnJson = sendMessage.sendHttpsStr( "/ords/swing/saver/golflist/"+countryclub_nm, "GET", "application/x-www-form-urlencoded",true);
+
+        LOGGER.debug("골프장 리스트를 검색 조회 응답:{}",rtnJson);
+
+        return rtnJson;
+    }
 }

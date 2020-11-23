@@ -2,19 +2,26 @@
 <%@include file="/WEB-INF/views/web/inc/score_new_header.jsp"%>
 
 <c:set var="now" value="<%=new java.util.Date()%>" />
+
+
     <section class="container no-padding">
         <div class="col-xs-12" style="padding: 0">
             <div class="score-page form-page" style="margin: 0px">
                
 
 
-                <div class="myCanvas" style="overflow-x: scroll;">
+                <div class="myCanvas">
+                
+                <div class="sc-ad">
+                
+                <div class="" style="position: relative;">
+                
                     <div class="score-wrap">
                         <div class="ph-wrap" id="preview">
                             <img  class="bir-logo" src="/image/bir_logo_img.png">
                         </div>
                         <div class="sc-wrap">
-                            <img class="gol-logo" src="<c:url value='${golfInfo.image_url}'/>">
+                            <img class="gol-logo" src="<c:url value='${golfInfo.image_url}'/>" height="30pt">
                             <h3 class="name-date">${qrInfo.username}&emsp;<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" />&ensp;${qrInfo.utime}<!-- fmt:formatDate value="${now}" pattern="a KK:mm" /  --></h3>
                             <div class="sc-box">
                                 <h4 class="cou">Course.${parInfo1.course_nm}</h4>
@@ -217,7 +224,8 @@
                 <button id="btnSave" class="form-btn" onclick="#">이미지저장하기</button>
                 <button id="btnChange" class="img-btn" onclick="#">사진변경</button>
 
-
+</div>
+            </div>
 
             </div>
 

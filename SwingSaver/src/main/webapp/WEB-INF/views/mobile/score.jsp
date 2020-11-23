@@ -6,7 +6,7 @@
 
     <section id="contents" class="gray_con">
         <div class="con-wrap">
-            <a href="/score/scoreAdd" class="sc-add">새로운 스코어 추가 +</a>
+            <a href="/m/score-add" class="sc-add">새로운 스코어 추가 +</a>
            
             <h2>조회기간</h2>
             <div class="month-wrap">

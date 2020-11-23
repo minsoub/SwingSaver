@@ -64,4 +64,13 @@ public interface MobileService {
      * @throws ApiException
      */
     public String getScoreDetail(String visit_date, String countryclub_id, String seq_no, String user_id) throws JsonProcessingException, ApiException;
+    
+    /**
+     * 골프장 리스트를 검색한다. [ 골프장 명칭으로 ] 
+     * @param countryclub_nm
+     * @return
+     * @throws JsonProcessingException
+     * @throws ApiException
+     */
+    public String getCountryclubList(String countryclub_nm) throws JsonProcessingException, ApiException;
 }

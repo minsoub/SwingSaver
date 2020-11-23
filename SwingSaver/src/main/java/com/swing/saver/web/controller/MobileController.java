@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,6 +31,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
+import com.swing.saver.web.domain.SCScoreInfo;
 import com.swing.saver.web.entity.AdverVo;
 import com.swing.saver.web.entity.AreaVo;
 import com.swing.saver.web.entity.Constant;
@@ -37,10 +40,12 @@ import com.swing.saver.web.entity.GolfVo;
 import com.swing.saver.web.entity.LoginVo;
 import com.swing.saver.web.entity.ScoreListVo;
 import com.swing.saver.web.entity.ScoreMaster;
+import com.swing.saver.web.entity.ScoreVo;
 import com.swing.saver.web.entity.UserVo;
 import com.swing.saver.web.exception.ApiException;
 import com.swing.saver.web.service.MobileService;
 import com.swing.saver.web.service.RestService;
+import com.swing.saver.web.service.SCScoreInfoService;
 import com.swing.saver.web.util.CommonUtil;
 
 /**
@@ -63,6 +68,9 @@ public class MobileController extends CommonController {
     
     @Inject
     RestService service;
+    
+    @Inject
+    SCScoreInfoService scoreService;
     
     /**
      * Mobile Index Page
@@ -295,6 +303,180 @@ public class MobileController extends CommonController {
     }
     
     /**
+     * 버이야 스코어 추가 초기 화면 
+     * 골프장 이름, Out코스, In 코스 선택 화면 
+     * 
+     * @param request
+     * @param session
+     * @return
+     * @throws IOException
+     * @throws ApiException
+     */
+    @GetMapping("/score-add")
+    public ModelAndView scoreAddForm(HttpServletRequest request, HttpSession session) throws IOException, ApiException {    	
+    	ModelAndView mv = new ModelAndView();
+    	
+    	LoginVo loginVo = (LoginVo)session.getAttribute("login");
+    	UserVo userVo = null;		
+    	long userId = -1;
+    	
+    	if (loginVo != null)
+    		userId = loginVo.getUserid();
+    	
+    	LOGGER.debug("Login userID : " + userId);
+    	
+        /*회원정보 조회*/
+    	userVo = service.getMemberInfo(userId);
+        mv.addObject("userInfo",userVo);
+
+    	mv.addObject("setMenu",        "score");
+    	mv.setViewName("mobile/score/score_add_form");
+    	
+        return mv;
+    }
+    
+
+    /**
+     * 스코어 등록을 위한 골프장 정보를 조회한다. 
+     * 
+     * @param request
+     * @return
+     * @throws ApiException
+     * @throws IOException
+     */
+    @RequestMapping(value="/countryclub-search")
+    @ResponseBody
+    public String countryclubSearch(HttpServletRequest request) throws ApiException, IOException {
+    	LOGGER.debug("==================== MobileController countryclubSearch Strart : ===================={}");
+    	String jsonData = restService.getCountryclubList(URLEncoder.encode(request.getParameter("countryclub_nm").toString(), "UTF-8"));		// 골프장 조회
+    	LOGGER.debug(jsonData);
+    	
+    	LOGGER.debug("==================== MobileController countryclubSearch end : ===================={}");
+    	return jsonData;
+    }    
+    
+    /**
+     * Par 리스트 출력
+     * @param request
+     * @return
+     */
+    @GetMapping("/parList/{countryclub_id}")
+    public ModelAndView parList(HttpServletRequest request, @PathVariable String countryclub_id)  throws IOException, ApiException 
+    {
+    	ModelAndView mv = new ModelAndView();
+    	String rtnJson=  service.getParList(countryclub_id);   // 골프장 Par 리스트 조회
+    	
+        mv.addObject("data", rtnJson);
+        mv.setViewName("jsonView");
+        
+    	return mv;
+    }   
+    
+    /**
+     * 골프장 아이디, out코스, in코스 정보를 받아서 상세 정보를 입력하는 폼을 출력하낟. 
+     * 
+     * @param request
+     * @param countryclub_id
+     * @param start_couse
+     * @param end_course
+     * @param session
+     * @return
+     * @throws IOException
+     * @throws ApiException
+     */
+    @GetMapping("/score-add/{countryclub_id}/{start_course}/{end_course}")
+    public ModelAndView scoreAddDetailForm(HttpServletRequest request, @PathVariable String countryclub_id, 
+    		@PathVariable String start_course, @PathVariable String end_course, 
+    		HttpSession session) throws IOException, ApiException {    	
+    	ModelAndView mv = new ModelAndView();
+    	
+    	LoginVo loginVo = (LoginVo)session.getAttribute("login");
+    	UserVo userVo = null;		
+    	long userId = -1;
+    	
+    	if (loginVo != null)
+    		userId = loginVo.getUserid();
+    	
+    	LOGGER.debug("Login userID : " + userId);
+    	
+    	GolfVo golfVo = service.getGolfInfo(" ", " ", countryclub_id);
+    	
+        // Hole에 대한 PAR 정보를 조회
+    	FarVo parInfo1 =  service.getParInfo(" ", " ", countryclub_id, start_course);   // 골프장 Par 정보 상세 정보 조회 (Start Course)
+    	FarVo parInfo2 =  service.getParInfo(" ", " ", countryclub_id, end_course);     // 골프장 Par 정보 상세 정보 조회 (End Course)
+    	
+    	// PAR에 대한 SUM 합계
+    	parInfo1.setSum(parInfo1.getHole1()+parInfo1.getHole2()+parInfo1.getHole3()+parInfo1.getHole4()+parInfo1.getHole5()+parInfo1.getHole6()
+    					+parInfo1.getHole7()+parInfo1.getHole8()+parInfo1.getHole9());
+    	parInfo2.setSum(parInfo2.getHole1()+parInfo2.getHole2()+parInfo2.getHole3()+parInfo2.getHole4()+parInfo2.getHole5()+parInfo2.getHole6()
+		+parInfo2.getHole7()+parInfo2.getHole8()+parInfo2.getHole9());
+    	
+        mv.addObject("parInfo1", parInfo1);
+        mv.addObject("parInfo2", parInfo2);
+        
+        mv.addObject("golfInfo", golfVo); 
+    	mv.addObject("scoreInfo",      null);
+    	mv.addObject("setMenu",        "score");
+    	mv.setViewName("mobile/score/score_add");
+    	
+        return mv;
+    }
+    
+    /**
+     * 스코어 등록 화면에서 데이터를 받아와서 저장한다. 
+     * 
+     * @param scoreVo
+     * @param request
+     * @param session
+     * @param mv
+     * @param redirectAttributes
+     * @return
+     * @throws ApiException
+     * @throws IOException
+     */
+    @PostMapping(value="/score/scoreSave")
+    public ModelAndView scoreSave(ScoreVo scoreVo, HttpServletRequest request, HttpSession session, ModelAndView mv, RedirectAttributes redirectAttributes) throws ApiException, IOException 
+    {
+    	LOGGER.debug("==================== MobileController scoreSave Start : ===================");
+    	LoginVo loginVo = (LoginVo)session.getAttribute("login");
+    	UserVo userVo = null;		
+    	long userId = -1;
+    	
+    	if (loginVo != null)
+    		userId = loginVo.getUserid();
+    	
+    	scoreVo.setUser_id((int)userId);	// 사용자 ID
+    	
+    	SCScoreInfo info = scoreService.save(scoreVo);
+    	
+    	GolfVo golfVo = service.getGolfInfo(" ", " ", scoreVo.getContryclub_id());
+    	
+        // Hole에 대한 PAR 정보를 조회
+    	FarVo parInfo1 =  service.getParInfo(" ", " ", scoreVo.getContryclub_id(), String.valueOf(scoreVo.getStart_course()));   // 골프장 Par 정보 상세 정보 조회 (Start Course)
+    	FarVo parInfo2 =  service.getParInfo(" ", " ", scoreVo.getContryclub_id(), String.valueOf(scoreVo.getEnd_course()));     // 골프장 Par 정보 상세 정보 조회 (End Course)
+    	
+    	// PAR에 대한 SUM 합계
+    	parInfo1.setSum(parInfo1.getHole1()+parInfo1.getHole2()+parInfo1.getHole3()+parInfo1.getHole4()+parInfo1.getHole5()+parInfo1.getHole6()
+    					+parInfo1.getHole7()+parInfo1.getHole8()+parInfo1.getHole9());
+    	parInfo2.setSum(parInfo2.getHole1()+parInfo2.getHole2()+parInfo2.getHole3()+parInfo2.getHole4()+parInfo2.getHole5()+parInfo2.getHole6()
+		+parInfo2.getHole7()+parInfo2.getHole8()+parInfo2.getHole9());
+    	
+        mv.addObject("parInfo1", parInfo1);
+        mv.addObject("parInfo2", parInfo2);
+        
+        
+    	mv.addObject("scoreInfo",      scoreVo);
+    	mv.addObject("setMenu",        "score");
+    	mv.addObject("message",        "저장을 완료하였습니다!!!");
+    	mv.setViewName("mobile/score/score_add");
+    	
+    	LOGGER.debug("==================== MobileController scoreSave End : ===================");
+    	return mv;
+    }
+    
+    
+    
+    /**
      * Mobile Index Page
      * 내가 등록한 스코어 리스트를 조회한다. 
      * 1개월, 2개월, 3개월, 월별 리스트 데이터를 가져온다. 
@@ -327,6 +509,8 @@ public class MobileController extends CommonController {
     	ObjectMapper mapper = new ObjectMapper();
     	ScoreMaster scoreInfo = mapper.readValue(rtnJson, ScoreMaster.class);
 
+    	GolfVo golfVo = service.getGolfInfo(" ", " ", countryclub_id);
+    	
         // Hole에 대한 PAR 정보를 조회
     	FarVo parInfo1 =  service.getParInfo(" ", " ", countryclub_id, start_course);   // 골프장 Par 정보 상세 정보 조회 (Start Course)
     	FarVo parInfo2 =  service.getParInfo(" ", " ", countryclub_id, end_course);     // 골프장 Par 정보 상세 정보 조회 (End Course)
@@ -340,17 +524,17 @@ public class MobileController extends CommonController {
         mv.addObject("parInfo1", parInfo1);
         mv.addObject("parInfo2", parInfo2);
         
-        
+        mv.addObject("golfInfo", golfVo); 
     	mv.addObject("scoreInfo",      scoreInfo);
     	mv.addObject("setMenu",        "score");
-    	mv.setViewName("mobile/score_add");
+    	mv.setViewName("mobile/score/score_add");
     	
         return mv;
     }
     
     
     /**
-     * Mobile 스코어 등록
+     * Mobile 스코어 등록 (Not used)
      * 
      * @param request
      * @return
@@ -367,7 +551,7 @@ public class MobileController extends CommonController {
     	
     	List<GolfVo> golfList = mapper.convertValue(map.get("golfList"), TypeFactory.defaultInstance().constructCollectionType(List.class, GolfVo.class));
     	mv.addObject("golfList", golfList);
-    	mv.setViewName("mobile/score_add");
+    	mv.setViewName("mobile/score/score_add");
     	mv.addObject("setMenu", "score");
     	    	    	
     	rtnJson = restService.getAdvList();   //  광고관리 정보 조회 (use_yn이 Y인 것에 대해서만 화면상에 보여 주어야 한다)

@@ -25,7 +25,9 @@
         <java.version>1.8</java.version>
         <org.springframework-version>4.3.13.RELEASE</org.springframework-version>
     </properties>
+    
     <dependencies>
+	
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
@@ -146,6 +148,18 @@
             <groupId>org.imgscalr</groupId>
             <artifactId>imgscalr-lib</artifactId>
             <version>4.2</version>
+        </dependency>
+        
+        <!--  JPA  -->
+        <dependency>
+        	<groupId>org.springframework.data</groupId>
+        	<artifactId>spring-data-jpa</artifactId>
+        	<version>1.9.0.RELEASE</version>
+        </dependency>
+        <dependency>
+        	<groupId>org.hibernate</groupId>
+        	<artifactId>hibernate-entitymanager</artifactId>
+        	<version>4.3.8.Final</version>
         </dependency>
     </dependencies>
     
