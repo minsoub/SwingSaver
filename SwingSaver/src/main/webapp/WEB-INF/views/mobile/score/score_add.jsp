@@ -447,125 +447,128 @@
         <!-- green Modal -->
 <script>
 $(document).ready(function(){
-	// Stroke 변경에 의해서 다시 재계산한다.
-	function ScoreChk1()
-	{
-		var sum = 0;
-		var stroke_sum = 0;
-		
-		console.log($('#hole1').val());  // par
-		if ($('#stroke1').val() != "") $('#score1').val($('#stroke1').val() - $('#hole1').text());
-		if ($('#stroke2').val() != "") $('#score2').val($('#stroke2').val() - $('#hole2').text());
-		if ($('#stroke3').val() != "") $('#score3').val($('#stroke3').val() - $('#hole3').text());
-		if ($('#stroke4').val() != "") $('#score4').val($('#stroke4').val() - $('#hole4').text());
-		if ($('#stroke5').val() != "") $('#score5').val($('#stroke5').val() - $('#hole5').text());
-		if ($('#stroke6').val() != "") $('#score6').val($('#stroke6').val() - $('#hole6').text());
-		if ($('#stroke7').val() != "") $('#score7').val($('#stroke7').val() - $('#hole7').text());
-		if ($('#stroke8').val() != "") $('#score8').val($('#stroke8').val() - $('#hole8').text());
-		if ($('#stroke9').val() != "") $('#score9').val($('#stroke9').val() - $('#hole9').text());
-		
-		if ($('#stroke1').val() != "") stroke_sum  += $('#stroke1').val();
-		if ($('#stroke2').val() != "") stroke_sum  += $('#stroke2').val();
-		if ($('#stroke3').val() != "") stroke_sum  += $('#stroke3').val();
-		if ($('#stroke4').val() != "") stroke_sum  += $('#stroke4').val();
-		if ($('#stroke5').val() != "") stroke_sum  += $('#stroke5').val();
-		if ($('#stroke6').val() != "") stroke_sum  += $('#stroke6').val();
-		if ($('#stroke7').val() != "") stroke_sum  += $('#stroke7').val();
-		if ($('#stroke8').val() != "") stroke_sum  += $('#stroke8').val();
-		if ($('#stroke9').val() != "") stroke_sum  += $('#stroke9').val();	
-		$('#strokesum1').val(stroke_sum);
-		
-		if ($('#score1').val() != "") sum += parseInt($('#score1').val());
-		if ($('#score2').val() != "") sum += parseInt($('#score2').val());
-		if ($('#score3').val() != "") sum += parseInt($('#score3').val());
-		if ($('#score4').val() != "") sum += parseInt($('#score4').val());
-		if ($('#score5').val() != "") sum += parseInt($('#score5').val());
-		if ($('#score6').val() != "") sum += parseInt($('#score6').val());
-		if ($('#score7').val() != "") sum += parseInt($('#score7').val());
-		if ($('#score8').val() != "") sum += parseInt($('#score8').val());
-		if ($('#score9').val() != "") sum += parseInt($('#score9').val());	
-		$('#scoresum1').val(sum);
-	}
-	
-	function ScoreChk2()
-	{
-		var sum = 0;
-		var stroke_sum = 0;
-		
-		console.log($('#hole1').val());  // par
-		if ($('#stroke10').val() != "") $('#score10').val($('#stroke10').val() - $('#hole10').text());
-		if ($('#stroke11').val() != "") $('#score11').val($('#stroke11').val() - $('#hole11').text());
-		if ($('#stroke12').val() != "") $('#score12').val($('#stroke12').val() - $('#hole12').text());
-		if ($('#stroke13').val() != "") $('#score13').val($('#stroke13').val() - $('#hole13').text());
-		if ($('#stroke14').val() != "") $('#score14').val($('#stroke14').val() - $('#hole14').text());
-		if ($('#stroke15').val() != "") $('#score15').val($('#stroke15').val() - $('#hole15').text());
-		if ($('#stroke16').val() != "") $('#score16').val($('#stroke16').val() - $('#hole16').text());
-		if ($('#stroke17').val() != "") $('#score17').val($('#stroke17').val() - $('#hole17').text());
-		if ($('#stroke18').val() != "") $('#score18').val($('#stroke18').val() - $('#hole18').text());
-		
-		if ($('#stroke10').val() != "") stroke_sum  += $('#stroke10').val();
-		if ($('#stroke11').val() != "") stroke_sum  += $('#stroke11').val();
-		if ($('#stroke12').val() != "") stroke_sum  += $('#stroke12').val();
-		if ($('#stroke13').val() != "") stroke_sum  += $('#stroke13').val();
-		if ($('#stroke15').val() != "") stroke_sum  += $('#stroke14').val();
-		if ($('#stroke15').val() != "") stroke_sum  += $('#stroke15').val();
-		if ($('#stroke16').val() != "") stroke_sum  += $('#stroke16').val();
-		if ($('#stroke17').val() != "") stroke_sum  += $('#stroke17').val();
-		if ($('#stroke18').val() != "") stroke_sum  += $('#stroke18').val();	
-		$('#strokesum2').val(stroke_sum);
-		
-		if ($('#score10').val() != "") sum += parseInt($('#score10').val());
-		if ($('#score11').val() != "") sum += parseInt($('#score11').val());
-		if ($('#score12').val() != "") sum += parseInt($('#score12').val());
-		if ($('#score13').val() != "") sum += parseInt($('#score13').val());
-		if ($('#score14').val() != "") sum += parseInt($('#score14').val());
-		if ($('#score15').val() != "") sum += parseInt($('#score15').val());
-		if ($('#score16').val() != "") sum += parseInt($('#score16').val());
-		if ($('#score17').val() != "") sum += parseInt($('#score17').val());
-		if ($('#score18').val() != "") sum += parseInt($('#score18').val());	
-		$('#scoresum2').val(sum);
-	}	
-	
-	// Putter 퍼팅수 1
-	function putterChk1()
-	{
-		var sum = 0;
-
-		if ($('#putter1').val() != "") sum  += $('#putter1').val();
-		if ($('#putter2').val() != "") sum  += $('#putter2').val();
-		if ($('#putter3').val() != "") sum  += $('#putter3').val();
-		if ($('#putter4').val() != "") sum  += $('#putter4').val();
-		if ($('#putter5').val() != "") sum  += $('#putter5').val();
-		if ($('#putter6').val() != "") sum  += $('#putter6').val();
-		if ($('#putter7').val() != "") sum  += $('#putter7').val();
-		if ($('#putter8').val() != "") sum  += $('#putter8').val();
-		if ($('#putter9').val() != "") sum  += $('#putter9').val();	
-		$('#puttersum1').val(sum);
-	}
-	function putterChk2()
-	{
-		var sum = 0;
-
-		if ($('#putter10').val() != "") sum  += $('#putter10').val();
-		if ($('#putter11').val() != "") sum  += $('#putter11').val();
-		if ($('#putter12').val() != "") sum  += $('#putter12').val();
-		if ($('#putter13').val() != "") sum  += $('#putter13').val();
-		if ($('#putter14').val() != "") sum  += $('#putter14').val();
-		if ($('#putter15').val() != "") sum  += $('#putter15').val();
-		if ($('#putter16').val() != "") sum  += $('#putter16').val();
-		if ($('#putter17').val() != "") sum  += $('#putter17').val();
-		if ($('#putter18').val() != "") sum  += $('#putter18').val();	
-		$('#puttersum2').val(sum);
-	}	
-	
 	
     $("#saveScore").click(function(){
     	if (confirm("입력된 정보를 저장하시겠습니까?"))
     	{
-    		forms1.action = "/m/score/scoreSave";
-    		forms1.submit();
+    		frm.action = "/m/score/scoreSave";
+    		frm.method = "POST";
+    		frm.submit();
     	}
     });	
 });
+
+// Stroke 변경에 의해서 다시 재계산한다.
+function strokeChk1(obj)
+{
+	var sum = 0;
+	var stroke_sum = 0;
+	
+	console.log($('#hole1').val());  // par
+	if ($('#stroke1').val() != "") $('#score1').val($('#stroke1').val() - $('#hole1').text());
+	if ($('#stroke2').val() != "") $('#score2').val($('#stroke2').val() - $('#hole2').text());
+	if ($('#stroke3').val() != "") $('#score3').val($('#stroke3').val() - $('#hole3').text());
+	if ($('#stroke4').val() != "") $('#score4').val($('#stroke4').val() - $('#hole4').text());
+	if ($('#stroke5').val() != "") $('#score5').val($('#stroke5').val() - $('#hole5').text());
+	if ($('#stroke6').val() != "") $('#score6').val($('#stroke6').val() - $('#hole6').text());
+	if ($('#stroke7').val() != "") $('#score7').val($('#stroke7').val() - $('#hole7').text());
+	if ($('#stroke8').val() != "") $('#score8').val($('#stroke8').val() - $('#hole8').text());
+	if ($('#stroke9').val() != "") $('#score9').val($('#stroke9').val() - $('#hole9').text());
+	
+	if ($('#stroke1').val() != "") stroke_sum  += parseInt($('#stroke1').val());
+	if ($('#stroke2').val() != "") stroke_sum  += parseInt($('#stroke2').val());
+	if ($('#stroke3').val() != "") stroke_sum  += parseInt($('#stroke3').val());
+	if ($('#stroke4').val() != "") stroke_sum  += parseInt($('#stroke4').val());
+	if ($('#stroke5').val() != "") stroke_sum  += parseInt($('#stroke5').val());
+	if ($('#stroke6').val() != "") stroke_sum  += parseInt($('#stroke6').val());
+	if ($('#stroke7').val() != "") stroke_sum  += parseInt($('#stroke7').val());
+	if ($('#stroke8').val() != "") stroke_sum  += parseInt($('#stroke8').val());
+	if ($('#stroke9').val() != "") stroke_sum  += parseInt($('#stroke9').val());	
+	$('#strokesum1').val(stroke_sum);
+	
+	if ($('#score1').val() != "") sum += parseInt($('#score1').val());
+	if ($('#score2').val() != "") sum += parseInt($('#score2').val());
+	if ($('#score3').val() != "") sum += parseInt($('#score3').val());
+	if ($('#score4').val() != "") sum += parseInt($('#score4').val());
+	if ($('#score5').val() != "") sum += parseInt($('#score5').val());
+	if ($('#score6').val() != "") sum += parseInt($('#score6').val());
+	if ($('#score7').val() != "") sum += parseInt($('#score7').val());
+	if ($('#score8').val() != "") sum += parseInt($('#score8').val());
+	if ($('#score9').val() != "") sum += parseInt($('#score9').val());	
+	$('#scoresum1').val(sum);
+}
+
+function strokeChk2(obj)
+{
+	var sum = 0;
+	var stroke_sum = 0;
+	
+	console.log($('#hole1').val());  // par
+	if ($('#stroke10').val() != "") $('#score10').val($('#stroke10').val() - $('#hole10').text());
+	if ($('#stroke11').val() != "") $('#score11').val($('#stroke11').val() - $('#hole11').text());
+	if ($('#stroke12').val() != "") $('#score12').val($('#stroke12').val() - $('#hole12').text());
+	if ($('#stroke13').val() != "") $('#score13').val($('#stroke13').val() - $('#hole13').text());
+	if ($('#stroke14').val() != "") $('#score14').val($('#stroke14').val() - $('#hole14').text());
+	if ($('#stroke15').val() != "") $('#score15').val($('#stroke15').val() - $('#hole15').text());
+	if ($('#stroke16').val() != "") $('#score16').val($('#stroke16').val() - $('#hole16').text());
+	if ($('#stroke17').val() != "") $('#score17').val($('#stroke17').val() - $('#hole17').text());
+	if ($('#stroke18').val() != "") $('#score18').val($('#stroke18').val() - $('#hole18').text());
+	
+	if ($('#stroke10').val() != "") stroke_sum  += parseInt($('#stroke10').val());
+	if ($('#stroke11').val() != "") stroke_sum  += parseInt($('#stroke11').val());
+	if ($('#stroke12').val() != "") stroke_sum  += parseInt($('#stroke12').val());
+	if ($('#stroke13').val() != "") stroke_sum  += parseInt($('#stroke13').val());
+	if ($('#stroke15').val() != "") stroke_sum  += parseInt($('#stroke14').val());
+	if ($('#stroke15').val() != "") stroke_sum  += parseInt($('#stroke15').val());
+	if ($('#stroke16').val() != "") stroke_sum  += parseInt($('#stroke16').val());
+	if ($('#stroke17').val() != "") stroke_sum  += parseInt($('#stroke17').val());
+	if ($('#stroke18').val() != "") stroke_sum  += parseInt($('#stroke18').val());	
+	$('#strokesum2').val(stroke_sum);
+	
+	if ($('#score10').val() != "") sum += parseInt($('#score10').val());
+	if ($('#score11').val() != "") sum += parseInt($('#score11').val());
+	if ($('#score12').val() != "") sum += parseInt($('#score12').val());
+	if ($('#score13').val() != "") sum += parseInt($('#score13').val());
+	if ($('#score14').val() != "") sum += parseInt($('#score14').val());
+	if ($('#score15').val() != "") sum += parseInt($('#score15').val());
+	if ($('#score16').val() != "") sum += parseInt($('#score16').val());
+	if ($('#score17').val() != "") sum += parseInt($('#score17').val());
+	if ($('#score18').val() != "") sum += parseInt($('#score18').val());	
+	$('#scoresum2').val(sum);
+}	
+
+// Putter 퍼팅수 1
+function putterChk1(obj)
+{
+	var sum = 0;
+
+	if ($('#putter1').val() != "") sum  += parseInt($('#putter1').val());
+	if ($('#putter2').val() != "") sum  += parseInt($('#putter2').val());
+	if ($('#putter3').val() != "") sum  += parseInt($('#putter3').val());
+	if ($('#putter4').val() != "") sum  += parseInt($('#putter4').val());
+	if ($('#putter5').val() != "") sum  += parseInt($('#putter5').val());
+	if ($('#putter6').val() != "") sum  += parseInt($('#putter6').val());
+	if ($('#putter7').val() != "") sum  += parseInt($('#putter7').val());
+	if ($('#putter8').val() != "") sum  += parseInt($('#putter8').val());
+	if ($('#putter9').val() != "") sum  += parseInt($('#putter9').val());	
+	$('#puttersum1').val(sum);
+}
+function putterChk2(obj)
+{
+	var sum = 0;
+
+	if ($('#putter10').val() != "") sum  += parseInt($('#putter10').val());
+	if ($('#putter11').val() != "") sum  += parseInt($('#putter11').val());
+	if ($('#putter12').val() != "") sum  += parseInt($('#putter12').val());
+	if ($('#putter13').val() != "") sum  += parseInt($('#putter13').val());
+	if ($('#putter14').val() != "") sum  += parseInt($('#putter14').val());
+	if ($('#putter15').val() != "") sum  += parseInt($('#putter15').val());
+	if ($('#putter16').val() != "") sum  += parseInt($('#putter16').val());
+	if ($('#putter17').val() != "") sum  += parseInt($('#putter17').val());
+	if ($('#putter18').val() != "") sum  += parseInt($('#putter18').val());	
+	$('#puttersum2').val(sum);
+}	
+
+</script>
 
 <%@include file="/WEB-INF/views/mobile/include/bottom.jsp"%>

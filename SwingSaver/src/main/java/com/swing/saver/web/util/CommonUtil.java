@@ -37,6 +37,8 @@ public class CommonUtil {
 	public static final String facebookClientId = "187211659375164";
 	public static final String facebookKey = "a163d69ecb147510993e83943a46db58";
 	
+	public static final String jasypt_data = "swingsaver.co.kr.key";
+	
 	/**
 	 * 현재 날짜를 yyyyMMdd 형식으로 리턴한다.
 	 * @return

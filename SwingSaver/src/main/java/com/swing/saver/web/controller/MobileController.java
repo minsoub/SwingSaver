@@ -20,6 +20,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,7 +41,7 @@ import com.swing.saver.web.entity.GolfVo;
 import com.swing.saver.web.entity.LoginVo;
 import com.swing.saver.web.entity.ScoreListVo;
 import com.swing.saver.web.entity.ScoreMaster;
-import com.swing.saver.web.entity.ScoreVo;
+import com.swing.saver.web.entity.ScoreRequest;
 import com.swing.saver.web.entity.UserVo;
 import com.swing.saver.web.exception.ApiException;
 import com.swing.saver.web.service.MobileService;
@@ -435,7 +436,7 @@ public class MobileController extends CommonController {
      * @throws IOException
      */
     @PostMapping(value="/score/scoreSave")
-    public ModelAndView scoreSave(ScoreVo scoreVo, HttpServletRequest request, HttpSession session, ModelAndView mv, RedirectAttributes redirectAttributes) throws ApiException, IOException 
+    public ModelAndView scoreSave(ScoreRequest scoreVo, HttpServletRequest request, HttpSession session, ModelAndView mv, RedirectAttributes redirectAttributes) throws ApiException, IOException 
     {
     	LOGGER.debug("==================== MobileController scoreSave Start : ===================");
     	LoginVo loginVo = (LoginVo)session.getAttribute("login");
@@ -445,15 +446,15 @@ public class MobileController extends CommonController {
     	if (loginVo != null)
     		userId = loginVo.getUserid();
     	
-    	scoreVo.setUser_id((int)userId);	// 사용자 ID
+    	scoreVo.setUser_id(String.valueOf(userId));	// 사용자 ID
     	
     	SCScoreInfo info = scoreService.save(scoreVo);
     	
-    	GolfVo golfVo = service.getGolfInfo(" ", " ", scoreVo.getContryclub_id());
+    	GolfVo golfVo = service.getGolfInfo(" ", " ", scoreVo.getCountryclub_id());
     	
         // Hole에 대한 PAR 정보를 조회
-    	FarVo parInfo1 =  service.getParInfo(" ", " ", scoreVo.getContryclub_id(), String.valueOf(scoreVo.getStart_course()));   // 골프장 Par 정보 상세 정보 조회 (Start Course)
-    	FarVo parInfo2 =  service.getParInfo(" ", " ", scoreVo.getContryclub_id(), String.valueOf(scoreVo.getEnd_course()));     // 골프장 Par 정보 상세 정보 조회 (End Course)
+    	FarVo parInfo1 =  service.getParInfo(" ", " ", scoreVo.getCountryclub_id(), String.valueOf(scoreVo.getStart_course()));   // 골프장 Par 정보 상세 정보 조회 (Start Course)
+    	FarVo parInfo2 =  service.getParInfo(" ", " ", scoreVo.getCountryclub_id(), String.valueOf(scoreVo.getEnd_course()));     // 골프장 Par 정보 상세 정보 조회 (End Course)
     	
     	// PAR에 대한 SUM 합계
     	parInfo1.setSum(parInfo1.getHole1()+parInfo1.getHole2()+parInfo1.getHole3()+parInfo1.getHole4()+parInfo1.getHole5()+parInfo1.getHole6()
@@ -462,7 +463,7 @@ public class MobileController extends CommonController {
 		+parInfo2.getHole7()+parInfo2.getHole8()+parInfo2.getHole9());
     	
         mv.addObject("parInfo1", parInfo1);
-        mv.addObject("parInfo2", parInfo2);
+        mv.addObject("parInfo2", parInfo2); 
         
         
     	mv.addObject("scoreInfo",      scoreVo);

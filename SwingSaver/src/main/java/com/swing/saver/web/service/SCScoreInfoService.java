@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.swing.saver.web.domain.SCScoreInfo;
-import com.swing.saver.web.entity.ScoreVo;
+import com.swing.saver.web.entity.ScoreRequest;
 import com.swing.saver.web.repository.SCScoreInfoRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ public class SCScoreInfoService {
 	 * @return
 	 */
 	@Transactional
-	public SCScoreInfo save(ScoreVo dto)
+	public SCScoreInfo save(ScoreRequest dto)
 	{
 		SCScoreInfo request = SCScoreInfo.builder().scoreVo(dto).build();
 		
