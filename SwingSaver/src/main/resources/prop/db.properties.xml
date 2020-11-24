@@ -2,7 +2,7 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd" >
 <properties>
     <entry key="db.driverClassName">oracle.jdbc.driver.OracleDriver</entry>
-    <entry key="db.jdbcUrl">ENC(yWk8BN+gDznNW8lFJ8EVQUhVTxvKQgqs9S0dY0gopGalycUn7hrZhSCwFdvkpTdPndvsvKW3XIiQtzti1wqUFkFyv4ditnPQaeiO8d2n8uH5c1EGKHkad9NqwqOdZaqh)</entry>
+    <entry key="db.jdbcUrl">ENC(9dvo2b9nyohnW0hfMvNJmCZX+sdYfGxmiV4LC3ssM99y+wm49FDgYIsgNFH8lDOY/MzOiJzb7sFgJYdSYc0VwkxPjl7LPvIla+hLMIUathR366zZx2qVJF8P40MfWtOb)</entry>
     <entry key="db.username">ENC(1kw1hUlgXzMfVUJQUCGwRg==)</entry>
     <entry key="db.password">ENC(9eyzJESVofglMtw+TJH9krZiPaHcTksnhyDEWw7hAuo=)</entry>
 </properties>

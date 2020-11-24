@@ -177,7 +177,7 @@
         	<version>4.3.8.Final</version>
         </dependency  -->
         
-        <!-- Jasypt  -->
+        <!-- Jasypt : encrypt/decrypt -->
         <dependency>
         	<groupId>org.jasypt</groupId>
         	<artifactId>jasypt-spring31</artifactId>
@@ -186,6 +186,7 @@
 		</dependency>
         
 		<!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+		<!--  Strings.IsNullorEmpty use   -->
 		<dependency>
     		<groupId>com.google.guava</groupId>
     		<artifactId>guava</artifactId>
@@ -212,6 +213,14 @@
     		<version>12.1</version>
 		</dependency>
 		        
+        <!-- junit 5, unit test -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.3.1</version>
+            <scope>test</scope>
+        </dependency>
+        		        
     </dependencies>
     
     <packaging>war</packaging>
