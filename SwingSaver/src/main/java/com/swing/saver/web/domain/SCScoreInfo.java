@@ -14,11 +14,13 @@ import com.swing.saver.web.entity.ScoreRequest;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @DynamicInsert			// Insert시 null 필드 제외  @DynamicUpdate => update시 null인 필드 제외
 @IdClass(SCScoreInfoPK.class)
+@NoArgsConstructor
 public class SCScoreInfo {
 
 	@Id
@@ -164,6 +166,6 @@ public class SCScoreInfo {
 		this.putter17 = Strings.isNullOrEmpty(scoreVo.getPutter17()) == true ? null : Integer.parseInt(scoreVo.getPutter17());
 		this.putter18 = Strings.isNullOrEmpty(scoreVo.getPutter18()) == true ? null : Integer.parseInt(scoreVo.getPutter18());
 		this.description = scoreVo.getDescription();
-		// this.dateinserted = 
+		this.dateinserted = new Timestamp(System.currentTimeMillis()); 
 	}
 }

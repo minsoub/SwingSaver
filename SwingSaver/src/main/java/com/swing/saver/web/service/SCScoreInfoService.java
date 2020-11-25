@@ -1,5 +1,6 @@
 package com.swing.saver.web.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class SCScoreInfoService {
 
+	@Autowired
 	private SCScoreInfoRepository repository;
 	
 	/**

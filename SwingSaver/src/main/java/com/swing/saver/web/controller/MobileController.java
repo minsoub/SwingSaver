@@ -465,7 +465,7 @@ public class MobileController extends CommonController {
         mv.addObject("parInfo1", parInfo1);
         mv.addObject("parInfo2", parInfo2); 
         
-        
+        mv.addObject("golfInfo", golfVo);
     	mv.addObject("scoreInfo",      scoreVo);
     	mv.addObject("setMenu",        "score");
     	mv.addObject("message",        "저장을 완료하였습니다!!!");

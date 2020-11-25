@@ -9,8 +9,7 @@
     <section id="contents" class="">
     
     <form name="frm" id="frm">
-    <input type="hidden" name="visit_date" id="visit_date" value="<c:if test='${scoreInfo ne null}'>${scoreInfo.visit_date}</c:if>
-                	<c:if test='${scoreInfo eq null}'><fmt:formatDate value="${now}" pattern="yyyyMMdd" /></c:if>">
+    <input type="hidden" name="visit_date" id="visit_date" value="<c:if test='${scoreInfo ne null}'>${scoreInfo.visit_date}</c:if><c:if test='${scoreInfo eq null}'><fmt:formatDate value="${now}" pattern="yyyyMMdd" /></c:if>">
     <input type="hidden" name="countryclub_id" id="countryclub_id" value="${golfInfo.countryclub_id}">
     <input type="hidden" name="start_course" id="start_course" value="${parInfo1.course}">
     <input type="hidden" name="end_course" id="end_course" value="${parInfo2.course}">
@@ -447,6 +446,8 @@
         <!-- green Modal -->
 <script>
 $(document).ready(function(){
+	
+	if ("${message}" != "") alert("${message}");
 	
     $("#saveScore").click(function(){
     	if (confirm("입력된 정보를 저장하시겠습니까?"))
