@@ -4,8 +4,11 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.DynamicInsert;
 
@@ -38,6 +41,11 @@ public class SCScoreInfo {
 	@Id
 	@Column(name = "user_id")	
 	private Integer     user_id;             // 사용자 아이디
+	 
+	//@ManyToOne(targetEntity=CountryclubInfo.class, fetch=FetchType.LAZY)
+	//@JoinColumn(name="countryclub_id")
+	//private CountryclubInfo countryclubinfo;
+	
 	
 	private Integer     start_course;
 	private Integer     end_course;

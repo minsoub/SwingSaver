@@ -44,6 +44,7 @@ import com.swing.saver.web.entity.ScoreMaster;
 import com.swing.saver.web.entity.ScoreRequest;
 import com.swing.saver.web.entity.UserVo;
 import com.swing.saver.web.exception.ApiException;
+import com.swing.saver.web.response.ResponseScore;
 import com.swing.saver.web.service.MobileService;
 import com.swing.saver.web.service.RestService;
 import com.swing.saver.web.service.SCScoreInfoService;
@@ -284,21 +285,21 @@ public class MobileController extends CommonController {
     	
     	String search_period = fromDt + " ~ " + toDt;  // 검색 기간
     	
-    	// 주어진 기간으로 골프장 스코어 리스트를 조회한다. 
-    	String rtnJson = restService.getScoreList(userId, fromDt, toDt);
+//    	// 주어진 기간으로 골프장 스코어 리스트를 조회한다. 
+//    	String rtnJson = restService.getScoreList(userId, fromDt, toDt);    	
+//    	//String rtnJson = restService.golfRecommandList();
+//    	ObjectMapper mapper = new ObjectMapper();
+//    	Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});    	
+//    	mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);    	
+//    	List<ScoreListVo> scoreList = mapper.convertValue(map.get("scoreList"), TypeFactory.defaultInstance().constructCollectionType(List.class, ScoreListVo.class));
+//    	
+    	List<ResponseScore> scoreList = scoreService.getScoreList(userId, fromDt, toDt);
     	
-    	//String rtnJson = restService.golfRecommandList();
-    	ObjectMapper mapper = new ObjectMapper();
-    	Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});
-    	
-    	mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
-    	
-    	List<ScoreListVo> scoreList = mapper.convertValue(map.get("scoreList"), TypeFactory.defaultInstance().constructCollectionType(List.class, ScoreListVo.class));
     	mv.addObject("scoreList",      scoreList);
     	mv.addObject("search_period",  search_period);
     	mv.addObject("m",              param);
     	mv.addObject("setMenu",        "score");
-    	mv.setViewName("mobile/score");
+    	mv.setViewName("mobile/score/score_list");
     	
         return mv;
     }
