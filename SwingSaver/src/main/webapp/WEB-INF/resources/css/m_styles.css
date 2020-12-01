@@ -3729,6 +3729,7 @@ tbody {
 
 
 
+
 /*new qr*/
 
 .score-wrap{width: 100%; }
@@ -3738,7 +3739,7 @@ tbody {
 .sc-wrap{position: relative;display: inline-block; vertical-align: top;width: 55%;padding-left: 10px;margin: 0;}   
 .gol-logo{position: absolute; right: 0px;    width: 25%;    top: 2px;}
 .sc-wrap .name-date{font-size: 0.5em;margin: 0;}
-.sc-wrap .sc-box .cou{font-size: 10px; font-weight: bold;margin: 2px 1px 0 0;font-size: 0.5em;}
+.sc-wrap .sc-box .cou{font-size: 10px; font-weight: bold;margin: 2px 0 1px 0; font-size: 0.5em;}
 .sc-box table{width: 100%;text-align: center;border-collapse: collapse;}
 .sc-box table .hole th{background-color: #151b31;color: #fff;font-size:0.5em;padding:1px 0; font-weight: 200;}
 .sc-box table .par td{background-color: #1e3e75;color: #fff;font-size:0.5em;padding:1px 0; font-weight: 200;width: 22px;}
@@ -3748,7 +3749,7 @@ tbody {
 .sc-box .s-he{background-color: #8ccc40; border-radius: 30px;color:#fff;}
 .sc-box table .sc-gray{background-color: #ededed;font-size:0.5em;padding:1px 0;font-weight: 500;}
 .score-rd{background-color: #243055; width: 70px;height: 70px; border-radius: 70px;}    
-.bottom-box{position: absolute;width: 84%;background-image: url('/image/back-info.png');background-size: cover; right: 0;bottom: 5px;}
+.bottom-box{position: absolute;width: 84%;background-image: url('image/back-info.png');background-size: cover; right: 0;bottom: 5px;}
 .score-rd {bottom: 14px;position: absolute;text-align: center;line-height: 91px;left: 31px; top: -62px;}
 .score-rd p{font-size: 1.5em;color: #fff;margin: 13px!important;} 
 .score-rd p span{font-size: 14px;font-weight: 200;} 

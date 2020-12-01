@@ -8,14 +8,17 @@
             <div class="sc-search-wrap">
                 <h1>골프장 정보입력</h1>
                 <div class="btnSearch">
-                	<select class="sc-select countryclub_id" name="countryclub_id" id="countryclub_id">
-                	
+                	<select class="sc-select countryclub_id" name="countryclub_id" id="countryclub_id">                	
                 	</select> 
                 
                     <!-- input class="sc-Search" type="text" id="countryclub_name" name="countryclub_name" placeholder="골프장 이름을 검색해주세요">
                     <input type="image" src="/mobile/image/view-btn-bl.png" name="countryclub_search" id="btnSearchTop" class="btn_top_srarch" title="검색" value="검색" alt="검색" -->                
                 </div>
                 <br>
+                <input type="date" class="sc-dacl" id="visit_date" name="visit_date">                
+                <input type="time" class="sc-dacl" id="teeup_time" name="teeup_time"> 
+                
+                 
                 <select class="sc-select" id="start_course" name="start_course">
                 	<option value="">OUT 코스를 선택해주세요</option>
             	</select>
@@ -135,7 +138,23 @@ $(document).ready(function(){
     		$("#end_course").focus();    		
     		return;
     	}    
-    	location.href="/m/score-add/"+$("#countryclub_id").val()+"/"+$("#start_course").val()+"/"+$("#end_course").val();
+    	if ($("#visit_date").val() == "") {
+    		alert("일자를 입력하지 않았습니다!!!");
+    		$("#vist_date").focus();
+    		return;
+    	}
+    	if ($("#teeup_time").val() == "") {
+    		alert("티업시간을 입력하지 않았습니다!!!");
+    		$("#teeup_time").focus();
+    		return;
+    	}
+    	var url = "/m/score-add/"+$("#countryclub_id").val()+"/"+$("#start_course").val()+"/"+$("#end_course").val();
+    	var vd = $("#visit_date").val(); //.replace(/-/g, '');
+    	var tm = $("#teeup_time").val(); // .replace(/:/g, '');
+    	var param = "?visit_date="+vd+"&teeup_time="+tm;
+    	//alert(vd);
+    	//alert(tm);
+    	location.href=url+param;
     });
 });
 </script>

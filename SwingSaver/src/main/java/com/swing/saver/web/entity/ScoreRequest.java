@@ -11,7 +11,7 @@ public class ScoreRequest {
 	private String zone_id;
 	private String countryclub_id;			// 골프장 코드
 	private String countryclub_nm;			// 골프장명
-	private String seq_no;
+	private String teeup_time;
 	private String user_id;					// 사용자 순번 키
 	private String start_course;				// 시작코스
 	private String end_course;					// 종료코스
@@ -199,7 +199,7 @@ public class ScoreRequest {
 	
 	// 검색 조건
 	private String search_visit_date;
-	private String search_seq_no;
+	private String search_teeup_time;
 	private String search_countryclub_id;
 	private String stdate;
 	private String etdate;

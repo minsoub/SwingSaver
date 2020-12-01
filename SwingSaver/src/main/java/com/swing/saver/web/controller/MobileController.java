@@ -20,7 +20,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +31,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
+import com.swing.saver.web.domain.SCScoreDetailInfo;
 import com.swing.saver.web.domain.SCScoreInfo;
 import com.swing.saver.web.entity.AdverVo;
 import com.swing.saver.web.entity.AreaVo;
@@ -39,12 +39,13 @@ import com.swing.saver.web.entity.Constant;
 import com.swing.saver.web.entity.FarVo;
 import com.swing.saver.web.entity.GolfVo;
 import com.swing.saver.web.entity.LoginVo;
-import com.swing.saver.web.entity.ScoreListVo;
-import com.swing.saver.web.entity.ScoreMaster;
 import com.swing.saver.web.entity.ScoreRequest;
 import com.swing.saver.web.entity.UserVo;
 import com.swing.saver.web.exception.ApiException;
 import com.swing.saver.web.response.ResponseScore;
+import com.swing.saver.web.response.ResponseScoreAnalysys;
+import com.swing.saver.web.response.ResponseScoreDetail;
+import com.swing.saver.web.response.ResponseScoreSts;
 import com.swing.saver.web.service.MobileService;
 import com.swing.saver.web.service.RestService;
 import com.swing.saver.web.service.SCScoreInfoService;
@@ -305,6 +306,56 @@ public class MobileController extends CommonController {
     }
     
     /**
+     * Mobile 통계 페이지 
+     * 모바일 통계 페이지 출력
+     * 1개월, 2개월, 3개월, 월별 리스트 데이터를 가져온다. 
+     * parameter : m=1, m=2, m=3, m=list
+     * 
+     * @param request
+     * @return
+     */
+    @GetMapping("/score_sts")
+    public ModelAndView scoreStsForm(HttpServletRequest request, HttpSession session) throws IOException, ApiException {    	
+    	ModelAndView mv = new ModelAndView();
+    	
+    	LoginVo loginVo = (LoginVo)session.getAttribute("login");
+    	UserVo userVo = null;		
+    	long userId = -1;
+    	
+    	if (loginVo != null)
+    		userId = loginVo.getUserid();
+    	
+    	LOGGER.debug("Login userID : " + userId);
+    	
+    	String param = request.getParameter("p");
+    	LOGGER.debug(param);
+    	
+    	String fromDt = null;
+    	String toDt = null;
+    	if (param == null)
+    	{
+    		param = "1";
+    	}
+    	
+    	
+    	fromDt = CommonUtil.getDiffDate(Integer.parseInt(param), "yyyy.MM.dd");
+    	toDt   = CommonUtil.getCurrentFromatDate("yyyy.MM.dd");
+    	
+    	String search_period = fromDt + " ~ " + toDt;  // 검색 기간
+    	
+    	
+    	ResponseScoreSts scoreList = scoreService.getScoreInfoList(userId, fromDt, toDt);
+    	
+    	mv.addObject("sts", scoreList);
+    	mv.addObject("search_period",  search_period);
+    	mv.addObject("m",              param);
+        mv.setViewName("mobile/score/score_sts");
+        
+        return mv;
+    }
+    
+    
+    /**
      * 버이야 스코어 추가 초기 화면 
      * 골프장 이름, Out코스, In 코스 선택 화면 
      * 
@@ -399,6 +450,18 @@ public class MobileController extends CommonController {
     	if (loginVo != null)
     		userId = loginVo.getUserid();
     	
+    	// visit_date, teeup_time parameter
+    	String visit_date = request.getParameter("visit_date").toString();
+    	String teeup_time = request.getParameter("teeup_time").toString();
+    	
+    	if (visit_date == null || teeup_time == null)
+    	{
+    		mv.setViewName("redirect:/m/score");
+        	
+            return mv;
+    	}
+    	
+    	
     	LOGGER.debug("Login userID : " + userId);
     	
     	GolfVo golfVo = service.getGolfInfo(" ", " ", countryclub_id);
@@ -414,9 +477,10 @@ public class MobileController extends CommonController {
 		+parInfo2.getHole7()+parInfo2.getHole8()+parInfo2.getHole9());
     	
         mv.addObject("parInfo1", parInfo1);
-        mv.addObject("parInfo2", parInfo2);
-        
+        mv.addObject("parInfo2", parInfo2);        
         mv.addObject("golfInfo", golfVo); 
+        mv.addObject("visit_date", visit_date);
+        mv.addObject("teeup_time", teeup_time);
     	mv.addObject("scoreInfo",      null);
     	mv.addObject("setMenu",        "score");
     	mv.setViewName("mobile/score/score_add");
@@ -449,7 +513,16 @@ public class MobileController extends CommonController {
     	
     	scoreVo.setUser_id(String.valueOf(userId));	// 사용자 ID
     	
+    	scoreVo.setTeeup_time(scoreVo.getTeeup_time().replace(":", ""));
+    	scoreVo.setVisit_date(scoreVo.getVisit_date().replace("-", "").replace("-", ""));
+    	
     	SCScoreInfo info = scoreService.save(scoreVo);
+    	SCScoreDetailInfo detailInfo = scoreService.saveDetail(scoreVo);
+    	
+    	ResponseScoreDetail scoreInfo = ResponseScoreDetail.builder()
+				.score(info)
+				.detail(detailInfo)
+				.build();
     	
     	GolfVo golfVo = service.getGolfInfo(" ", " ", scoreVo.getCountryclub_id());
     	
@@ -467,7 +540,7 @@ public class MobileController extends CommonController {
         mv.addObject("parInfo2", parInfo2); 
         
         mv.addObject("golfInfo", golfVo);
-    	mv.addObject("scoreInfo",      scoreVo);
+    	mv.addObject("scoreInfo",      scoreInfo);
     	mv.addObject("setMenu",        "score");
     	mv.addObject("message",        "저장을 완료하였습니다!!!");
     	mv.setViewName("mobile/score/score_add");
@@ -476,6 +549,63 @@ public class MobileController extends CommonController {
     	return mv;
     }
     
+    /**
+     * 스코어 분석
+     * @param scoreVo
+     * @param request
+     * @param session
+     * @param mv
+     * @param redirectAttributes
+     * @return
+     * @throws ApiException
+     * @throws IOException
+     */
+    @PostMapping(value="/score/scoreAnalysis")
+    public ModelAndView scoreAnalysis(ScoreRequest scoreVo, HttpServletRequest request, HttpSession session, ModelAndView mv, RedirectAttributes redirectAttributes) throws ApiException, IOException 
+    {
+    	LOGGER.debug("==================== MobileController scoreAnaysis Start : ===================");
+    	LoginVo loginVo = (LoginVo)session.getAttribute("login");
+    	UserVo userVo = null;		
+    	long userId = -1;
+    	
+    	if (loginVo != null)
+    		userId = loginVo.getUserid();
+    	
+    	scoreVo.setUser_id(String.valueOf(userId));	// 사용자 ID
+    	
+    	scoreVo.setTeeup_time(scoreVo.getTeeup_time().replace(":", ""));
+    	scoreVo.setVisit_date(scoreVo.getVisit_date().replace("-", "").replace("-", ""));
+    	
+    	String teeup_time = scoreVo.getTeeup_time();
+    	String countryclub_id = scoreVo.getCountryclub_id();
+    	String visit_date = scoreVo.getVisit_date();
+    	String start_course = scoreVo.getStart_course();
+    	String end_course = scoreVo.getEnd_course();
+    	
+    	
+    	SCScoreInfo info = scoreService.findByKey(countryclub_id, visit_date, teeup_time, Long.valueOf(userId).intValue());
+    	SCScoreDetailInfo detail = scoreService.findDetailByKey(countryclub_id, visit_date, teeup_time, Long.valueOf(userId).intValue());
+    	
+    	ResponseScoreAnalysys scoreAnalysys = ResponseScoreAnalysys.builder()
+    											.score(info)
+    											.detail(detail)
+    											.build();
+    	
+    	GolfVo golfVo = service.getGolfInfo(" ", " ", scoreVo.getCountryclub_id());
+    	
+    	
+    	mv.addObject("golfInfo", golfVo);
+    	mv.addObject("scoreAnalysys", scoreAnalysys);
+    	mv.addObject("visit_date", scoreVo.getVisit_date());
+    	mv.addObject("teeup_time", scoreVo.getTeeup_time());
+    	mv.addObject("countryclub_id", scoreVo.getCountryclub_id());
+    	mv.addObject("start_course", scoreVo.getStart_course());
+    	mv.addObject("end_course", scoreVo.getEnd_course());
+    	mv.addObject("setMenu",        "score");
+    	mv.setViewName("mobile/score/score_analysis");
+    	LOGGER.debug("==================== MobileController scoreAnaysis End : ===================");
+    	return mv;
+    }
     
     
     /**
@@ -500,16 +630,26 @@ public class MobileController extends CommonController {
     	
     	LOGGER.debug("Login userID : " + userId);
     	
-    	String seq_no = request.getParameter("seq_no");
+    	String teeup_time = request.getParameter("teeup_time");
     	String countryclub_id = request.getParameter("countryclub_id");
     	String visit_date = request.getParameter("visit_date").replace(".", "").replace(".", "");
     	String start_course = request.getParameter("start_course");
     	String end_course = request.getParameter("end_course");
     	
-    	// seq_no를 통해서 스코어 상세 정보를 조회한다. 
-    	String rtnJson = restService.getScoreDetail(visit_date, countryclub_id, seq_no, String.valueOf(userId));
-    	ObjectMapper mapper = new ObjectMapper();
-    	ScoreMaster scoreInfo = mapper.readValue(rtnJson, ScoreMaster.class);
+    	
+    	SCScoreInfo info = scoreService.findByKey(countryclub_id, visit_date, teeup_time, Long.valueOf(userId).intValue());
+    	SCScoreDetailInfo detail = scoreService.findDetailByKey(countryclub_id, visit_date, teeup_time, Long.valueOf(userId).intValue());
+    	
+    	ResponseScoreDetail scoreInfo = ResponseScoreDetail.builder()
+    										.score(info)
+    										.detail(detail)
+    										.build();
+    	
+    	
+//    	// seq_no를 통해서 스코어 상세 정보를 조회한다. 
+//    	String rtnJson = restService.getScoreDetail(visit_date, countryclub_id, seq_no, String.valueOf(userId));
+//    	ObjectMapper mapper = new ObjectMapper();
+//    	ScoreMaster scoreInfo = mapper.readValue(rtnJson, ScoreMaster.class);
 
     	GolfVo golfVo = service.getGolfInfo(" ", " ", countryclub_id);
     	
@@ -567,38 +707,7 @@ public class MobileController extends CommonController {
     }
     
     
-    /**
-     * Mobile 통계 페이지 
-     * 모바일 통계 페이지 출력
-     * 
-     * @param request
-     * @return
-     */
-    @GetMapping("/score_sts")
-    public ModelAndView scoreStsForm(HttpServletRequest request) throws IOException, ApiException {    	
-    	ModelAndView mv = new ModelAndView();
-    	
-    	String rtnJson = restService.golfRecommandList();
-    	ObjectMapper mapper = new ObjectMapper();
-    	Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});
-    	
-    	mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
-    	
-    	List<GolfVo> golfList = mapper.convertValue(map.get("golfList"), TypeFactory.defaultInstance().constructCollectionType(List.class, GolfVo.class));
-    	mv.addObject("golfList", golfList);
-    	mv.setViewName("mobile/score_sts");
-    	mv.addObject("setMenu", "score");
-    	    	    	
-    	rtnJson = restService.getAdvList();   //  광고관리 정보 조회 (use_yn이 Y인 것에 대해서만 화면상에 보여 주어야 한다)
-    	ObjectMapper mapp= new ObjectMapper();
-        Map<String, Object> mapAd = mapp.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});
-        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
-        List<AdverVo> advList = mapp.convertValue(mapAd.get("advList"), TypeFactory.defaultInstance().constructCollectionType(List.class,AdverVo.class));
-        mv.addObject("advList", advList);
-    	
-        return mv;
-    }
-    
+  
     
     /**
      * Aicoach Form

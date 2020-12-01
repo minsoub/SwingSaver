@@ -8,21 +8,21 @@
         <div class="con-wrap">
             <h2>조회기간</h2>
             <div class="month-wrap">
-                <a href="" class="month-btn on">1개월</a>
-                <a href="" class="month-btn">2개월</a>
-                <a href="" class="month-btn">3개월</a>
-                <a href="" class="month-btn">월별</a>
-            </div>
+                <a href="/m/score_sts.do?p=1" class="<c:if test='${m eq "1"}'>month-btn on</c:if><c:if test='${m ne "1"}'>month-btn</c:if>">1개월</a>
+                <a href="/m/score_sts.do?p=2" class="<c:if test='${m eq "2"}'>month-btn on</c:if><c:if test='${m ne "2"}'>month-btn</c:if>">2개월</a>
+                <a href="/m/score_sts.do?p=3" class="<c:if test='${m eq "3"}'>month-btn on</c:if><c:if test='${m ne "3"}'>month-btn</c:if>">3개월</a>
+                <a href="/m/score_sts.do?p=12" class="<c:if test='${m eq "12"}'>month-btn on</c:if><c:if test='${m ne "12"}'>month-btn</c:if>">월별</a>
+            </div>  
 
             <div class="date-wrap">
-                <div class="sc-date">2020.02.22 ~ 2020.03.22</div>
-                <a href="#" class="sta-btn">리스트보기</a>
+                <div class="sc-date">${search_period}</div>
+                <a href="/m/score" class="sta-btn">리스트보기</a>
             </div>
             <div class="sta-box">
                 <h2 class="red">BEST SCORE</h2>
                 <div class="sc-box-wrap">
                     <div class="sc-box">
-                        <p>최고스코어<br/><strong>75</strong>타</p>
+                        <p>최고스코어<br/><strong>${sts.high_stroke}</strong>타</p>
                     </div>
                     <div class="sc-box">
                         <p>최대퍼팅거리<br/><strong>20.2</strong>M</p>
@@ -36,30 +36,30 @@
                 <h2 class="red">평균성적분석</h2>
                 <div class="sc-box-wrap">
                     <div class="sc-box-round">
-                        <p>평균타수<br/><strong>75</strong>타</p>
+                        <p>평균타수<br/><strong>${sts.avg_stroke}</strong>타</p>
                     </div>
                     <div class="sc-box-round">
                         <p>평균비거리<br/><strong>20.2</strong>M</p>
                     </div>
                     <div class="sc-box-round">
-                        <p>평균퍼팅수<br/><strong>1.95</strong>타</p>
+                        <p>평균퍼팅수<br/><strong>${sts.avg_put_cnt}</strong>타</p>
                     </div>
                 </div>
                 <div class="sc-box-wrap">
                     <div class="sc-box-round">
-                        <p>페어웨이안착<br/><strong>56.9</strong>%</p>
+                        <p>페어웨이안착<br/><strong>${sts.avg_fairway}</strong>%</p>
                     </div>
                     <div class="sc-box-round">
-                        <p>그린적중률<br/><strong>25</strong>%</p>
+                        <p>그린적중률<br/><strong>${sts.avg_greenon}</strong>%</p>
                     </div>
                     <div class="sc-box-round">
-                        <p>퍼팅패턴<br/><strong>JR</strong></p>
+                        <p>퍼팅패턴<br/><strong>${sts.avg_pattern}</strong></p>
                     </div>
                 </div>
             </div>
 
             <div class="sta-box">
-                <h2>평균타수 87타</h2>
+                <h2>평균타수 ${sts.avg_stroke}타</h2>
                 <div style="width:100%">
                     <canvas id="myChart1"></canvas>
                 </div>
@@ -164,7 +164,7 @@
             </script>           
            
             <div class="sta-box">
-                <h2>평균퍼팅수 1.86타</h2>
+                <h2>평균퍼팅수 ${sts.avg_put_cnt}타</h2>
                 <div style="width:100%">
                     <canvas id="myChart3"></canvas>
                 </div>
@@ -216,7 +216,7 @@
             </script>               
            
             <div class="sta-box">
-                <h2>페어웨이안착률 56.9%</h2>
+                <h2>페어웨이안착률 ${sts.avg_fairway}%</h2>
                 <div style="width:100%">
                     <canvas id="myChart4"></canvas>
                 </div>
@@ -268,7 +268,7 @@
             </script>               
                       
             <div class="sta-box">
-                <h2>그린적중률 25%</h2>
+                <h2>그린적중률 ${sts.avg_greenon}%</h2>
                 <div style="width:100%">
                     <canvas id="myChart5"></canvas>
                 </div>

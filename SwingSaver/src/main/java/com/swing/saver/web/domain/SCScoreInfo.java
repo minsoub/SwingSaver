@@ -35,8 +35,8 @@ public class SCScoreInfo {
 	private String countryclub_id;		// 골프장 ID
 	
 	@Id
-	@Column(name = "seq_no")	
-	private Integer     seq_no;              // 라운드 차수 (1, 2)
+	@Column(name = "teeup_time")	
+	private String     teeup_time;      // Teeup Time
 	
 	@Id
 	@Column(name = "user_id")	
@@ -113,7 +113,7 @@ public class SCScoreInfo {
 	{
 		this.visit_date = scoreVo.getVisit_date();
 		this.countryclub_id = scoreVo.getCountryclub_id();
-		this.seq_no = scoreVo.getSeq_no() == null ? null : Integer.parseInt(scoreVo.getSeq_no());
+		this.teeup_time = scoreVo.getTeeup_time();
 		this.user_id = scoreVo.getUser_id() == null ? null : Integer.parseInt(scoreVo.getUser_id());
 		this.start_course = Strings.isNullOrEmpty(scoreVo.getStart_course()) == true ? null : Integer.parseInt(scoreVo.getStart_course());
 		this.end_course = Strings.isNullOrEmpty(scoreVo.getEnd_course()) == true ? null : Integer.parseInt(scoreVo.getEnd_course());

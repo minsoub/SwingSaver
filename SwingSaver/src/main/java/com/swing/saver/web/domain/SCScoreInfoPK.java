@@ -10,6 +10,6 @@ public class SCScoreInfoPK implements Serializable{
 	
 	private String visit_date;			// 방문일자 : yyyyMMdd
 	private String countryclub_id;		// 골프장 ID
-	private int    seq_no;              // 라운드 차수 (1, 2)
+	private String teeup_time;          // Teeup Time
 	private int    user_id;             // 사용자 아이디
 }

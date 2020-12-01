@@ -18,7 +18,7 @@
             
             <div class="date-wrap">
                 <div class="sc-date">${search_period}</div>
-                <a href="/m/score_sts" class="sta-btn">통계보기</a>
+                <a href="/m/score_sts" class="sta-btn gray-btn">통계보기</a>
             </div>
             
         </div>
@@ -26,12 +26,12 @@
           <c:forEach var="scoreInfo" items="${scoreList}" varStatus="status">
             <div class="list">
                 <div class="list-info">
-                    <span>${scoreInfo.visit_date}</span>
-                    <h4>${scoreInfo.countryclub_nm}</h4>
+                    <span>${scoreInfo.visit_date_format} / ${scoreInfo.teeup_time_format}</span>
+                    <h4>${scoreInfo.countryclub_nm} <span>${scoreInfo.stroke_sum}(${scoreInfo.score_sum_format })</span></h4>
                     <p>Thru <strong>0</strong> Shru <strong>0</strong> Score <strong>${scoreInfo.score_sum}</strong></p>
                 </div>
                 <div class="list-right">
-                    <a href="/m/scoredetail.do?visit_date=${scoreInfo.visit_date}&countryclub_id=${scoreInfo.countryclub_id}&seq_no=${scoreInfo.seq_no}&start_course=${scoreInfo.start_course}&end_course=${scoreInfo.end_course}" class=""><img src="/mobile/image/arrow-btn.png" class="list-arrow"></a>
+                    <a href="/m/scoredetail.do?visit_date=${scoreInfo.visit_date}&countryclub_id=${scoreInfo.countryclub_id}&teeup_time=${scoreInfo.teeup_time}&start_course=${scoreInfo.start_course}&end_course=${scoreInfo.end_course}" class=""><img src="/mobile/image/arrow-btn.png" class="list-arrow"></a>
                 </div>
             </div>
           </c:forEach>
