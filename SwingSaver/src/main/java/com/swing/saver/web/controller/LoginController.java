@@ -41,6 +41,8 @@ import java.util.Map;
 public class LoginController {
     private final static Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
 
+    
+    
     @Inject
     RestService restService;
 

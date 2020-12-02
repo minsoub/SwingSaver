@@ -24,6 +24,19 @@ public class ResponseScoreDetail {
 	private String user_id;					// 사용자 순번 키
 	private String start_course;				// 시작코스
 	private String end_course;					// 종료코스
+	
+	private int fairwayon_rate;			// Fairway 안착률
+	private int greenon_rate;			// Greenon 적중률
+	private int pattern1;				// 퍼팅패턴 
+	private int pattern2;				// 퍼팅패턴
+	private int pattern3;				// 퍼팅패턴
+	private int pattern4;				// 퍼팅패턴
+	private int pattern5;				// 퍼팅패턴
+	private int pattern6;				// 퍼팅패턴
+	private int pattern7;				// 퍼팅패턴
+	private int pattern8;				// 퍼팅패턴
+	
+	
 	private String score1;
 	private String score2;
 	private String score3;
@@ -409,204 +422,323 @@ public class ResponseScoreDetail {
 		this.fairwayon17 = detail.getFairwayon17();
 		this.fairwayon18 = detail.getFairwayon18();
 		
+		this.fairwayon_rate = 0;		// fairway 안착률
+		int fairway_cnt = 0;
 		if (this.fairwayon1 != null)
 		{
 			if (this.fairwayon1.equals("L")) this.fairwayon1_name = "Left";
-			else if (this.fairwayon1.equals("Y")) this.fairwayon1_name = "OK";
+			else if (this.fairwayon1.equals("Y")) {
+				this.fairwayon1_name = "OK";
+				fairway_cnt++;
+			}
 			else if (this.fairwayon1.equals("R")) this.fairwayon1_name = "Right";
 		}
 		if (this.fairwayon2 != null)
 		{
 			if (this.fairwayon2.equals("L")) this.fairwayon2_name = "Left";
-			else if (this.fairwayon2.equals("Y")) this.fairwayon2_name = "OK";
+			else if (this.fairwayon2.equals("Y")) {
+				this.fairwayon2_name = "OK";
+				fairway_cnt++;
+			}
 			else if (this.fairwayon2.equals("R")) this.fairwayon2_name = "Right";
 		}
 		if (this.fairwayon3 != null)
 		{
 			if (this.fairwayon3.equals("L")) this.fairwayon3_name = "Left";
-			else if (this.fairwayon3.equals("Y")) this.fairwayon3_name = "OK";
+			else if (this.fairwayon3.equals("Y")) {
+				this.fairwayon3_name = "OK";
+				fairway_cnt++;
+			}
 			else if (this.fairwayon3.equals("R")) this.fairwayon3_name = "Right";
 		}
 		if (this.fairwayon4 != null)
 		{
 			if (this.fairwayon4.equals("L")) this.fairwayon4_name = "Left";
-			else if (this.fairwayon4.equals("Y")) this.fairwayon4_name = "OK";
+			else if (this.fairwayon4.equals("Y")) {
+				this.fairwayon4_name = "OK";
+				fairway_cnt++;
+			}
 			else if (this.fairwayon4.equals("R")) this.fairwayon4_name = "Right";
 		}
 		if (this.fairwayon5 != null)
 		{
 			if (this.fairwayon5.equals("L")) this.fairwayon5_name = "Left";
-			else if (this.fairwayon5.equals("Y")) this.fairwayon5_name = "OK";
+			else if (this.fairwayon5.equals("Y")) {
+				this.fairwayon5_name = "OK";
+				fairway_cnt++;
+			}
 			else if (this.fairwayon5.equals("R")) this.fairwayon5_name = "Right";
 		}
 		if (this.fairwayon6 != null)
 		{
 			if (this.fairwayon6.equals("L")) this.fairwayon6_name = "Left";
-			else if (this.fairwayon6.equals("Y")) this.fairwayon6_name = "OK";
+			else if (this.fairwayon6.equals("Y")) {
+				this.fairwayon6_name = "OK";
+				fairway_cnt++;
+			}
 			else if (this.fairwayon6.equals("R")) this.fairwayon6_name = "Right";
 		}
 		if (this.fairwayon7 != null)
 		{
 			if (this.fairwayon7.equals("L")) this.fairwayon7_name = "Left";
-			else if (this.fairwayon7.equals("Y")) this.fairwayon7_name = "OK";
+			else if (this.fairwayon7.equals("Y")) {
+				this.fairwayon7_name = "OK";
+				fairway_cnt++;
+			}
 			else if (this.fairwayon7.equals("R")) this.fairwayon7_name = "Right";
 		}
 		if (this.fairwayon8 != null)
 		{
 			if (this.fairwayon8.equals("L")) this.fairwayon8_name = "Left";
-			else if (this.fairwayon8.equals("Y")) this.fairwayon8_name = "OK";
+			else if (this.fairwayon8.equals("Y")) {
+				this.fairwayon8_name = "OK";
+				fairway_cnt++;
+			}
 			else if (this.fairwayon8.equals("R")) this.fairwayon8_name = "Right";
 		}
 		if (this.fairwayon9 != null)
 		{
 			if (this.fairwayon9.equals("L")) this.fairwayon9_name = "Left";
-			else if (this.fairwayon9.equals("Y")) this.fairwayon9_name = "OK";
+			else if (this.fairwayon9.equals("Y")) {
+				this.fairwayon9_name = "OK";
+				fairway_cnt++;
+			}
 			else if (this.fairwayon9.equals("R")) this.fairwayon9_name = "Right";
 		}
 		if (this.fairwayon10 != null)
 		{
 			if (this.fairwayon10.equals("L")) this.fairwayon10_name = "Left";
-			else if (this.fairwayon10.equals("Y")) this.fairwayon10_name = "OK";
+			else if (this.fairwayon10.equals("Y")) {
+				this.fairwayon10_name = "OK";
+				fairway_cnt++;
+			}
 			else if (this.fairwayon10.equals("R")) this.fairwayon10_name = "Right";
 		}
 		if (this.fairwayon11 != null)
 		{
 			if (this.fairwayon11.equals("L")) this.fairwayon11_name = "Left";
-			else if (this.fairwayon11.equals("Y")) this.fairwayon11_name = "OK";
+			else if (this.fairwayon11.equals("Y")) {
+				this.fairwayon11_name = "OK";
+				fairway_cnt++;
+			}
 			else if (this.fairwayon11.equals("R")) this.fairwayon11_name = "Right";
 		}
 		if (this.fairwayon12 != null)
 		{
 			if (this.fairwayon12.equals("L")) this.fairwayon12_name = "Left";
-			else if (this.fairwayon12.equals("Y")) this.fairwayon12_name = "OK";
+			else if (this.fairwayon12.equals("Y")) {
+				this.fairwayon12_name = "OK";
+				fairway_cnt++;
+			}
 			else if (this.fairwayon12.equals("R")) this.fairwayon12_name = "Right";
 		}
 		if (this.fairwayon13 != null)
 		{
 			if (this.fairwayon13.equals("L")) this.fairwayon13_name = "Left";
-			else if (this.fairwayon13.equals("Y")) this.fairwayon13_name = "OK";
+			else if (this.fairwayon13.equals("Y")) {
+				this.fairwayon13_name = "OK";
+				fairway_cnt++;
+			}
 			else if (this.fairwayon13.equals("R")) this.fairwayon13_name = "Right";
 		}
 		if (this.fairwayon14 != null)
 		{
 			if (this.fairwayon14.equals("L")) this.fairwayon14_name = "Left";
-			else if (this.fairwayon14.equals("Y")) this.fairwayon14_name = "OK";
+			else if (this.fairwayon14.equals("Y")) {
+				this.fairwayon14_name = "OK";
+				fairway_cnt++;
+			}
 			else if (this.fairwayon14.equals("R")) this.fairwayon14_name = "Right";
 		}
 		if (this.fairwayon15 != null)
 		{
 			if (this.fairwayon15.equals("L")) this.fairwayon15_name = "Left";
-			else if (this.fairwayon15.equals("Y")) this.fairwayon15_name = "OK";
+			else if (this.fairwayon15.equals("Y")) {
+				this.fairwayon15_name = "OK";
+				fairway_cnt++;
+			}
 			else if (this.fairwayon15.equals("R")) this.fairwayon15_name = "Right";
 		}
 		if (this.fairwayon16 != null)
 		{
 			if (this.fairwayon16.equals("L")) this.fairwayon16_name = "Left";
-			else if (this.fairwayon16.equals("Y")) this.fairwayon16_name = "OK";
+			else if (this.fairwayon16.equals("Y")) {
+				this.fairwayon16_name = "OK";
+				fairway_cnt++;
+			}
 			else if (this.fairwayon16.equals("R")) this.fairwayon16_name = "Right";
 		}
 		if (this.fairwayon17 != null)
 		{
 			if (this.fairwayon17.equals("L")) this.fairwayon17_name = "Left";
-			else if (this.fairwayon17.equals("Y")) this.fairwayon17_name = "OK";
+			else if (this.fairwayon17.equals("Y")) {
+				this.fairwayon17_name = "OK";
+				fairway_cnt++;
+			}
 			else if (this.fairwayon17.equals("R")) this.fairwayon17_name = "Right";
 		}
 		if (this.fairwayon18 != null)
 		{
 			if (this.fairwayon18.equals("L")) this.fairwayon18_name = "Left";
-			else if (this.fairwayon18.equals("Y")) this.fairwayon18_name = "OK";
+			else if (this.fairwayon18.equals("Y")) {
+				this.fairwayon18_name = "OK";
+				fairway_cnt++;
+			}
 			else if (this.fairwayon18.equals("R")) this.fairwayon18_name = "Right";
 		}
+		if (fairway_cnt > 0) {
+			this.fairwayon_rate = (int) Math.round(fairway_cnt / 18.0);
+		}
 		
+		this.greenon_rate = 0;			// 그린 적중률
+		int greenon_cnt = 0;
 		if (this.greenon1 != null)
 		{
 			if (this.greenon1.equals("N")) this.greenon1_name = "NO";
-			else if (this.greenon1.equals("Y")) this.greenon1_name = "OK";
+			else if (this.greenon1.equals("Y")) {
+				this.greenon1_name = "OK";
+				greenon_cnt++;
+			}
 		}
 		if (this.greenon2 != null)
 		{
 			if (this.greenon2.equals("N")) this.greenon2_name = "NO";
-			else if (this.greenon2.equals("Y")) this.greenon2_name = "OK";
+			else if (this.greenon2.equals("Y")) {
+				this.greenon2_name = "OK";
+				greenon_cnt++;
+			}
 		}		
 		if (this.greenon3 != null)
 		{
 			if (this.greenon3.equals("N")) this.greenon3_name = "NO";
-			else if (this.greenon3.equals("Y")) this.greenon3_name = "OK";
+			else if (this.greenon3.equals("Y")) {
+				this.greenon3_name = "OK";
+				greenon_cnt++;
+			}
 		}		
 		if (this.greenon4 != null)
 		{
 			if (this.greenon4.equals("N")) this.greenon4_name = "NO";
-			else if (this.greenon4.equals("Y")) this.greenon4_name = "OK";
+			else if (this.greenon4.equals("Y")) {
+				this.greenon4_name = "OK";
+				greenon_cnt++;
+			}
 		}
 		if (this.greenon5 != null)
 		{
 			if (this.greenon5.equals("N")) this.greenon5_name = "NO";
-			else if (this.greenon5.equals("Y")) this.greenon5_name = "OK";
+			else if (this.greenon5.equals("Y")) {
+				this.greenon5_name = "OK";
+				greenon_cnt++;
+			}
 		}
 		if (this.greenon6 != null)
 		{
 			if (this.greenon6.equals("N")) this.greenon6_name = "NO";
-			else if (this.greenon6.equals("Y")) this.greenon6_name = "OK";
+			else if (this.greenon6.equals("Y")) {
+				this.greenon6_name = "OK";
+				greenon_cnt++;
+			}
 		}
 		if (this.greenon7 != null)
 		{
 			if (this.greenon7.equals("N")) this.greenon7_name = "NO";
-			else if (this.greenon7.equals("Y")) this.greenon7_name = "OK";
+			else if (this.greenon7.equals("Y")) {
+				this.greenon7_name = "OK";
+				greenon_cnt++;
+			}
 		}
 		if (this.greenon8 != null)
 		{
 			if (this.greenon8.equals("N")) this.greenon8_name = "NO";
-			else if (this.greenon8.equals("Y")) this.greenon8_name = "OK";
+			else if (this.greenon8.equals("Y")) {
+				this.greenon8_name = "OK";
+				greenon_cnt++;
+			}
 		}
 		if (this.greenon9 != null)
 		{
 			if (this.greenon9.equals("N")) this.greenon9_name = "NO";
-			else if (this.greenon9.equals("Y")) this.greenon9_name = "OK";
+			else if (this.greenon9.equals("Y")) {
+				this.greenon9_name = "OK";
+				greenon_cnt++;
+			}
 		}
 		if (this.greenon10 != null)
 		{
 			if (this.greenon10.equals("N")) this.greenon10_name = "NO";
-			else if (this.greenon10.equals("Y")) this.greenon10_name = "OK";
+			else if (this.greenon10.equals("Y")) {
+				this.greenon10_name = "OK";
+				greenon_cnt++;
+			}
 		}
 		if (this.greenon11 != null)
 		{
 			if (this.greenon11.equals("N")) this.greenon11_name = "NO";
-			else if (this.greenon11.equals("Y")) this.greenon11_name = "OK";
+			else if (this.greenon11.equals("Y")) {
+				this.greenon11_name = "OK";
+				greenon_cnt++;
+			}
 		}
 		if (this.greenon12 != null)
 		{
 			if (this.greenon12.equals("N")) this.greenon12_name = "NO";
-			else if (this.greenon12.equals("Y")) this.greenon12_name = "OK";
+			else if (this.greenon12.equals("Y")) {
+				this.greenon12_name = "OK";
+				greenon_cnt++;
+			}
 		}
 		if (this.greenon13 != null)
 		{
 			if (this.greenon13.equals("N")) this.greenon13_name = "NO";
-			else if (this.greenon13.equals("Y")) this.greenon13_name = "OK";
+			else if (this.greenon13.equals("Y")) {
+				this.greenon13_name = "OK";
+				greenon_cnt++;
+			}
 		}
 		if (this.greenon14 != null)
 		{
 			if (this.greenon14.equals("N")) this.greenon14_name = "NO";
-			else if (this.greenon14.equals("Y")) this.greenon14_name = "OK";
+			else if (this.greenon14.equals("Y")) {
+				this.greenon14_name = "OK";
+				greenon_cnt++;
+			}
 		}
 		if (this.greenon15 != null)
 		{
 			if (this.greenon15.equals("N")) this.greenon15_name = "NO";
-			else if (this.greenon15.equals("Y")) this.greenon15_name = "OK";
+			else if (this.greenon15.equals("Y")) {
+				this.greenon15_name = "OK";
+				greenon_cnt++;
+			}
 		}
 		if (this.greenon16 != null)
 		{
 			if (this.greenon16.equals("N")) this.greenon16_name = "NO";
-			else if (this.greenon16.equals("Y")) this.greenon16_name = "OK";
+			else if (this.greenon16.equals("Y")) {
+				this.greenon16_name = "OK";
+				greenon_cnt++;
+			}
 		}
 		if (this.greenon17 != null)
 		{
 			if (this.greenon17.equals("N")) this.greenon17_name = "NO";
-			else if (this.greenon17.equals("Y")) this.greenon17_name = "OK";
+			else if (this.greenon17.equals("Y")) {
+				this.greenon17_name = "OK";
+				greenon_cnt++;
+			}
 		}
 		if (this.greenon18 != null)
 		{
 			if (this.greenon18.equals("N")) this.greenon18_name = "NO";
-			else if (this.greenon18.equals("Y")) this.greenon18_name = "OK";
+			else if (this.greenon18.equals("Y")) {
+				this.greenon18_name = "OK";
+				greenon_cnt++;
+			}
+		}
+		
+		if (greenon_cnt > 0) {
+			this.greenon_rate = (int) Math.round(greenon_cnt / 18.0);
 		}
 		
 		this.total_socre = 0;	// stroke 친 개수
@@ -674,6 +806,61 @@ public class ResponseScoreDetail {
 		if (score.getPutter15() != null) this.puttersum += score.getPutter15();
 		if (score.getPutter16() != null) this.puttersum += score.getPutter16();
 		if (score.getPutter17() != null) this.puttersum += score.getPutter17();
-		if (score.getPutter18() != null) this.puttersum += score.getPutter18();		
+		if (score.getPutter18() != null) this.puttersum += score.getPutter18();	
+		
+		// 퍼팅 패턴 카운트
+		this.pattern1 = 0;
+		this.pattern2 = 0;
+		this.pattern3 = 0;
+		this.pattern4 = 0;
+		this.pattern5 = 0;
+		this.pattern6 = 0;
+		this.pattern7 = 0;
+		this.pattern8 = 0;
+		
+		if (detail.getPuterpattern1() != null) puterPatternCheck(detail.getPuterpattern1());
+		if (detail.getPuterpattern2() != null) puterPatternCheck(detail.getPuterpattern2());
+		if (detail.getPuterpattern3() != null) puterPatternCheck(detail.getPuterpattern3());
+		if (detail.getPuterpattern4() != null) puterPatternCheck(detail.getPuterpattern4());
+		if (detail.getPuterpattern5() != null) puterPatternCheck(detail.getPuterpattern5());
+		if (detail.getPuterpattern6() != null) puterPatternCheck(detail.getPuterpattern6());
+		if (detail.getPuterpattern7() != null) puterPatternCheck(detail.getPuterpattern7());
+		if (detail.getPuterpattern8() != null) puterPatternCheck(detail.getPuterpattern8());
+		if (detail.getPuterpattern9() != null) puterPatternCheck(detail.getPuterpattern9());
+		if (detail.getPuterpattern10() != null) puterPatternCheck(detail.getPuterpattern10());
+		if (detail.getPuterpattern11() != null) puterPatternCheck(detail.getPuterpattern11());
+		if (detail.getPuterpattern12() != null) puterPatternCheck(detail.getPuterpattern12());
+		if (detail.getPuterpattern13() != null) puterPatternCheck(detail.getPuterpattern13());
+		if (detail.getPuterpattern14() != null) puterPatternCheck(detail.getPuterpattern14());
+		if (detail.getPuterpattern15() != null) puterPatternCheck(detail.getPuterpattern15());
+		if (detail.getPuterpattern16() != null) puterPatternCheck(detail.getPuterpattern16());
+		if (detail.getPuterpattern17() != null) puterPatternCheck(detail.getPuterpattern17());
+		if (detail.getPuterpattern18() != null) puterPatternCheck(detail.getPuterpattern18());
+	}
+	/**
+	 * 퍼팅 패턴 카운터
+	 * @param pattern
+	 */
+	private void puterPatternCheck(String pattern)
+	{
+		char s = pattern.charAt(0);
+		
+		if (pattern.equals("SL")) {
+			this.pattern1++;
+		}else if (pattern.equals("SR")) {
+			this.pattern2++;
+		}else if (pattern.equals("SS")) {
+			this.pattern3++;
+		}else if(pattern.equals("JL")) {
+			this.pattern4++;
+		}else if(pattern.equals("JR")) {
+			this.pattern5++;
+		}else if(pattern.equals("OL")) {
+			this.pattern6++;
+		}else if(pattern.equals("OS")) {
+			this.pattern7++;
+		}else if(pattern.equals("OL")) {
+			this.pattern8++;
+		}
 	}
 }

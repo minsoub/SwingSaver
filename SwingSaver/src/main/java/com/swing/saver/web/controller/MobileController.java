@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
+import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
@@ -42,10 +43,12 @@ import com.swing.saver.web.entity.LoginVo;
 import com.swing.saver.web.entity.ScoreRequest;
 import com.swing.saver.web.entity.UserVo;
 import com.swing.saver.web.exception.ApiException;
+import com.swing.saver.web.response.ResponseCountryClub;
 import com.swing.saver.web.response.ResponseScore;
 import com.swing.saver.web.response.ResponseScoreAnalysys;
 import com.swing.saver.web.response.ResponseScoreDetail;
 import com.swing.saver.web.response.ResponseScoreSts;
+import com.swing.saver.web.service.CountryClubService;
 import com.swing.saver.web.service.MobileService;
 import com.swing.saver.web.service.RestService;
 import com.swing.saver.web.service.SCScoreInfoService;
@@ -75,6 +78,9 @@ public class MobileController extends CommonController {
     @Inject
     SCScoreInfoService scoreService;
     
+    @Inject
+    CountryClubService countryclubService;
+    
     /**
      * Mobile Index Page
      * 골프장 추천 리스트를 조회해서 출력한다. 
@@ -94,9 +100,8 @@ public class MobileController extends CommonController {
     	
     	List<GolfVo> golfList = mapper.convertValue(map.get("golfList"), TypeFactory.defaultInstance().constructCollectionType(List.class, GolfVo.class));
     	mv.addObject("golfList", golfList);
-    	mv.setViewName("mobile/home");
-    	mv.addObject("setMenu", "home");
-    	    	    	
+    	
+    	    	    	    	
     	rtnJson = restService.getAdvList();   //  광고관리 정보 조회 (use_yn이 Y인 것에 대해서만 화면상에 보여 주어야 한다)
     	ObjectMapper mapp= new ObjectMapper();
         Map<String, Object> mapAd = mapp.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});
@@ -104,6 +109,8 @@ public class MobileController extends CommonController {
         List<AdverVo> advList = mapp.convertValue(mapAd.get("advList"), TypeFactory.defaultInstance().constructCollectionType(List.class,AdverVo.class));
         mv.addObject("advList", advList);
     	
+        mv.addObject("setMenu", "home");
+        mv.setViewName("mobile/home");
         return mv;
     }
     
@@ -285,15 +292,7 @@ public class MobileController extends CommonController {
     	toDt   = CommonUtil.getCurrentFromatDate("yyyy.MM.dd");
     	
     	String search_period = fromDt + " ~ " + toDt;  // 검색 기간
-    	
-//    	// 주어진 기간으로 골프장 스코어 리스트를 조회한다. 
-//    	String rtnJson = restService.getScoreList(userId, fromDt, toDt);    	
-//    	//String rtnJson = restService.golfRecommandList();
-//    	ObjectMapper mapper = new ObjectMapper();
-//    	Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});    	
-//    	mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);    	
-//    	List<ScoreListVo> scoreList = mapper.convertValue(map.get("scoreList"), TypeFactory.defaultInstance().constructCollectionType(List.class, ScoreListVo.class));
-//    	
+
     	List<ResponseScore> scoreList = scoreService.getScoreList(userId, fromDt, toDt);
     	
     	mv.addObject("scoreList",      scoreList);
@@ -399,9 +398,10 @@ public class MobileController extends CommonController {
      */
     @RequestMapping(value="/countryclub-search")
     @ResponseBody
-    public String countryclubSearch(HttpServletRequest request) throws ApiException, IOException {
+    public String countryclubSearch(HttpServletRequest request) throws ApiException, IOException, ParseException {
     	LOGGER.debug("==================== MobileController countryclubSearch Strart : ===================={}");
-    	String jsonData = restService.getCountryclubList(URLEncoder.encode(request.getParameter("countryclub_nm").toString(), "UTF-8"));		// 골프장 조회
+    	//String jsonData = restService.getCountryclubList(URLEncoder.encode(request.getParameter("countryclub_nm").toString(), "UTF-8"));		// 골프장 조회
+    	String jsonData = countryclubService.findByLikeName(request.getParameter("countryclub_nm").toString()); // URLEncoder.encode(request.getParameter("countryclub_nm").toString(), "UTF-8"));
     	LOGGER.debug(jsonData);
     	
     	LOGGER.debug("==================== MobileController countryclubSearch end : ===================={}");
@@ -464,7 +464,8 @@ public class MobileController extends CommonController {
     	
     	LOGGER.debug("Login userID : " + userId);
     	
-    	GolfVo golfVo = service.getGolfInfo(" ", " ", countryclub_id);
+    	//GolfVo golfVo = service.getGolfInfo(" ", " ", countryclub_id);
+    	ResponseCountryClub golfVo = countryclubService.findByCountryClub(countryclub_id);
     	
         // Hole에 대한 PAR 정보를 조회
     	FarVo parInfo1 =  service.getParInfo(" ", " ", countryclub_id, start_course);   // 골프장 Par 정보 상세 정보 조회 (Start Course)
@@ -524,8 +525,8 @@ public class MobileController extends CommonController {
 				.detail(detailInfo)
 				.build();
     	
-    	GolfVo golfVo = service.getGolfInfo(" ", " ", scoreVo.getCountryclub_id());
-    	
+    	//GolfVo golfVo = service.getGolfInfo(" ", " ", scoreVo.getCountryclub_id());
+    	ResponseCountryClub golfVo = countryclubService.findByCountryClub(scoreVo.getCountryclub_id());
         // Hole에 대한 PAR 정보를 조회
     	FarVo parInfo1 =  service.getParInfo(" ", " ", scoreVo.getCountryclub_id(), String.valueOf(scoreVo.getStart_course()));   // 골프장 Par 정보 상세 정보 조회 (Start Course)
     	FarVo parInfo2 =  service.getParInfo(" ", " ", scoreVo.getCountryclub_id(), String.valueOf(scoreVo.getEnd_course()));     // 골프장 Par 정보 상세 정보 조회 (End Course)
@@ -591,8 +592,8 @@ public class MobileController extends CommonController {
     											.detail(detail)
     											.build();
     	
-    	GolfVo golfVo = service.getGolfInfo(" ", " ", scoreVo.getCountryclub_id());
-    	
+    	//GolfVo golfVo = service.getGolfInfo(" ", " ", scoreVo.getCountryclub_id());
+    	ResponseCountryClub golfVo = countryclubService.findByCountryClub(scoreVo.getCountryclub_id());
     	
     	mv.addObject("golfInfo", golfVo);
     	mv.addObject("scoreAnalysys", scoreAnalysys);
@@ -651,8 +652,8 @@ public class MobileController extends CommonController {
 //    	ObjectMapper mapper = new ObjectMapper();
 //    	ScoreMaster scoreInfo = mapper.readValue(rtnJson, ScoreMaster.class);
 
-    	GolfVo golfVo = service.getGolfInfo(" ", " ", countryclub_id);
-    	
+    	//GolfVo golfVo = service.getGolfInfo(" ", " ", countryclub_id);
+    	ResponseCountryClub golfVo = countryclubService.findByCountryClub(countryclub_id);
         // Hole에 대한 PAR 정보를 조회
     	FarVo parInfo1 =  service.getParInfo(" ", " ", countryclub_id, start_course);   // 골프장 Par 정보 상세 정보 조회 (Start Course)
     	FarVo parInfo2 =  service.getParInfo(" ", " ", countryclub_id, end_course);     // 골프장 Par 정보 상세 정보 조회 (End Course)

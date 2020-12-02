@@ -65,19 +65,21 @@
                 </div>
             </div>
             <script>
+            	var obj1 = new array();
+            	var obj2 = new array();
+            	
+            	<c:forEach var="scoreInfo" items="${sts.list}" varStatus="status">
+            		obj1.push("${scoreInfo.visit_date_format}");
+            		obj2.push("${scoreInfo.total_socre}");
+            	</c:forEach>
+            	
                 new Chart(document.getElementById("myChart1"), {
                     type: 'line',
                     data: {
-                        labels: ['2.2', '2.14', '3.1', '3.5', '3.14'],
+                        labels: obj1,   // ['2.2', '2.14', '3.1', '3.5', '3.14'],
                         datasets: [{
                             label: '날짜별 타수',
-                            data: [
-                                74,
-                                96,
-                                70,
-                                63,
-                                80
-                            ],
+                            data: obj2,   // [74, 96, 70, 63, 80],
                             borderColor: "rgba(255, 92, 92, 1)",
                             backgroundColor: "rgba(255, 92, 92, 0.3)",
                             fill: true,
@@ -170,19 +172,21 @@
                 </div>
             </div>
             <script>
+            	var obj3 = new array();
+            	var obj4 = new array();
+            	
+            	<c:forEach var="scoreInfo" items="${sts.list}" varStatus="status">
+        			obj3.push("${scoreInfo.visit_date_format}");
+        			obj4.push("${scoreInfo.puttersum}");
+        		</c:forEach>
+        	
                 new Chart(document.getElementById("myChart3"), {
                     type: 'line',
                     data: {
-                        labels: ['2.2', '2.14', '3.1', '3.5', '3.14'],
+                        labels: obj3,  // ['2.2', '2.14', '3.1', '3.5', '3.14'],
                         datasets: [{
                             label: '날짜별 퍼팅수',
-                            data: [
-                                1.1,
-                                2,
-                                1.3,
-                                1.6,
-                                2.1
-                            ],
+                            data: obj4,  // [1.1, 2, 1.3, 1.6, 2.1 ],
                             borderColor: "rgba(92, 188, 255, 1)",
                             backgroundColor: "rgba(92, 188, 255, 0.3)",
                             fill: true,
@@ -222,19 +226,21 @@
                 </div>
             </div>
             <script>
+        	var obj5 = new array();
+        	var obj6 = new array();
+        	
+        	<c:forEach var="scoreInfo" items="${sts.list}" varStatus="status">
+    			obj5.push("${scoreInfo.visit_date_format}");
+    			obj6.push("${scoreInfo.fairwayon_rate}");
+    		</c:forEach>
+    		            
                 new Chart(document.getElementById("myChart4"), {
                     type: 'line',
                     data: {
-                        labels: ['2.2', '2.14', '3.1', '3.5', '3.14'],
+                        labels: obj5,  // ['2.2', '2.14', '3.1', '3.5', '3.14'],
                         datasets: [{
                             label: '날짜별 페어웨이안착률',
-                            data: [
-                                64,
-                                40,
-                                70,
-                                73,
-                                50
-                            ],
+                            data: obj6,   // [ 64, 40, 70, 73, 50 ],
                             borderColor: "rgba(255, 92, 92, 1)",
                             backgroundColor: "rgba(255, 92, 92, 0.3)",
                             fill: true,
@@ -274,19 +280,21 @@
                 </div>
             </div>
             <script>
+        	var obj7 = new array();
+        	var obj8 = new array();
+        	
+        	<c:forEach var="scoreInfo" items="${sts.list}" varStatus="status">
+    			obj7.push("${scoreInfo.visit_date_format}");
+    			obj8.push("${scoreInfo.greenon_rate}");
+    		</c:forEach>
+    		
                 new Chart(document.getElementById("myChart5"), {
                     type: 'line',
                     data: {
-                        labels: ['2.2', '2.14', '3.1', '3.5', '3.14'],
+                        labels: obj7, // ['2.2', '2.14', '3.1', '3.5', '3.14'],
                         datasets: [{
                             label: '날짜별 그린적중률',
-                            data: [
-                                24,
-                                10,
-                                60,
-                                40,
-                                35
-                            ],
+                            data: obj8,   // [24, 10, 60, 40, 35 ],
                             borderColor:  "rgba(255, 201, 14, 1)",
                             backgroundColor:  "rgba(255, 201, 14,0.3)",
                             fill: true,
@@ -328,6 +336,12 @@
                 </div>
             </div>
             <script>
+        	var obj9 = new array();	
+			
+        	<c:forEach var="scoreInfo" items="${sts.list}" varStatus="status">
+    			obj9.push("${scoreInfo.visit_date_format}");
+    		</c:forEach>
+    		
                 // 우선 컨텍스트를 가져옵니다. 
                 var ctx = document.getElementById("myChart6").getContext('2d');
                 /*
@@ -338,10 +352,11 @@
                 var myChart = new Chart(ctx, {
                     type: 'bar',
                     data: {
-                        labels: ["O", "JL", "JR", "OL", "OR", "SL", "SR", "SS"],
+                        labels: ["SL", "SR", "SS", "JL", "JR", "OL", "OS", "OL"],
                         datasets: [{
                             label: '퍼팅 패턴',
-                            data: [4, 1, 0, 5, 0, 3, 1, 3],
+                            data: [${scoreInfo.pattern1}, ${scoreInfo.pattern2}, ${scoreInfo.pattern3}, ${scoreInfo.pattern4},
+                            	${scoreInfo.pattern5}, ${scoreInfo.pattern6}, ${scoreInfo.pattern7}, ${scoreInfo.pattern8}],
                             backgroundColor: [
                                 'rgba(90, 99, 108, 0.2)',
                                 'rgba(90, 99, 108, 0.2)',
