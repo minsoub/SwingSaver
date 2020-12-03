@@ -3,6 +3,9 @@ package com.swing.saver.web.response;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.swing.saver.web.domain.SCScoreDetailInfo;
 import com.swing.saver.web.domain.SCScoreInfo;
 
@@ -13,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class ResponseScoreSts {
-
+	private final static Logger LOGGER = LoggerFactory.getLogger(ResponseScoreSts.class);
 	int high_stroke;			// 최대 스코어
 	double high_put_dist;		// 최대 퍼팅거리 (미관리)
 	int high_shot_dist;  		// 최대 삿거리 (미관리)
@@ -41,6 +44,8 @@ public class ResponseScoreSts {
 		
 		int fairwayon = 0;
 		int greenon = 0;
+		int put_cnt = 0;
+		int stroke = 0;
 		for (int i=0; i<score.size(); i++)
 		{
 			ResponseScoreDetail sc = ResponseScoreDetail.builder()
@@ -50,16 +55,21 @@ public class ResponseScoreSts {
 			list.add(sc);
 			
 			if (sc.getTotal_socre() > this.high_stroke) this.high_stroke = sc.getTotal_socre(); // 최코스코어
-			if (sc.getPuttersum() > 0) this.avg_put_cnt	+= sc.getPuttersum();	
+			if (sc.getPuttersum() > 0) put_cnt	+= sc.getPuttersum();	
 			fairwayon += fairwayonCheck(sc);
 			greenon += greenonCheck(sc);
 			patternCheck(sc);
-			this.avg_stroke += sc.getTotal_socre();
+			stroke += sc.getTotal_socre();
 		}
-		if (this.avg_stroke > 0) this.avg_stroke	= (int) Math.round(this.avg_stroke / (18.0 * list.size()));
-		if (this.avg_put_cnt > 0) this.avg_put_cnt	= Math.round(this.avg_put_cnt / (18.0 * list.size()));		// 평균 퍼팅수
-		if (fairwayon > 0) this.avg_fairway = Math.round(fairwayon/(18.0 * list.size()));						// 페어웨이 안착률
-		if (greenon > 0) this.avg_greenon = Math.round(greenon/(18.0 * list.size()));							// 그린 적중률
+		if (stroke > 0) this.avg_stroke	= (int) Math.round(stroke / (list.size()));
+		if (put_cnt > 0) this.avg_put_cnt	= Math.round(put_cnt / (list.size()));		// 평균 퍼팅수
+		if (fairwayon > 0) this.avg_fairway = Math.round( (fairwayon/(18.0 * list.size())) * 100.0);						// 페어웨이 안착률
+		if (greenon > 0) this.avg_greenon = Math.round(((greenon*1.0)/(18.0*list.size()))*100.0 );							// 그린 적중률
+		LOGGER.info("list.size : " + list.size());
+		LOGGER.info("avg_stroke : " + avg_stroke + ", stroke : " + stroke);
+		LOGGER.info("avg_put_cnt : " + avg_put_cnt + ", put_cnt : " + put_cnt);
+		LOGGER.info("avg_fairway : " + avg_fairway + ", fairwayon : " + fairwayon);
+		LOGGER.info("avg_greenon : " + avg_greenon + ", greeon : " + greenon);
 		patternSet();
 	}
 	

@@ -11,6 +11,7 @@ import lombok.Setter;
 public class LoginVo extends BaseEntity {
 
     private long userid;
+    private String username;
     private String result;
 
     private String groupadmin;		// 그룹어드민 여부

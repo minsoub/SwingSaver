@@ -1275,5 +1275,5 @@ input:checked + label.or{background-image: url("/mobile/image/or_on.gif");}
 }
 
 .input_data {
-	width: 20px;
+	width: 30px;
 }

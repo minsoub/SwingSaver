@@ -1,5 +1,7 @@
 package com.swing.saver.web.response;
 
+import org.springframework.util.StringUtils;
+
 import com.swing.saver.web.domain.SCScoreDetailInfo;
 import com.swing.saver.web.domain.SCScoreInfo;
 
@@ -587,7 +589,7 @@ public class ResponseScoreDetail {
 			else if (this.fairwayon18.equals("R")) this.fairwayon18_name = "Right";
 		}
 		if (fairway_cnt > 0) {
-			this.fairwayon_rate = (int) Math.round(fairway_cnt / 18.0);
+			this.fairwayon_rate = fairway_cnt;  // (int) Math.round(fairway_cnt / 18.0);
 		}
 		
 		this.greenon_rate = 0;			// 그린 적중률
@@ -738,7 +740,7 @@ public class ResponseScoreDetail {
 		}
 		
 		if (greenon_cnt > 0) {
-			this.greenon_rate = (int) Math.round(greenon_cnt / 18.0);
+			this.greenon_rate = greenon_cnt;  // (int) Math.round(greenon_cnt / 18.0);
 		}
 		
 		this.total_socre = 0;	// stroke 친 개수
@@ -843,6 +845,7 @@ public class ResponseScoreDetail {
 	 */
 	private void puterPatternCheck(String pattern)
 	{
+		if (StringUtils.isEmpty(pattern)) return;
 		char s = pattern.charAt(0);
 		
 		if (pattern.equals("SL")) {

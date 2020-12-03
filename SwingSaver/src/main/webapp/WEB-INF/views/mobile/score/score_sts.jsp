@@ -65,8 +65,8 @@
                 </div>
             </div>
             <script>
-            	var obj1 = new array();
-            	var obj2 = new array();
+            	var obj1 = new Array();
+            	var obj2 = new Array();
             	
             	<c:forEach var="scoreInfo" items="${sts.list}" varStatus="status">
             		obj1.push("${scoreInfo.visit_date_format}");
@@ -172,8 +172,8 @@
                 </div>
             </div>
             <script>
-            	var obj3 = new array();
-            	var obj4 = new array();
+            	var obj3 = new Array();
+            	var obj4 = new Array();
             	
             	<c:forEach var="scoreInfo" items="${sts.list}" varStatus="status">
         			obj3.push("${scoreInfo.visit_date_format}");
@@ -226,8 +226,8 @@
                 </div>
             </div>
             <script>
-        	var obj5 = new array();
-        	var obj6 = new array();
+        	var obj5 = new Array();
+        	var obj6 = new Array();
         	
         	<c:forEach var="scoreInfo" items="${sts.list}" varStatus="status">
     			obj5.push("${scoreInfo.visit_date_format}");
@@ -280,8 +280,8 @@
                 </div>
             </div>
             <script>
-        	var obj7 = new array();
-        	var obj8 = new array();
+        	var obj7 = new Array();
+        	var obj8 = new Array();
         	
         	<c:forEach var="scoreInfo" items="${sts.list}" varStatus="status">
     			obj7.push("${scoreInfo.visit_date_format}");
@@ -336,7 +336,7 @@
                 </div>
             </div>
             <script>
-        	var obj9 = new array();	
+        	var obj9 = new Array();	
 			
         	<c:forEach var="scoreInfo" items="${sts.list}" varStatus="status">
     			obj9.push("${scoreInfo.visit_date_format}");
@@ -355,8 +355,8 @@
                         labels: ["SL", "SR", "SS", "JL", "JR", "OL", "OS", "OL"],
                         datasets: [{
                             label: '퍼팅 패턴',
-                            data: [${scoreInfo.pattern1}, ${scoreInfo.pattern2}, ${scoreInfo.pattern3}, ${scoreInfo.pattern4},
-                            	${scoreInfo.pattern5}, ${scoreInfo.pattern6}, ${scoreInfo.pattern7}, ${scoreInfo.pattern8}],
+                            data: [${sts.pattern[1]}, ${sts.pattern[2]}, ${sts.pattern[3]}, ${sts.pattern[4]},
+                            	${sts.pattern[5]}, ${sts.pattern[6]}, ${sts.pattern[7]}, ${sts.pattern[8]}],
                             backgroundColor: [
                                 'rgba(90, 99, 108, 0.2)',
                                 'rgba(90, 99, 108, 0.2)',

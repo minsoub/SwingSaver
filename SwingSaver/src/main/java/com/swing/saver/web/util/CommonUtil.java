@@ -114,7 +114,43 @@ public class CommonUtil {
 	        } finally {
 	            con.disconnect();
 	        }
-	 }
+	}
+	
+	
+//	public static String getmakePasswordEncoding(String password) {
+//		
+//		String CIPHER = "DES/CBC/PKCS5Padding";
+//		byte[] key = DatatypeConverter.parseHexBinary("4D594B4559313233");
+//		byte[] value = 
+//		DatatypeConverter.parseHexBinary("24FC80D150E224F2E8CE83229F38B607ADAF312BCB1B4A55");
+//		String INIT_VECTOR = new String(DatatypeConverter.parseHexBinary("3031323334353637"));
+//		SecretKeySpec secretKeySpec=new SecretKeySpec(key, "DES");
+//		IvParameterSpec ivParameterSpec=null;
+//		try {
+//		    ivParameterSpec=new IvParameterSpec(INIT_VECTOR.getBytes("UTF-8"));
+//		} catch (UnsupportedEncodingException e1) {
+//		    e1.printStackTrace();
+//		}
+//		Cipher decryptCipher=null;
+//		try {
+//		    decryptCipher= Cipher.getInstance(CIPHER);
+//		    decryptCipher.init(Cipher.DECRYPT_MODE, secretKeySpec,ivParameterSpec);
+//		} catch (NoSuchAlgorithmException | NoSuchPaddingException |InvalidKeyException 
+//		| InvalidAlgorithmParameterException  e) {
+//		    e.printStackTrace();
+//		}
+//		String result="";
+//		try {
+//		    result=new String(decryptCipher.doFinal(value),Charset.forName("UTF-8"));
+//		} catch (IllegalBlockSizeException e) {
+//		    e.printStackTrace();
+//		} catch (BadPaddingException e) {
+//		    e.printStackTrace();
+//		}
+//		System.out.println("Result " + result);
+//		
+//		return password;
+//	}
 
 	    private static HttpURLConnection connect(String apiUrl){
 	        try {
@@ -143,6 +179,5 @@ public class CommonUtil {
 	            throw new RuntimeException("API 응답을 읽는데 실패했습니다.", e);
 	        }
 	    }
-	
 	
 }

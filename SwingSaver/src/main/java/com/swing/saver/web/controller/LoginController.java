@@ -1,26 +1,5 @@
 package com.swing.saver.web.controller;
 
-import com.swing.saver.web.entity.Constant;
-import com.swing.saver.web.entity.LoginVo;
-import com.swing.saver.web.entity.QRInfoVo;
-import com.swing.saver.web.exception.ApiException;
-import com.swing.saver.web.service.RestService;
-import com.swing.saver.web.util.CommonUtil;
-
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -33,6 +12,30 @@ import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.swing.saver.web.entity.Constant;
+import com.swing.saver.web.entity.LoginVo;
+import com.swing.saver.web.entity.QRInfoVo;
+import com.swing.saver.web.exception.ApiException;
+import com.swing.saver.web.service.LoginService;
+import com.swing.saver.web.service.RestService;
+import com.swing.saver.web.util.CommonUtil;
+
 /**
  * Created by mycom on 2019-06-04.
  */
@@ -41,10 +44,22 @@ import java.util.Map;
 public class LoginController {
     private final static Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
 
+    @Value("${sns.kakao.returnUrl}")
+    private String kakaoReturnUrl;
+    
+    @Value("${sns.kakao.clientID}")
+    private String kakaoClientID;
+    
+    @Value("${sns.kakao.apiKey}")
+    private String kakaoApiKey;
+    
     
     
     @Inject
     RestService restService;
+    
+    @Inject
+    LoginService loginService;
 
     /**
      * 메인 페이지 접속 
@@ -93,13 +108,13 @@ public class LoginController {
     	String state = new BigInteger(130, random).toString(32);
     	
     	String naverUrl = URLEncoder.encode(CommonUtil.naverReturUrl, "UTF-8");
-    	String kakaoUrl = URLEncoder.encode(CommonUtil.kakaoReturnUrl, "UTF-8");
+    	String kakaoUrl = URLEncoder.encode(kakaoReturnUrl,  "UTF-8");
     	String facebookUrl = URLEncoder.encode(CommonUtil.facebookReturnUrl, "UTF-8");
     	mv.addObject("naverUrl", naverUrl);
     	mv.addObject("kakaoUrl", kakaoUrl);
     	mv.addObject("facebookUrl", facebookUrl);
     	mv.addObject("naverId", CommonUtil.naverClientId);
-    	mv.addObject("kakaoId", CommonUtil.kakaoClientId);
+    	mv.addObject("kakaoId",  kakaoClientID);
     	mv.addObject("facebookId", CommonUtil.facebookClientId);
     	
     	
@@ -228,12 +243,13 @@ public class LoginController {
                 // 사용자 세션을 생성하고 리턴한다.
                 LoginVo loginVo = new LoginVo();
                 loginVo.setEmail(email);
-                loginVo = restService.loginSnsProcess(loginVo,session);
+                loginVo.setUsername(name);
+                loginVo = loginService.loginSnsProcess(loginVo,session);   // restService.loginSnsProcess(loginVo,session);
                 if(loginVo == null || "false".equals(loginVo.getResult())){
                 	// 신규 등록한다.
                 	
                 	// 다시조회
-                	loginVo = restService.loginSnsProcess(loginVo,session);
+                	loginVo = loginService.loginSnsProcess(loginVo,session);  // restService.loginSnsProcess(loginVo,session);
                 }
                 // 세션 등록 
                 LOGGER.debug("로그인 성공 사용자id:{},사용자 권한:{}",loginVo.getUserid(),loginVo.getGroupadmin());
@@ -294,11 +310,11 @@ public class LoginController {
         	redirectUrl = "redirect:"+(String) session.getAttribute("redirectUrl");
         }   	
         
-        String clientId = CommonUtil.kakaoClientId;		    //애플리케이션 클라이언트 아이디값";
-        String clientSecret = CommonUtil.kakaoApiKey;		    //애플리케이션 클라이언트 시크릿값";
+        String clientId = kakaoClientID;		    //애플리케이션 클라이언트 아이디값";
+        String clientSecret = kakaoApiKey;		    //애플리케이션 클라이언트 시크릿값";
         String code  = request.getParameter("code");		//발급받은 코드
         //String state = request.getParameter("state");
-        String redirectURI = URLEncoder.encode(CommonUtil.kakaoReturnUrl, "UTF-8");
+        String redirectURI = URLEncoder.encode(kakaoReturnUrl, "UTF-8");
         String apiURL;
         apiURL = "https://kauth.kakao.com/oauth/token?grant_type=authorization_code&";
         apiURL += "client_id=" + clientId;
@@ -388,12 +404,10 @@ public class LoginController {
                 // 사용자 세션을 생성하고 리턴한다.
                 LoginVo loginVo = new LoginVo();
                 loginVo.setEmail(email);
-                loginVo = restService.loginSnsProcess(loginVo,session);
+                loginVo.setUsername(name);
+                loginVo = loginService.loginSnsProcess(loginVo,session);   // restService.loginSnsProcess(loginVo,session);
                 if(loginVo == null || "false".equals(loginVo.getResult())){
-                	// 신규 등록한다.
-                	
-                	// 다시조회
-                	loginVo = restService.loginSnsProcess(loginVo,session);
+                	loginVo = loginService.loginSnsProcess(loginVo,session);  // restService.loginSnsProcess(loginVo,session);
                 }
                 // 세션 등록 
                 LOGGER.debug("로그인 성공 사용자id:{},사용자 권한:{}",loginVo.getUserid(),loginVo.getGroupadmin());
@@ -627,18 +641,15 @@ public class LoginController {
         }else {
 
             /*로그인 호출 LoginVo 리턴*/
-            loginVo = restService.loginProcess(loginVo,session);
+            loginVo = loginService.loginProcess(loginVo, session);  // restService.loginProcess(loginVo,session);
             if(loginVo != null && "true".equals(loginVo.getResult())){
                 LOGGER.debug("로그인 성공 사용자id:{},사용자 권한:{}, ",loginVo.getUserid(),loginVo.getGroupadmin());
                 LOGGER.debug("로그인 성공 사용자 정보{}, ",loginVo);
-                /*session.setMaxInactiveInterval(60*60);*/
                 session.setAttribute("login",loginVo);
-                /*mv.addObject("isLoign",loginVo.getResult());*/
                 LOGGER.debug("Prev URL : " + prev_url);
                 if (prev_url != null && !"".equals(prev_url))
                 {
-                	redirectAttributes.addFlashAttribute("qrVo", qrInfo);
-                	
+                	redirectAttributes.addFlashAttribute("qrVo", qrInfo);                	
                 	rtnUrl = prev_url;
                 }else {                		                
                 	rtnUrl = "redirect:/";
@@ -647,8 +658,6 @@ public class LoginController {
                 LOGGER.debug("로그인 실패 : {}", loginVo.getResult());
 
                 redirectAttributes.addFlashAttribute("returnCode", "9999");
-                //redirectAttributes.addFlashAttribute("loginVo", loginVo);
-
                 rtnUrl = "redirect:/loginForm";
             }
         }
