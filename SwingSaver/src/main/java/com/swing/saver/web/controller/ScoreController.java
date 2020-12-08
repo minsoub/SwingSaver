@@ -90,6 +90,8 @@ public class ScoreController {
     	LOGGER.debug("Login userID : " + userId);
        
         
+    	qrVo.setVisit_date(CommonUtil.getCurrentFromatDate("yyyy-MM-dd"));
+    	
     	// 골프장 Par 정보를 얻는다.
     	String country_id = "KR";
     	FarVo parInfo1 =  restService.getParInfo(country_id, qrVo.getZone_id(), qrVo.getCountryclub_id(), qrVo.getStartcourse());   // 골프장 Par 정보 상세 정보 조회 (Start Course)
@@ -934,7 +936,7 @@ public class ScoreController {
     	LOGGER.debug(vo.getCountryclub_id());
     	LOGGER.debug(vo.getZone_id());
     	
-    	mv.addObject("prev_url", "redirect:/score/scoreRegister");
+    	mv.addObject("prev_url", "redirect:/m/score/scoreRegister");
     	
     	mv.setViewName("web/user/login");
     	
@@ -1072,6 +1074,8 @@ public class ScoreController {
         qrVo2.setScore2(qrVo.getScore2());
         qrVo2.setOthername3(qrVo.getOthername3());
         qrVo2.setScore3(qrVo.getScore3());
+        
+        
         
     	mv.addObject("areaList", areaList); 
     	mv.addObject("scoreVo", scoreVo);			// Score 정보

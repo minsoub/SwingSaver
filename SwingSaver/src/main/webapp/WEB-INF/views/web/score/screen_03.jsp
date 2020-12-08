@@ -218,7 +218,7 @@
 
                 <div class="sc-ad">
                     <p><strong>스코어 관리</strong>가 필요하신가요?<br/>
-                    <a href="javascript:fn_mngScoreList();"><span>스윙세이버를 시작! <strong>Click!</strong></span></a></p>
+                    <a href="javascript:fn_mngScoreList();"><span>"버디야"로 스코어 저장 <strong>Click!</strong></span></a></p>
                 </div>
 
                 <button id="btnSave" class="form-btn" onclick="#">이미지저장하기</button>
@@ -246,6 +246,8 @@
 <input type="hidden" name="score2" value="${qrInfo.score2}">
 <input type="hidden" name="othername3" value="${qrInfo.othername3}">
 <input type="hidden" name="score3" value="${qrInfo.score3}">	
+<input type="hidden" name="visit_date" value="${qrInfo.visit_date}">
+<input type="hidden" name="utime" value="${qrInfo.utime}">
 </form>   
 
 <input type="file" name="attachFile00" id="attachFile00" onchange="readURL(this);" style="display:none;"/>
@@ -329,7 +331,7 @@ function fn_mngScoreList()
 		forms1.submit();
 	}else {
 		// 로그인이 되어 있으므로
-		forms1.action = "/score/scoreRegister";
+		forms1.action = "/m/score/scoreRegister";
 		forms1.submit();
 	}
 }

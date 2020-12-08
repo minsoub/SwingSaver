@@ -20,8 +20,8 @@ public class JasyptConfig {
 		config.setPassword(CommonUtil.jasypt_data);
 		config.setAlgorithm("PBEWithMD5AndDES");
 		config.setKeyObtentionIterations("1000");
-		config.setPoolSize("1");
-		config.setProviderName("SunJCE");
+		config.setPoolSize("2");
+		//config.setProviderName("SunJCE");
 		config.setSaltGeneratorClassName("org.jasypt.salt.RandomSaltGenerator");
 		config.setStringOutputType("base64");
 		encryptor.setConfig(config);;

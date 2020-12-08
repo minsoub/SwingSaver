@@ -32,14 +32,14 @@ class SCScoreInfoServiceTest {
 		repository.deleteAll();
 	}
 	
-	@Test
-	void test() {
-		List<SCScoreInfo> list = new ArrayList();
-		repository.findAll().forEach(e->list.add(e));
-		
-		// then 
-		SCScoreInfo data = list.get(0);
-		assertThat(data.getVisit_date()).isEqualTo("20201125");
-	}
+//	@Test
+//	void test() {
+//		//List<SCScoreInfo> list = new ArrayList();
+//		List<SCScoreInfo> list = repository.findAll();  // .forEach(e->list.add(e));
+//		
+//		// then 
+//		SCScoreInfo data = list.get(0);
+//		assertThat(data.getVisit_date()).isEqualTo("20201125");
+//	}
 
 }

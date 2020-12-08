@@ -54,6 +54,15 @@ public class LoginController {
     private String kakaoApiKey;
     
     
+    @Value("${sns.naver.returnUrl}")
+    private String naverReturnUrl;
+    
+    @Value("${sns.naver.clientID}")
+    private String naverClientID;
+    
+    @Value("${sns.naver.apiKey}")
+    private String naverApiKey;
+    
     
     @Inject
     RestService restService;
@@ -107,18 +116,18 @@ public class LoginController {
     	SecureRandom random = new SecureRandom();
     	String state = new BigInteger(130, random).toString(32);
     	
-    	String naverUrl = URLEncoder.encode(CommonUtil.naverReturUrl, "UTF-8");
+    	String naverUrl = URLEncoder.encode(naverReturnUrl, "UTF-8");
     	String kakaoUrl = URLEncoder.encode(kakaoReturnUrl,  "UTF-8");
     	String facebookUrl = URLEncoder.encode(CommonUtil.facebookReturnUrl, "UTF-8");
     	mv.addObject("naverUrl", naverUrl);
     	mv.addObject("kakaoUrl", kakaoUrl);
     	mv.addObject("facebookUrl", facebookUrl);
-    	mv.addObject("naverId", CommonUtil.naverClientId);
+    	mv.addObject("naverId", naverClientID);
     	mv.addObject("kakaoId",  kakaoClientID);
     	mv.addObject("facebookId", CommonUtil.facebookClientId);
     	
     	
-    	mv.addObject("state", state);
+    	mv.addObject("state", URLEncoder.encode(state, "UTF-8"));
     	mv.setViewName("web/user/login");
     	
     	session.setAttribute("state", state);    	
@@ -153,11 +162,11 @@ public class LoginController {
         	redirectUrl = "redirect:"+(String) session.getAttribute("redirectUrl");
         }   	
         
-        String clientId = CommonUtil.naverClientId;		    //애플리케이션 클라이언트 아이디값";
-        String clientSecret = CommonUtil.naverKey;		    //애플리케이션 클라이언트 시크릿값";
+        String clientId = URLEncoder.encode(naverClientID, "UTF-8");		    //애플리케이션 클라이언트 아이디값";
+        String clientSecret =  URLEncoder.encode(naverApiKey, "UTF-8");		    //애플리케이션 클라이언트 시크릿값";
         String code  = request.getParameter("code");		//발급받은 코드
         String state = request.getParameter("state");
-        String redirectURI = URLEncoder.encode(CommonUtil.naverReturUrl, "UTF-8");
+        String redirectURI = URLEncoder.encode(naverReturnUrl, "UTF-8");
         String apiURL;
         apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
         apiURL += "client_id=" + clientId;
@@ -167,7 +176,7 @@ public class LoginController {
         apiURL += "&state=" + state;
         String access_token = "";
         String refresh_token = "";
-        System.out.println("apiURL="+apiURL);
+        LOGGER.debug("apiURL="+apiURL);
         
         try 
         {        	
@@ -176,7 +185,7 @@ public class LoginController {
             con.setRequestMethod("GET");
             int responseCode = con.getResponseCode();
             BufferedReader br;
-            System.out.print("responseCode="+responseCode);
+            LOGGER.debug("responseCode="+responseCode);
             if(responseCode==200) { // 정상 호출
               br = new BufferedReader(new InputStreamReader(con.getInputStream()));
             } else {  // 에러 발생
@@ -189,14 +198,14 @@ public class LoginController {
             }
             br.close();
             if(responseCode==200) {
-            	System.out.println(res.toString());            	         
+            	LOGGER.debug(res.toString());            	         
             	//responseCode=200{"access_token":"AAAAOKPDnM6r9f2-4L1EggPv_l74zvBaMiYcnGBlrvtguKUd3zB1G6cr7J1pIC-1CpA9zlL_0wmlnbWwhCB4S6pNrkI","refresh_token":"RisYjIIocPG08KrkUv3FMrjI0wuZv0epipRluUFV3SRiiyxN5xB6keNmqMIq0UipsnZtoMXTJisR4YJpHj0K5e83XLPLCApv5isaloCisHJ048KXWPRYI5giim2K8H4wGmsUipUsn","token_type":"bearer","expires_in":"3600"}
             	JSONParser parser = new JSONParser();
             	Object obj = parser.parse(res.toString());
             	JSONObject jsonObj = (JSONObject) obj;
             	
-            	System.out.println(jsonObj.toString());
-            	System.out.println(jsonObj.get("access_token"));
+            	LOGGER.debug(jsonObj.toString());
+            	LOGGER.debug(jsonObj.get("access_token").toString());
             	access_token = (String)jsonObj.get("access_token"); 
             	refresh_token = (String)jsonObj.get("refresh_token");
             	
@@ -222,11 +231,11 @@ public class LoginController {
                 String email =  (String)response_obj.get("email");
                 String name =  (String)response_obj.get("name");
                 String id =  (String)response_obj.get("id");                
-                System.out.println(responseBody);
-                System.out.println(nickname);
-                System.out.println(email);
-                System.out.println(name);
-                System.out.println(id);
+                LOGGER.debug(responseBody);
+                LOGGER.debug(nickname);
+                LOGGER.debug(email);
+                LOGGER.debug(name);
+                LOGGER.debug(id);
                 //System.out.println(nickname);
                 /*apiURL=https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=HU7BlUDoiX1K80yIxsVP&client_secret=9vEYPAM0l3&redirect_uri=https%3A%2F%2Flocalhost%3A8443%2FnaverLoginReturn&code=W1aDEvATQZAxWbYfE2&state=7m4f4torlj2ggkh2ku9c4b198v
                 	responseCode=200{"access_token":"AAAAOKPDnM6r9f2-4L1EggPv_l74zvBaMiYcnGBlrvtguKUd3zB1G6cr7J1pIC-1CpA9zlL_0wmlnbWwhCB4S6pNrkI","refresh_token":"RisYjIIocPG08KrkUv3FMrjI0wuZv0epipRluUFV3SRiiyxN5xB6keNmqMIq0UipsnZtoMXTJisR4YJpHj0K5e83XLPLCApv5isaloCisHJ048KXWPRYI5giim2K8H4wGmsUipUsn","token_type":"bearer","expires_in":"3600"}
@@ -268,13 +277,13 @@ public class LoginController {
                 
                 mv.addObject("success", "Y");   
             }else {
-            	System.out.println(res.toString());
+            	LOGGER.debug(res.toString());
             	mv.addObject("Error", res.toString());
             	mv.addObject("success", "N");
             }
         } catch (Exception e) {
         	mv.addObject("Error", e.toString());
-            System.out.println(e);
+        	LOGGER.debug(e.getLocalizedMessage());
             mv.addObject("success", "N");
         }
     	mv.setViewName("web/user/sns_login_result");
