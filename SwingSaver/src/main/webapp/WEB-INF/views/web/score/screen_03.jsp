@@ -3,13 +3,10 @@
 
 <c:set var="now" value="<%=new java.util.Date()%>" />
 
-
     <section class="container no-padding">
         <div class="col-xs-12" style="padding: 0">
             <div class="score-page form-page" style="margin: 0px">
                
-
-
                 <div class="myCanvas">
                 
                 <div class="sc-ad">
@@ -18,7 +15,7 @@
                 
                     <div class="score-wrap">
                         <div class="ph-wrap" id="preview">
-                            <img  class="bir-logo" src="/image/bir_logo_img.png">
+                            <!-- img  class="bir-logo" id="preview_img" src="/image/bir_logo_img.png"  -->
                         </div>
                         <div class="sc-wrap">
                             <img class="gol-logo" src="<c:url value='${golfInfo.image_url}'/>" height="30pt">
@@ -111,6 +108,21 @@
                                         <td class="sc-gray">${scoreVo4.sum1}</td>
                                     </tr>
                                </c:if>
+                                <c:if test="${scoreVo5.error != 'NO'}">    
+                                    <tr>
+                                        <td class="sc-gray">${qrInfo.othername4}</td>
+                        				<td <c:if test="${scoreVo5.scorechk1 < 0}">class="s-he"</c:if>><c:if test="${scoreVo5.score1 == 0}">&nbsp;</c:if><c:if test="${scoreVo5.score1 != 0}">${scoreVo5.scorechk1}</c:if></td>
+                        				<td <c:if test="${scoreVo5.scorechk2 < 0}">class="s-he"</c:if>><c:if test="${scoreVo5.score2 == 0}">&nbsp;</c:if><c:if test="${scoreVo5.score2 != 0}">${scoreVo5.scorechk2}</c:if></td>
+                        				<td <c:if test="${scoreVo5.scorechk3 < 0}">class="s-he"</c:if>><c:if test="${scoreVo5.score3 == 0}">&nbsp;</c:if><c:if test="${scoreVo5.score3 != 0}">${scoreVo5.scorechk3}</c:if></td>
+                        				<td <c:if test="${scoreVo5.scorechk4 < 0}">class="s-he"</c:if>><c:if test="${scoreVo5.score4 == 0}">&nbsp;</c:if><c:if test="${scoreVo5.score4 != 0}">${scoreVo5.scorechk4}</c:if></td>
+                        				<td <c:if test="${scoreVo5.scorechk5 < 0}">class="s-he"</c:if>><c:if test="${scoreVo5.score5 == 0}">&nbsp;</c:if><c:if test="${scoreVo5.score5 != 0}">${scoreVo5.scorechk5}</c:if></td>
+                        				<td <c:if test="${scoreVo5.scorechk6 < 0}">class="s-he"</c:if>><c:if test="${scoreVo5.score6 == 0}">&nbsp;</c:if><c:if test="${scoreVo5.score6 != 0}">${scoreVo5.scorechk6}</c:if></td>
+                        				<td <c:if test="${scoreVo5.scorechk7 < 0}">class="s-he"</c:if>><c:if test="${scoreVo5.score7 == 0}">&nbsp;</c:if><c:if test="${scoreVo5.score7 != 0}">${scoreVo5.scorechk7}</c:if></td>
+                        				<td <c:if test="${scoreVo5.scorechk8 < 0}">class="s-he"</c:if>><c:if test="${scoreVo5.score8 == 0}">&nbsp;</c:if><c:if test="${scoreVo5.score8 != 0}">${scoreVo5.scorechk8}</c:if></td>
+                        				<td <c:if test="${scoreVo5.scorechk9 < 0}">class="s-he"</c:if>><c:if test="${scoreVo5.score9 == 0}">&nbsp;</c:if><c:if test="${scoreVo5.score9 != 0}">${scoreVo5.scorechk9}</c:if></td>                                                                       
+                                        <td class="sc-gray">${scoreVo5.sum1}</td>
+                                    </tr>
+                               </c:if>                               
                                 </table>
 
                             </div>
@@ -202,6 +214,21 @@
                                         <td class="sc-gray">${scoreVo4.sum2}/${scoreVo4.sum1+scoreVo4.sum2}</td>
                                     </tr>
                                  </c:if>
+                                 <c:if test="${scoreVo5.error != 'NO'}">
+                                    <tr>
+                                        <td class="sc-gray">${qrInfo.othername4}</td>
+                        				<td <c:if test="${scoreVo5.scorechk10 < 0}">class="s-he"</c:if>><c:if test="${scoreVo5.score10 == 0}">&nbsp;</c:if><c:if test="${scoreVo5.score10 != 0}">${scoreVo5.scorechk10}</c:if></td>
+                        				<td <c:if test="${scoreVo5.scorechk11 < 0}">class="s-he"</c:if>><c:if test="${scoreVo5.score11 == 0}">&nbsp;</c:if><c:if test="${scoreVo5.score11 != 0}">${scoreVo5.scorechk11}</c:if></td>
+                        				<td <c:if test="${scoreVo5.scorechk12 < 0}">class="s-he"</c:if>><c:if test="${scoreVo5.score12 == 0}">&nbsp;</c:if><c:if test="${scoreVo5.score12 != 0}">${scoreVo5.scorechk12}</c:if></td>
+                        				<td <c:if test="${scoreVo5.scorechk13 < 0}">class="s-he"</c:if>><c:if test="${scoreVo5.score13 == 0}">&nbsp;</c:if><c:if test="${scoreVo5.score13 != 0}">${scoreVo5.scorechk13}</c:if></td>
+                        				<td <c:if test="${scoreVo5.scorechk14 < 0}">class="s-he"</c:if>><c:if test="${scoreVo5.score14 == 0}">&nbsp;</c:if><c:if test="${scoreVo5.score14 != 0}">${scoreVo5.scorechk14}</c:if></td>
+                        				<td <c:if test="${scoreVo5.scorechk15 < 0}">class="s-he"</c:if>><c:if test="${scoreVo5.score15 == 0}">&nbsp;</c:if><c:if test="${scoreVo5.score15 != 0}">${scoreVo5.scorechk15}</c:if></td>
+                        				<td <c:if test="${scoreVo5.scorechk16 < 0}">class="s-he"</c:if>><c:if test="${scoreVo5.score16 == 0}">&nbsp;</c:if><c:if test="${scoreVo5.score16 != 0}">${scoreVo5.scorechk16}</c:if></td>
+                        				<td <c:if test="${scoreVo5.scorechk17 < 0}">class="s-he"</c:if>><c:if test="${scoreVo5.score17 == 0}">&nbsp;</c:if><c:if test="${scoreVo5.score17 != 0}">${scoreVo5.scorechk17}</c:if></td>
+                        				<td <c:if test="${scoreVo5.scorechk18 < 0}">class="s-he"</c:if>><c:if test="${scoreVo5.score18 == 0}">&nbsp;</c:if><c:if test="${scoreVo5.score18 != 0}">${scoreVo5.scorechk18}</c:if></td>                                                                       
+                                        <td class="sc-gray">${scoreVo5.sum2}/${scoreVo5.sum1+scoreVo5.sum2}</td>
+                                    </tr>
+                                 </c:if>                                 
                                 </table>
                             </div>
                         </div>
@@ -221,11 +248,14 @@
                     <a href="javascript:fn_mngScoreList();"><span>"버디야"로 스코어 저장 <strong>Click!</strong></span></a></p>
                 </div>
 
+</div>
+            </div>
+            
+            
                 <button id="btnSave" class="form-btn" onclick="#">이미지저장하기</button>
                 <button id="btnChange" class="img-btn" onclick="#">사진변경</button>
 
-</div>
-            </div>
+
 
             </div>
 
@@ -344,10 +374,10 @@ function readURL(input) {
 	if (input.files && input.files[0]) { 
 		var reader = new FileReader(); 
 		reader.onload = function (e) { 
-		    var img = "url("+e.target.result+")";
-			//$("#nd01").css({"background":"url(img.png)"}); 		
-			$("#preview").css({"background":img});
-			//$('#preview').attr('src', e.target.result); 
+		    var img = "url("+e.target.result+")";		
+			//$("#preview").css({"background":img});			
+			$("#preview").css("background-image", img);
+			//$('#preview_img').attr('src', e.target.result); 
 		} 
 		reader.readAsDataURL(input.files[0]); 
 	} 

@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,14 +42,17 @@ import com.swing.saver.web.entity.GolfVo;
 import com.swing.saver.web.entity.LoginVo;
 import com.swing.saver.web.entity.QRInfoVo;
 import com.swing.saver.web.entity.ScoreRequest;
-import com.swing.saver.web.entity.ScoreVo;
 import com.swing.saver.web.entity.UserVo;
 import com.swing.saver.web.exception.ApiException;
+import com.swing.saver.web.response.ResponseAdvert;
+import com.swing.saver.web.response.ResponseAreaInfo;
 import com.swing.saver.web.response.ResponseCountryClub;
 import com.swing.saver.web.response.ResponseScore;
 import com.swing.saver.web.response.ResponseScoreAnalysys;
 import com.swing.saver.web.response.ResponseScoreDetail;
 import com.swing.saver.web.response.ResponseScoreSts;
+import com.swing.saver.web.service.AdvertService;
+import com.swing.saver.web.service.AreaInfoService;
 import com.swing.saver.web.service.CountryClubService;
 import com.swing.saver.web.service.MobileService;
 import com.swing.saver.web.service.RestService;
@@ -82,7 +84,13 @@ public class MobileController extends CommonController {
     SCScoreInfoService scoreService;
     
     @Inject
-    CountryClubService countryclubService;
+    CountryClubService countryclubService;		// 골프장 
+    
+    @Inject
+    AdvertService advertService;				// 광고 제휴 사이트 서비스
+    
+    @Inject
+    AreaInfoService areaService;
     
     /**
      * Mobile Index Page
@@ -95,22 +103,11 @@ public class MobileController extends CommonController {
     public ModelAndView mobileHomeForm(HttpServletRequest request) throws IOException, ApiException {    	
     	ModelAndView mv = new ModelAndView();
     	
-    	String rtnJson = restService.golfRecommandList();
-    	ObjectMapper mapper = new ObjectMapper();
-    	Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});
-    	
-    	mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
-    	
-    	List<GolfVo> golfList = mapper.convertValue(map.get("golfList"), TypeFactory.defaultInstance().constructCollectionType(List.class, GolfVo.class));
+    	List<ResponseCountryClub> golfList = countryclubService.findByAllianceCountryClub();   // 골프장 제휴 리스트 조회
     	mv.addObject("golfList", golfList);
     	
-    	    	    	    	
-    	rtnJson = restService.getAdvList();   //  광고관리 정보 조회 (use_yn이 Y인 것에 대해서만 화면상에 보여 주어야 한다)
-    	ObjectMapper mapp= new ObjectMapper();
-        Map<String, Object> mapAd = mapp.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});
-        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
-        List<AdverVo> advList = mapp.convertValue(mapAd.get("advList"), TypeFactory.defaultInstance().constructCollectionType(List.class,AdverVo.class));
-        mv.addObject("advList", advList);
+    	List<ResponseAdvert> advertList = advertService.findByAdvertAll();
+    	mv.addObject("advList", advertList);
     	
         mv.addObject("setMenu", "home");
         mv.setViewName("mobile/home");
@@ -187,7 +184,8 @@ public class MobileController extends CommonController {
     public ModelAndView mobileBookMarkForm(GolfVo vo, HttpServletRequest request,HttpSession session, ModelAndView mv, RedirectAttributes redirectAttributes) throws ApiException, IOException {
         
     	// 지역 코드 조회
-        List<AreaVo> areaList = getAreaList("KR");	// Default KR
+        //List<AreaVo> areaList = getAreaList("KR");	// Default KR
+        List<ResponseAreaInfo> areaList = areaService.findByAreaList();	
         mv.addObject("areaList", areaList); 
     	
     	// 파라미터 : zone_id, alliance_check
@@ -198,11 +196,14 @@ public class MobileController extends CommonController {
     	params.put("alliance_check", "Y");		// 제휴 리스트만 출력
     	params.put("word",           "");
     	
-    	String rtnJson = restService.getGolfList(params);
-    	ObjectMapper mapper = new ObjectMapper();
-    	Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});    	
-    	mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);    	
-    	List<GolfVo> golfList = mapper.convertValue(map.get("golfList"), TypeFactory.defaultInstance().constructCollectionType(List.class, GolfVo.class));
+    	List<ResponseCountryClub> golfList = countryclubService.findByBookmarkSearch(params);
+    	
+    	
+//    	String rtnJson = restService.getGolfList(params);
+//    	ObjectMapper mapper = new ObjectMapper();
+//    	Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});    	
+//    	mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);    	
+//    	List<GolfVo> golfList = mapper.convertValue(map.get("golfList"), TypeFactory.defaultInstance().constructCollectionType(List.class, GolfVo.class));
     	mv.addObject("golfList", golfList);
         mv.addObject("alliance_check", vo.getAlliance_check());		// 검색조건
         mv.addObject("zone_id", vo.getZone_id());					// 검색조건
@@ -231,8 +232,9 @@ public class MobileController extends CommonController {
     	
     	LOGGER.debug("Login userID : " + userId);
     	
+    	List<ResponseAreaInfo> areaList = areaService.findByAreaList();		// 지역코드 조회
     	// 지역 코드 조회
-        List<AreaVo> areaList = getAreaList("KR");	// Default KR
+        //List<AreaVo> areaList = getAreaList("KR");	// Default KR
         mv.addObject("areaList", areaList); 
     	
     	// 파라미터 : zone_id, alliance_check
@@ -244,11 +246,16 @@ public class MobileController extends CommonController {
     	params.put("userid", String.valueOf(userId));
     	params.put("word", "");
     	
-    	String rtnJson = restService.getGolfList(params);
-    	ObjectMapper mapper = new ObjectMapper();
-    	Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});    	
-    	mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);    	
-    	List<GolfVo> golfList = mapper.convertValue(map.get("golfList"), TypeFactory.defaultInstance().constructCollectionType(List.class, GolfVo.class));
+    	List<ResponseCountryClub> golfList = countryclubService.findByAreaySearch(params);
+//    	
+//    	String rtnJson = restService.getGolfList(params);
+//    	ObjectMapper mapper = new ObjectMapper();
+//    	Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});    	
+//    	mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);    	
+//    	List<GolfVo> golfList = mapper.convertValue(map.get("golfList"), TypeFactory.defaultInstance().constructCollectionType(List.class, GolfVo.class));
+//    	
+//    	
+    	
     	mv.addObject("golfList", golfList);
         mv.addObject("alliance_check", vo.getAlliance_check());		// 검색조건
         mv.addObject("zone_id", vo.getZone_id());					// 검색조건

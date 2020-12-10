@@ -6,6 +6,7 @@
 <section id="contents" class="gray_con">
 <form name="frm" id="frm" action="POST">
 <input type="hidden" name="alliance_check" id="alliance_check" value="${alliance_check}" />
+
     <div class="select-area">
         <select name="zone_id" id="zone_id" class="select-bar" onChange="javascript:ChangeZone(this.value);">
         	<option value="">지역선택</option>
@@ -14,10 +15,12 @@
         </c:forEach>
         </select>
     </div>
+    
     <div class="bud-tab">
         <a href="javascript:GolfList('');"  class="tab-01 <c:if test="${alliance_check ne 'Y'}">active</c:if> ">모두</a>
         <a href="javascript:GolfList('Y');" class="tab-01 <c:if test="${alliance_check eq 'Y'}">active</c:if> ">제휴</a>
     </div>
+    
     <div class="list-wrap">
     	<c:forEach var="golfInfo" items="${golfList}" varStatus="status">
         <div class="list">

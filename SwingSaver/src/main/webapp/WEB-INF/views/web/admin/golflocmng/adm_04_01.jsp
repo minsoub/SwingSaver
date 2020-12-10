@@ -11,6 +11,7 @@
 
                     <form class="form-signin" id='forms1' name="forms1" method="POST" enctype="multipart/form-data">
                     <input type="hidden" id="image" name="image">
+                    <input type="hidden" id="logo_image" name="logo_image">
                     <input type="hidden" id="assets" name="assets">
                     <input type="hidden" id="simage" name="simage">
                     <input type="hidden" id="fdata" name="fdata">
@@ -41,9 +42,14 @@
                             <p>골프장홀수</p>
                             <input type="number" id="hole_value" name="hole_value" placeholder="골프장홀수" maxlength=2  oninput="maxLengthCheck(this)"  />
                         </div>
+                        
                         <div class="question">
                             <p>골프장로고</p>
                             <input type="file" id="imageFile" name="imageFile" placeholder="기본이미지 저장경로" style="width:350;"  />
+                        </div>
+                        <div class="question">
+                            <p>골프장로고(가로)</p>
+                            <input type="file" id="logo_imageFile" name="logo_imageFile" placeholder="가로이미지 저장경로" style="width:350;"  />
                         </div>
                         <div class="question">
                             <p>골프장홈피용</p>

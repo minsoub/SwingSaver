@@ -35,4 +35,15 @@ public interface CountryClubInfoRepository  extends JpaRepository <CountryclubIn
 	 */
 	@Query(value="select a from CountryclubInfo a where a.countryclub_nm like CONCAT(CONCAT('%',:countryclub_nm),'%')")
 	List<CountryclubInfo> findByLikeName(@Param("countryclub_nm") String countryclub_nm); 
+	
+	/**
+	 * 제휴 골프장 리스트 조회
+	 * @return
+	 */
+	@Query(value="select a from CountryclubInfo a where a.alliance_check='Y'")
+	List<CountryclubInfo> findByAllianceCountryClub();
+	
+	@Query(value="select 'C'|| LPAD(NVL(MAX(TO_NUMBER(SUBSTR(a.countryclub_id, 3,2))), 0)+1, 3, '0') from sccountryclubinfo a ", nativeQuery = true)
+	String findNextKey();
+	
 }

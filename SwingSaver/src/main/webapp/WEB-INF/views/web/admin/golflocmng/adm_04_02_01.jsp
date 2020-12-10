@@ -10,6 +10,7 @@
 
                     <form class="form-signin" id='forms1' name="forms1" method="POST"  enctype="multipart/form-data">
                     <input type="hidden" id="image" name="image" value="${golfInfo.image}">
+                    <input type="hidden" id="logo_image" name="logo_image" value="${golfInfo.logo_image}">
                     <input type="hidden" id="assets" name="assets" value="${golfInfo.assets}">    
                     <input type="hidden" id="simage" name="simage" value="${golfInfo.simage}">   
                     <input type="hidden" id="fdata" name="fdata" value="${golfInfo.fdata}">             
@@ -38,6 +39,11 @@
                             <input type="file" id="imageFile" name="imageFile" placeholder="기본이미지 저장경로" value="${golfInfo.image}"  maxlength="100"  />
                             [${golfInfo.image}]
                         </div>
+                        <div class="question">
+                            <p>골프장로고(가로)</p>
+                            <input type="file" id="imageFile" name="imageFile" placeholder="기본이미지 저장경로" value="${golfInfo.image}"  maxlength="100"  />
+                            [${golfInfo.logo_image}]
+                        </div>                        
                         <div class="question">
                             <p>골프장홈피용</p>
                             <input type="file" id="assetsFile" name="assetsFile" placeholder="Asset 저장 경로" value="${golfInfo.assets}" maxlength="100"  />

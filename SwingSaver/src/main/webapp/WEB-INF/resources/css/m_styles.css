@@ -3733,7 +3733,7 @@ tbody {
 /*new qr*/
 
 .score-wrap{width: 100%; }
-.ph-wrap{    width: 42%;background-image: url('/image/photo.png');background-size: cover;position: relative;display: inline-block;min-height: 310px;}
+.ph-wrap{ width: 42%; background-image: url('/image/photo.png');background-size: cover;position: relative;display: inline-block;min-height: 310px;}
 .bir-logo{position: absolute; left: 10px;bottom: 10px; width: 28%;}
 .sc-tit{font-size: 9px!important;font-weight: 500!important;width:37px!important;}
 .sc-wrap{position: relative;display: inline-block; vertical-align: top;width: 55%;padding-left: 10px;margin: 0;}   

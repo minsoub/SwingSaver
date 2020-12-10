@@ -17,6 +17,7 @@ public class GolfVo {
 	String countryclub_nm;		// 골프장 이름
 	int hole_value;				// 홀수
 	String image;			// 기본 이미지 경로
+	String logo_image;			// 가로 이미지 경로
 	String address;			// 골프장 주소
 	String phone;			// 연락처
 	String email;			// 담당자 메일
@@ -35,6 +36,7 @@ public class GolfVo {
 	String country_nm;		// 국가코드명
 	String zone_nm;			// 지역명
 	String image_url;		// 이미지 경로
+	String logo_image_url;		// 이미지 경로(가로)
 	String assets_url;		// 저장이미지 경로
 	String simage_url;		// 스코어 이미지 경로
 	String fdata_url;
@@ -47,6 +49,7 @@ public class GolfVo {
 	int pay_dt;             // 남은유효기간
 	
 	MultipartFile imageFile;
+	MultipartFile logo_imageFile;
 	MultipartFile assetsFile;
 	MultipartFile simageFile;
 	MultipartFile fdataFile;

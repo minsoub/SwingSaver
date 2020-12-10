@@ -24,6 +24,10 @@ public class QRInfoVo {
 	private String score2;			// 동반자 2의 점수
 	private String othername3;		// 동반자 3
 	private String score3;			// 동반자 3의 점수
+	
+	private String othername4;		// 동반자 4
+	private String score4;			// 동반자 4의 점수
+	
 	private String utime;			// 티업타임 13:50
 	private String visit_date;		// 2020-12-30
 }

@@ -99,10 +99,7 @@
 }   
 </style>
 
-
 <%@include file="/WEB-INF/views/mobile/include/top_menu.jsp"%>
-
-
     
  <section id="contents" class="main_con">
    <div class="main-btn">
@@ -119,22 +116,21 @@
                 
    <!--  광고 이미지    -->
    <div class="main-bn slideshow-container">
-   <c:forEach var="advInfo" items="${advList}" varStatus="status">
-   		<c:if test="${advInfo.use_yn eq 'Y'}">
-   		   <div class="mySlides fade">
-    		<a href="${advInfo.site_url}"><img src="<c:url value='${advInfo.image_url}'/>" width=100%></a>
-    	   </div>
-  		</c:if>
-  	</c:forEach> 		
+   		<c:forEach var="advInfo" items="${advList}" varStatus="status">
+   			<c:if test="${advInfo.use_yn eq 'Y'}">
+   		   		<div class="mySlides fade">
+    				<a href="${advInfo.site_url}"><img src="<c:url value='${advInfo.image_url}'/>" width=100%></a>
+    	   		</div>
+  			</c:if>
+  		</c:forEach> 		
   	
   		<!-- Next and previous buttons -->
   		<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-  		<a class="next" onclick="plusSlides(1)">&#10095;</a>
-  		  	
+  		<a class="next" onclick="plusSlides(1)">&#10095;</a>  		  	
    </div>
    <!-- 광고 이미지 End -->
    
-   <a href="/score/scoreList" class="swing-bn">
+   <a href="/m/score" class="swing-bn">
       지난 스코어 보러가기<img src="/mobile/image/main-sc-btn.png">
    </a>
 
@@ -151,8 +147,7 @@
           </div>   
         </div>        
     </div>
-    
-    
+        
 </section>
 
 <form name="frm" id="frm" method="POST">

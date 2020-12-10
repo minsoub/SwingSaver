@@ -56,6 +56,11 @@
                                         <td>${golfInfo.image}</td>
                                     </tr>
                                     <tr>
+                                        <td><strong>골프장로고(가로)
+                                        </strong></td>
+                                        <td>${golfInfo.logo_image}</td>
+                                    </tr>                                    
+                                    <tr>
                                         <td><strong>골프장홈피용</strong></td>
                                         <td>${golfInfo.assets}</td>
                                     </tr>

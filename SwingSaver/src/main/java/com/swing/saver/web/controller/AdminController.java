@@ -33,6 +33,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
+import com.swing.saver.web.domain.CountryclubInfo;
 import com.swing.saver.web.entity.AdminVo;
 import com.swing.saver.web.entity.AdverVo;
 import com.swing.saver.web.entity.AreaVo;
@@ -44,7 +45,9 @@ import com.swing.saver.web.entity.GroupVo;
 import com.swing.saver.web.entity.StsVo;
 import com.swing.saver.web.entity.UserVo;
 import com.swing.saver.web.exception.ApiException;
+import com.swing.saver.web.response.ResponseCountryClub;
 import com.swing.saver.web.service.AdminService;
+import com.swing.saver.web.service.CountryClubService;
 import com.swing.saver.web.service.RestService;
 import com.swing.saver.web.util.UploadFileUtils;
 
@@ -68,6 +71,9 @@ public class AdminController extends CommonController {
     
     @Inject
     AdminService adminService;
+    
+    @Inject
+    private CountryClubService clubService;
     
     /**
      * Admin Login Form display
@@ -541,15 +547,17 @@ public class AdminController extends CommonController {
     	ModelAndView mv = new ModelAndView();
     	AdminVo loginVo = (AdminVo) session.getAttribute("adminlogin");
 
-    	String rtnJson = restService.getGolfList();   // 관리자가 골프장 정보 조회
-    	LOGGER.debug(rtnJson);
-        ObjectMapper mapper = new ObjectMapper();
-        Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});
-
-        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
-        
-        // groupList => RestFul Service에서 등록한 명
-        List<GolfVo> golfList = mapper.convertValue(map.get("golfList"), TypeFactory.defaultInstance().constructCollectionType(List.class,GolfVo.class));
+    	List<ResponseCountryClub> golfList = clubService.findAll();
+//    	
+//    	String rtnJson = restService.getGolfList();   // 관리자가 골프장 정보 조회
+//    	LOGGER.debug(rtnJson);
+//        ObjectMapper mapper = new ObjectMapper();
+//        Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});
+//
+//        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
+//        
+//        // groupList => RestFul Service에서 등록한 명
+//        List<GolfVo> golfList = mapper.convertValue(map.get("golfList"), TypeFactory.defaultInstance().constructCollectionType(List.class,GolfVo.class));
 
         mv.addObject("golfList", golfList);
         mv.setViewName("web/admin/golflocmng/adm_04");
@@ -614,6 +622,7 @@ public class AdminController extends CommonController {
     	params.put("countryclub_id", golfVo.getCountryclub_id());
     	params.put("countryclub_nm", golfVo.getCountryclub_nm());
     	params.put("image", "");  // file
+    	params.put("logo_image", "");  // file
     	params.put("assets", ""); // file
     	params.put("simage", "");  // file
     	params.put("fdata", "");  // file
@@ -623,10 +632,8 @@ public class AdminController extends CommonController {
     	params.put("email", golfVo.getEmail());
     	params.put("description", golfVo.getDescription());
     	params.put("rsv_url", golfVo.getRsv_url());
-    	params.put("evt_url", golfVo.getEvt_url());
-    	
+    	params.put("evt_url", golfVo.getEvt_url());    	
     	params.put("pgm_call_param", golfVo.getPgm_call_param());
-    	
     	
     	if (golfVo.getAlliance_check() == null && "".equals(golfVo.getAlliance_check())) golfVo.setAlliance_check("N");
     	params.put("alliance_check", golfVo.getAlliance_check());
@@ -646,6 +653,17 @@ public class AdminController extends CommonController {
 	    	String paramName = golfVo.getImageFile().getName();  // 파라미터명
 	    	params.put("image", savedName);
     	}
+    	if (!golfVo.getLogo_imageFile().isEmpty())
+    	{
+    		String orginFileName = golfVo.getLogo_imageFile().getOriginalFilename();
+    		int index = orginFileName.lastIndexOf(".");
+		    String fileExt = orginFileName.substring(index + 1);
+	        String savedName = UploadFileUtils.getTimeStamp()+"."+fileExt;
+	        String filePath = uploadPath + File.separator + savedName;
+	        golfVo.getLogo_imageFile().transferTo(new File(filePath));
+	    	String paramName = golfVo.getLogo_imageFile().getName();  // 파라미터명
+	    	params.put("logo_image", savedName);
+    	}    	
     	if (!golfVo.getAssetsFile().isEmpty())
     	{
     		String orginFileName = golfVo.getAssetsFile().getOriginalFilename();
@@ -680,22 +698,35 @@ public class AdminController extends CommonController {
 	    	String paramName = golfVo.getFdataFile().getName();  // 파라미터명
 	    	params.put("fdata", savedName);
     	}
+    	
+    	ObjectMapper mapper = new ObjectMapper(); 
+    	GolfVo pojo = mapper.convertValue(params, GolfVo.class);
 
-    	String rtnJson = restService.golfCreate(params);
+    	CountryclubInfo result = clubService.save(pojo);
+    	
+    	if (result == null)
+    	{
+    		golfVo.setResult(false);
+        	golfVo.setError("저장하는데 에러가 발생하였습니다");
+    	}else {
+    		golfVo.setResult(true);
+    	}
+    	
+//    	String rtnJson = restService.golfCreate(params);
     	
     	// 결과값에 대해서 리턴한다.
-    	LOGGER.debug(rtnJson);
-        ObjectMapper mapper = new ObjectMapper();
-        Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});
-        // key : result, error
-        String result = map.get("result").toString();
-        if (result.equals("true"))
-        {
-        	golfVo.setResult(true);
-        }else {
-        	golfVo.setResult(false);
-        	golfVo.setError(map.get("error").toString());
-        }
+//    	LOGGER.debug(rtnJson);
+//        ObjectMapper mapper = new ObjectMapper();
+//        Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});
+//        // key : result, error
+//        String result = map.get("result").toString();
+//        if (result.equals("true"))
+//        {
+//        	golfVo.setResult(true);
+//        }else {
+//        	golfVo.setResult(false);
+//        	golfVo.setError(map.get("error").toString());
+//        }
                 
         mv.addObject("result", golfVo);
     	LOGGER.debug("==================== AdminController golfAdd end : ===================");
@@ -723,6 +754,43 @@ public class AdminController extends CommonController {
     } 
     
     /**
+     * 골프장정보 상세 정보 출력 
+     * 
+     * @param request
+     * @return
+     */
+    @GetMapping("/golf/{country_id}/{zone_id}/{countryclub_id}")
+    public ModelAndView golfDetail(HttpServletRequest request,@PathVariable String country_id, @PathVariable String zone_id, @PathVariable String countryclub_id)  throws IOException, ApiException 
+    {
+    	ModelAndView mv = new ModelAndView();
+    	ObjectMapper mapper = new ObjectMapper();
+    	
+    	ResponseCountryClub golfInfo = clubService.findById(country_id, zone_id,countryclub_id);    	   	    	
+    	mv.addObject("golfInfo", golfInfo);
+    	
+//    	//GolfVo golfInfo =  restService.getGolfInfo(country_id, zone_id, countryclub_id);   // 골프장정보 상세 정보 조회
+//    	String resultJson = restService.getGolfImgIncludeDetail(country_id, zone_id, countryclub_id);  // 이미지 포함 골프장 정보 조회
+//    	Map<String, Object> goflMap = mapper.readValue(resultJson, new TypeReference<Map<String, Object>>(){});
+//    	mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false); 
+//    	List<GolfVo> mapList = mapper.convertValue(goflMap.get("golfList"), TypeFactory.defaultInstance().constructCollectionType(List.class,GolfVo.class));    	    	
+//        mv.addObject("golfInfo", mapList.get(0));
+//        
+        
+    	String rtnJson = restService.getParList(countryclub_id);   // 관리자가 PAR 정보 조회
+    	LOGGER.debug(rtnJson);
+       
+        Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);        
+        // groupList => RestFul Service에서 등록한 명
+        List<FarVo> parList = mapper.convertValue(map.get("parList"), TypeFactory.defaultInstance().constructCollectionType(List.class,FarVo.class));
+        mv.addObject("parList", parList);
+               
+        mv.setViewName("web/admin/golflocmng/adm_04_02");
+        
+    	return mv;
+    }     
+    
+    /**
      * 골프장 상세정보 화면 출력 (수정화면)
      * @param request
      * @return
@@ -734,7 +802,9 @@ public class AdminController extends CommonController {
     	LOGGER.debug("zone_id : " + golfVo.getZone_id());
     	LOGGER.debug("countryclub_id : " + golfVo.getCountryclub_id());
     	
-    	GolfVo golfInfo =  restService.getGolfInfo(golfVo.getCountry_id().trim(), golfVo.getZone_id(), golfVo.getCountryclub_id());   // 골프장정보 상세 정보 조회
+    	ResponseCountryClub golfInfo = clubService.findById(golfVo.getCountry_id().trim(), golfVo.getZone_id(), golfVo.getCountryclub_id());
+    	    	
+    	// GolfVo golfInfo =  restService.getGolfInfo(golfVo.getCountry_id().trim(), golfVo.getZone_id(), golfVo.getCountryclub_id());   // 골프장정보 상세 정보 조회
         mv.addObject("golfInfo", golfInfo);
 
         // 국가코드 조회
@@ -768,6 +838,7 @@ public class AdminController extends CommonController {
     	params.put("countryclub_id", golfVo.getCountryclub_id());
     	params.put("countryclub_nm", golfVo.getCountryclub_nm());
     	params.put("image", golfVo.getImage());
+    	params.put("logo_image", golfVo.getLogo_image());
     	params.put("assets", golfVo.getAssets());
     	params.put("simage", golfVo.getSimage());
     	params.put("hole_value", String.valueOf(golfVo.getHole_value()));
@@ -795,6 +866,17 @@ public class AdminController extends CommonController {
 	    	String paramName = golfVo.getImageFile().getName();  // 파라미터명
 	    	params.put("image", savedName);
     	}
+    	if (!golfVo.getLogo_imageFile().isEmpty())
+    	{
+    		String orginFileName = golfVo.getLogo_imageFile().getOriginalFilename();
+    		int index = orginFileName.lastIndexOf(".");
+		    String fileExt = orginFileName.substring(index + 1);
+	        String savedName = UploadFileUtils.getTimeStamp()+"."+fileExt;
+	        String filePath = uploadPath + File.separator + savedName;
+	        golfVo.getLogo_imageFile().transferTo(new File(filePath));
+	    	String paramName = golfVo.getLogo_imageFile().getName();  // 파라미터명
+	    	params.put("logo_image", savedName);
+    	} 
     	if (!golfVo.getAssetsFile().isEmpty())
     	{
     		String orginFileName = golfVo.getAssetsFile().getOriginalFilename();
@@ -818,46 +900,42 @@ public class AdminController extends CommonController {
 	    	params.put("simage", savedName);
     	}    	
     	
-    	String rtnJson = restService.golfUpdate(params);
+    	if (!golfVo.getFdataFile().isEmpty())
+    	{
+    		String orginFileName = golfVo.getFdataFile().getOriginalFilename();
+    		int index = orginFileName.lastIndexOf(".");
+		    String fileExt = orginFileName.substring(index + 1);
+	        String savedName = UploadFileUtils.getTimeStamp()+"."+fileExt;
+	        String filePath = uploadPath + File.separator + savedName;
+	        golfVo.getFdataFile().transferTo(new File(filePath));
+	    	String paramName = golfVo.getFdataFile().getName();  // 파라미터명
+	    	params.put("fdata", savedName);
+    	}
     	
-    	LOGGER.debug(rtnJson);
+    	ObjectMapper mapper = new ObjectMapper(); 
+    	GolfVo pojo = mapper.convertValue(params, GolfVo.class);
+
+    	CountryclubInfo result = clubService.save(pojo);
+    	
+    	if (result == null)
+    	{
+    		golfVo.setResult(false);
+        	golfVo.setError("저장하는데 에러가 발생하였습니다");
+    	}else {
+    		golfVo.setResult(true);
+    	}
+    	mv.addObject("result", golfVo);
+    	
+    	//String rtnJson = restService.golfUpdate(params);
+    	
+    	//LOGGER.debug(rtnJson);
     	
     	LOGGER.debug("==================== golfUpdate areaUpdate end : ===================");
     	mv.setViewName("web/admin/golflocmng/adm_04_01_01");
     	return mv;
     }      
     
-    /**
-     * 골프장정보 상세 정보 출력 
-     * @param request
-     * @return
-     */
-    @GetMapping("/golf/{country_id}/{zone_id}/{countryclub_id}")
-    public ModelAndView golfDetail(HttpServletRequest request,@PathVariable String country_id, @PathVariable String zone_id, @PathVariable String countryclub_id)  throws IOException, ApiException 
-    {
-    	ModelAndView mv = new ModelAndView();
-    	 ObjectMapper mapper = new ObjectMapper();
-    	//GolfVo golfInfo =  restService.getGolfInfo(country_id, zone_id, countryclub_id);   // 골프장정보 상세 정보 조회
-    	String resultJson = restService.getGolfImgIncludeDetail(country_id, zone_id, countryclub_id);  // 이미지 포함 골프장 정보 조회
-    	Map<String, Object> goflMap = mapper.readValue(resultJson, new TypeReference<Map<String, Object>>(){});
-    	mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false); 
-    	List<GolfVo> mapList = mapper.convertValue(goflMap.get("golfList"), TypeFactory.defaultInstance().constructCollectionType(List.class,GolfVo.class));    	
-        mv.addObject("golfInfo", mapList.get(0));
-        
-        
-    	String rtnJson = restService.getParList(countryclub_id);   // 관리자가 PAR 정보 조회
-    	LOGGER.debug(rtnJson);
-       
-        Map<String, Object> map = mapper.readValue(rtnJson, new TypeReference<Map<String, Object>>(){});
-        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);        
-        // groupList => RestFul Service에서 등록한 명
-        List<FarVo> parList = mapper.convertValue(map.get("parList"), TypeFactory.defaultInstance().constructCollectionType(List.class,FarVo.class));
-        mv.addObject("parList", parList);
-               
-        mv.setViewName("web/admin/golflocmng/adm_04_02");
-        
-    	return mv;
-    }    
+   
     
     /**
      * 골프장 Par 등록 화면 출력
