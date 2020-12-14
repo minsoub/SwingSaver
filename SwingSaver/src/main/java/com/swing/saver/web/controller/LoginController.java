@@ -227,12 +227,12 @@ public class LoginController {
                 obj = parser.parse(responseBody);
                 jsonObj = (JSONObject) obj;
                 JSONObject response_obj = (JSONObject)jsonObj.get("response");
-                String nickname = (String)response_obj.get("nickname");
+                //String nickname = (String)response_obj.get("nickname");
                 String email =  (String)response_obj.get("email");
                 String name =  (String)response_obj.get("name");
                 String id =  (String)response_obj.get("id");                
                 LOGGER.debug(responseBody);
-                LOGGER.debug(nickname);
+                //LOGGER.debug(nickname);
                 LOGGER.debug(email);
                 LOGGER.debug(name);
                 LOGGER.debug(id);

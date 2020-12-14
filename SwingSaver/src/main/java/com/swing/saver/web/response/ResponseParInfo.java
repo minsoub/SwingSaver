@@ -34,6 +34,7 @@ public class ResponseParInfo {
 	{
 		this.countryclub_id = info.getCountryclub_id();
 		this.course_nm = info.getCourse_nm();
+		this.course = String.valueOf(info.getCourse());
 		this.hole1 = info.getHole1();
 		this.hole2 = info.getHole2();
 		this.hole3 = info.getHole3();

@@ -100,7 +100,7 @@ public class ResponseCountryClub {
 		}		
 	}
 	
-	public ResponseCountryClub(String country_id, String zone_id, String zone_nm, String countryclub_id, String countryclub_nm, int hole_value, String image, 
+	public ResponseCountryClub(String country_id, String zone_id, String zone_nm, String countryclub_id, String countryclub_nm, int hole_value, String image, String logo_image, 
 			String address, String phone, String email, String link_check, String assets, String simage, String fdata, String rsv_url, String evt_url, 
 			String alliance_check, String pgm_call_param, String received, java.util.Date duedate)
 	{
@@ -111,6 +111,7 @@ public class ResponseCountryClub {
 		this.countryclub_nm = countryclub_nm;
 		this.hole_value = hole_value;
 		this.image = image;
+		this.logo_image = logo_image;
 		this.address = address;
 		this.phone = phone;
 		this.email = email;
@@ -138,9 +139,13 @@ public class ResponseCountryClub {
 		{
 			this.image_url = "https://www.swingsaver.co.kr/m/getImage?fileName="+image;
 		}
+		if (logo_image != null && logo_image.length() > 0)
+		{
+			this.logo_image_url = "https://www.swingsaver.co.kr/m/getImage?fileName="+logo_image;
+		}	
 	}
 	
-	public ResponseCountryClub(String country_id, String zone_id, String zone_nm, String countryclub_id, String countryclub_nm, int hole_value, String image, 
+	public ResponseCountryClub(String country_id, String zone_id, String zone_nm, String countryclub_id, String countryclub_nm, int hole_value, String image, String logo_image,
 			String address, String phone, String email, String link_check, String assets, String simage, String fdata, String rsv_url, String evt_url, 
 			String alliance_check, String pgm_call_param)
 	{
@@ -151,6 +156,7 @@ public class ResponseCountryClub {
 		this.countryclub_nm = countryclub_nm;
 		this.hole_value = hole_value;
 		this.image = image;
+		this.logo_image = logo_image;
 		this.address = address;
 		this.phone = phone;
 		this.email = email;
@@ -171,5 +177,9 @@ public class ResponseCountryClub {
 		{
 			this.image_url = "https://www.swingsaver.co.kr/m/getImage?fileName="+image;
 		}
+		if (logo_image != null && logo_image.length() > 0)
+		{
+			this.logo_image_url = "https://www.swingsaver.co.kr/m/getImage?fileName="+logo_image;
+		}	
 	}	
 }

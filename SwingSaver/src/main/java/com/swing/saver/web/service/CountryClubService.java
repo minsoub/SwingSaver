@@ -189,7 +189,7 @@ public class CountryClubService {
 				" select                                                               " +
 				"       new com.swing.saver.web.response.ResponseCountryClub (         " +
 				"        a.country_id, a.zone_id, b.zone_nm, a.countryclub_id, a.countryclub_nm, " +
-				"        a.hole_value, a.image, a.address, a.phone, a.email, a.link_check, " +
+				"        a.hole_value, a.image, a.logo_image, a.address, a.phone, a.email, a.link_check, " +
 				"        a.assets, a.simage, a.fdata, a.rsv_url, a.evt_url, a.alliance_check, a.pgm_call_param, c.received, c.duedate "+
 				"   ) " +
 				"  from CountryclubInfo a, AreaInfo b  LEFT JOIN a.arPerson c " +
@@ -220,33 +220,55 @@ public class CountryClubService {
 	 * @param param
 	 * @return
 	 */
-	public List<ResponseCountryClub> findByBookmarkSearch(Map<String, String> param)
+	public List<ResponseCountryClub> findBySearch(Map<String, String> param)
 	{
-		EntityManager em = emf.createEntityManager();
+		List<ResponseCountryClub> result = repository.findBySearch(param.get("zone_id").toString(), param.get("country_id").toString(), param.get("countryclub_id").toString(), 
+				param.get("alliance_check").toString(), param.get("word").toString());
 		
-		TypedQuery <ResponseCountryClub> query = em.createQuery(
-				" select                                                               " +
-				"       new com.swing.saver.web.response.ResponseCountryClub (         " +
-				"        a.country_id, a.zone_id, b.zone_nm, a.countryclub_id, a.countryclub_nm, " +
-				"        a.hole_value, a.image, a.address, a.phone, a.email, a.link_check, " +
-				"        a.assets, a.simage, a.fdata, a.rsv_url, a.evt_url, a.alliance_check, a.pgm_call_param "+
-				"   ) " +
-				"  from CountryclubInfo a, AreaInfo b   " +
-				" where                                                                " +
-				"       a.country_id = b.country_id                                    " +
-				"   and a.zone_id    = b.zone_id                                       " +
-				"   and (:alliance_check is null or a.alliance_check = :alliance_check )                            " +
-				"   and (:zone_id is null or a.zone_id    = :zone_id  )                                      " +
-				" order by a.countryclub_nm asc                                        "
-				,
-				ResponseCountryClub.class);
+		return result;
 		
-		query.setParameter("alliance_check", param.get("alliance_check"));
-		query.setParameter("zone_id",  param.get("zone_id"));
 		
-		List<ResponseCountryClub> list = query.getResultList();
-		em.close();
-		
-		return list;
+//		EntityManager em = emf.createEntityManager();
+//		
+//		TypedQuery <ResponseCountryClub> query = em.createQuery(
+//				" select                                                               " +
+//				"       new com.swing.saver.web.response.ResponseCountryClub (         " +
+//				"        a.country_id, a.zone_id, b.zone_nm, a.countryclub_id, a.countryclub_nm, " +
+//				"        a.hole_value, a.image, a.logo_image, a.address, a.phone, a.email, a.link_check, " +
+//				"        a.assets, a.simage, a.fdata, a.rsv_url, a.evt_url, a.alliance_check, a.pgm_call_param "+
+//				"   ) " +
+//				"  from CountryclubInfo a, AreaInfo b   " +
+//				" where                                                                " +
+//				"       a.country_id = b.country_id                                    " +
+//				"   and a.zone_id    = b.zone_id                                       " +
+//				"   and (:alliance_check is null or a.alliance_check = :alliance_check )                            " +
+//				"   and (:zone_id is null or a.zone_id    = :zone_id  )                                      " +
+//				"   and (:word is null or a.countryclub_nm   CONCAT(CONCAT('%',:word),'%')  )                                      " +
+//				" order by a.countryclub_nm asc                                        "
+//				,
+//				ResponseCountryClub.class);
+//		
+//		query.setParameter("alliance_check", param.get("alliance_check"));
+//		query.setParameter("zone_id",  param.get("zone_id"));
+//		query.setParameter("word",  param.get("word"));
+//		
+//		List<ResponseCountryClub> list = query.getResultList();
+//		em.close();
+//		
+//		return list;
 	}
+	
+	/**
+	 * 버디야 Detail 상세 페이지 검색 
+	 * 
+	 * @param param
+	 * @return
+	 */
+	public ResponseCountryClub findByDetail(Map<String, String> param)
+	{
+		ResponseCountryClub result = repository.findByDetail(param.get("country_id").toString(), param.get("zone_id").toString(), 
+				param.get("countryclub_id").toString());
+		
+		return result;
+	}	
 }

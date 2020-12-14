@@ -41,7 +41,7 @@
                         </div>
                         <div class="question">
                             <p>골프장로고(가로)</p>
-                            <input type="file" id="imageFile" name="imageFile" placeholder="기본이미지 저장경로" value="${golfInfo.image}"  maxlength="100"  />
+                            <input type="file" id="logo_imageFile" name="logo_imageFile" placeholder="기본이미지 저장경로" value="${golfInfo.logo_image}"  maxlength="100"  />
                             [${golfInfo.logo_image}]
                         </div>                        
                         <div class="question">

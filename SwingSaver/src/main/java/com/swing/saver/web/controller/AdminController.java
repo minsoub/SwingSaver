@@ -802,7 +802,7 @@ public class AdminController extends CommonController {
     	LOGGER.debug("zone_id : " + golfVo.getZone_id());
     	LOGGER.debug("countryclub_id : " + golfVo.getCountryclub_id());
     	
-    	ResponseCountryClub golfInfo = clubService.findById(golfVo.getCountry_id().trim(), golfVo.getZone_id(), golfVo.getCountryclub_id());
+    	ResponseCountryClub golfInfo = clubService.findById(golfVo.getCountry_id(), golfVo.getZone_id(), golfVo.getCountryclub_id());
     	    	
     	// GolfVo golfInfo =  restService.getGolfInfo(golfVo.getCountry_id().trim(), golfVo.getZone_id(), golfVo.getCountryclub_id());   // 골프장정보 상세 정보 조회
         mv.addObject("golfInfo", golfInfo);
