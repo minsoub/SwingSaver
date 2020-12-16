@@ -3,19 +3,20 @@
 
 <c:set var="now" value="<%=new java.util.Date()%>" />
 
-    <section class="container no-padding">
-        <div class="col-xs-12" style="padding: 0">
-            <div class="score-page form-page" style="margin: 0px">
+<section class="container no-padding">
+  <div class="col-xs-12" style="padding: 0">
+     <div class="score-page form-page" style="margin: 0px">
                
-                <div class="myCanvas">
+        <div class="myCanvas">
                 
-                <div class="sc-ad">
+          <div class="sc-ad">
                 
                 <div class="" style="position: relative;">
                 
                     <div class="score-wrap">
                         <div class="ph-wrap" id="preview">
-                            <!-- img  class="bir-logo" id="preview_img" src="/image/bir_logo_img.png"  -->
+                        	<img class="bir-logo" src="/image/bir_logo_img.png">
+                            <img class="" src="${golfInfo.simage_url}" id="preview_img"> <!--  /image/test.PNG  -->
                         </div>
                         <div class="sc-wrap">
                             <img class="gol-logo" src="<c:url value='${golfInfo.image_url}'/>" height="30pt">
@@ -243,25 +244,21 @@
                     </div>
                </div>
 
-                <div class="sc-ad">
-                    <p><strong>스코어 관리</strong>가 필요하신가요?<br/>
-                    <a href="javascript:fn_mngScoreList();"><span>"버디야"로 스코어 저장 <strong>Click!</strong></span></a></p>
-                </div>
-
-</div>
-            </div>
-            
-            
-                <button id="btnSave" class="form-btn" onclick="#">이미지저장하기</button>
-                <button id="btnChange" class="img-btn" onclick="#">사진변경</button>
-
-
-
-            </div>
-
-
+			</div>
         </div>
-    </section>
+            
+        <div class="sc-ad">
+             <p><strong>스코어 관리</strong>가 필요하신가요?<br/>
+             <a href="javascript:fn_mngScoreList();"><span>"버디야"로 스코어 저장 <strong>Click!</strong></span></a></p>
+        </div>
+                                        
+        <button id="btnSave" class="form-btn" >이미지저장하기</button>
+        <button id="btnChange" class="img-btn">사진변경</button>
+
+    </div>
+
+  </div>
+</section>
 
 <form id='forms1' name="forms1" method="POST">
 <input type="hidden" name="zone_id" value="${qrInfo.zone_id}">
@@ -295,10 +292,14 @@
 
 $(document).ready(function(){
 	
-	// 골프장 스코어 이미지가 존재하면 자동으로 출력한다. 
-	$("#preview").css({"background":"${golfInfo.simage_url}"});
+	$(".ph-wrap").css("min-height", "330px");
 	
-	var test = $(".myCanvas").get(0);  // html 얻기
+	// 골프장 스코어 이미지가 존재하면 자동으로 출력한다. 
+	//$('#preview_img').attr('src', "${golfInfo.simage_url}");
+	
+	//$("#preview").css({"background":"${golfInfo.simage_url}"});
+	
+	
 	
     $("#btnMng").click(function(){
     	fn_mngScoreList();
@@ -310,7 +311,17 @@ $(document).ready(function(){
     
 	// to canvas
 	$('#btnSave').click(function(e) {
-  		html2canvas(test).then(function(canvas) {
+		var test = $(".myCanvas").get(0);  // html 얻기
+  		html2canvas(test, 
+  			{
+  				useCORS: true,
+  				allowTaint: false,
+  				taintTest: false,
+  				pagesplit: true,
+  				optimized: false,
+  				loggin: true
+  			}
+  		).then(function(canvas) {
     		// canvas width
     		var canvasWidth = canvas.width;
     		// canvas height
@@ -336,15 +347,15 @@ $(document).ready(function(){
         	//Canvas2Image.saveAsImage(canvas, w, h, type, f);
         	
         	
-        	$("#data").val(canvas.toDataURL("image/png"));
-    		$("#imgForm").submit();
+        	//$("#data").val(canvas.toDataURL("image/png"));
+    		//$("#imgForm").submit();
     
     
-        	//var a = document.createElement('a');
+        	var a = document.createElement('a');
             // toDataURL defaults to png, so we need to request a jpeg, then convert for file download.
-            //a.href = canvas.toDataURL("image/png").replace("image/jpeg", "image/octet-stream");
-            //a.download = 'myScore.jpg';
-            //a.click()
+            a.href = canvas.toDataURL("image/png").replace("image/jpeg", "image/octet-stream");
+            a.download = 'myScore.jpg';
+            a.click()
             
   		});
 	});
@@ -374,10 +385,21 @@ function readURL(input) {
 	if (input.files && input.files[0]) { 
 		var reader = new FileReader(); 
 		reader.onload = function (e) { 
-		    var img = "url("+e.target.result+")";		
+		    //var img = "url("+e.target.result+")";		
 			//$("#preview").css({"background":img});			
-			$("#preview").css("background-image", img);
-			//$('#preview_img').attr('src', e.target.result); 
+			//$("#preview").css("background-image", img);
+
+			$('#preview_img').attr('src', e.target.result); 
+			$('#preview_img').ready( function(){
+				//console.log($("#preview_img").height);
+				var imageNaturalHeight = $('#preview_img').prop('naturalHeight');
+				console.log(imageNaturalHeight);
+				if (imageNaturalHeight > 330) $("#preview_img").height("330");
+				else {
+					$(".ph-wrap").css("min-height", "330px");
+					$("#preview_img").height(imageNaturalHeight);
+				}
+			});				
 		} 
 		reader.readAsDataURL(input.files[0]); 
 	} 
