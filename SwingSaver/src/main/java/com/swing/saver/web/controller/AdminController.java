@@ -85,6 +85,12 @@ public class AdminController extends CommonController {
         return "web/admin/adm_log";
     }
     
+    @GetMapping("/")
+    public String index()
+    {
+    	return "web/admin/index";
+    }
+    
     /**
      * 로그아웃
      * 
