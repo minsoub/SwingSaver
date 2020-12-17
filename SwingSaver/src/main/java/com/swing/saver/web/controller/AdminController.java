@@ -88,7 +88,7 @@ public class AdminController extends CommonController {
     @GetMapping("/")
     public String index()
     {
-    	return "web/admin/index";
+    	return "admin/index";
     }
     
     /**

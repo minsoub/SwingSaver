@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.OneToOne;
@@ -85,7 +86,7 @@ public class CountryclubInfo {
 	@Column(name="pgm_call_param", length=200)
 	private String pgm_call_param;	
 	
-	@OneToOne(mappedBy="countryclubInfo")
+	@OneToOne(mappedBy="countryclubInfo", fetch=FetchType.LAZY)
 	private ArPerson arPerson;
 	
 	@Builder
