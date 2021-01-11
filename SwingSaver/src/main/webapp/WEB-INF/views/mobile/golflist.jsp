@@ -3,9 +3,11 @@
     
 <%@include file="/WEB-INF/views/mobile/include/top_menu.jsp"%>
     
-<section id="contents" class="gray_con">
 <form name="frm" id="frm" action="POST">
 <input type="hidden" name="alliance_check" id="alliance_check" value="${alliance_check}" />
+    
+<section id="contents" class="gray_con">
+
 
     <div class="select-area">
         <select name="zone_id" id="zone_id" class="select-bar" onChange="javascript:ChangeZone(this.value);">
@@ -21,37 +23,42 @@
         <a href="javascript:GolfList('Y');" class="tab-01 <c:if test="${alliance_check eq 'Y'}">active</c:if> ">제휴</a>
     </div>
     
-    <div class="list-wrap">
-    	<c:forEach var="golfInfo" items="${golfList}" varStatus="status">
-        <div class="list">
-            <img src="<c:if test="${golfInfo.alliance_check eq 'Y'}">/mobile/image/buddyya-on.png</c:if><c:if test="${golfInfo.alliance_check ne 'Y'}">/mobile/image/buddyya-off.png</c:if>" class="list-img" width="100%">
-            <div class="list-info">
-            	<a href="javascript:DetailView('${golfInfo.country_id}','${golfInfo.zone_id}', '${golfInfo.countryclub_id}');">
-                <img src="<c:url value='${golfInfo.image_url}'/>" class="list-logo">
-                <h4>${golfInfo.countryclub_nm}</h4>
-                <p>${golfInfo.zone_nm}</p>
-                </a>
-            </div>
-            <div class="list-right">
-                <img src="<c:if test="${golfInfo.alliance_check eq 'Y'}">/mobile/image/like-on.svg</c:if><c:if test="${golfInfo.alliance_check ne 'Y'}">/mobile/image/like-off.svg</c:if>" class="list-like" width="100%">
-				<c:if test="${golfInfo.pay_chk eq 'Y'}">                
-                <a class="play active" href="javascript:CallApp('${golfInfo.countryclub_id}');">Play</a>
-                </c:if>
-				<c:if test="${golfInfo.pay_chk ne 'Y'}">                
-                <a class="play" href="javascript:Pay('${golfInfo.country_id}', '${golfInfo.zone_id}', '${golfInfo.countryclub_id}');">Download</a>
-                </c:if>                
-            </div>            
-        </div>
-        </c:forEach>       
+    <div class="list-wrap" style="margin-top: 120px;">
+    	<ul>
+	    	<c:forEach var="golfInfo" items="${golfList}" varStatus="status">
+	        <li class="list">
+	            <!-- img src="<c:if test="${golfInfo.alliance_check eq 'Y'}">/mobile/image/buddyya-on.png</c:if><c:if test="${golfInfo.alliance_check ne 'Y'}">/mobile/image/buddyya-off.png</c:if>" class="list-img" width="100%"  -->
+	            <div class="list-info">
+	            	<a href="javascript:DetailView('${golfInfo.country_id}','${golfInfo.zone_id}', '${golfInfo.countryclub_id}');">
+	                <img src="<c:url value='${golfInfo.image_url}'/>" class="list-logo">
+	                <h4>${golfInfo.countryclub_nm}</h4>
+	                <p>${golfInfo.zone_nm}</p>
+	                </a>
+	            </div>
+	            <c:if test="${golfInfo.alliance_check eq 'Y'}"><img src="/image/partner.png" class="list-partner"></c:if>
+	            <div class="list-right">
+	                <img src="<c:if test="${golfInfo.alliance_check eq 'Y'}">/mobile/image/like-on.svg</c:if><c:if test="${golfInfo.alliance_check ne 'Y'}">/mobile/image/like-off.svg</c:if>" class="list-like" width="100%">
+					<c:if test="${golfInfo.pay_chk eq 'Y'}">                
+	                <a class="play active" href="javascript:CallApp('${golfInfo.countryclub_id}');">Play</a>
+	                </c:if>
+					<c:if test="${golfInfo.pay_chk ne 'Y'}">                
+	                <a class="play" href="javascript:Pay('${golfInfo.country_id}', '${golfInfo.zone_id}', '${golfInfo.countryclub_id}');">Download</a>
+	                </c:if>                
+	            </div>            
+	        </li>
+	        </c:forEach>  
+        </ul>     
     </div> 
-</form>    
+
+</section>
+
+ </form>   
+ 
 <form name="sFrm" id="sFrm" method="POST">
 	<input type="hidden" id="country_id" name="country_id" />
 	<input type="hidden" id="zone_id" name="zone_id" />
 	<input type="hidden" id="countryclub_id" name="countryclub_id" />
 </form>
-</section>
-
 <script>
 	function Pay(country_id, zone_id, countryclub_id)
 	{

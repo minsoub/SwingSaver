@@ -15,8 +15,8 @@
                     <input type="image" src="/mobile/image/view-btn-bl.png" name="countryclub_search" id="btnSearchTop" class="btn_top_srarch" title="검색" value="검색" alt="검색" -->                
                 </div>
                 <br>
-                <input type="date" class="sc-dacl" id="visit_date" name="visit_date">                
-                <input type="time" class="sc-dacl" id="teeup_time" name="teeup_time"> 
+                <input type="date" class="sc-dacl" id="visit_date" name="visit_date" placeholder="날짜 입력">                
+                <input type="time" class="sc-dacl" id="teeup_time" name="teeup_time" placeholder="시간 입력"> 
                 
                  
                 <select class="sc-select" id="start_course" name="start_course">
@@ -92,7 +92,7 @@ $(document).ready(function(){
 	        contentType:"application/json;charset=UTF-8",
 	        success : function(rtnData) {
 	        	console.dir(rtnData);
-	            var reqdata = JSON.parse(rtnData.data);
+	            var reqdata = JSON.parse(rtnData); //.data);
 	            
 	            console.log(reqdata);
 	            $('#start_course').append($('<option>').text("OUT 코스를 선택해주세요"));

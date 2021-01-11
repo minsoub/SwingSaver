@@ -696,6 +696,27 @@ public class LoginController {
         LOGGER.debug("==================== LoginController logout End : {}====================");
         return "redirect:/loginForm";
     }
+    
+    /**
+     * 로그아웃
+     * 
+     * @param session
+     * @return
+     * @throws ApiException
+     * @throws UnsupportedEncodingException
+     */
+    @GetMapping(value = "/birdieya_logout")
+    public String birdieya_logout(HttpSession session) throws ApiException, UnsupportedEncodingException {
+
+        LOGGER.debug("==================== LoginController logout Start: {}====================");
+        if ( session.getAttribute("login") != null ){
+            // 기존에 login이란 세션 값이 존재한다면
+            session.invalidate(); // 세션 전체를 날려버림
+        }
+
+        LOGGER.debug("==================== LoginController logout End : {}====================");
+        return "redirect:/m/home";
+    }
     /*
 	 * 로그인을 완료한 사용자의 아이디를 세션에 저장하는 메소드
 	 * @param session 세션 객체

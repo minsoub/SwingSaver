@@ -7,23 +7,26 @@
 
     <div class="list-wrap">
 
-    	<c:forEach var="golfInfo" items="${golfList}" varStatus="status">
-        <div class="list">
-            <img src="<c:if test="${golfInfo.alliance_check eq 'Y'}">/mobile/image/buddyya-on.png</c:if><c:if test="${golfInfo.alliance_check ne 'Y'}">/mobile/image/buddyya-off.png</c:if>" class="list-img" width="100%">
-            <div class="list-info">
-            	<a href="javascript:DetailView('${golfInfo.country_id}','${golfInfo.zone_id}', '${golfInfo.countryclub_id}');">
-                <img src="<c:url value='${golfInfo.image_url}'/>" class="list-logo">
-                <h4>${golfInfo.countryclub_nm}</h4>
-                <p>${golfInfo.zone_nm}</p>
-                </a>
-            </div>
-            <div class="list-right">
-                <img src="<c:if test="${golfInfo.alliance_check eq 'Y'}">/mobile/image/like-on.svg</c:if><c:if test="${golfInfo.alliance_check ne 'Y'}">/mobile/image/like-off.svg</c:if>" class="list-like" width="100%">
-                <a class="play active" href="javascript:CallApp('${golfInfo.countryclub_id}');">Play</a>
-            </div>            
-        </div>
-        </c:forEach>             
+		<ul>
+	    	<c:forEach var="golfInfo" items="${golfList}" varStatus="status">
+	        <li class="list">
+	            <!-- img src="<c:if test="${golfInfo.alliance_check eq 'Y'}">/mobile/image/buddyya-on.png</c:if><c:if test="${golfInfo.alliance_check ne 'Y'}">/mobile/image/buddyya-off.png</c:if>" class="list-img" width="100%" -->
+	            <div class="list-info">
+	            	<a href="javascript:DetailView('${golfInfo.country_id}','${golfInfo.zone_id}', '${golfInfo.countryclub_id}');">
+	                <img src="<c:url value='${golfInfo.image_url}'/>" class="list-logo">
+	                <h4>${golfInfo.countryclub_nm}</h4>
+	                <p>${golfInfo.zone_nm}</p>
+	                </a>
+	            </div>
+	            <c:if test="${golfInfo.alliance_check eq 'Y'}"><img src="/image/partner.png" class="list-partner"></c:if>
+	            <div class="list-right">
+	                <img src="<c:if test="${golfInfo.alliance_check eq 'Y'}">/mobile/image/like-on.svg</c:if><c:if test="${golfInfo.alliance_check ne 'Y'}">/mobile/image/like-off.svg</c:if>" class="list-like" width="100%">
+	                <a class="play active" href="javascript:CallApp('${golfInfo.countryclub_id}');">Play</a>
+	            </div>            
+	        </li>
+	        </c:forEach>             
 
+		</ul>
     </div>
   
 </section>

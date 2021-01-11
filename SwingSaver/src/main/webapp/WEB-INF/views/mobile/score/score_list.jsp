@@ -24,7 +24,7 @@
         </div>
         <div class="list-wrap">
           <c:forEach var="scoreInfo" items="${scoreList}" varStatus="status">
-            <div class="list">
+            <div class="list" style='cursor:pointer;' onclick="location.href='/m/scoredetail.do?visit_date=${scoreInfo.visit_date}&countryclub_id=${scoreInfo.countryclub_id}&teeup_time=${scoreInfo.teeup_time}&start_course=${scoreInfo.start_course}&end_course=${scoreInfo.end_course}'">
                 <div class="list-info">
                     <span>${scoreInfo.visit_date_format} / ${scoreInfo.teeup_time_format}</span>
                     <h4>${scoreInfo.countryclub_nm} <span>${scoreInfo.stroke_sum}(${scoreInfo.score_sum_format })</span></h4>

@@ -31,7 +31,7 @@
         		<p>이벤트</p>
         		</a>
     		</div>
-    		<div class="play-btn">
+    		<div class="play-btn" style="cursor:pointer"onclick="javascript:CallApp('${golfInfo.countryclub_id}');">
         		<a class=""  href="javascript:CallApp('${golfInfo.countryclub_id}');">PLAY</a>
     		</div>
     	</div>

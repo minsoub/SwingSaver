@@ -75,7 +75,7 @@
   display: inline-block;
   transition: background-color 0.6s ease;
 }
-.active, 
+//.active, 
 .dot:hover {
   background-color: #717171;
 }
@@ -103,16 +103,36 @@
     
  <section id="contents" class="main_con">
    <div class="main-btn">
-     <a href="#" class="">
+      <a href="/m/golflist.do" class="l-btn">
+         <p>골프장 찾기<span>Find Place</span></p>
+         <img src="/image/golf_main_btn1.png">
+      </a>
+
+      <a a href="/m/score" class="r-btn">
+         <p>지난 스코어 보기<span>Score View</span></p>
+         <img src="/image/golf_main_btn2.png">
+      </a>
+               
+     <!-- a href="#" class="">
    	  <img src="/mobile/image/golf_btn_kr.png" width="100%">
       	<p>국내 골프장<span>Republic of Korea</span></p>
      </a>
-
      <a href="#" class="">
       <img src="/mobile/image/golf_btn_fc.png" width="100%">
       <p>해외 골프장<span>Foreign country</span></p>
-     </a>
+     </a  -->
+     
    </div>
+   
+   <div class="swing-bn">
+     <a href="javascript:alert('준비중입니다');" class="">
+            앱 사용방법<img src="/image/main-if-btn.png">
+     </a>
+
+     <a href="javascript:alert('준비중입니다');" class="">
+            제휴사 문의<img src="/image/main-sc-btn.png">
+     </a>
+   </div>   
                 
    <!--  광고 이미지    -->
    <div class="main-bn slideshow-container">
@@ -130,9 +150,9 @@
    </div>
    <!-- 광고 이미지 End -->
    
-   <a href="/m/score" class="swing-bn">
+   <!-- a href="/m/score" class="swing-bn">
       지난 스코어 보러가기<img src="/mobile/image/main-sc-btn.png">
-   </a>
+   </a  -->
 
     <div class="recomend">
         <h2>제휴골프장</h2>       

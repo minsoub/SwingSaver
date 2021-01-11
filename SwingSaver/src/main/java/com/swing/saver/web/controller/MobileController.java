@@ -390,15 +390,16 @@ public class MobileController extends CommonController {
      * @return
      */
     @GetMapping("/parList/{countryclub_id}")
-    public ModelAndView parList(HttpServletRequest request, @PathVariable String countryclub_id)  throws IOException, ApiException 
+    @ResponseBody
+    public String parList(HttpServletRequest request, @PathVariable String countryclub_id)  throws IOException, ApiException 
     {
-    	ModelAndView mv = new ModelAndView();
+    	//ModelAndView mv = new ModelAndView();
     	String rtnJson=  service.getParList(countryclub_id);   // 골프장 Par 리스트 조회
     	
-        mv.addObject("data", rtnJson);
-        mv.setViewName("jsonView");
+        //mv.addObject("data", rtnJson);
+        //mv.setViewName("jsonView");
         
-    	return mv;
+    	return rtnJson;
     }   
     
     /**

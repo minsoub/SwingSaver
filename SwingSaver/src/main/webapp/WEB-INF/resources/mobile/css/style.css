@@ -61,7 +61,8 @@ table {
 }
 
 
-
+li{list-style: none;padding: 0}
+ul{padding: 0;}
 
 
 /*header*/
@@ -72,6 +73,7 @@ table {
     background-color: #333333;
     position: fixed;
     height: 62px;
+        z-index: 999;
 }
 
 #contents {
@@ -92,8 +94,17 @@ table {
     position: absolute;
     top: 20px;
     right: 20px;
-
 }
+
+.gnb-log {
+    width: 22px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+
+
 
 .main_con {
     background-color: #333333;
@@ -116,6 +127,13 @@ table {
     padding: 20px;
     background-color: #333333;
     padding: 10px 20px;
+    position: fixed;
+    width: 100%;
+    box-sizing: border-box; /* ???(Opera) */
+    -moz-box-sizing: border-box; /* ?????(Firefox)*/
+    -webkit-box-sizing: border-box; /* ??(Webkit) & ??(Chrome) */
+    z-index: 99;
+
 }
 
 .select-bar {
@@ -132,6 +150,8 @@ table {
     background-color: #333333;
     position: fixed;
     width: 100%;
+    top: 119px;
+    z-index: 99;
 }
 
 .bud-tab a {
@@ -156,10 +176,11 @@ table {
 }
 
 .list {
-    padding: 10px;
+    padding: 15px;
     background-color: #fff;
     border-radius: 10px;
     margin: 8px 10px;
+    position: relative;
 }
 
 .list-img {
@@ -173,14 +194,14 @@ table {
 }
 
 .list-info {
-    width: 60%;
-    display: inline-block;
-    margin-left: 5px;
+
 
 }
 
 .list-right {
-    float: right;
+    right: 20px;
+    top: 14px;
+    position: absolute;
     text-align: right;
 }
 
@@ -208,6 +229,12 @@ table {
     width: 22px;
 }
 
+.list-partner{
+    position: absolute;
+    right: 50px;
+    top: 0;
+    width: 9%;
+}
 
 .play {
     display: block;
@@ -234,6 +261,7 @@ table {
     width: 100%;
     height: 70px;
     padding: 0 10px;
+    z-index: 999;
 }
 
 .menu-gnb {
@@ -252,11 +280,53 @@ table {
     font-weight: 600;
 }
 
-#gnb .active .gnb-01 {}
 
 .gnb-01 {
-    height: 20px;
+    height: 24px;
+    background: url(/image/gnb-01.png) center bottom no-repeat;
 }
+
+.active .gnb-01{
+    background-position:center top;
+}
+
+.gnb-02 {
+    height: 24px;
+    background: url(/image/gnb-02.png) center bottom no-repeat;
+}
+
+.active .gnb-02{
+    background: url(/image/gnb-02.png) center top no-repeat;
+}
+
+.gnb-03 {
+    height: 24px;
+    background: url(/image/gnb-03.png) center bottom no-repeat;
+}
+
+.active .gnb-03{
+    background: url(/image/gnb-03.png) center top no-repeat;
+}
+
+.gnb-04 {
+    height: 24px;
+    background: url(/image/gnb-04.png) center bottom no-repeat;
+}
+
+.active .gnb-04{
+    background-position:center top;
+}
+
+.gnb-05 {
+    height: 24px;
+    background: url(/image/gnb-05.png) center bottom no-repeat;
+}
+
+.active .gnb-05{
+    background: url(/image/gnb-05.png) center top no-repeat;
+}
+
+
 
 .menu-gnb p {
     font-size: 1em;
@@ -321,7 +391,7 @@ table {
 }
 
 .main-btn {
-    padding: 50px 20px 10px 20px;
+    padding: 10px 20px;
 }
 
 
@@ -330,41 +400,52 @@ table {
 .main-btn p span {
     display: block;
     font-weight: 100;
-    color: #bbbbbb;
     font-size: 0.9em;
 }
 
 
 .main-btn a img {
     margin: 0 0 10px 0;
+    width: 45%;
 }
 
-.swing-bn {
+
+.swing-bn{
+    padding: 0 20px;
+}
+
+.swing-bn a{
     font-size: 1.5em;
     color: #fff;
-    display: block;
+    display: inline-block;
+    width: 48%;
     background-color: #131313;
-    margin: 0 20px;
-    padding: 20px;
     text-align: center;
     border-radius: 14px;
+    margin-right: 2%;
+    padding: 20px 0;
+}
+
+.swing-bn a:last-child{
+    margin-right: 0;
 }
 
 .swing-bn img {
-    width: 8%;
+    width: 13%;
     vertical-align: middle;
     margin-left: 10px;
 }
 
 .main-btn p {
-    font-size: 1.5em;
-    font-weight: 200;
-    line-height: 21px;
-    letter-spacing: -0.5px;
+    font-size: 1.4em;
+    font-weight: 600;
+    line-height: 23px;
+    letter-spacing: -1px;
+    margin-bottom: 15px;
 }
 
 .main-bn {
-    padding: 20px;
+    padding: 15px 20px;
 }
 
 .main-bn img {
@@ -374,7 +455,6 @@ table {
 .recomend {
     padding-left: 20px;
     color: #Fff;
-    margin-top: 30px;
 }
 
 .recomend h2 {
@@ -455,15 +535,28 @@ table {
 
 .main-btn a {
     display: inline-block;
-    /*    background: #ededed;*/
     text-align: center;
     border-radius: 10px;
     color: #fff;
-    width: 49%;
+    width: 48%;
     vertical-align: top;
+    padding: 35px 0;
+    margin-right: 2%;
+}
+
+.main-btn .l-btn{
+    background-color: #ec2218;
+}
+
+.main-btn .r-btn{
+    background-color: #fff;
+    color: #181818;
 }
 
 
+.main-btn a:last-child{
+    margin-right: 0;
+}
 
 
 .golf-info {
@@ -1276,4 +1369,28 @@ input:checked + label.or{background-image: url("/mobile/image/or_on.gif");}
 
 .input_data {
 	width: 30px;
+}
+
+input[type=date] {
+  text-align:center;
+}
+input[type="date"]:before {
+  color: black;
+  content: attr(placeholder) !important;
+  margin-right: 0.5em;
+}
+input[type="date"]:focus:before {
+  content: '' !important;
+}
+
+input[type=time] {
+  text-align: center;
+}
+input[type="time"]:before {
+  color: black;
+  content: attr(placeholder) !important;
+  margin-right: 0.5em;
+}
+input[type="time"]:focus:before {
+  content: '' !important;
 }
