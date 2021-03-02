@@ -20,26 +20,26 @@ import org.springframework.web.servlet.view.mustache.java.MustacheJTemplateFacto
 //@EnableWebMvc
 //@Configuration
 //@ComponentScan
-public class WebConfiguration extends UrlBasedViewResolver implements Ordered {
+public class WebConfiguration { //extends UrlBasedViewResolver implements Ordered {
 	
-	@Override
-	 protected View loadView(String viewName, Locale locale) throws Exception {
-		// TODO Auto-generated method stub
-		AbstractUrlBasedView view = buildView(viewName);
-		View viewObj = (View)     getApplicationContext().getAutowireCapableBeanFactory().initializeBean(view, viewName);
-		if (viewObj instanceof JstlView) {
-		  JstlView jv = (JstlView) viewObj;
-		  System.out.println(jv.getBeanName());
-		  
-		  if (jv.getBeanName().indexOf(".mustache") != -1) {
-			  
-			  return null;
-		  }
-		}
-		return viewObj;
-	 }
-//	
-//	
+//	@Override
+//	 protected View loadView(String viewName, Locale locale) throws Exception {
+//		// TODO Auto-generated method stub
+//		AbstractUrlBasedView view = buildView(viewName);
+//		View viewObj = (View)     getApplicationContext().getAutowireCapableBeanFactory().initializeBean(view, viewName);
+//		if (viewObj instanceof JstlView) {
+//		  JstlView jv = (JstlView) viewObj;
+//		  System.out.println(jv.getBeanName());
+//		  
+//		  if (jv.getBeanName().indexOf(".mustache") != -1) {
+//			  
+//			  return null;
+//		  }
+//		}
+//		return viewObj;
+//	 }
+	
+	
 //    @Autowired
 //    ResourceLoader resourceLoader;
 //
