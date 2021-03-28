@@ -2,9 +2,9 @@
 <%@include file="/WEB-INF/views/mobile/include/top.jsp"%>
     
     <nav id="header">
-        <img src="/mobile/image/gnb-menu.svg" class="gnb-menu" width="100%">
+        <a href="/m/home"><img src="/image/h-back.png" class="gnb-log" width="100%"></a>
         <div class="logo">${golfInfo.countryclub_nm}</div>
-        <a href="/m/search.do"><img src="/mobile/image/gnb-ser.svg" class="gnb-ser" width="100%"></a>
+        <a href="/m/golflist.do"><img src="/mobile/image/gnb-ser.svg" class="gnb-ser" width="100%"></a>
     </nav>
     
 	<section id="contents">

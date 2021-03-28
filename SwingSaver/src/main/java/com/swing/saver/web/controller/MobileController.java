@@ -222,13 +222,14 @@ public class MobileController extends CommonController {
     	params.put("countryclub_id", "");
     	params.put("alliance_check", vo.getAlliance_check());
     	params.put("userid", String.valueOf(userId));
-    	params.put("word", "");
+    	params.put("word", vo.getWord());
     	
     	List<ResponseCountryClub> golfList = countryclubService.findByAreaySearch(params);
 
     	mv.addObject("golfList", golfList);
         mv.addObject("alliance_check", vo.getAlliance_check());		// 검색조건
         mv.addObject("zone_id", vo.getZone_id());					// 검색조건
+        mv.addObject("word", vo.getWord());
         mv.setViewName("mobile/golflist");  
         mv.addObject("setMenu", "golflist");
         return mv;

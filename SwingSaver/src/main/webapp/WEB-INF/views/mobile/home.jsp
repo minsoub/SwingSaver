@@ -160,7 +160,7 @@
           <div class="rec-list">
             <c:forEach var="golfInfo" items="${golfList}" varStatus="status">          	
             	<a href="javascript:goPage('${golfInfo.country_id}','${golfInfo.zone_id}','${golfInfo.countryclub_id}' )">
-            	<img src="<c:url value='${golfInfo.image_url}'/>"  width="100%">
+            	<img src="<c:url value='${golfInfo.image_url}'/>">
             	<p>${golfInfo.countryclub_nm}</p>
             	</a>
             </c:forEach>

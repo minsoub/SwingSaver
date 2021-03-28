@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/mobile/include/top.jsp"%>
     
-<%@include file="/WEB-INF/views/mobile/include/top_menu.jsp"%>
+ <nav id="header">
+ 	<a href="/m/score"><img src="/image/h-back.png" class="gnb-log" width="100%"></a>
+    <div class="logo"><img src="/image/head-logo.png" class="" width="100%"></div>
+    <a href="/m/golflist.do"><img src="/mobile/image/gnb-ser.svg" class="gnb-ser" width="100%"></a>
+ </nav>
 
 
     <section id="contents" class="gray_con">

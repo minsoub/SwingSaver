@@ -144,13 +144,30 @@ ul{padding: 0;}
     font-size: 16px;
 }
 
+.select-area .s-input input[type="text"]{
+    width: 100%;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 50px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.select-area .s-input button{
+    position: absolute;
+    right: 10px;
+    font-weight: 700;
+    top: 10px;
+}
+
+.select-area .s-input{position: relative;}
 
 .bud-tab {
     border-bottom: 1px solid #acacac;
     background-color: #333333;
     position: fixed;
     width: 100%;
-    top: 119px;
+    top: 163px;
     z-index: 99;
 }
 
@@ -329,7 +346,7 @@ ul{padding: 0;}
 
 
 .menu-gnb p {
-    font-size: 1em;
+    font-size: 11px;
     margin: 0;
 }
 
@@ -437,9 +454,9 @@ ul{padding: 0;}
 }
 
 .main-btn p {
-    font-size: 1.4em;
+    font-size:17px;
     font-weight: 600;
-    line-height: 23px;
+    line-height: 25px;
     letter-spacing: -1px;
     margin-bottom: 15px;
 }
@@ -482,9 +499,8 @@ ul{padding: 0;}
 }
 
 .rec-list a img {
-    width: 100%;
     margin: 10px 0 30px 0;
-    max-height: 50px;
+    height: 50px;
 }
 
 .rec-list a p {
@@ -540,7 +556,7 @@ ul{padding: 0;}
     color: #fff;
     width: 48%;
     vertical-align: top;
-    padding: 35px 0;
+    padding: 30px 0;
     margin-right: 2%;
 }
 
@@ -805,6 +821,21 @@ form p {
 .kakao_log {
     margin-top: 5px !important;
 }
+
+.apple_log {
+    background-color: #fff;
+    text-align: left;
+    padding-left: 30px;
+    border: 1px solid #e2e2e2;
+    margin-top: 5px;
+    color: #181818;
+}
+
+.kakao_log {
+    margin-top: 5px !important;
+}
+
+
 
 .con-wrap {
     margin: 8px 10px;
@@ -1352,7 +1383,7 @@ input:checked + label.or{background-image: url("/mobile/image/or_on.gif");}
 @media screen and (max-width: 900px) {
 
     .form-page {
-        margin: 30% 0 20% 0;
+        margin: 17% 0 20% 0;
     }
 }
 
@@ -1369,28 +1400,4 @@ input:checked + label.or{background-image: url("/mobile/image/or_on.gif");}
 
 .input_data {
 	width: 30px;
-}
-
-input[type=date] {
-  text-align:center;
-}
-input[type="date"]:before {
-  color: black;
-  content: attr(placeholder) !important;
-  margin-right: 0.5em;
-}
-input[type="date"]:focus:before {
-  content: '' !important;
-}
-
-input[type=time] {
-  text-align: center;
-}
-input[type="time"]:before {
-  color: black;
-  content: attr(placeholder) !important;
-  margin-right: 0.5em;
-}
-input[type="time"]:focus:before {
-  content: '' !important;
 }

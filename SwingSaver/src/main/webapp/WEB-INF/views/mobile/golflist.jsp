@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/mobile/include/top.jsp"%>
     
-<%@include file="/WEB-INF/views/mobile/include/top_menu.jsp"%>
+ <nav id="header">
+ 	<a href="/m/home"><img src="/image/h-back.png" class="gnb-log" width="100%"></a>
+    <div class="logo"><img src="/image/head-logo.png" class="" width="100%"></div>
+    <a href="/m/golflist.do"><img src="/mobile/image/gnb-ser.svg" class="gnb-ser" width="100%"></a>
+ </nav>
     
 <form name="frm" id="frm" action="POST">
 <input type="hidden" name="alliance_check" id="alliance_check" value="${alliance_check}" />
@@ -11,11 +15,16 @@
 
     <div class="select-area">
         <select name="zone_id" id="zone_id" class="select-bar" onChange="javascript:ChangeZone(this.value);">
-        	<option value="">지역선택</option>
+        	<option value="">전국</option>
         <c:forEach var="areaInfo" items="${areaList}" varStatus="status">
         	<option value="${areaInfo.zone_id}" <c:if test="${areaInfo.zone_id eq zone_id}">selected</c:if>>${areaInfo.zone_nm}</option>
         </c:forEach>
         </select>
+        
+        <div class="s-input">
+            <input type="text" id=word name=word value="${word}" placeholder="이름을 검색해주세요">
+            <button id="btnSearch" onclick="javascript:Search();">검색</button>
+        </div>        
     </div>
     
     <div class="bud-tab">
@@ -76,8 +85,24 @@
 	function ChangeZone(data)
 	{
 		frm.action = "/m/golflist.do";
+		frm.word.value = "";
 		frm.submit();		
 	}
+	
+	function Search()
+	{		
+		if (frm.word.value == "") {
+			
+			alert("검색단어를 입력하세요!!!");
+			frm.word.focus();
+			return;
+		}else {
+			frm.action = "/m/golflist.do";
+			frm.zone_id.value = "";
+			frm.submit();						
+		}
+	}
+	
 
 	function DetailView(country_id, zone_id, countryclub_id)
 	{

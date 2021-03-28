@@ -96,6 +96,43 @@ public class LoginController {
      * @return
      * @throws UnsupportedEncodingException 
      */
+    @RequestMapping("/birdialoginForm")
+    public ModelAndView birdialoginForm(HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException {
+    	ModelAndView mv = new ModelAndView();
+    	//String prev_url = null;
+        mv.addObject("prev_url", "redirect:/m/home");
+    	
+    	
+    	// 토큰 생성 
+    	SecureRandom random = new SecureRandom();
+    	String state = new BigInteger(130, random).toString(32);
+    	
+    	String naverUrl = URLEncoder.encode(naverReturnUrl, "UTF-8");
+    	String kakaoUrl = URLEncoder.encode(kakaoReturnUrl,  "UTF-8");
+    	String facebookUrl = URLEncoder.encode(CommonUtil.facebookReturnUrl, "UTF-8");
+    	mv.addObject("naverUrl", naverUrl);
+    	mv.addObject("kakaoUrl", kakaoUrl);
+    	mv.addObject("facebookUrl", facebookUrl);
+    	mv.addObject("naverId", naverClientID);
+    	mv.addObject("kakaoId",  kakaoClientID);
+    	mv.addObject("facebookId", CommonUtil.facebookClientId);
+    	
+    	
+    	mv.addObject("state", URLEncoder.encode(state, "UTF-8"));
+    	mv.setViewName("web/user/login");
+    	
+    	session.setAttribute("state", state);    	
+    	return mv;
+    }
+    
+    /**
+     * 로그인 페이지 호출
+     * 
+     * @param request
+     * @param session
+     * @return
+     * @throws UnsupportedEncodingException 
+     */
     @RequestMapping("/loginForm")
     public ModelAndView loginForm(HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException {
     	ModelAndView mv = new ModelAndView();

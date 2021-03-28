@@ -6,9 +6,9 @@
     		<a href="/birdieya_logout"><img src="/image/logout.png" class="gnb-log" width="100%"></a>
 		</c:when>
         <c:otherwise>    		
-        	<a href="/loginForm"><img src="/image/logout.png" class="gnb-log" width="100%"></a>
+        	<a href="/birdialoginForm"><img src="/image/logout.png" class="gnb-log" width="100%"></a>
 		</c:otherwise>
 	</c:choose>
     <div class="logo"><img src="/image/head-logo.png" class="" width="100%"></div>
-    <a href="/m/search.do"><img src="/mobile/image/gnb-ser.svg" class="gnb-ser" width="100%"></a>
+    <a href="/m/golflist.do"><img src="/mobile/image/gnb-ser.svg" class="gnb-ser" width="100%"></a>
  </nav>

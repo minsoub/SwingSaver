@@ -1004,7 +1004,7 @@ ul.tab li.current {
     min-height: 1070px;
 }
 
-/*濡쒓렇�씤*/
+/*嚥≪뮄�뉛옙��*/
 
 .tex-02 .form-page h1 {
     margin-bottom: 50px;
@@ -1099,7 +1099,7 @@ ul.tab li.current {
     font-size: 17px;
     display: inline-block;
     box-sizing: border-box;
-    padding: 20px 15px;
+    padding: 17px 15px;
     border-radius: 0px;
     color: #ffffff;
     font-weight: 400;
@@ -1108,6 +1108,10 @@ ul.tab li.current {
     z-index: 1;
     width: 100%;
     height: 60px;
+}
+
+.form-btn {
+    margin-top: 20px;
 }
 
 
@@ -1223,8 +1227,34 @@ ul.tab li.current {
 }
 
 
-.form-btn {
-    padding: 0;
+.naver_log {
+    background-color: #3cce42;
+    border: 1px solid #3cce42;
+    padding-right: 15px;
+    text-align: left;
+    padding-left: 30px;
+    margin-right: 10px;
+}
+
+
+.face_log {
+    background-color: #2b7be6;
+    text-align: left;
+    padding-left: 30px;
+    border: 1px solid #2b7be6;
+    margin-top: 5px;
+}
+
+.face_log {
+    margin-top: 5px !important;
+}
+
+.face_log {
+    background-color: #2b7be6;
+    text-align: left;
+    padding-left: 30px;
+    border: 1px solid #2b7be6;
+    margin-top: 5px;
 }
 
 .kakao_log {
@@ -1236,23 +1266,21 @@ ul.tab li.current {
     color: #321d1d;
 }
 
-.naver_log {
-    background-color: #3cce42;
-    border: 1px solid #3cce42;
-    padding-right: 15px;
-    text-align: left;
-    padding-left: 30px;
-    margin-right: 10px;
+.kakao_log {
+    margin-top: 5px !important;
 }
 
-
-
-.face_log {
-    background-color: #2b7be6;
+.apple_log {
+    background-color: #fff;
     text-align: left;
     padding-left: 30px;
-    border: 1px solid #2b7be6;
+    border: 1px solid #e2e2e2;
     margin-top: 5px;
+    color: #181818;
+}
+
+.kakao_log {
+    margin-top: 5px !important;
 }
 
 
@@ -1290,7 +1318,7 @@ ul.tab li.current {
     border-left: 1px solid #777;
 }
 
-/*�쉶�썝媛��엯*/
+/*占쎌돳占쎌뜚揶쏉옙占쎌뿯*/
 
 .joinus-page form .question select {
     border: 1px solid #dcdcdc;
@@ -1550,7 +1578,7 @@ form p {
 
 }
 
-/*留덉씠�럹�씠吏�*/
+/*筌띾뜆�좑옙�뱄옙�좑쭪占�*/
 
 .profile-info {
     width: auto;
@@ -1808,7 +1836,7 @@ form p {
     right: 40px;
 }
 
-/*洹몃９愿�由�*/
+/*域밸챶竊숁꽴占썹뵳占�*/
 
 .side-menu {
     padding: 5%;
@@ -2216,7 +2244,7 @@ tbody {
 }
 
 
-/*�뼱�뱶誘�*/
+/*占쎈선占쎈굡沃섓옙*/
 
 .adm-nav {
     background-color: #333;
@@ -2381,7 +2409,7 @@ tbody {
     top: 9.09090909px;
 }
 
-/*�뻹踰꾧굅 硫붾돱 �솢�꽦�솕 �떆*/
+/*占쎈뻘甕곌쑨援� 筌롫뗀�� 占쎌넞占쎄쉐占쎌넅 占쎈뻻*/
 
 .dg-hd-mo-menu-panel .dg-hd-mo-menu-btn.mo-menu-active span {
     background: transparent;
@@ -2413,7 +2441,7 @@ tbody {
     -ms-transform: rotate(135deg);
 }
 
-/*硫붾돱 �뙣�꼸 �븞履쎈�遺�*/
+/*筌롫뗀�� 占쎈솭占쎄섯 占쎈툧筌잛럥占썽겫占�*/
 
 .mo-menu-title {
     background: #333;
@@ -2461,7 +2489,7 @@ tbody {
     border-top: 1px solid #dcdcdc;
 }
 
-/*1李� 硫붾돱�쓽 - + 遺�遺�*/
+/*1筌∽옙 筌롫뗀�깍옙�� - + �븝옙�븝옙*/
 
 .dg-hd-mo-menu-panel ul li .dg-hd-mo-menu-arrow {
     height: 64px;
@@ -3181,7 +3209,7 @@ tbody {
 
 
 
-/*誘몃뵒�뼱荑쇰━*/
+/*沃섎챶逾믭옙堉김뜎�겸봺*/
 
 @media screen and (max-width:1300px) {
 
@@ -3660,7 +3688,7 @@ tbody {
 
 
 
-/*硫붾돱*/
+/*筌롫뗀��*/
 
 @media screen and (min-width:768px) {
     .dg-hd-mo {

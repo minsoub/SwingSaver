@@ -200,6 +200,7 @@ public class CountryClubService {
 				"   and a.zone_id    = b.zone_id                                       " +
 				"   and (:alliance_check is null or a.alliance_check = :alliance_check )                            " +
 				"   and (:zone_id is null or a.zone_id    = :zone_id  )                                      " +
+				"   and (:word is null or a.countryclub_nm like CONCAT(CONCAT('%',:word),'%')  ) )                                      " +
 				" order by a.countryclub_nm asc                                        "
 				,
 				ResponseCountryClub.class);
@@ -207,6 +208,7 @@ public class CountryClubService {
 		query.setParameter("userid",  Integer.parseInt(param.get("userid").toString()));
 		query.setParameter("alliance_check", param.get("alliance_check"));
 		query.setParameter("zone_id",  param.get("zone_id"));
+		query.setParameter("word",  param.get("word"));
 		
 		List<ResponseCountryClub> list = query.getResultList();
 		em.close();
