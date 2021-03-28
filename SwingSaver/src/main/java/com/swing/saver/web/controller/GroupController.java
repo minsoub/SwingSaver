@@ -101,6 +101,7 @@ public class GroupController {
         String groupadminYn = loginVo.getGroupadmin();
         String groupId = loginVo.getGroupid();
         LOGGER.debug("그룹여부: {}",groupadminYn);
+        LOGGER.debug("그룹ID: {}",groupId);
         /*그룹관리자 여부 및 그룹id 확인 없으면 회원정보 페이지로 이동*/
         if(groupadminYn.equals("Y") && !StringUtils.isEmpty(groupId)){
             groupVo = restService.getUserGroupInfo(groupId);

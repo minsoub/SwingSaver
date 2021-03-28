@@ -49,6 +49,7 @@ public class LoginService {
 			GroupMember gMember = groupRepoistory.findByAcademyGroupAuth((int) userLoginInfo.getUserid());
 			if (gMember != null) {
 				userLoginInfo.setGroupadmin("Y");
+				userLoginInfo.setGroupid(gMember.getGroupid());
 			}else {
 				userLoginInfo.setGroupadmin("N");
 			}
