@@ -11,6 +11,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
@@ -19,6 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -831,15 +833,30 @@ public class MobileController extends CommonController {
      * @return
      * @throws IOException
      */
+//    @GetMapping(value="/getFile", produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)  // .IMAGE_JPEG_VALUE)
+//    public @ResponseBody byte[] getFile(HttpServletRequest request) throws IOException {
+//    	InputStream in = null;   // 이미지 read
+//    	String imageName = request.getParameter("fileName");
+//    	String filePath = uploadPath + File.separator + imageName;
+//    	
+//    	System.out.println("filePath : " + filePath);
+//    	in = new FileInputStream(filePath);
+//    	
+//    	return IOUtils.toByteArray(in);
+//    }
+    
     @GetMapping(value="/getFile", produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)  // .IMAGE_JPEG_VALUE)
-    public @ResponseBody byte[] getFile(HttpServletRequest request) throws IOException {
-    	InputStream in = null;   // 이미지 read
+    public @ResponseBody void getFile(HttpServletResponse response, HttpServletRequest request) throws IOException {
     	String imageName = request.getParameter("fileName");
     	String filePath = uploadPath + File.separator + imageName;
     	
-    	System.out.println("filePath : " + filePath);
-    	in = new FileInputStream(filePath);
-    	
-    	return IOUtils.toByteArray(in);
-    }
+    	File downFile = new File(filePath);
+    	try {
+    		response.setHeader("content-Disposition", "attachment;filename="+imageName);
+    		FileCopyUtils.copy(new FileInputStream(downFile), response.getOutputStream());
+    		response.flushBuffer();
+    	}catch(Exception ex) {
+    		ex.printStackTrace();
+    	}
+    }    
 }

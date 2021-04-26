@@ -7,7 +7,7 @@
         <a href="/m/golflist.do"><img src="/mobile/image/gnb-ser.svg" class="gnb-ser" width="100%"></a>
     </nav>
     
-	<section id="contents">
+	<section id="contents_f">
 
 		<div class="">
         	<!-- img src="/mobile/image/golf-main-bn.png"width="100%"  -->

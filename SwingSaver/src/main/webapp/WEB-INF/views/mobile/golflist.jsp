@@ -22,7 +22,7 @@
         </select>
         
         <div class="s-input">
-            <input type="text" id=word name=word value="${word}" placeholder="이름을 검색해주세요">
+            <input type="search" id=word name=word value="${word}" placeholder="이름을 검색해주세요">
             <button id="btnSearch" onclick="javascript:Search();">검색</button>
         </div>        
     </div>
@@ -32,7 +32,7 @@
         <a href="javascript:GolfList('Y');" class="tab-01 <c:if test="${alliance_check eq 'Y'}">active</c:if> ">제휴</a>
     </div>
     
-    <div class="list-wrap" style="margin-top: 120px;">
+    <div class="list-wrap" style="margin-top: 155px;">
     	<ul>
 	    	<c:forEach var="golfInfo" items="${golfList}" varStatus="status">
 	        <li class="list">
@@ -51,7 +51,8 @@
 	                <a class="play active" href="javascript:CallApp('${golfInfo.countryclub_id}');">Play</a>
 	                </c:if>
 					<c:if test="${golfInfo.pay_chk ne 'Y'}">                
-	                <a class="play" href="javascript:Pay('${golfInfo.country_id}', '${golfInfo.zone_id}', '${golfInfo.countryclub_id}');">Download</a>
+	                <!-- a class="play" href="javascript:Pay('${golfInfo.country_id}', '${golfInfo.zone_id}', '${golfInfo.countryclub_id}');">Download</a  -->
+	                <a class="play" href="javascript:Download('${golfInfo.fdata}');">Download</a>
 	                </c:if>                
 	            </div>            
 	        </li>
@@ -75,6 +76,18 @@
 		var newWindow = window.open("about:blank");
 		newWindow.location.href="/pay/assets/"+country_id+"/"+zone_id+"/"+countryclub_id;
 	}
+	
+	function Download(assets)
+	{
+		if (assets == "") {
+			alert("다운로드할 데이터가 없습니다!!!");
+			return;
+		}
+		if(confirm("6개월까지 무료사용입니다!!!"))
+		{
+			location.href="https://www.swingsaver.co.kr/m/getFile?fileName="+assets;
+		}
+	}	
 	function GolfList(data)
 	{
 		$("#alliance_check").val(data);
@@ -98,7 +111,7 @@
 			return;
 		}else {
 			frm.action = "/m/golflist.do";
-			frm.zone_id.value = "";
+			//frm.zone_id.value = "";
 			frm.submit();						
 		}
 	}

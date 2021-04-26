@@ -156,7 +156,7 @@
 
     <div class="recomend">
         <h2>제휴골프장</h2>       
-        <div style="overflow-x: auto;">
+        <div style="overflow-x: auto; overflow-y: hidden; ">
           <div class="rec-list">
             <c:forEach var="golfInfo" items="${golfList}" varStatus="status">          	
             	<a href="javascript:goPage('${golfInfo.country_id}','${golfInfo.zone_id}','${golfInfo.countryclub_id}' )">

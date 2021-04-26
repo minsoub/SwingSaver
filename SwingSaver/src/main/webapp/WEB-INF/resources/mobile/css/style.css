@@ -28,6 +28,8 @@ a {
     text-decoration: none;
     color: #333;
     cursor: pointer;
+    outline: none;
+    -webkit-tap-highlight-color : transparent;
 }
 
 a:link,
@@ -77,9 +79,15 @@ ul{padding: 0;}
 }
 
 #contents {
-    padding: 62px 0 140px 0;
+    padding: 62px 0 80px 0;
     min-height: 100vh;
 }
+
+#contents_f {
+    padding: 62px 0 0 0;
+}
+
+
 
 .gnb-menu {
     width: 20px;
@@ -93,14 +101,14 @@ ul{padding: 0;}
     width: 22px;
     position: absolute;
     top: 20px;
-    right: 20px;
+    right: 15px;
 }
 
 .gnb-log {
     width: 22px;
     position: absolute;
     top: 20px;
-    left: 20px;
+    left: 15px;
 }
 
 
@@ -124,9 +132,8 @@ ul{padding: 0;}
 }
 
 .select-area {
-    padding: 20px;
     background-color: #333333;
-    padding: 10px 20px;
+    padding: 10px 15px;
     position: fixed;
     width: 100%;
     box-sizing: border-box; /* ???(Opera) */
@@ -141,23 +148,41 @@ ul{padding: 0;}
     background-color: #fff;
     padding: 10px;
     border-radius: 50px;
-    font-size: 16px;
+    font-size: 15px;
+    border: 0;
+    outline: none;
 }
+
 
 .select-area .s-input input[type="text"]{
     width: 100%;
     background-color: #fff;
     padding: 10px;
     border-radius: 50px;
+    font-size: 15px;
+    box-sizing: border-box;
+    border: 0;
+    margin-top: 5px;
+    outline: none;
+}
+
+.select-area .s-input input[type="search"]{
+    width: 100%;
+    background-color: #fff;
+    padding: 10px 45px 10px 10px;
+    border-radius: 50px;
     font-size: 16px;
     box-sizing: border-box;
+    outline: none;
 }
+
+
 
 .select-area .s-input button{
     position: absolute;
     right: 10px;
     font-weight: 700;
-    top: 10px;
+    top: 11px;
 }
 
 .select-area .s-input{position: relative;}
@@ -184,20 +209,20 @@ ul{padding: 0;}
 }
 
 .gray_con {
-    background-color: #ededed;
+    background-color: #f9f9f9;
 }
 
 .bud-tab .active {
-    color: #ee6d6d;
-    border-bottom: 4px solid #e62424;
+    border-bottom: 4px solid #ff5959;
 }
 
 .list {
-    padding: 15px;
+    padding: 10px 15px;
     background-color: #fff;
     border-radius: 10px;
     margin: 8px 10px;
     position: relative;
+    box-shadow: 0px 1px 6px rgb(0 0 0 / 5%);
 }
 
 .list-img {
@@ -216,8 +241,8 @@ ul{padding: 0;}
 }
 
 .list-right {
-    right: 20px;
-    top: 14px;
+    right: 15px;
+    top: 16px;
     position: absolute;
     text-align: right;
 }
@@ -256,10 +281,10 @@ ul{padding: 0;}
 .play {
     display: block;
     border-radius: 50px;
-    border: 1px solid #7d7d7d;
+    border:1px solid #bababa;
     padding: 3px 15px;
-    margin-top: 8px;
-    font-size: 14px;
+    margin-top: 10px;
+    font-size: 13px;
     color: #7d7d7d;
 }
 
@@ -276,20 +301,22 @@ ul{padding: 0;}
     position: fixed;
     bottom: 0;
     width: 100%;
-    height: 70px;
-    padding: 0 10px;
+    padding: 14px 6px 10px 6px;
     z-index: 999;
+    padding: 0 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box; 
 }
 
 .menu-gnb {
     display: inline-block;
-    width: 18%;
+    width: 19.4%;
     text-align: center;
-    padding-top: 17px;
 }
 
 .menu-gnb:last-child {
-    width: 20%;
+    width: 19%;
 }
 
 #gnb .active p {
@@ -300,7 +327,7 @@ ul{padding: 0;}
 
 .gnb-01 {
     height: 24px;
-    background: url(/image/gnb-01.png) center bottom no-repeat;
+    background: url(/mobile/image/gnb-01.svg) center bottom no-repeat;
 }
 
 .active .gnb-01{
@@ -309,25 +336,25 @@ ul{padding: 0;}
 
 .gnb-02 {
     height: 24px;
-    background: url(/image/gnb-02.png) center bottom no-repeat;
+    background: url(/mobile/image/gnb-02.svg) center bottom no-repeat;
 }
 
 .active .gnb-02{
-    background: url(/image/gnb-02.png) center top no-repeat;
+    background: url(/mobile/image/gnb-02.svg) center top no-repeat;
 }
 
 .gnb-03 {
     height: 24px;
-    background: url(/image/gnb-03.png) center bottom no-repeat;
+    background: url(/mobile/image/gnb-03.svg) center bottom no-repeat;
 }
 
 .active .gnb-03{
-    background: url(/image/gnb-03.png) center top no-repeat;
+    background: url(/mobile/image/gnb-03.svg) center top no-repeat;
 }
 
 .gnb-04 {
     height: 24px;
-    background: url(/image/gnb-04.png) center bottom no-repeat;
+    background: url(/mobile/image/gnb-04.svg) center bottom no-repeat;
 }
 
 .active .gnb-04{
@@ -336,11 +363,11 @@ ul{padding: 0;}
 
 .gnb-05 {
     height: 24px;
-    background: url(/image/gnb-05.png) center bottom no-repeat;
+    background: url(/mobile/image/gnb-05.svg) center bottom no-repeat;
 }
 
 .active .gnb-05{
-    background: url(/image/gnb-05.png) center top no-repeat;
+    background: url(/mobile/image/gnb-05.svg) center top no-repeat;
 }
 
 
@@ -348,6 +375,8 @@ ul{padding: 0;}
 .menu-gnb p {
     font-size: 11px;
     margin: 0;
+    color: #777;
+    font-weight: 300;
 }
 
 .search-wrap {
@@ -408,39 +437,48 @@ ul{padding: 0;}
 }
 
 .main-btn {
-    padding: 10px 20px;
+    0px 15px 10px 15px;
 }
 
 
+.select2-container--default .select2-selection--single{
+   border-radius: 30px!important; 
+    border: 1px solid #d8d8d8!important;
+}
 
+.select2-container--default .select2-selection--single .select2-selection__placeholder{
+    font-size: 15px;
+}
 
 .main-btn p span {
     display: block;
-    font-weight: 100;
-    font-size: 0.9em;
+    font-weight: 200;
+    font-size: 14px;
+    opacity: 0.6;
 }
 
 
 .main-btn a img {
-    margin: 0 0 10px 0;
+    margin: 0;
     width: 45%;
 }
 
 
 .swing-bn{
-    padding: 0 20px;
+    padding: 0 15px;
 }
 
 .swing-bn a{
-    font-size: 1.5em;
+    font-size: 16px;
     color: #fff;
     display: inline-block;
-    width: 48%;
+    width: 48.5%;
     background-color: #131313;
     text-align: center;
     border-radius: 14px;
     margin-right: 2%;
-    padding: 20px 0;
+    padding: 15px 0;
+    font-weight: 300;
 }
 
 .swing-bn a:last-child{
@@ -462,21 +500,21 @@ ul{padding: 0;}
 }
 
 .main-bn {
-    padding: 15px 20px;
+    padding: 10px 15px;
 }
 
 .main-bn img {
-    border-radius: 14px;
+    border-radius: 10px;
 }
 
 .recomend {
-    padding-left: 20px;
+    padding-left: 15px;
     color: #Fff;
 }
 
 .recomend h2 {
-    font-weight: 100;
-    font-size: 1.4em;
+    font-weight: 200;
+    font-size: 16px;
 }
 
 .rec-list {
@@ -516,12 +554,12 @@ ul{padding: 0;}
 }
 
 .gfmain-btn {
-    padding: 20px 0;
+        padding: 20px 0 10px 0;
 }
 
 .gfmain-btn a {
     display: inline-block;
-    background: #ededed;
+    background: #f7f7f7;
     text-align: center;
     border-radius: 10px;
     color: #fff;
@@ -538,14 +576,15 @@ ul{padding: 0;}
 .gfmain-btn p {
     color: #333;
     font-weight: 400;
+    margin-bottom: 0px;
 }
 
 .golf-main {
-    padding: 20px;
+    padding:15px;
     background-color: #ffffff;
-    position: relative;
-    top: -30px;
+    position: absolute;
     border-radius: 20px;
+    bottom: 80px;
 
 }
 
@@ -554,9 +593,9 @@ ul{padding: 0;}
     text-align: center;
     border-radius: 10px;
     color: #fff;
-    width: 48%;
+    width: 48.5%;
     vertical-align: top;
-    padding: 30px 0;
+    padding: 22px 0;
     margin-right: 2%;
 }
 
@@ -599,7 +638,7 @@ ul{padding: 0;}
     width: 100%;
     background-color: #f25555;
     padding: 20px 0;
-    border-radius: 5px;
+    border-radius: 10px;
     text-align: center;
 }
 
@@ -863,8 +902,8 @@ form p {
 
 .sc-date {
     display: inline-block;
-    font-size: 1.4em;
-    font-weight: 600;
+    font-size: 15px;
+    font-weight: 400;
     vertical-align: middle;
     padding: 7px 0;
 }
@@ -875,8 +914,9 @@ form p {
     padding: 7px 12px;
     border-radius: 5px;
     vertical-align: middle;
-    font-size: 1.3em;
+    font-size: 14px;
     float: right;
+    font-weight: 400;
 }
 
 
@@ -900,7 +940,7 @@ form p {
     text-align: center;
     margin-right: 4px;
     padding: 8px;
-    font-size: 1.3em;
+    font-size:15px;
     border-radius: 5px;
 }
 
@@ -910,8 +950,8 @@ form p {
     display: block;
     color: #fff;
     text-align: center;
-    font-size: 1.4em;
-    padding: 20px 0;
+    font-size: 16px;
+    padding: 18px 0;
     bottom: 64px;
     left: 0;
     margin: 5px 0;
@@ -923,11 +963,13 @@ form p {
 
 .ai-list {
     width: 65%;
+    display: inline-block;
+    margin-left: 10px;
 }
 
 .thumb-sm {
-    width: 62px;
-    height: 62px;
+    width: 67px;
+    height: 67px;
     display: inline-block;
     vertical-align: top;
     background-color: #222;
@@ -947,7 +989,7 @@ form p {
     width: 50%;
     position: absolute;
     top: 16px;
-    left: 16px;
+    left: 17px;
 }
 
 .list-p {
@@ -961,7 +1003,7 @@ form p {
     color: #222222;
     padding: 2px 5px;
     border-radius: 5px;
-    font-size: 1em;
+    font-size: 14px;
     border: 1px solid #222;
     margin-left: 10px;
 }
@@ -995,10 +1037,11 @@ form p {
     padding: 20px;
     border-radius: 10px;
     margin-bottom: 10px;
+    box-shadow: 0px 1px 5px rgb(0 0 0 / 5%);
 }
 
 .sta-box h2 {
-    margin: 0 0 20px 0;
+    margin: 0 0 20px 0!important;
 }
 
 .sc-box-round p {
@@ -1009,7 +1052,7 @@ form p {
 
 .sc-box-round {
     text-align: center;
-    font-size: 1.3em;
+    font-size: 14px;
     letter-spacing: -0.7px;
     width: 100px;
     height: 100px;
@@ -1027,11 +1070,11 @@ form p {
 
 
 .sta-box p {
-    line-height: 1.2;
+    line-height: 1.3;
 }
 
 .sta-box strong {
-    font-size: 1.5em;
+    font-size:18px;
 }
 
 .sc-box-wrap {
@@ -1044,8 +1087,8 @@ form p {
     display: block;
     color: #fff;
     text-align: center;
-    font-size: 1.4em;
-    padding: 20px 0;
+    font-size: 16px;
+    padding: 18px 0;
     /* border-radius: 10px; */
     position: fixed;
     bottom: 70px;
@@ -1081,11 +1124,13 @@ form p {
 .sc-select {
     width: 100%;
     border: 1px solid #d8d8d8;
-    font-size: 1rem;
+    font-size:15px;
     padding: 15px;
     margin-bottom: 10px;
     text-align-last: center;
     appearance: none;
+    background-color: #fff;
+    border-radius: 30px;
 }
 
 .sc-dacl {
@@ -1094,9 +1139,12 @@ form p {
     font-size: 1rem;
     padding: 15px 5%;
     margin-bottom: 10px;
-/*    text-align-last: center;*/
+    text-align: center;
     appearance: none;
     font-family: "Noto Sans KR", sans-serif !important;
+    background-color: #fff;
+    border-radius: 30px;
+    color: #181818;
 }
  
 .btn_top_srarch {
@@ -1215,7 +1263,7 @@ form p {
 
 
 .con-wrap h2 {
-    font-size: 1.4em;
+    font-size: 17px;
     margin: 20px 0;
 }
 
