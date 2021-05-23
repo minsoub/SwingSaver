@@ -2,8 +2,8 @@
 <%@include file="/WEB-INF/views/mobile/include/top.jsp"%>
     
     <nav id="header">
-        <a href="/m/home"><img src="/image/h-back.png" class="gnb-log" width="100%"></a>
-        <div class="logo">${golfInfo.countryclub_nm}</div>
+        <a href="javascript:history.back(-1);"><img src="/image/h-back.png" class="gnb-log" width="100%"></a>
+        <div class="logo">${golfInfo.countryclub_nm}</div>
         <a href="/m/golflist.do"><img src="/mobile/image/gnb-ser.svg" class="gnb-ser" width="100%"></a>
     </nav>
     
@@ -16,17 +16,17 @@
 		
     	<div class="golf-main"> 
    			<div class="golf-info">
-        		<img src="/mobile/image/like-on.svg" class="list-like" width="100%">
-        		<p>${golfInfo.zone_nm}</p>
+        		<img src="/mobile/image/like-on.svg" class="list-like" width="100%"> 
+        		<p>${golfInfo.zone_nm}</p>
         		<h2>${golfInfo.countryclub_nm}</h2>
    			</div>
    			<div class="main-btn gfmain-btn">
-        		<a href="<c:if test='${empty golfInfo.rsv_url}'>#</c:if><c:if test='${not empty golfInfo.rsv_url}'>${golfInfo.rsv_url}</c:if>" class="">
+        		<a href="<c:if test='${empty golfInfo.rsv_url}'>javascript:alert('준비중입니다!');</c:if><c:if test='${not empty golfInfo.rsv_url}'>${golfInfo.rsv_url}</c:if>" class="">
         		<img src="/mobile/image/main-reserve.png" width="100%">
         		<p>골프장예약</p>
         		</a>
         
-        		<a href="<c:if test='${empty golfInfo.evt_url}'>#</c:if><c:if test='${not empty golfInfo.evt_url}'>${golfInfo.evt_url}</c:if>" class="">
+        		<a href="<c:if test='${empty golfInfo.evt_url}'>javascript:alert('준비중입니다!');</c:if><c:if test='${not empty golfInfo.evt_url}'>${golfInfo.evt_url}</c:if>" class="">
         		<img src="/mobile/image/main-event.png" width="100%">
         		<p>이벤트</p>
         		</a>

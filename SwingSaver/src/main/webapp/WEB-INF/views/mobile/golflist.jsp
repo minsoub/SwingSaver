@@ -104,16 +104,10 @@
 	
 	function Search()
 	{		
-		if (frm.word.value == "") {
-			
-			alert("검색단어를 입력하세요!!!");
-			frm.word.focus();
-			return;
-		}else {
-			frm.action = "/m/golflist.do";
-			//frm.zone_id.value = "";
-			frm.submit();						
-		}
+
+		frm.action = "/m/golflist.do";
+		//frm.zone_id.value = "";
+		frm.submit();						
 	}
 	
 
